@@ -22,7 +22,7 @@
 <body>
 <div class="container col-lg-3 col-xs-12 col-sm-6 col-md-4">
     <div class="btn-group" role="group">
-        <button href="/LogInServlet" type="button" class="btn btn-default">Log in</button>
+        <button href="/login.jsp" type="button" class="btn btn-default">Log in</button> <!-- need to load in the JSP file which passes data into servlet -->
         <button href="/SignUpServlet" type="button" class="btn btn-default">Sign up</button>
 
         <form method="get" action="/Articles">

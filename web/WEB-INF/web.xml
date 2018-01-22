@@ -14,4 +14,17 @@
         <servlet-name>LoadArticles</servlet-name>
         <url-pattern>/Articles</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogInServlet</servlet-name>
+        <servlet-class>blah.LogInServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogInServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
