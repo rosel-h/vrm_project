@@ -28,6 +28,7 @@
         <form method="get" action="/Articles">
             <button type="submit" class="btn btn-default">Explore</button>
         </form>
+
     </div>
 </div>
 </body>

@@ -1,6 +1,8 @@
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+
+import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +21,10 @@ import java.util.Properties;
 public class LoadArticlesServlet extends HttpServlet {
 
     public void start() throws IOException, SQLException {
-
+        System.out.println("enter servlet start()");
         try{
             Class.forName("com.mysql.jdbc.Driver");
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
