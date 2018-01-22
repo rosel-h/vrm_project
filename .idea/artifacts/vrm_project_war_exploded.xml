@@ -4,7 +4,7 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="vrm_project" />
+          <element id="module-output" name="VRM_Project" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="commons-fileupload-1.3.2" />

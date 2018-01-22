@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>LoadArticles</servlet-name>
-        <servlet-class>LoadArticlesServlet</servlet-class>
+        <servlet-class>blah.LoadArticlesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

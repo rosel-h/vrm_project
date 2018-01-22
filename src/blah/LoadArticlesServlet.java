@@ -1,3 +1,5 @@
+package blah;
+
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
@@ -47,6 +49,7 @@ public class LoadArticlesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("do get");
         try {
             start();
         } catch (SQLException e) {
@@ -54,7 +57,8 @@ public class LoadArticlesServlet extends HttpServlet {
         }
     }
 
-
-
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("post");
+    }
 }
