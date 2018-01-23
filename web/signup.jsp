@@ -90,7 +90,7 @@ write something about yourself
             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
         </div>
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form">
+            <form id="signupform" class="form-horizontal" role="form" method="get" action="/SignUp">
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -192,7 +192,7 @@ write something about yourself
                 <div class="form-group">
                     <!-- Button -->
                     <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button>
+                        <button id="btn-signup" type="submit" class="btn btn-info">Sign Up</button>
                         <span style="margin-left:8px;">or</span>
                     </div>
                 </div>
