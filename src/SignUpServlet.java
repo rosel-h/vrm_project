@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.io.PrintWriter;
+import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 
 /**
  * Created by mshe666 on 23/01/2018.
  */
-public class SignUpServlet extends HttpServlet{
-    public void start() throws IOException, SQLException {
+public class SignUpServlet extends HttpServlet {
+    public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
 
-        try{
+        try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -33,7 +32,7 @@ public class SignUpServlet extends HttpServlet{
         String filepath = s.getRealPath("mysql.properties");
         try (FileInputStream fis = new FileInputStream(filepath)) {
             dbProps.load(fis);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         // Establishing connection to the database
@@ -42,17 +41,54 @@ public class SignUpServlet extends HttpServlet{
             // Access the JOOQ library through this variable.
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
+            PrintWriter out = resp.getWriter();
 
-        }
-    }
+            Map<String, String[]> paraMap = req.getParameterMap();
+            //username, password, cPassword, fname, lname, dob, country, description, avatar
+            String username = paraMap.get("username")[0];
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT * FROM vrm_users WHERE username = ?;")) {
+                stmt.setString(1, username);
+                try (ResultSet r = stmt.executeQuery()) {
+                    while (r.next()) {
+                        out.println("Username \"" + username + "\"" + " already exists!! Please choose another one.");
+                        break;
+                    }
+                }
+            }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String password = paraMap.get("password")[0];
+            String cPassword = paraMap.get("cPassword")[0];
+            String fname = paraMap.get("fname")[0];
+            String lname = paraMap.get("lname")[0];
+            String dob = paraMap.get("dob")[0];
+            String country = paraMap.get("country")[0];
+            String description = paraMap.get("description")[0];
+            String avatar = paraMap.get("avatar")[0];
 
-        try {
-            start();
-            Map<String, String[]> paraMap =  req.getParameterMap();
+            System.out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
+            if (!cPassword.equals(password)) {
+                out.println("Two passwords are different!!");
+            }else{
+                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, fname);
+                    stmt.setString(4, lname);
+                    stmt.setString(5, dob);
+                    stmt.setString(6, country);
+                    stmt.setString(7, description);
+                    stmt.setString(8, avatar);
+                    stmt.setString(9, "active");
+
+                    stmt.executeUpdate();
+
+                    out.println("Create a new user successfully!!");
+                    out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar + "," + "active");
+
+                }
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,8 +96,18 @@ public class SignUpServlet extends HttpServlet{
     }
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            createUser(req,resp);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("post");
+        doGet(req,resp);
     }
 
 
