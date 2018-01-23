@@ -50,12 +50,14 @@
 </head>
 <body>
 
+
+
 <div class="container">
     <div class="btn-group" role="group">
         <div class="image">
             <img src="imgs/backgroud01.jpg" style="width: 100%">
         </div>
-        <div class="row" style="background-color: royalblue">
+        <div class="row" style="">
             <a href="login.jsp">
                 <button type="submit" class="btn btn-default">Log in</button>
             </a>
