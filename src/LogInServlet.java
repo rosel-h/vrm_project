@@ -32,7 +32,8 @@ public class LogInServlet extends HttpServlet {
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
         } else {
-            out.println("Username or Password incorrect");
+            request.setAttribute("errorMessage", "Invalid Username or Password");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 
