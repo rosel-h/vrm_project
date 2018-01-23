@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.10.0.xsd">
+    <jdbc>
+    <driver>com.mysql.jdbc.Driver</driver>
+    <url>jdbc:mysql://db.sporadic.nz:3306/vwen239</url> <!-- Modify this to point to your database -->
+    <user>vwen239</user>                            <!-- Modify this to use your username -->
+    <password>vwen239</password>                     <!-- Modify this to use your password -->
+  </jdbc>
+
+  <generator>
+    <name>org.jooq.util.JavaGenerator</name>
+    <database>
+      <name>org.jooq.util.mysql.MySQLDatabase</name>
+      <inputSchema>vwen239</inputSchema>            <!-- Modify this to use your username -->
+      <includes>vrm.*</includes> <!--The list of databases we want-->
+      <excludes></excludes>
+    </database>
+
+    <target>
+      <packageName>blah.generated</packageName>
+      <directory>src</directory>
+    </target>
+  </generator>
+</configuration>
