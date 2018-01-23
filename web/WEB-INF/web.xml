@@ -24,4 +24,16 @@
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogIn</servlet-name>
+        <servlet-class>LogInServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogIn</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
