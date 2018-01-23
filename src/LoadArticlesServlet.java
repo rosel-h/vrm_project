@@ -30,18 +30,18 @@ public class LoadArticlesServlet extends HttpServlet {
         Properties dbProps = new Properties();
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("mysql.properties");
+
         try (FileInputStream fis = new FileInputStream(filepath)) {
             dbProps.load(fis);
         }catch (IOException e){
             e.printStackTrace();
         }
+
         // Establishing connection to the database
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("Connection Successful");
             // Access the JOOQ library through this variable.
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
-
-
         }
     }
 
