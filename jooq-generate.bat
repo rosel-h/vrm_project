@@ -1,0 +1,1 @@
+java -classpath ./lib/*;. org.jooq.util.GenerationTool helpGenerateJooq.xml
