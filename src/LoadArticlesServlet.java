@@ -64,7 +64,8 @@ public class LoadArticlesServlet extends HttpServlet {
                 DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
                 Result<Record> articles = create.select().from(VRM_ARTICLES).fetch();
-//                Result<Record> nestedComments = create.select().from(VRM_COMMENTS_ON_COMMENTS).fetch();
+                Result<Record> comments = create.select().from(VRM_COMMENTS_ON_ARTICLES).fetch();
+                Result<Record> nestedComments = create.select().from(VRM_COMMENTS_ON_COMMENTS).fetch();
 
                 out.println("<h1> All the Articles <h1>");
                 for (Record r : articles) {
@@ -75,11 +76,18 @@ public class LoadArticlesServlet extends HttpServlet {
                     out.println("<br>");
                     String id = r.getValue("article_id").toString();
                     System.out.println(id);
-                    Result<Record> comments = create.select().from(VRM_COMMENTS_ON_ARTICLES).fetch();
+//                    Result<Record> comments = create.select().from(VRM_COMMENTS_ON_ARTICLES).where(VRM_COMMENTS_ON_ARTICLES.ARTICLE_ID.eq(Integer.parseInt(r.getValue("articleid").toString()))).fetch();
+                    out.println("<p>Comments</p>");
                     for (Record com: comments){
-                        out.println("<p> " + com.getValue("username")+com.getValue("content") + "</p>");
-                        System.out.println(com.toString());
-                    }
+                        if(com.getValue("article_id")==r.getValue("article_id")) {
+                            out.println("<p> " + com.getValue("username") +": "+ com.getValue("content") + "</p>");
+                            for(Record nest: nestedComments){
+                                if(nest.getValue("parent_comment_id")==com.getValue("comment_id")){
+                                    out.println("<p> "+ nest.getValue("username")+ ": "+nest.getValue("content"));
+                                }
+                            }
+                        }
+                                            }
                     out.println("<hr>");
                 }
             }
