@@ -63,12 +63,10 @@
                         <input id="login-username" type="text" class="form-control" name="username" value=""
                                placeholder="Username">
                     </div>
-
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input id="login-password" type="password" class="form-control" name="pass" placeholder="">
                     </div>
-
                     <div style="color:red">${errorMessage}</div>
                     <div class="input-group">
                         <div class="checkbox">
@@ -77,16 +75,12 @@
                             </label>
                         </div>
                     </div>
-
                     <div style="margin-top:10px" class="form-group">
-                        <!-- Button -->
-
                         <div class="col-sm-12 controls">
                             <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
                             <button id="btn-fblogin" class="btn btn-primary" type="#">Login with Facebook</button>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-12 control">
                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
