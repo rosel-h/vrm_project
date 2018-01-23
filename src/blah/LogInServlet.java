@@ -4,10 +4,6 @@ package blah;
  * Created by vwen239 on 23/01/2018.
  */
 
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
-import java.util.StringJoiner;
 
-public class LogInServlet extends HttpServlet  {
+
+public class LogInServlet extends HttpServlet {
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,19 +29,55 @@ public class LogInServlet extends HttpServlet  {
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
 
-        if(Validate.checkUser(username, pass))
-        {
-            RequestDispatcher rs = request.getRequestDispatcher("index.jsp");
+        System.out.println(checkUser(username, pass));
+        if (checkUser(username, pass)) {
+            RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
-        }
-        else
-        {
+        } else {
             out.println("Username or Password incorrect");
-            RequestDispatcher rs = request.getRequestDispatcher("index.html");
-            rs.include(request, response);
         }
     }
 
+    //check password function
+    public boolean checkUser(String username, String pass) {
+        boolean loginStatus = false;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Connection attempt...");
+        Properties dbProps = new Properties();
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
+
+        try (FileInputStream fis = new FileInputStream(filepath)) {
+            dbProps.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establishing connection to the database
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            PreparedStatement ps = conn.prepareStatement
+                    ("select * from vrm_users where username=? and psw_hash=?");
+            ps.setString(1, username);
+            ps.setString(2, pass);
+            ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
+            loginStatus = rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return loginStatus;
+
+    }
+
+    //get function is post function
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
