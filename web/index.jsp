@@ -326,6 +326,10 @@
 <div class="container col-lg-3 col-xs-12 col-sm-6 col-md-4">
     <div class="btn-group" role="group">
 
+        <form method="get" action="login.jsp">
+            <button type="submit" class="btn btn-default">Log in</button>
+        </form>
+
         <form method="get" action="signup.jsp">
             <button type="submit" class="btn btn-default">Sign Up</button>
         </form>
