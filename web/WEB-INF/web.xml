@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>LoadArticles</servlet-name>
-        <servlet-class>blah.LoadArticlesServlet</servlet-class>
+        <servlet-class>LoadArticlesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -16,15 +16,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LogInServlet</servlet-name>
-        <servlet-class>blah.LogInServlet</servlet-class>
+        <servlet-name>SignUp</servlet-name>
+        <servlet-class>SignUpServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>LogInServlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
-
-
-
 </web-app>
