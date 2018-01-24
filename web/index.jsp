@@ -67,7 +67,7 @@
                 <button type="submit" class="btn btn-default">Sign Up</button>
             </a>
 
-            <a href="explore.jsp">
+            <a href="/Articles">
                 <button type="submit" class="btn btn-default">Explore</button>
             </a>
 

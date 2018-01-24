@@ -15,6 +15,7 @@ public class BlogDAO implements AutoCloseable {
     private final Connection conn;
 
     private final Database db;
+
     /**
      * Creates a new UniDAO and establishes a connection to the given database.
      */
@@ -24,19 +25,19 @@ public class BlogDAO implements AutoCloseable {
     }
 
     /*Execute a query to get all article from the db, then converts each row of the result table to an Article object*/
-    public List<Article> getAllArticles() throws SQLException{
+    public List<Article> getAllArticles() throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 List<Article> artic = new ArrayList<>();
                 while (rs.next()) {
-                    artic.add(dataFromResultSet(rs,new Article()));
+                    artic.add(dataFromResultSet(rs, new Article()));
                 }
                 return artic;
             }
         }
     }
 
-    public List<User> getAllUsers()throws SQLException{
+    public List<User> getAllUsers() throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 List<User> user = new ArrayList<>();
@@ -47,14 +48,46 @@ public class BlogDAO implements AutoCloseable {
             }
         }
     }
+
+    public List<CommentOnArticles> getAllFirstComments() throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_comments_on_articles")) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<CommentOnArticles> comArt = new ArrayList<>();
+                while (rs.next()) {
+                    comArt.add(dataFromResultSet(rs, new CommentOnArticles()));
+                }
+                return comArt;
+            }
+        }
+    }
+    public List<CommentsOnComments> getAllNestedComments() throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_comments_on_comments")) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<CommentsOnComments> comArt = new ArrayList<>();
+                while (rs.next()) {
+                    comArt.add(dataFromResultSet(rs, new CommentsOnComments()));
+                }
+                return comArt;
+            }
+        }
+    }
+
     /**
      * Translates the current row of the given ResultSet into a Article,User,Comment object depending on the Object type passed in.
      */
-    private Article dataFromResultSet(ResultSet rs,Article a) throws SQLException {
-                return new Article(rs.getString("username"),rs.getInt("article_id"),rs.getString("content"),rs.getString("date"),rs.getString("title"));
+    private Article dataFromResultSet(ResultSet rs, Article a) throws SQLException {
+        return new Article(rs.getString("username"), rs.getInt("article_id"), rs.getString("content"), rs.getString("date"), rs.getString("title"));
     }
-    private User dataFromResultSet(ResultSet rs,User u) throws SQLException {
-        return new User(rs.getString("username"),rs.getString("psw_hash"),rs.getString("fname"), rs.getString ("lname"), rs.getString ("dob"), rs.getString ("country"), rs.getString("avatar_icon") , rs.getString("status") );
+
+    private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
+        return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("avatar_icon"), rs.getString("status"));
+    }
+
+    private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username") ,rs.getString("date"),rs.getString("content") );
+    }
+    private CommentsOnComments dataFromResultSet(ResultSet rs, CommentsOnComments n) throws SQLException {
+        return new CommentsOnComments(rs.getInt("parent_comment_id"),rs.getInt("child_comment_id"),rs.getString("username"),rs.getString("date"),rs.getString("content"));
     }
 
     /**
