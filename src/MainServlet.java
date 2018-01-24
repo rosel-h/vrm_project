@@ -2,6 +2,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,16 @@ public class MainServlet extends HttpServlet {
             req.getRequestDispatcher("index.jsp").forward(req,resp);
 
         }else {
+
+            ServletContext servletContext = getServletContext();
+            String filePath = servletContext.getRealPath("/Sessions");
+
             String sessiont_id = sess.getId();
-            String fileName = sessiont_id + ".json";
+            String fileName = filePath + "\\" + sessiont_id + ".json";
             File sessionFile = new File(fileName);
+
+            System.out.println("MainServlet enter line 40: " + sessiont_id);
+            System.out.println("MainServlet enter line 41: " + sessionFile);
 
             if (sessionFile.exists()) {
                 req.getRequestDispatcher("welcome.jsp").forward(req,resp);

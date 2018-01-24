@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="description" class="col-md-3 control-label">Last Name</label>
+                    <label for="description" class="col-md-3 control-label">Description</label>
                     <div class="col-md-9">
                         <textarea id="description" class="form-control" name="description" rows="4" columns="40">
 

@@ -99,6 +99,12 @@ public class SignUpServlet extends HttpServlet {
                     req.getRequestDispatcher("signupsuccess.jsp").forward(req,resp);
 
 
+                    req.setAttribute("signUpStatus", true);
+                    req.getRequestDispatcher("index.jsp").forward(req,resp);
+
+
+                } catch (ServletException e) {
+                    e.printStackTrace();
                 }
             }
 
