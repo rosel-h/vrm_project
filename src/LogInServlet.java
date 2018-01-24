@@ -45,7 +45,16 @@ public class LogInServlet extends HttpServlet {
 
             HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
-            String fileName = sessiont_id + ".json";
+            ServletContext servletContext = getServletContext();
+            String filePath = servletContext.getRealPath("/Sessions");
+            System.out.println("enter line 50: " + filePath);
+            File sessionFolder = new File(filePath);
+            if (!sessionFolder.exists()) {
+                sessionFolder.mkdir();
+            }
+
+            String fileName = filePath + "\\" + sessiont_id + ".json";
+            System.out.println("enter line 53: " + fileName );
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {

@@ -47,9 +47,15 @@
 
     </style>
 
+
+
 </head>
 <body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<c:if test="${signUpStatus == true}">
+
+</c:if>
 
 
 <div class="container">
