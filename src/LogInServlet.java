@@ -65,7 +65,7 @@ public class LogInServlet extends HttpServlet {
             rs.forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid Username or Password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
@@ -94,7 +94,7 @@ public class LogInServlet extends HttpServlet {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
             PreparedStatement ps = conn.prepareStatement
-                    ("select * from vrm_users where username=? and psw_hash=?");
+                    ("select * from vrm_users where binary username=? and binary psw_hash=?");
             ps.setString(1, username);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
@@ -105,7 +105,6 @@ public class LogInServlet extends HttpServlet {
         }
 
         return loginStatus;
-
     }
 
     //get function is post function
