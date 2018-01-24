@@ -98,7 +98,9 @@ public class LoadArticlesServlet extends HttpServlet {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase())) {
+        ServletContext s = getServletContext();
+            String filepath = s.getRealPath("mysql.properties");
+        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
             System.out.println("Signup done");
             List<User> users = dao.getAllUsers();
             System.out.println("Users uploaded");
