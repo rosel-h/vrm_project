@@ -65,7 +65,7 @@ public class LogInServlet extends HttpServlet {
             rs.forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Invalid Username or Password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
@@ -105,7 +105,6 @@ public class LogInServlet extends HttpServlet {
         }
 
         return loginStatus;
-
     }
 
     //get function is post function

@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Uncomment the following lines to use Bootstrap -->
 
-
 <html>
 <head>
     <title>VRM Blog</title>
@@ -44,10 +43,7 @@
             text-align: center;
         }
 
-
     </style>
-
-
 
 </head>
 <body>
@@ -56,7 +52,6 @@
 <c:if test="${signUpStatus == true}">
 
 </c:if>
-
 
 <div class="container">
     <div class="btn-group" role="group">
