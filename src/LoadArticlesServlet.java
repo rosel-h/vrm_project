@@ -100,13 +100,34 @@ public class LoadArticlesServlet extends HttpServlet {
 //        }
         try (BlogDAO dao = new BlogDAO(new MYSQLDatabase())) {
             System.out.println("Signup done");
-            List<Article> articles = dao.getAllArticles();
-            System.out.println("Articles created");
             List<User> users = dao.getAllUsers();
             System.out.println("Users uploaded");
+            List<Article> articles = dao.getAllArticles();
+            System.out.println("Articles created");
+            List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
+            System.out.println("Comments on articles uploaded. Size: "+firstDegreeComments.size());
+            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
+            System.out.println("nestedcomments created. Size: "+nestedComments.size());
+
+
+            System.out.println();
+            for(Article b:articles) {
+                System.out.println(b.getTitle());
+                for (CommentOnArticles a : firstDegreeComments) {
+//                    System.out.println(a);
+                    if (a.getArticleID()==b.getArticleID()){
+                        System.out.println(a.getCommentAuthor() + ": " + a.getContent());
+                        System.out.println("yes");
+                    }
+                }
+            }
+
 
             req.setAttribute("articleList",articles);
             req.setAttribute("userList",users);
+            req.setAttribute("commentList",firstDegreeComments);
+            req.setAttribute("nestedList",nestedComments);
+
             req.getRequestDispatcher("explore.jsp").forward(req,resp);
             System.out.println("request has been dispatched");
 

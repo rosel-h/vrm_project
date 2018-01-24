@@ -4,39 +4,21 @@ package DAO_setup;
  * Created by rher490 on 24/01/2018.
  * This will show both comments on articles and on comments
  */
-public abstract class Comments {
+public class Comments {
     public int commentID;
-    private boolean isACommentOnArticle;
     public String datePublished;
     public String commentAuthor;
     public String content;
-    public int parentID;
 
-    public boolean isACommentOnArticle() {
-        return isACommentOnArticle;
-    }
-
-    public void setACommentOnArticle(boolean ACommentOnArticle) {
-        isACommentOnArticle = ACommentOnArticle;
-    }
-
-    public int getParentID() {
-        return parentID;
-    }
-
-    public void setParentID(int parentID) {
-        this.parentID = parentID;
-    }
-
-    public Comments(int commentID, boolean isACommentOnArticle, String datePublished, String commentAuthor, String content, int parentID) {
-
+    public Comments(int commentID, String datePublished, String commentAuthor, String content) {
         this.commentID = commentID;
-        this.isACommentOnArticle = isACommentOnArticle;
         this.datePublished = datePublished;
         this.commentAuthor = commentAuthor;
         this.content = content;
-        this.parentID = parentID;
     }
+
+    //does nothing
+    public Comments(){}
 
     public int getCommentID() {
         return commentID;
@@ -68,5 +50,15 @@ public abstract class Comments {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Comments{" +
+                "commentID=" + commentID +
+                ", datePublished='" + datePublished + '\'' +
+                ", commentAuthor='" + commentAuthor + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

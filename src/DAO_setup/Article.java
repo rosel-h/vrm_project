@@ -48,7 +48,26 @@ public class Article {
     public String getDate() {
         return date;
     }
+    public String getFormattedDate() {
+        String YMD=date.substring(9)+" ";
+        int month = Integer.parseInt(date.substring(5,7));
+        switch (month){
+            case 1: YMD+="Jan ";break;
+            case 2: YMD+="Feb ";break;
+            case 3: YMD+="Mar ";break;
+            case 4: YMD+="Apr ";break;
+            case 5: YMD+="May ";break;
+            case 6: YMD+="Jun ";break;
+            case 7: YMD+="Jul ";break;
+            case 8: YMD+="Aug ";break;
+            case 9: YMD+="Sep ";break;
+            case 10: YMD+="Oct ";break;
+            case 11: YMD+="Nov ";break;
+            case 12: YMD+="Dec ";break;
+        }
 
+        return YMD+date.substring(0,4);
+    }
     public void setDate(String date) {
         this.date = date;
     }
