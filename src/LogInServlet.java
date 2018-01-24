@@ -2,6 +2,7 @@
  * Created by vwen239 on 23/01/2018.
  */
 
+import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONValue;
 
 import javax.servlet.RequestDispatcher;
@@ -30,9 +31,13 @@ public class LogInServlet extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
 
-        System.out.println(checkUser(username, pass));
+        HttpSession sess = request.getSession(true);
+        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) sess.getAttribute("database");
+        System.out.println("enter line 36:"+ sess.getId());
 
-        if (checkUser(username, pass)) {
+        System.out.println(checkUser(username, pass, mysqlDatabase));
+
+        if (checkUser(username, pass, mysqlDatabase)) {
 
             Map<String, String[]> map = request.getParameterMap();
             Map<String, String> jsonMap = new HashMap<>();
@@ -43,8 +48,9 @@ public class LogInServlet extends HttpServlet {
 
             String jsonText = JSONValue.toJSONString(jsonMap);
 
-            HttpSession sess = request.getSession(true);
+//            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
+            System.out.println("enter line 52:" + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/Sessions");
             System.out.println("enter line 50: " + filePath);
@@ -70,7 +76,7 @@ public class LogInServlet extends HttpServlet {
     }
 
     //check password function
-    public boolean checkUser(String username, String pass) {
+    public boolean checkUser(String username, String pass, MYSQLDatabase mysqlDatabase) {
         boolean loginStatus = false;
 
         try {
@@ -91,7 +97,7 @@ public class LogInServlet extends HttpServlet {
         }
 
         // Establishing connection to the database
-        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+        try (Connection conn = mysqlDatabase.getConnection()) {
             System.out.println("connection successful");
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=?");

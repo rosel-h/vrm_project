@@ -1,3 +1,4 @@
+import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Mengjie
@@ -26,6 +28,17 @@ public class MainServlet extends HttpServlet {
 
 
         HttpSession sess = req.getSession(true);
+
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
+        try {
+            MYSQLDatabase mysqlDatabase = new MYSQLDatabase(filepath);
+            sess.setAttribute("database",mysqlDatabase);
+            System.out.println("enter line 37: " + sess.getId());
+            req.setAttribute("database",mysqlDatabase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         String logout = req.getParameter("logout_button");
         if (logout != null && logout.equals("Logout")) {

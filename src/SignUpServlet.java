@@ -1,12 +1,15 @@
+import DAO_setup.MYSQLDatabase;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
+import org.jooq.util.mysql.mysql.Mysql;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,7 +40,11 @@ public class SignUpServlet extends HttpServlet {
             e.printStackTrace();
         }
         // Establishing connection to the database
-        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+        HttpSession session = req.getSession(true);
+        System.out.println("enter line 44:" + session.getId());
+        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
+
+        try (Connection conn = mysqlDatabase.getConnection()) {
             System.out.println("Connection Successful");
             // Access the JOOQ library through this variable.
             DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
