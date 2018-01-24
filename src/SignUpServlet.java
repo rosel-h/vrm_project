@@ -18,8 +18,9 @@ import java.util.Properties;
  * Created by mshe666 on 23/01/2018.
  */
 public class SignUpServlet extends HttpServlet {
-    public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+    public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException,ServletException {
 
+        System.out.println("enter sign up servlet");
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -51,8 +52,11 @@ public class SignUpServlet extends HttpServlet {
                 stmt.setString(1, username);
                 try (ResultSet r = stmt.executeQuery()) {
                     while (r.next()) {
-                        out.println("Username \"" + username + "\"" + " already exists!! Please choose another one.");
+                        req.setAttribute("usernameError","username already exists");
+                        req.getRequestDispatcher("signup.jsp").forward(req,resp);
                         break;
+//                        out.println("Username \"" + username + "\"" + " already exists!! Please choose another one.");
+//                        break;
                     }
                 }
             }
@@ -69,7 +73,9 @@ public class SignUpServlet extends HttpServlet {
             System.out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
             if (!cPassword.equals(password)) {
-                out.println("Two passwords are different!!");
+                req.setAttribute("passwordError","two passwords are different");
+                req.getRequestDispatcher("signup.jsp").forward(req,resp);
+//                out.println("Two passwords are different!!");
             }else{
                 try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
                     stmt.setString(1, username);
@@ -84,9 +90,21 @@ public class SignUpServlet extends HttpServlet {
 
                     stmt.executeUpdate();
 
-                    out.println("Create a new user successfully!!");
-                    out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar + "," + "active");
+//                    out.println("Create a new user successfully!!");
+//                    out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar + "," + "active");
 
+                    req.setAttribute("successMessage","Sign up successfully!");
+                    req.setAttribute("directMessage","You will be directed to login page");
+                    req.setAttribute("directErrorMessage","true");
+                    req.getRequestDispatcher("signupsuccess.jsp").forward(req,resp);
+
+
+                    req.setAttribute("signUpStatus", true);
+                    req.getRequestDispatcher("index.jsp").forward(req,resp);
+
+
+                } catch (ServletException e) {
+                    e.printStackTrace();
                 }
             }
 

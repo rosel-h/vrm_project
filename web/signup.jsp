@@ -21,67 +21,6 @@
 
 <body>
 
-<%--<form method="get" action="/SignUp">
-    <label>Username</label>
-    <input type="text" name="username" minlength="4" maxlength="10"/>
-    <br/>
-
-    <label>Password</label>
-    <input type="password" name="password" minlength="4" maxlength="10"/>
-    <br/>
-
-    <label>Confirm Password</label>
-    <input type="password" name="cPassword" minlength="4" maxlength="10"/>
-    <br/>
-
-    <label>First Name</label>
-    <input type="text" name="fname" minlength="1" maxlength="10"/>
-    <br/>
-
-    <label>Last Name</label>
-    <input type="text" name="lname" minlength="1" maxlength="10"/>
-    <br/>
-
-    <label>Date of Birth</label>
-    <input type="date" name="dob"/>
-    <br/>
-
-    <label>Country</label>
-    <select name="country">
-        <option value="nz" selected>New Zealand</option>
-        <option value="aus">Australia</option>
-        <option value="in">India</option>
-        <option value="us">United States</option>
-        <option value="other">other</option>
-    </select>
-    <br/>
-
-    <label>Description</label>
-    <br/>
-    <textarea name="description" rows="4" cols="40">
-write something about yourself
-    </textarea>
-    <br/>
-
-    <label>Choose Avatar</label>
-    <br/>
-    <input type="radio" id="avatar01" name="avatar" value="avatar_01.png">
-    <label for="avatar01"><img src="avatars/avatar_01.png" height="40"></label>
-
-    <input type="radio" id="avatar02" name="avatar" value="avatar_02.png">
-    <label for="avatar02"><img src="avatars/avatar_02.png" height="40"></label>
-
-    <input type="radio" id="avatar03" name="avatar" value="avatar_03.png">
-    <label for="avatar03"><img src="avatars/avatar_03.png" height="40"></label>
-
-    <input type="radio" id="avatar04" name="avatar" value="avatar_04.png">
-    <label for="avatar04"><img src="avatars/avatar_04.png" height="40"></label>
-
-    <button type="submit">Sign Up</button>
-
-
-</form>--%>
-
 
 <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">
@@ -90,7 +29,7 @@ write something about yourself
             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
         </div>
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form" method="get" action="/SignUp">
+            <form id="signupform" class="form-horizontal" role="form" method="post" action="/SignUp">
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -101,6 +40,7 @@ write something about yourself
                     <label for="username" class="col-md-3 control-label">Username</label>
                     <div class="col-md-9">
                         <input type="text" id="username" class="form-control" name="username" placeholder="Enter Username 4~20 characters">
+                        <div style="color:red">${usernameError}</div>
                     </div>
                 </div>
 
@@ -115,6 +55,7 @@ write something about yourself
                     <label for="cPassword" class="col-md-3 control-label">Confirm Password</label>
                     <div class="col-md-9">
                         <input type="password" id="cPassword" class="form-control" name="cPassword" placeholder="Confirm Password">
+                        <div style="color:red">${passwordError}</div>
                     </div>
                 </div>
 
@@ -153,7 +94,7 @@ write something about yourself
                 </div>
 
                 <div class="form-group">
-                    <label for="description" class="col-md-3 control-label">Last Name</label>
+                    <label for="description" class="col-md-3 control-label">Description</label>
                     <div class="col-md-9">
                         <textarea id="description" class="form-control" name="description" rows="4" columns="40">
 

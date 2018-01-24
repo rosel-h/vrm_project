@@ -2,16 +2,19 @@
  * Created by vwen239 on 23/01/2018.
  */
 
+import org.json.simple.JSONValue;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -28,7 +31,36 @@ public class LogInServlet extends HttpServlet {
         String pass = request.getParameter("pass");
 
         System.out.println(checkUser(username, pass));
+
         if (checkUser(username, pass)) {
+
+            Map<String, String[]> map = request.getParameterMap();
+            Map<String, String> jsonMap = new HashMap<>();
+            for (String key : map.keySet()) {
+                String value = map.get(key)[0];
+                jsonMap.put(key, value);
+            }
+
+            String jsonText = JSONValue.toJSONString(jsonMap);
+
+            HttpSession sess = request.getSession(true);
+            String sessiont_id = sess.getId();
+            ServletContext servletContext = getServletContext();
+            String filePath = servletContext.getRealPath("/Sessions");
+            System.out.println("enter line 50: " + filePath);
+            File sessionFolder = new File(filePath);
+            if (!sessionFolder.exists()) {
+                sessionFolder.mkdir();
+            }
+
+            String fileName = filePath + "\\" + sessiont_id + ".json";
+            System.out.println("enter line 53: " + fileName );
+            File sessionFile = new File(fileName);
+
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
+                bufferedWriter.write(jsonText);
+            }
+
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
         } else {
