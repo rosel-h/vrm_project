@@ -29,7 +29,7 @@
             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
         </div>
         <div class="panel-body" >
-            <form id="signupform" class="form-horizontal" role="form" method="post" action="/SignUp">
+            <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp">
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>

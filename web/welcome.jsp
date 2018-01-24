@@ -13,7 +13,7 @@
 <body>
 <p>Welcome!</p>
 
-<form method="post" action="/Main">
+<form method="post" action="Main">
     <button type="submit" name="logout_button" value="Logout">Log out</button>
 </form>
 </body>
