@@ -9,32 +9,48 @@
 <html>
 <head>
     <title>Create Article</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!--  A form letting users add new articles. -->
-<div class="panel panel-info">
+<div class="container">
+    <!--  A form letting users add new articles. -->
+    <div class="panel panel-info">
 
-    <div class="panel-heading">
-        <h3 class="panel-title">New Article</h3>
+        <div class="panel-heading">
+            <h3 class="panel-title">New Article</h3>
+        </div>
+        <div class="panel-body">
+            <form action="/Articles" method="POST">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea id="content" name="content" class="form-control" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="operation" value="add">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+
+            </form>
+        </div>
     </div>
-    <div class="panel-body">
-        <form action="/CreateArticles" method="POST">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="content">Content</label>
-                <textarea id="content" name="content" class="form-control" rows="10" required></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Post</button>
-            </div>
-
-            <input type="hidden" name="operation" value="add">
-        </form>
-    </div>
-
 </div>
 
 

@@ -48,3 +48,5 @@ ALTER TABLE vrm_users ADD email_address VARCHAR(50);
 
 ALTER TABLE vrm_articles MODIFY COLUMN article_id INT auto_increment;
 
+ALTER TABLE vrm_comments_on_comments Modify COLUMN child_comment_id INT auto_increment;
+ALTER TABLE vrm_comments_on_articles Modify COLUMN comment_id INT auto_increment;

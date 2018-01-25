@@ -1,5 +1,14 @@
 package DAO_setup;
 
+import org.jooq.tools.json.JSONObject;
+import org.jooq.tools.json.JSONParser;
+import org.jooq.tools.json.ParseException;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 /**
  * Created by rher490 on 24/01/2018.
  */
@@ -101,5 +110,25 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public static JSONObject readJSONFile(String fileName){
+        JSONObject o = new JSONObject();
+        JSONParser parser = new JSONParser();
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
+            String line = br.readLine();
+            o = (JSONObject) parser.parse(line);
+//            String[] array = line.split("[^a-zA-Z0-9]+");
+//            for(int i = 0; i<array.length; i+=2){
+//                o.put(array[i],array[i+1]);
+//            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return o;
     }
 }

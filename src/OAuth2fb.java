@@ -1,21 +1,33 @@
 //import com.google.gson.Gson;
 
+import DAO_setup.MYSQLDatabase;
+import org.json.simple.JSONObject;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.*;
+import java.util.Properties;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 //logic to communcate with FB
 
 public class OAuth2fb extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    public static String stateParam = "";
 
     // Facebook WebApp authentication
     private static final String clientID = "352195078594245";
@@ -23,7 +35,6 @@ public class OAuth2fb extends HttpServlet {
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
 
     //https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&scope=email
-
     //note: need to implement state-param setting in URL to prevent cross-site-request forgery attach.
 
     //default constructor
@@ -32,16 +43,24 @@ public class OAuth2fb extends HttpServlet {
     }
 
     //setup get
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        FbResponse fbUser = new FbResponse();
         try {
             //checks if request_id exists, this is used for games and not relevant
             String rid = request.getParameter("request_ids");
+            String secretCode = request.getParameter("state");
+
+            if (!secretCode.equals(stateParam)) {
+                System.out.println("Incorrect State");
+                return;
+            }
+
             if (rid != null) {
                 response.sendRedirect("https://www.facebook.com/dialog/oauth?client_id="
                         + clientID + "&redirect_uri=" + redirectURI);
             } else {
+
+
                 // Get special code
                 String code = request.getParameter("code");
                 System.out.println(code);
@@ -90,8 +109,6 @@ public class OAuth2fb extends HttpServlet {
 
                     System.out.println(outputString);
 
-                    FbResponse fbUser = new FbResponse();
-
                     //get facebook email
                     String fbUserEmail = outputString.substring(outputString.indexOf("{\"email\":") + 10, outputString.indexOf("\",\"first_name\""));
                     fbUserEmail = fbUserEmail.replace("\\u0040", "@");
@@ -109,13 +126,95 @@ public class OAuth2fb extends HttpServlet {
                     System.out.println(fbUser.getEmail());
                     System.out.println(fbUser.getFirst_name());
                     System.out.println(fbUser.getLast_name());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        if (checkFbUser(fbUser.getEmail(), fbUser)) {
+            System.out.println("good");
+            RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
+            rs.forward(request, response);
+
+        } else {
+            request.setAttribute("successMessage", "Sign up successfully!");
+            request.setAttribute("directMessage", "You will be directed to login page");
+            request.setAttribute("directErrorMessage", "true");
+            request.setAttribute("success", true);
+            request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
+            System.out.println("Success = " + true);
+        }
+    }
+
+    public boolean checkFbUser(String email, FbResponse fbUser) {
+
+        boolean loginStatus = false;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Connection attempt...");
+        Properties dbProps = new Properties();
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
+
+        try (FileInputStream fis = new FileInputStream(filepath)) {
+            dbProps.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establishing connection to the database
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            PreparedStatement ps = conn.prepareStatement
+                    ("select * from vrm_users where binary email_address=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
+            loginStatus = rs.next();
+
+            if (!loginStatus) {
+
+                System.out.println("User does not exist.. creating");
+
+                //creates new user with default values and FB data
+                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+
+                    String username = fbUser.getFirst_name() + " " + fbUser.getLast_name();
+                    String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
+                    String fname = fbUser.getFirst_name();
+                    String lname = fbUser.getLast_name();
+                    String dob = "1900/11/11";
+                    String country = "";
+                    String description = "";
+                    String avatar = "avatar_01.jpg";
+                    String status = "facebook";
+
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, fname);
+                    stmt.setString(4, lname);
+                    stmt.setString(5, dob);
+                    stmt.setString(6, country);
+                    stmt.setString(7, description);
+                    stmt.setString(8, avatar);
+                    stmt.setString(9, status);
+                    stmt.setString(10, email);
+                    stmt.executeUpdate();
+
+                    System.out.println("Creation Successful");
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return loginStatus;
 
     }
 }
