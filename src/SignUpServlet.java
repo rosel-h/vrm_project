@@ -11,12 +11,15 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.JSONTokener;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -24,6 +27,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by mshe666 on 23/01/2018.
@@ -35,42 +39,6 @@ public class SignUpServlet extends HttpServlet {
     private static final String RESPONSE_PARAM = "response";
     private static final String G_RECAPTCHA_RESPONSE = "g-recaptcha-response";
     private static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
-
-    private JSONObject performRecaptchaSiteVerify(String recaptchaResponseToken) throws IOException, JSONException {
-        URL url = new URL(SITE_VERIFY_URL);
-        StringBuilder postData = new StringBuilder();
-        addParam(postData, SECRET_PARAM, SITE_SECRET);
-        addParam(postData, RESPONSE_PARAM, recaptchaResponseToken);
-
-        return postAndParseJSON(url, postData.toString());
-    }
-
-    private StringBuilder addParam(StringBuilder postData, String param, String value) throws UnsupportedEncodingException {
-        if (postData.length() != 0) {
-            postData.append("&");
-        }
-        return postData.append(
-                String.format("%s=%s",
-                        URLEncoder.encode(param, StandardCharsets.UTF_8.displayName()),
-                        URLEncoder.encode(value, StandardCharsets.UTF_8.displayName())));
-    }
-
-    private JSONObject postAndParseJSON(URL url, String postData) throws IOException, JSONException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setDoOutput(true);
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty(
-                "Content-Type", "application/x-www-form-urlencoded");
-        urlConnection.setRequestProperty(
-                "charset", StandardCharsets.UTF_8.displayName());
-        urlConnection.setRequestProperty(
-                "Content-Length", Integer.toString(postData.length()));
-        urlConnection.setUseCaches(false);
-        urlConnection.getOutputStream()
-                .write(postData.getBytes(StandardCharsets.UTF_8));
-        JSONTokener jsonTokener = new JSONTokener(urlConnection.getInputStream());
-        return new JSONObject((Map) jsonTokener);
-    }
 
 
     public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
@@ -110,13 +78,13 @@ public class SignUpServlet extends HttpServlet {
             Connection conn = mysqlDatabase.getConnection();
             System.out.println("SignUpServlet Connection Successful");
 
+            //if user uploads profile image, set maxMemSize and maxFileSize allowed
             final int maxMemSize = 10 * 1024 * 1024;
             final int maxFileSize = 50 * 1024 * 1024;
 
-            boolean uploaded = false;
+            //get the path of directory which stores all avatar images
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/avatars");
-            boolean isMultipart = ServletFileUpload.isMultipartContent(req);
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setSizeThreshold(maxMemSize);
@@ -124,25 +92,30 @@ public class SignUpServlet extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload(factory);
             upload.setSizeMax(maxFileSize);
 
+            //declare and initiate all for fields
             File file = null;
             String username = "";
             String password = "";
             String cPassword = "";
             String fname = "";
             String lname = "";
-            String dob = "1970-01-01";
+            String dob = "1970-01-01";//if user's dob field is empty, use 1970-01-01 as default
             String country = "";
             String description = "";
             String avatar = "";
             String email = "";
             String uploadFileName = "";
+            boolean hasUpload = false;
+            FileItem doUpload = null;
 
             try {
                 List fileItems = upload.parseRequest(req);
                 Iterator i = fileItems.iterator();
+                //loop through all the file items in signup form
                 while (i.hasNext()) {
                     FileItem fileItem = (FileItem) i.next();
 
+                    //logic for uploading an image
                     if (!fileItem.isFormField()) {
                         String fieldName = fileItem.getFieldName();
                         String fileName = fileItem.getName();
@@ -151,24 +124,28 @@ public class SignUpServlet extends HttpServlet {
                         boolean isInMemory = fileItem.isInMemory();
                         long sizeInBytes = fileItem.getSize();
 
+                        //uploading image field is empty
                         if (fileName == null | fileName == "") {
                             break;
                         }
 
                         // Write the file
-                        System.out.println("SignUpServlet enter line 254: " + filePath);
+                        System.out.println("SignUpServlet enter line 133: " + filePath);
 
                         if (fileName.lastIndexOf("\\") >= 0) {
                             fileName = fileName.substring(fileName.lastIndexOf("\\"));
-                            file = new File(filePath + "\\" + fileName);
+//                            file = new File(filePath + "\\" + fileName);
                         } else {
                             fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-                            file = new File(filePath + "\\" + fileName);
+//                            file = new File(filePath + "\\" + fileName);
                         }
-                        uploadFileName = fileName;
-                        System.out.println(file.getAbsolutePath());
 
-                        fileItem.write(file);
+                        uploadFileName = fileName;
+//                        System.out.println("SignUpServlet enter line 139: " + file.getAbsolutePath());
+                        doUpload = fileItem;
+                        hasUpload = true;
+
+//                        fileItem.write(file);
                     } else {
 
                         String fieldName = fileItem.getFieldName();
@@ -184,7 +161,7 @@ public class SignUpServlet extends HttpServlet {
                         } else if (fieldName.equals("lname")) {
                             lname = fileItem.getString();
                         } else if (fieldName.equals("dob")) {
-                            dob = (fileItem.getString() == "") ? dob : fileItem.getString();
+                            dob = (fileItem.getString().equals("")) ? dob : fileItem.getString();
                         } else if (fieldName.equals("country")) {
                             country = fileItem.getString();
                         } else if (fieldName.equals("description")) {
@@ -211,13 +188,47 @@ public class SignUpServlet extends HttpServlet {
                     req.getRequestDispatcher("signup.jsp").forward(req, resp);
                 }
 
-                if (avatar == "") {
-                    if (file == null) {
+                if (avatar.equals("")) {
+                    if (uploadFileName.equals("")) {
                         avatar = "avatar_01.png";
                     }else {
                         avatar = username + "_" + uploadFileName;
-                    }
+                        file = new File(filePath + "\\" + avatar);
+                        System.out.println("SignUpServlet enter line 197: " + avatar);
+                        System.out.println("SignUpServlet enter line 197: " + file.getAbsolutePath());
+                        doUpload.write(file);
 
+                        BufferedImage img = null;
+                        try {
+                            System.out.println("SignUpServlet enter line 203");
+                            img = ImageIO.read(file);
+                            String thumbFileName = avatar.replace(avatar.substring(avatar.lastIndexOf(".")), "_thumbnail.png");
+                            avatar = thumbFileName;
+                            System.out.println("SignUpServlet enter line 204: " + thumbFileName);
+                            File thumbFile = new File(filePath + "\\" + thumbFileName);
+                            System.out.println("SignUpServlet enter line 205: " + thumbFile.getAbsolutePath());
+
+                            if (img.getHeight() < 20 && img.getWidth() < 20) {
+                                ImageIO.write(img,"png",thumbFile);
+                            }else {
+                                double zoom = Math.max(1.0 * img.getHeight() / 400, 1.0 * img.getWidth() / 400);
+                                int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
+                                BufferedImage resizedImage = new BufferedImage((int)(img.getWidth() / zoom), (int)(img.getHeight() / zoom), type);
+                                Graphics2D g = resizedImage.createGraphics();
+                                g.drawImage(img,0,0,(int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), null);
+                                g.dispose();
+                                g.setComposite(AlphaComposite.Src);
+                                g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                                g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                                g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                                ImageIO.write(resizedImage, "png", thumbFile);
+
+                            }
+
+                        }catch (IOException e) {
+                            e.getStackTrace();
+                        }
+                    }
                 }
 
                 System.out.println("SignUpServlet enter line 190: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
@@ -246,11 +257,9 @@ public class SignUpServlet extends HttpServlet {
                     req.setAttribute("success", success);
                     System.out.println("Success = " + success);
 
-
                 } catch (ServletException e) {
                     e.printStackTrace();
                 }
-
 
             } catch (FileUploadException e) {
                 e.printStackTrace();
@@ -272,7 +281,6 @@ public class SignUpServlet extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -288,6 +296,44 @@ public class SignUpServlet extends HttpServlet {
             return object.toString();
         }
     }
+
+    private JSONObject performRecaptchaSiteVerify(String recaptchaResponseToken) throws IOException, JSONException {
+        URL url = new URL(SITE_VERIFY_URL);
+        StringBuilder postData = new StringBuilder();
+        addParam(postData, SECRET_PARAM, SITE_SECRET);
+        addParam(postData, RESPONSE_PARAM, recaptchaResponseToken);
+
+        return postAndParseJSON(url, postData.toString());
+    }
+
+    private StringBuilder addParam(StringBuilder postData, String param, String value) throws UnsupportedEncodingException {
+        if (postData.length() != 0) {
+            postData.append("&");
+        }
+        return postData.append(
+                String.format("%s=%s",
+                        URLEncoder.encode(param, StandardCharsets.UTF_8.displayName()),
+                        URLEncoder.encode(value, StandardCharsets.UTF_8.displayName())));
+    }
+
+    private JSONObject postAndParseJSON(URL url, String postData) throws IOException, JSONException {
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setDoOutput(true);
+        urlConnection.setRequestMethod("POST");
+        urlConnection.setRequestProperty(
+                "Content-Type", "application/x-www-form-urlencoded");
+        urlConnection.setRequestProperty(
+                "charset", StandardCharsets.UTF_8.displayName());
+        urlConnection.setRequestProperty(
+                "Content-Length", Integer.toString(postData.length()));
+        urlConnection.setUseCaches(false);
+        urlConnection.getOutputStream()
+                .write(postData.getBytes(StandardCharsets.UTF_8));
+        JSONTokener jsonTokener = new JSONTokener(urlConnection.getInputStream());
+        return new JSONObject((Map) jsonTokener);
+    }
+
+
 
 
 }
