@@ -106,11 +106,14 @@ public class LoadArticlesServlet extends HttpServlet {
             }
 
             String icon = dao.getIcon(user);
+            System.out.println(icon);
             if (user != null) {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");
                 req.setAttribute("personAvatarIcon", icon);
             }
+
+
             List<User> users = dao.getAllUsers();
             System.out.println("LoadArticlesServlet Users uploaded");
             List<Article> articles = dao.getAllArticles();

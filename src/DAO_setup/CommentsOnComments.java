@@ -9,8 +9,8 @@ public class CommentsOnComments extends Comments {
     //ignore
     public CommentsOnComments(){
     }
-    public CommentsOnComments( int parentID, int commentID, String commentAuthor, String datePublished, String content) {
-        super(commentID, datePublished, commentAuthor, content);
+    public CommentsOnComments( int parentID, int commentID, String commentAuthor, String datePublished, String content, String avatarIcon) {
+        super(commentID, datePublished, commentAuthor, content, avatarIcon);
         this.parentID=parentID;
     }
 

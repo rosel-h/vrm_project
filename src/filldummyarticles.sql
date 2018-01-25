@@ -43,3 +43,5 @@ INSERT INTO vrm_articles (title,username, date, content) VALUE ('Hidden Figures'
 SELECT * FROM vrm_users WHERE username="ruru";
 
 SELECT avatar_icon FROM vrm_users WHERE username="user902";
+
+SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;
