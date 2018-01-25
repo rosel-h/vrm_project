@@ -161,7 +161,8 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
                         <input type="text" class="form-control input" disabled placeholder="Upload Image">
                         <span class="input-group-btn">
-        <button class="browse btn btn-default input" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+        <button class="browse btn btn-default input" type="button"><i
+                class="glyphicon glyphicon-search"></i> Browse</button>
       </span>
                     </div>
                 </div>
@@ -170,11 +171,11 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
                 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
                 <script>
-                    $(document).on('click', '.browse', function(){
+                    $(document).on('click', '.browse', function () {
                         var file = $(this).parent().parent().parent().find('.file');
                         file.trigger('click');
                     });
-                    $(document).on('change', '.file', function(){
+                    $(document).on('change', '.file', function () {
                         $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
                     });
                 </script>
@@ -194,8 +195,9 @@
                                 data-callback="onSubmit">Sign Up
                         </button>
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
-                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  
-                            Sign Up with Facebook
+                        <button id="btn-fbsignup" type="button" onclick="window.location.href='/Login'"
+                                class="btn btn-primary"><i class="icon-facebook"></i>  
+                            Continue with Facebook
                         </button>
                     </div>
                 </div>

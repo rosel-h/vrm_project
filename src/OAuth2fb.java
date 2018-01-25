@@ -27,13 +27,14 @@ import java.util.StringJoiner;
 public class OAuth2fb extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    public static String stateParam = "";
+
     // Facebook WebApp authentication
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
 
     //https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&scope=email
-
     //note: need to implement state-param setting in URL to prevent cross-site-request forgery attach.
 
     //default constructor
@@ -47,10 +48,19 @@ public class OAuth2fb extends HttpServlet {
         try {
             //checks if request_id exists, this is used for games and not relevant
             String rid = request.getParameter("request_ids");
+            String secretCode = request.getParameter("state");
+
+            if (!secretCode.equals(stateParam)) {
+                System.out.println("Incorrect State");
+                return;
+            }
+
             if (rid != null) {
                 response.sendRedirect("https://www.facebook.com/dialog/oauth?client_id="
                         + clientID + "&redirect_uri=" + redirectURI);
             } else {
+
+
                 // Get special code
                 String code = request.getParameter("code");
                 System.out.println(code);
@@ -120,7 +130,6 @@ public class OAuth2fb extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-
         }
 
         if (checkFbUser(fbUser.getEmail(), fbUser)) {
@@ -135,7 +144,6 @@ public class OAuth2fb extends HttpServlet {
             request.setAttribute("success", true);
             request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
             System.out.println("Success = " + true);
-
         }
     }
 
@@ -173,6 +181,7 @@ public class OAuth2fb extends HttpServlet {
 
                 System.out.println("User does not exist.. creating");
 
+                //creates new user with default values and FB data
                 try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
 
                     String username = fbUser.getFirst_name() + " " + fbUser.getLast_name();
@@ -208,5 +217,4 @@ public class OAuth2fb extends HttpServlet {
         return loginStatus;
 
     }
-
 }
