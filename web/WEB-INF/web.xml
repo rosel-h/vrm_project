@@ -45,5 +45,15 @@
         <url-pattern>/Main</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>FBAuth</servlet-name>
+        <servlet-class>OAuth2fb</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FBAuth</servlet-name>
+        <url-pattern>/oauth2fb</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
