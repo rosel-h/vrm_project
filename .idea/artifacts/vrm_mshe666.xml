@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="vrm_project:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/vrm_project_war_exploded</output-path>
-    <root id="root">
+  <artifact type="war" name="vrm_mshe666">
+    <output-path>$PROJECT_DIR$/out/artifacts/vrm_mshe666</output-path>
+    <root id="archive" name="vrm_mshe666.war">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="VRM_Project" />

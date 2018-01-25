@@ -46,6 +46,18 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>FBAuth</servlet-name>
+        <servlet-class>OAuth2fb</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FBAuth</servlet-name>
+        <url-pattern>/oauth2fb</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
         <servlet-name>add_article</servlet-name>
         <servlet-class>CreateArticle</servlet-class>
     </servlet>
