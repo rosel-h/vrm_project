@@ -38,3 +38,4 @@ Eeyore was stood outside Owl’s front door with a letter in his mouth. “It’
 
 ​Pooh greeted Eeyore and said not to worry. He knocked on Owl’s front door.');
 
+INSERT INTO vrm_articles (title,username, date, content) VALUE ('Hidden Figures','user902','2017-09-20','Hidden Figures is a 2016 American biographical drama film directed by Theodore Melfi and written by Melfi and Allison Schroeder, based on the non-fiction book of the same name by Margot Lee Shetterly about black female mathematicians who worked at the National Aeronautics and Space Administration (NASA) during ...');

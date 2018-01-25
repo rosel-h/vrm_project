@@ -23,6 +23,7 @@ import java.util.Properties;
 
 public class LogInServlet extends HttpServlet {
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html"); // change to text/jsp at a later stage
@@ -33,9 +34,16 @@ public class LogInServlet extends HttpServlet {
 
         HttpSession sess = request.getSession(true);
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) sess.getAttribute("database");
-        System.out.println("enter line 36:"+ sess.getId());
+        if (mysqlDatabase == null) {
+            try {
+                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("LoginServlet enter line 36:"+ sess.getId());
 
-        System.out.println(checkUser(username, pass, mysqlDatabase));
+        System.out.println("LoginServlet enter line 38: " + checkUser(username, pass, mysqlDatabase));
 
         if (checkUser(username, pass, mysqlDatabase)) {
 
@@ -50,17 +58,17 @@ public class LogInServlet extends HttpServlet {
 
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
-            System.out.println("enter line 52:" + sessiont_id);
+            System.out.println("LoginServlet enter line 52:" + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/Sessions");
-            System.out.println("enter line 50: " + filePath);
+
             File sessionFolder = new File(filePath);
             if (!sessionFolder.exists()) {
                 sessionFolder.mkdir();
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("enter line 53: " + fileName );
+            System.out.println("LoginServlet enter line 53: " + fileName );
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
@@ -85,20 +93,21 @@ public class LogInServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-//        System.out.println("Connection attempt...");
-//        Properties dbProps = new Properties();
-//        ServletContext s = getServletContext();
-//        String filepath = s.getRealPath("mysql.properties");
+        System.out.println("LoginServlet Connection attempt...");
+        Properties dbProps = new Properties();
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
 
-//        try (FileInputStream fis = new FileInputStream(filepath)) {
-//            dbProps.load(fis);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try (FileInputStream fis = new FileInputStream(filepath)) {
+            dbProps.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Establishing connection to the database
-        try (Connection conn = mysqlDatabase.getConnection()) {
-            System.out.println("connection successful");
+        try {
+            Connection conn = mysqlDatabase.getConnection();
+            System.out.println("LoginServlet connection successful");
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=?");
             ps.setString(1, username);

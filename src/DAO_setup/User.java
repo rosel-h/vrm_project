@@ -12,11 +12,12 @@ public class User {
     String country;
     String avatar_icon;
     String status;
+    String email;
 
     public User() {
     }
 
-    public User(String username, String password, String fname, String lname, String dateOfBirth, String country, String avatar_icon, String status) {
+    public User(String username, String password, String fname, String lname, String dateOfBirth, String country, String avatar_icon, String status, String email) {
         this.username = username;
         this.password = password;
         this.fname = fname;
@@ -25,6 +26,9 @@ public class User {
         this.country = country;
         this.avatar_icon = avatar_icon;
         this.status = status;
+        if(!String.valueOf(email).equals("null")) {
+            this.email = email;
+        }
     }
 
     public String getUsername() {
@@ -89,5 +93,13 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

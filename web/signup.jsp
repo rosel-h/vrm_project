@@ -6,18 +6,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Sign Up</title>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        function onSubmit() {
+            document.getElementById('signupform').submit();
+        }
+    </script>
+
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
 </head>
+
 
 <body>
 
@@ -26,9 +41,11 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="panel-title">Sign Up</div>
-            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#"
+                                                                                       onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign
+                In</a></div>
         </div>
-        <div class="panel-body" >
+        <div class="panel-body">
             <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp">
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
@@ -39,7 +56,8 @@
                 <div class="form-group">
                     <label for="username" class="col-md-3 control-label">Username</label>
                     <div class="col-md-9">
-                        <input type="text" id="username" class="form-control" name="username" placeholder="Enter Username 4~20 characters">
+                        <input type="text" id="username" class="form-control" name="username"
+                               placeholder="Enter Username 4~20 characters">
                         <div style="color:red">${usernameError}</div>
                     </div>
                 </div>
@@ -47,14 +65,16 @@
                 <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-9">
-                        <input type="password" id="password" class="form-control" name="password" placeholder="Enter Password 4~20 characters">
+                        <input type="password" id="password" class="form-control" name="password"
+                               placeholder="Enter Password 4~20 characters">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="cPassword" class="col-md-3 control-label">Confirm Password</label>
                     <div class="col-md-9">
-                        <input type="password" id="cPassword" class="form-control" name="cPassword" placeholder="Confirm Password">
+                        <input type="password" id="cPassword" class="form-control" name="cPassword"
+                               placeholder="Confirm Password">
                         <div style="color:red">${passwordError}</div>
                     </div>
                 </div>
@@ -130,28 +150,37 @@
                     </div>
                 </div>
 
+                <div class="g-recaptcha form-group" data-sitekey="6LdzZkIUAAAAANwDR88UIllyBhP9hRKPpNusMmX6" style="margin-left: auto"></div>
+
+
                 <div class="form-group">
                     <!-- Button -->
                     <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-signup" type="submit" class="btn btn-info">Sign Up</button>
-                        <span style="margin-left:8px;">or</span>
+                        <button id="btn-signup" type="submit" class="btn btn-info g-recaptcha"
+                                data-sitekey="6LfeHx4UAAAAAAKUx5rO5nfKMtc9-syDTdFLftnm"
+                                data-callback="onSubmit">Sign Up
+                        </button>
+                        <span style="margin-left:8px; margin-right: 8px;">or</span>
+                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  
+                            Sign Up with Facebook
+                        </button>
                     </div>
                 </div>
 
-                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                <%--<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">--%>
 
-                    <div class="col-md-offset-3 col-md-9">
-                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
-                    </div>
+                    <%--<div class="col-md-offset-3 col-md-9">--%>
+                        <%--<button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  --%>
+                            <%--Sign Up with Facebook--%>
+                        <%--</button>--%>
+                    <%--</div>--%>
 
-                </div>
-
+                <%--</div>--%>
 
 
             </form>
         </div>
     </div>
-
 
 
 </div>
