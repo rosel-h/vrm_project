@@ -50,7 +50,7 @@
         </div>
 
         <div class="panel-body">
-            <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp">
+            <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp" enctype='multipart/form-data'>
 
                 <div id="signupalert" style="display:none" class="alert alert-danger">
                     <p>Error:</p>
@@ -159,10 +159,11 @@
                     <input type="file" name="img[]" class="file" style="visibility: hidden; position: absolute;">
                     <div class="input-group col-md-8">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                        <input type="text" class="form-control input" disabled placeholder="Upload Image">
+                        <input type="text" class="form-control input" name="uploadAvatar" disabled placeholder="Upload Image">
                         <span class="input-group-btn">
-        <button class="browse btn btn-default input" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
-      </span>
+                            <button class="browse btn btn-default input" type="button">
+                                <i class="glyphicon glyphicon-search"></i> Browse</button>
+                        </span>
                     </div>
                 </div>
 
@@ -184,7 +185,6 @@
                          style="margin-left: 40px">
                     </div>
                 </div>
-
 
                 <div class="form-group">
                     <!-- Button -->

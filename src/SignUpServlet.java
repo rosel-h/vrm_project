@@ -1,4 +1,8 @@
 import DAO_setup.MYSQLDatabase;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
@@ -13,17 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by mshe666 on 23/01/2018.
@@ -110,74 +110,153 @@ public class SignUpServlet extends HttpServlet {
             Connection conn = mysqlDatabase.getConnection();
             System.out.println("SignUpServlet Connection Successful");
 
-            //username, password, cPassword, fname, lname, dob, country, description, avatar
-            Map<String, String[]> paraMap = req.getParameterMap();
+            final int maxMemSize = 10 * 1024 * 1024;
+            final int maxFileSize = 50 * 1024 * 1024;
 
-            //get username from input and check if it already exists in database
-            //if true, return usernameError message
-            String username = paraMap.get("username")[0];
+            boolean uploaded = false;
+            ServletContext servletContext = getServletContext();
+            String filePath = servletContext.getRealPath("/avatars");
+            boolean isMultipart = ServletFileUpload.isMultipartContent(req);
 
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username = ?;")) {
-                stmt.setString(1, username);
-                try (ResultSet r = stmt.executeQuery()) {
-                    while (r.next()) {
-                        req.setAttribute("usernameError", "username already exists");
-                        req.getRequestDispatcher("signup.jsp").forward(req, resp);
-                        break;
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            factory.setSizeThreshold(maxMemSize);
+            factory.setRepository(new File("c:\\temp"));
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setSizeMax(maxFileSize);
+
+            File file = null;
+            String username = "";
+            String password = "";
+            String cPassword = "";
+            String fname = "";
+            String lname = "";
+            String dob = "1970-01-01";
+            String country = "";
+            String description = "";
+            String avatar = "";
+            String email = "";
+            String uploadFileName = "";
+
+            try {
+                List fileItems = upload.parseRequest(req);
+                Iterator i = fileItems.iterator();
+                while (i.hasNext()) {
+                    FileItem fileItem = (FileItem) i.next();
+
+                    if (!fileItem.isFormField()) {
+                        String fieldName = fileItem.getFieldName();
+                        String fileName = fileItem.getName();
+                        System.out.println("fileName " + fileName);
+                        String contentType = fileItem.getContentType();
+                        boolean isInMemory = fileItem.isInMemory();
+                        long sizeInBytes = fileItem.getSize();
+
+                        if (fileName == null | fileName == "") {
+                            break;
+                        }
+
+                        // Write the file
+                        System.out.println("SignUpServlet enter line 254: " + filePath);
+
+                        if (fileName.lastIndexOf("\\") >= 0) {
+                            fileName = fileName.substring(fileName.lastIndexOf("\\"));
+                            file = new File(filePath + "\\" + fileName);
+                        } else {
+                            fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+                            file = new File(filePath + "\\" + fileName);
+                        }
+                        uploadFileName = fileName;
+                        System.out.println(file.getAbsolutePath());
+
+                        fileItem.write(file);
+                    } else {
+
+                        String fieldName = fileItem.getFieldName();
+                        System.out.println("SignUpServlet enter line 169: fieldName: " + fieldName + "," + fileItem.getString());
+                        if (fieldName.equals("username")) {
+                            username = fileItem.getString();
+                        } else if (fieldName.equals("password")) {
+                            password = fileItem.getString();
+                        } else if (fieldName.equals("cPassword")) {
+                            cPassword = fileItem.getString();
+                        } else if (fieldName.equals("fname")) {
+                            fname = fileItem.getString();
+                        } else if (fieldName.equals("lname")) {
+                            lname = fileItem.getString();
+                        } else if (fieldName.equals("dob")) {
+                            dob = (fileItem.getString() == "") ? dob : fileItem.getString();
+                        } else if (fieldName.equals("country")) {
+                            country = fileItem.getString();
+                        } else if (fieldName.equals("description")) {
+                            description = fileItem.getString();
+                        } else if (fieldName.equals("avatar")) {
+                            avatar = fileItem.getString();
+                        }
                     }
                 }
-            }
 
-            //get password and confirm password from input and check if they are exactly the same
-            //if true, return password Error message
-            String password = paraMap.get("password")[0];
-            String cPassword = paraMap.get("cPassword")[0];
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username = ?;")) {
+                    stmt.setString(1, username);
+                    try (ResultSet r = stmt.executeQuery()) {
+                        while (r.next()) {
+                            req.setAttribute("usernameError", "username already exists");
+                            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+                            break;
+                        }
+                    }
+                }
 
-            if (!cPassword.equals(password)) {
-                req.setAttribute("passwordError", "two passwords are different");
-                req.getRequestDispatcher("signup.jsp").forward(req, resp);
-            }
+                if (!cPassword.equals(password)) {
+                    req.setAttribute("passwordError", "two passwords are different");
+                    req.getRequestDispatcher("signup.jsp").forward(req, resp);
+                }
 
-            //
-            String fname = checkNull(paraMap.get("fname")[0]);
-            String lname = checkNull(paraMap.get("lname")[0]);
-            String dob = checkNull(paraMap.get("dob")[0]);
-            String country = checkNull(paraMap.get("country")[0]);
-            String description = checkNull(paraMap.get("description")[0]);
-            String avatar = checkNull(paraMap.get("avatar")[0]);
-            String email = "";
+                if (avatar == "") {
+                    if (file == null) {
+                        avatar = "avatar_01.png";
+                    }else {
+                        avatar = username + "_" + uploadFileName;
+                    }
 
-            System.out.println("SignUpServlet enter line 81: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
+                }
 
-            try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
-                stmt.setString(1, username);
-                stmt.setString(2, password);
-                stmt.setString(3, fname);
-                stmt.setString(4, lname);
-                stmt.setString(5, dob);
-                stmt.setString(6, country);
-                stmt.setString(7, description);
-                stmt.setString(8, avatar);
-                stmt.setString(9, "active");
-                stmt.setString(10, email);
+                System.out.println("SignUpServlet enter line 190: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
-                stmt.executeUpdate();
+                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, fname);
+                    stmt.setString(4, lname);
+                    stmt.setString(5, dob);
+                    stmt.setString(6, country);
+                    stmt.setString(7, description);
+                    stmt.setString(8, avatar);
+                    stmt.setString(9, "active");
+                    stmt.setString(10, email);
 
-                req.setAttribute("successMessage", "Sign up successfully!");
-                req.setAttribute("directMessage", "You will be directed to login page");
-                req.setAttribute("directErrorMessage", "true");
-                req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
+                    stmt.executeUpdate();
 
-                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
-                boolean success = (boolean) jsonObject.get("success");
-                req.setAttribute("success", success);
-                System.out.println("Success = " + success);
+                    req.setAttribute("successMessage", "Sign up successfully!");
+                    req.setAttribute("directMessage", "You will be directed to login page");
+                    req.setAttribute("directErrorMessage", "true");
+                    req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
+
+                    JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
+                    boolean success = (boolean) jsonObject.get("success");
+                    req.setAttribute("success", success);
+                    System.out.println("Success = " + success);
 
 
-            } catch (ServletException e) {
+                } catch (ServletException e) {
+                    e.printStackTrace();
+                }
+
+
+            } catch (FileUploadException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -205,7 +284,7 @@ public class SignUpServlet extends HttpServlet {
         String returnStr = "";
         if (object == null) {
             return returnStr;
-        }else {
+        } else {
             return object.toString();
         }
     }
