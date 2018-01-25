@@ -35,7 +35,7 @@
     <h1>All Articles</h1>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as  ${personLoggedIn} <img src="avatars/${personAvatarIcon}" alt="avatar"/>
+            <div>Logged in as  ${personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px" alt="avatar"/>
             </div>
         </c:if>
         <c:if test="${personLoggedIn ==null}">
@@ -131,11 +131,11 @@
                         <form method="post" action="/Articles">
                             <div class="form-group">
                                 <label for="newComment">Comment as ${personLoggedIn}:</label>
-                                <textarea class="form-control" rows="3" name="newComment" id="newComment"></textarea>
+                                <textarea class="form-control" rows="3" name="newComment" id="newComment" required></textarea>
                                 <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
                                 <input type="hidden" name="operation" value="commentOnArticle">
                                 <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                <button type="submit" class="btn btn-sm">Post a comment</button>
+                                <button style="float: right" type="submit" class="btn btn-sm">Post a comment</button>
                             </div>
                         </form>
                         </c:if>
