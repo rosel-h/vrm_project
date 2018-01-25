@@ -9,12 +9,23 @@ public class Comments {
     public String datePublished;
     public String commentAuthor;
     public String content;
+    public String avatarIcon;
 
-    public Comments(int commentID, String datePublished, String commentAuthor, String content) {
+    public String getAvatarIcon() {
+        return avatarIcon;
+    }
+
+    public void setAvatarIcon(String avatarIcon) {
+        this.avatarIcon = avatarIcon;
+    }
+
+    public Comments(int commentID, String datePublished, String commentAuthor, String content, String avatarIcon) {
         this.commentID = commentID;
         this.datePublished = datePublished;
         this.commentAuthor = commentAuthor;
         this.content = content;
+        this.avatarIcon = avatarIcon;
+
     }
 
     //does nothing

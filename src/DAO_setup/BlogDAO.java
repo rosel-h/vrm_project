@@ -53,7 +53,7 @@ public class BlogDAO implements AutoCloseable {
 
     /*Gets all the comments on articles from database*/
     public List<CommentOnArticles> getAllFirstComments() throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_comments_on_articles")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 List<CommentOnArticles> comArt = new ArrayList<>();
                 while (rs.next()) {
@@ -64,7 +64,7 @@ public class BlogDAO implements AutoCloseable {
         }
     }
     public List<CommentsOnComments> getAllNestedComments() throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_comments_on_comments")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_comments.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_comments WHERE  vwen239.vrm_comments_on_comments.username  = vwen239.vrm_users.username;")) {
             try (ResultSet rs = stmt.executeQuery()) {
                 List<CommentsOnComments> comArt = new ArrayList<>();
                 while (rs.next()) {
@@ -85,20 +85,21 @@ public class BlogDAO implements AutoCloseable {
         return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("avatar_icon"), rs.getString("status"),rs.getString("email_address"));
     }
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
-        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username") ,rs.getString("date"),rs.getString("content") );
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username") ,rs.getString("date"),rs.getString("content"),rs.getString("avatar_icon"));
     }
     private CommentsOnComments dataFromResultSet(ResultSet rs, CommentsOnComments n) throws SQLException {
-        return new CommentsOnComments(rs.getInt("parent_comment_id"),rs.getInt("child_comment_id"),rs.getString("username"),rs.getString("date"),rs.getString("content"));
+        return new CommentsOnComments(rs.getInt("parent_comment_id"),rs.getInt("child_comment_id"),rs.getString("username"),rs.getString("date"),rs.getString("content"),rs.getString("avatar_icon"));
     }
 
     public String getIcon(String username){
         String icon ="";
-        try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username=?")){
+        try(PreparedStatement stmt = conn.prepareStatement("SELECT avatar_icon FROM vrm_users WHERE username=?")){
             stmt.setString(1,username);
             try (ResultSet r = stmt.executeQuery()) {
                 System.out.println(r.toString());
                 while(r.next()){
-                    icon=r.getString(0);
+
+                    icon=r.getString(1);
                 }
             }
         } catch (SQLException e) {

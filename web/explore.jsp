@@ -78,7 +78,7 @@
                     <div class="modal-header">
                         <h4 class="modal-title">${articleList.getTitle()}</h4>
                         <c:if test="${personLoggedIn == articleList.getUsername()}">
-                        <form class="form-inline" action="/CreateArticles" method="POST">
+                        <form class="form-inline" action="/Articles" method="POST">
                         <button type="submit" class="btn btn-danger pull-right">Delete</button>
                         <input type="hidden" name="operation" value="delete">
                         <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
@@ -98,7 +98,7 @@
                             <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
                                 <%--avatar icon--%>
                                 <div class="media-left">
-                                    <img src="avatars/avatar_01.png" class="media-object" style="width:30px">
+                                    <img src="avatars/${commentList.getAvatarIcon()}" class="media-object" style="width:30px">
                                 </div>
                                 <div class="media-body">
                                     <h5 class="media-heading">${commentList.getCommentAuthor()}
@@ -109,7 +109,7 @@
                                     <c:forEach var="nestedList" items="${nestedList}">
                                         <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
                                             <div class="media-left">
-                                                <img src="avatars/avatar_02.png" class="media-object"
+                                                <img src="avatars/${nestedList.getAvatarIcon()}" class="media-object"
                                                      style="width:30px">
                                             </div>
                                             <div class="media-body">
