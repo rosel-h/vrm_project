@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="vrm_mshe666">
+    <serverData>
+      <paths name="vrm_mshe666">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/opt/tomcat/webapps" local="$PROJECT_DIR$/out/artifacts/vrm_mshe666" web="/vrm_mshe666" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

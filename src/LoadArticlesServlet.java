@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -98,26 +99,26 @@ public class LoadArticlesServlet extends HttpServlet {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        ServletContext s = getServletContext();
-            String filepath = s.getRealPath("mysql.properties");
-        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+        HttpSession session = req.getSession(true);
+        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
+        try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
             System.out.println("Signup done");
             List<User> users = dao.getAllUsers();
             System.out.println("Users uploaded");
             List<Article> articles = dao.getAllArticles();
             System.out.println("Articles created");
             List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
-            System.out.println("Comments on articles uploaded. Size: "+firstDegreeComments.size());
+            System.out.println("Comments on articles uploaded. Size: " + firstDegreeComments.size());
             List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
-            System.out.println("nestedcomments created. Size: "+nestedComments.size());
+            System.out.println("nestedcomments created. Size: " + nestedComments.size());
 
 
             System.out.println();
-            for(Article b:articles) {
+            for (Article b : articles) {
                 System.out.println(b.getTitle());
                 for (CommentOnArticles a : firstDegreeComments) {
 //                    System.out.println(a);
-                    if (a.getArticleID()==b.getArticleID()){
+                    if (a.getArticleID() == b.getArticleID()) {
                         System.out.println(a.getCommentAuthor() + ": " + a.getContent());
                         System.out.println("yes");
                     }
@@ -125,12 +126,12 @@ public class LoadArticlesServlet extends HttpServlet {
             }
 
 
-            req.setAttribute("articleList",articles);
-            req.setAttribute("userList",users);
-            req.setAttribute("commentList",firstDegreeComments);
-            req.setAttribute("nestedList",nestedComments);
+            req.setAttribute("articleList", articles);
+            req.setAttribute("userList", users);
+            req.setAttribute("commentList", firstDegreeComments);
+            req.setAttribute("nestedList", nestedComments);
 
-            req.getRequestDispatcher("explore.jsp").forward(req,resp);
+            req.getRequestDispatcher("explore.jsp").forward(req, resp);
             System.out.println("request has been dispatched");
 
         } catch (Exception e) {
