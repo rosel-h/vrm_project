@@ -1,15 +1,23 @@
 //import com.google.gson.Gson;
 
+import DAO_setup.MYSQLDatabase;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.*;
+import java.util.Properties;
 import java.util.Scanner;
 
 //logic to communcate with FB
@@ -32,9 +40,8 @@ public class OAuth2fb extends HttpServlet {
     }
 
     //setup get
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        FbResponse fbUser = new FbResponse();
         try {
             //checks if request_id exists, this is used for games and not relevant
             String rid = request.getParameter("request_ids");
@@ -90,8 +97,6 @@ public class OAuth2fb extends HttpServlet {
 
                     System.out.println(outputString);
 
-                    FbResponse fbUser = new FbResponse();
-
                     //get facebook email
                     String fbUserEmail = outputString.substring(outputString.indexOf("{\"email\":") + 10, outputString.indexOf("\",\"first_name\""));
                     fbUserEmail = fbUserEmail.replace("\\u0040", "@");
@@ -109,13 +114,62 @@ public class OAuth2fb extends HttpServlet {
                     System.out.println(fbUser.getEmail());
                     System.out.println(fbUser.getFirst_name());
                     System.out.println(fbUser.getLast_name());
-
                 }
+
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        if (checkFbUser(fbUser.getEmail())) {
+            System.out.println("good");
+            RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
+            rs.forward(request, response);
+
+        } else {
+            System.out.println("false");
+            RequestDispatcher rs = request.getRequestDispatcher("signup.jsp");
+            rs.forward(request, response);
+        }
+    }
+
+    public boolean checkFbUser(String email) {
+
+        boolean loginStatus = false;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Connection attempt...");
+        Properties dbProps = new Properties();
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
+
+        try (FileInputStream fis = new FileInputStream(filepath)) {
+            dbProps.load(fis);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establishing connection to the database
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            PreparedStatement ps = conn.prepareStatement
+                    ("select * from vrm_users where binary email_address=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
+            loginStatus = rs.next();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return loginStatus;
     }
+
 }

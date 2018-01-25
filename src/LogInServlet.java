@@ -23,7 +23,6 @@ import java.util.Properties;
 
 public class LogInServlet extends HttpServlet {
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html"); // change to text/jsp at a later stage
@@ -86,16 +85,16 @@ public class LogInServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("Connection attempt...");
-        Properties dbProps = new Properties();
-        ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
+//        System.out.println("Connection attempt...");
+//        Properties dbProps = new Properties();
+//        ServletContext s = getServletContext();
+//        String filepath = s.getRealPath("mysql.properties");
 
-        try (FileInputStream fis = new FileInputStream(filepath)) {
-            dbProps.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try (FileInputStream fis = new FileInputStream(filepath)) {
+//            dbProps.load(fis);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         // Establishing connection to the database
         try (Connection conn = mysqlDatabase.getConnection()) {

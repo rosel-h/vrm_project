@@ -17,6 +17,7 @@
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="11" parent="6" name="title">
       <Position>2</Position>
@@ -145,7 +146,11 @@
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="37" parent="9" name="PRIMARY">
+    <column id="37" parent="9" name="email_address">
+      <Position>10</Position>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <key id="38" parent="9" name="PRIMARY">
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>
