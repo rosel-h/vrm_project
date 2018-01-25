@@ -75,25 +75,25 @@ public class SignUpServlet extends HttpServlet {
 
     public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
 
-
-
-        System.out.println("enter sign up servlet");
+        System.out.println("SignUpServlet enter sign up servlet");
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        // Establishing connection to the database
 
         System.out.println("SignUpServlet Connection attempt...");
-        Properties dbProps = new Properties();
+        //plan A:
+/*        Properties dbProps = new Properties();
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("mysql.properties");
         try (FileInputStream fis = new FileInputStream(filepath)) {
             dbProps.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        // Establishing connection to the database
+        }*/
+        //plan B:
         HttpSession session = req.getSession(true);
         System.out.println("SignUpServlet enter line 44:" + session.getId());
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
@@ -105,79 +105,79 @@ public class SignUpServlet extends HttpServlet {
             }
         }
 
+        // connect to the database
         try {
             Connection conn = mysqlDatabase.getConnection();
             System.out.println("SignUpServlet Connection Successful");
-            // Access the JOOQ library through this variable.
-            DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 
-            PrintWriter out = resp.getWriter();
-
-            Map<String, String[]> paraMap = req.getParameterMap();
             //username, password, cPassword, fname, lname, dob, country, description, avatar
+            Map<String, String[]> paraMap = req.getParameterMap();
+
+            //get username from input and check if it already exists in database
+            //if true, return usernameError message
             String username = paraMap.get("username")[0];
-            try (PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT * FROM vrm_users WHERE username = ?;")) {
+
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username = ?;")) {
                 stmt.setString(1, username);
                 try (ResultSet r = stmt.executeQuery()) {
                     while (r.next()) {
-                        req.setAttribute("usernameError","username already exists");
-                        req.getRequestDispatcher("signup.jsp").forward(req,resp);
+                        req.setAttribute("usernameError", "username already exists");
+                        req.getRequestDispatcher("signup.jsp").forward(req, resp);
                         break;
-//                        out.println("Username \"" + username + "\"" + " already exists!! Please choose another one.");
-//                        break;
                     }
                 }
             }
 
+            //get password and confirm password from input and check if they are exactly the same
+            //if true, return password Error message
             String password = paraMap.get("password")[0];
             String cPassword = paraMap.get("cPassword")[0];
-            String fname = paraMap.get("fname")[0];
-            String lname = paraMap.get("lname")[0];
-            String dob = paraMap.get("dob")[0];
-            String country = paraMap.get("country")[0];
-            String description = paraMap.get("description")[0];
-            String avatar = paraMap.get("avatar")[0];
+
+            if (!cPassword.equals(password)) {
+                req.setAttribute("passwordError", "two passwords are different");
+                req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            }
+
+            //
+            String fname = checkNull(paraMap.get("fname")[0]);
+            String lname = checkNull(paraMap.get("lname")[0]);
+            String dob = checkNull(paraMap.get("dob")[0]);
+            String country = checkNull(paraMap.get("country")[0]);
+            String description = checkNull(paraMap.get("description")[0]);
+            String avatar = checkNull(paraMap.get("avatar")[0]);
             String email = "";
 
             System.out.println("SignUpServlet enter line 81: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
-            if (!cPassword.equals(password)) {
-                req.setAttribute("passwordError","two passwords are different");
-                req.getRequestDispatcher("signup.jsp").forward(req,resp);
-//                out.println("Two passwords are different!!");
-            }else{
-                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
-                    stmt.setString(1, username);
-                    stmt.setString(2, password);
-                    stmt.setString(3, fname);
-                    stmt.setString(4, lname);
-                    stmt.setString(5, dob);
-                    stmt.setString(6, country);
-                    stmt.setString(7, description);
-                    stmt.setString(8, avatar);
-                    stmt.setString(9, "active");
-                    stmt.setString(10, email);
+            try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+                stmt.setString(1, username);
+                stmt.setString(2, password);
+                stmt.setString(3, fname);
+                stmt.setString(4, lname);
+                stmt.setString(5, dob);
+                stmt.setString(6, country);
+                stmt.setString(7, description);
+                stmt.setString(8, avatar);
+                stmt.setString(9, "active");
+                stmt.setString(10, email);
 
-                    stmt.executeUpdate();
+                stmt.executeUpdate();
 
-//                    out.println("Create a new user successfully!!");
-//                    out.println(username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar + "," + "active");
+                req.setAttribute("successMessage", "Sign up successfully!");
+                req.setAttribute("directMessage", "You will be directed to login page");
+                req.setAttribute("directErrorMessage", "true");
+                req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
 
-                    req.setAttribute("successMessage","Sign up successfully!");
-                    req.setAttribute("directMessage","You will be directed to login page");
-                    req.setAttribute("directErrorMessage","true");
-                    req.getRequestDispatcher("signupsuccess.jsp").forward(req,resp);
+                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
+                boolean success = (boolean) jsonObject.get("success");
+                req.setAttribute("success", success);
+                System.out.println("Success = " + success);
 
-                    JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
-                    boolean success = (boolean) jsonObject.get("success");
-                    req.setAttribute("success", success);
-                    System.out.println("Success = " + success);
 
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                }
+            } catch (ServletException e) {
+                e.printStackTrace();
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,7 +187,7 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            createUser(req,resp);
+            createUser(req, resp);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -198,7 +198,16 @@ public class SignUpServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req,resp);
+        doGet(req, resp);
+    }
+
+    private String checkNull(Object object) {
+        String returnStr = "";
+        if (object == null) {
+            return returnStr;
+        }else {
+            return object.toString();
+        }
     }
 
 
