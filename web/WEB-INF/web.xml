@@ -57,5 +57,13 @@
 
 
 
+    <servlet>
+        <servlet-name>add_article</servlet-name>
+        <servlet-class>CreateArticle</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>add_article</servlet-name>
+        <url-pattern>/CreateArticles</url-pattern>
+    </servlet-mapping>
 </web-app>

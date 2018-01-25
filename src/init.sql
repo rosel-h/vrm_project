@@ -43,3 +43,8 @@ CREATE TABLE IF NOT EXISTS vrm_comments_on_comments (
   content TEXT NOT NULL,
   PRIMARY KEY (child_comment_id)
 );
+
+ALTER TABLE vrm_users ADD email_address VARCHAR(50);
+
+ALTER TABLE vrm_articles MODIFY COLUMN article_id INT auto_increment;
+
