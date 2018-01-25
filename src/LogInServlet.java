@@ -6,7 +6,6 @@ import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONValue;
 
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,6 +22,7 @@ import java.util.Properties;
 
 public class LogInServlet extends HttpServlet {
 
+    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +41,6 @@ public class LogInServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        System.out.println("LoginServlet enter line 36:"+ sess.getId());
 
         System.out.println("LoginServlet enter line 38: " + checkUser(username, pass, mysqlDatabase));
 
@@ -68,7 +67,7 @@ public class LogInServlet extends HttpServlet {
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("LoginServlet enter line 53: " + fileName );
+            System.out.println("LoginServlet enter line 53: " + fileName);
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
@@ -124,7 +123,30 @@ public class LogInServlet extends HttpServlet {
 
     //get function is post function
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("dispatching facebook");
+        stateParam = randomString();
+        OAuth2fb.stateParam = this.stateParam;
+
+        String url = "https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&state=" + stateParam;
+        System.out.println(url);
+        response.sendRedirect(url);
+
+    }
+
+    //genrates a 30 length random string to be used as StateParam
+    private String randomString() {
+        String list = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String randomString = "";
+
+        for (int i = 0; i < 30; i++) {
+            int random = (int) (Math.random() * 61);
+            randomString += list.charAt(random);
+        }
+
+        System.out.println("random string is " + randomString);
+        return randomString;
+
     }
 }

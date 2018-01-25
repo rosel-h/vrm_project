@@ -80,21 +80,23 @@
                     <div style="margin-top:10px" class="form-group">
                         <div class="col-sm-12 controls">
                             <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
-                            <button id="btn-fblogin" class="btn btn-primary" type="#">Login with Facebook</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12 control">
-                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                Don't have an account!
-                                <a href="signup.jsp">
-                                    Sign Up
-                                    <Here></Here>
-                                </a>
-                            </div>
+                            <button id="btn-fblogin" class="btn btn-primary" type ="button" onclick="window.location.href='/Login'">
+                                Continue with Facebook
+                            </button>
                         </div>
                     </div>
                 </form>
+                <div class="form-group">
+                    <div class="col-md-12 control">
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            Don't have an account!
+                            <a href="signup.jsp">
+                                Sign Up
+                                <Here></Here>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

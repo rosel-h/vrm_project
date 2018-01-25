@@ -39,12 +39,16 @@
 
 <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">
+
         <div class="panel-heading">
             <div class="panel-title">Sign Up</div>
-            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#"
-                                                                                       onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign
-                In</a></div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">
+                    Sign In
+                </a>
+            </div>
         </div>
+
         <div class="panel-body">
             <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp">
 
@@ -123,7 +127,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dob" class="col-md-3 control-label">Choose Your Profile Photo</label>
+                    <label for="dob" class="col-md-3 control-label">Profile Photo</label>
                     <div class="col-md-9">
 
                         <input type="radio" id="avatar01" name="avatar" value="avatar_01.png">
@@ -150,7 +154,37 @@
                     </div>
                 </div>
 
-                <div class="g-recaptcha form-group" data-sitekey="6LdzZkIUAAAAANwDR88UIllyBhP9hRKPpNusMmX6" style="margin-left: auto"></div>
+                <div class="form-group">
+                    <label for="dob" class="col-md-3 control-label">Upload Photo</label>
+                    <input type="file" name="img[]" class="file" style="visibility: hidden; position: absolute;">
+                    <div class="input-group col-md-8">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+                        <input type="text" class="form-control input" disabled placeholder="Upload Image">
+                        <span class="input-group-btn">
+        <button class="browse btn btn-default input" type="button"><i
+                class="glyphicon glyphicon-search"></i> Browse</button>
+      </span>
+                    </div>
+                </div>
+
+                <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+                <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                <script>
+                    $(document).on('click', '.browse', function () {
+                        var file = $(this).parent().parent().parent().find('.file');
+                        file.trigger('click');
+                    });
+                    $(document).on('change', '.file', function () {
+                        $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+                    });
+                </script>
+
+                <div class="form-group">
+                    <div class="g-recaptcha form-group" data-sitekey="6LdzZkIUAAAAANwDR88UIllyBhP9hRKPpNusMmX6"
+                         style="margin-left: 40px">
+                    </div>
+                </div>
 
 
                 <div class="form-group">
@@ -160,23 +194,23 @@
                                 data-sitekey="6LfeHx4UAAAAAAKUx5rO5nfKMtc9-syDTdFLftnm"
                                 data-callback="onSubmit">Sign Up
                         </button>
-                        <span style="margin-left:8px; margin-right: 8px;">or</span>
-                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  
-                            Sign Up with Facebook
+                        <span style="margin-left:20px; margin-right: 20px;">or</span>
+                        <button id="btn-fbsignup" type="button" onclick="window.location.href='/Login'"
+                                class="btn btn-primary"><i class="icon-facebook"></i>  
+                            Continue with Facebook
                         </button>
                     </div>
                 </div>
 
                 <%--<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">--%>
 
-                    <%--<div class="col-md-offset-3 col-md-9">--%>
-                        <%--<button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  --%>
-                            <%--Sign Up with Facebook--%>
-                        <%--</button>--%>
-                    <%--</div>--%>
-
+                <%--<div class="col-md-offset-3 col-md-9">--%>
+                <%--<button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  --%>
+                <%--Sign Up with Facebook--%>
+                <%--</button>--%>
                 <%--</div>--%>
 
+                <%--</div>--%>
 
             </form>
         </div>

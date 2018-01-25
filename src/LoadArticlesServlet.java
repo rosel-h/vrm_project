@@ -78,7 +78,7 @@ public class LoadArticlesServlet extends HttpServlet {
                 userJson = User.readJSONFile(fileName);
                 System.out.println(JSONObject.toJSONString(userJson));
                 user = String.valueOf(userJson.get("username"));
-            }else{
+            } else {
                 System.out.println("session doesnt exist");
             }
             //add articles
@@ -90,28 +90,26 @@ public class LoadArticlesServlet extends HttpServlet {
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("CreateArticles: new article made");
 
-            }
-            else if ("delete".equals(op)) {
+            } else if ("delete".equals(op)) {
                 System.out.println("CreateArticle: Delete option");
 //                String qwak = ;
                 System.out.println(req.getParameter("articleId"));
                 int id = Integer.parseInt(req.getParameter("articleId"));
                 dao.deleteArticle(id);
 
-            }
-            else if("commentOnArticle".equals(op)){
+            } else if ("commentOnArticle".equals(op)) {
                 String userWhoCommented = req.getParameter("userWhoCommented");
                 String comment = req.getParameter("newComment");
                 int articleID = Integer.parseInt(req.getParameter("articleID"));
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                dao.addCommentToArticle(articleID,userWhoCommented,sqlDate,comment);
+                dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
             }
 
             String icon = dao.getIcon(user);
-            if(user!=null){
-                req.setAttribute("personLoggedIn",user);
+            if (user != null) {
+                req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");
-                req.setAttribute("personAvatarIcon",icon);
+                req.setAttribute("personAvatarIcon", icon);
             }
             List<User> users = dao.getAllUsers();
             System.out.println("LoadArticlesServlet Users uploaded");

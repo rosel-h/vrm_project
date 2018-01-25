@@ -25,8 +25,6 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
         HttpSession sess = req.getSession(true);
 
         ServletContext s = getServletContext();
@@ -63,7 +61,6 @@ public class MainServlet extends HttpServlet {
                 req.getRequestDispatcher("index.jsp").forward(req,resp);
             }
         }
-
 
     }
 
