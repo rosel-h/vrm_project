@@ -13,6 +13,17 @@
 <body>
 <p>Welcome!</p>
 
+
+<a href="Articles">
+    <button type="submit" class="btn btn-default">Explore</button>
+</a>
+
+<form action="newArticle.jsp">
+    <button class="btn btn-md" type="submit">New Article</button>
+</form>
+
+
+
 <form method="post" action="Main">
     <button type="submit" name="logout_button" value="Logout">Log out</button>
 </form>

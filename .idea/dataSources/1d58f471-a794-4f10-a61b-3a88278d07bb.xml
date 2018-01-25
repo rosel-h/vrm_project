@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="vwen239@db.sporadic.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
     <root id="1"/>
     <schema id="2" parent="1" name="vwen239">
       <Current>1</Current>
@@ -40,6 +40,7 @@
       <NotNull>1</NotNull>
     </column>
     <key id="15" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>article_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -47,6 +48,7 @@
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="17" parent="7" name="article_id">
       <Position>2</Position>
@@ -69,6 +71,7 @@
       <NotNull>1</NotNull>
     </column>
     <key id="21" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -81,6 +84,7 @@
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="24" parent="8" name="username">
       <Position>3</Position>
@@ -98,6 +102,7 @@
       <NotNull>1</NotNull>
     </column>
     <key id="27" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>child_comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -151,6 +156,7 @@
       <DataType>varchar(50)|0</DataType>
     </column>
     <key id="38" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>

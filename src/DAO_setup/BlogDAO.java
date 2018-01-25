@@ -96,17 +96,21 @@ public class BlogDAO implements AutoCloseable {
         try(PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username=?")){
             stmt.setString(1,username);
             try (ResultSet r = stmt.executeQuery()) {
-                icon=r.getString(0);
+                System.out.println(r.toString());
+                while(r.next()){
+                    icon=r.getString(0);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(icon);
         return icon;
     }
 
     public void addArticle(String title, String content, String user, Date now){
 
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_articles VALUE (?, ?, ?, ?);")) {
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_articles (title,username, date, content) VALUE (?, ?, ?, ?);")) {
             stmt.setString(1, title);
             stmt.setString(2, user);
             stmt.setString(3, String.valueOf(now));
@@ -118,7 +122,49 @@ public class BlogDAO implements AutoCloseable {
 
     }
 
+    public User getUserDetails(String username){
+        System.out.println("BlogDAO: getUserDetails for "+username);
+        User u = null;
+        if(username!=null) {
 
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username=?")) {
+                stmt.setString(1, username);
+                System.out.println("BlogDAO: statement prepared = SELECT * FROM vrm_users WHERE username="+username);
+
+                try (ResultSet r = stmt.executeQuery()) {
+                    System.out.println("RS executed");
+//                    System.out.println("BlogDAO: user in RS = "+r.getString("username"));
+                    u = dataFromResultSet(r, new User());
+                    System.out.println(u.getUsername() + " "+u.getAvatar_icon());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return u;
+    }
+
+    /*delete an article*/
+    public void deleteArticle(int id) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_articles WHERE article_id = ?")) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    /*add a comment*/
+    public void addCommentToArticle(int articleID, String userWhoCommented, Date date,String comment){
+        try(PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_comments_on_articles (article_id, username, date, content) VALUE (?,?,?,?)")){
+            stmt.setInt(1,articleID);
+            stmt.setString(2,userWhoCommented);
+            stmt.setDate(3,date);
+            stmt.setString(4,comment);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Blog Dao: Comment was not added");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Closes the connection to the database. Implements {@link AutoCloseable} to support try-with-resources.
