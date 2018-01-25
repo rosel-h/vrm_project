@@ -31,56 +31,78 @@
 </head>
 <body>
 <%--Load articles --%>
-<h1>All Articles</h1>
 <div class="container">
+    <h1>All Articles</h1>
     <c:forEach var="articleList" items="${articleList}">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2>${articleList.getTitle()}</h2>
-            </div>
-            <div class="panel-body">
-                <div>Written by ${articleList.getUsername()}, published on ${articleList.getFormattedDate()}</div>
-                <div>${articleList.getContent()}</div>
-            </div>
+        <div class="panel panel-warning">${articleList.getTitle()} by ${articleList.getUsername()}
+            <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
+                    data-target="#a${articleList.getArticleID()}">Full Article
+            </button>
+        </div>
 
-            <div class="media panel-footer">
-                <div class=""><h4>Comments</h4></div>
-                <%--first comments--%>
-                <c:forEach var="commentList" items="${commentList}">
-                    <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
-                        <%--avatar icon--%>
-                        <div class="media-left">
-                            <img src="avatars/avatar_01.png" class="media-object" style="width:45px">
-                        </div>
-                        <div class="media-body">
-                            <h5 class="media-heading">${commentList.getCommentAuthor()}
-                                <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                            </h5>
-                            <p>${commentList.getContent()}</p>
+        <!-- Modal -->
+        <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">${articleList.getTitle()}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>Written by ${articleList.getUsername()}, published
+                            on ${articleList.getFormattedDate()}</div>
+                        <div>${articleList.getContent()}</div>
+                    </div>
 
-                            <%--second nest comments--%>
-                            <c:forEach var="nestedList" items="${nestedList}">
-                                <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
-                                    <div class="media-left">
-                                        <img src="avatars/avatar_02.png" class="media-object" style="width:45px">
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">${nestedList.getCommentAuthor()}
-                                            <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
-                                        </h5>
-                                        <p>${nestedList.getContent()}</p>
-                                    </div>
-                                </c:if>
+                    <div class="media panel-footer">
+                        <div class=""><h4>Comments</h4></div>
+                            <%--first comments--%>
+                        <c:forEach var="commentList" items="${commentList}">
+                            <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
+                                <%--avatar icon--%>
+                                <div class="media-left">
+                                    <img src="avatars/avatar_01.png" class="media-object" style="width:30px">
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="media-heading">${commentList.getCommentAuthor()}
+                                        <small><i>Posted on ${commentList.getDatePublished()}</i></small>
+                                    </h5>
+                                    <p>${commentList.getContent()}</p>
 
-                            </c:forEach>
+                                        <%--second nest comments--%>
+                                    <c:forEach var="nestedList" items="${nestedList}">
+                                        <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
+                                            <div class="media-left">
+                                                <img src="avatars/avatar_02.png" class="media-object"
+                                                     style="width:30px">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">${nestedList.getCommentAuthor()}
+                                                    <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
+                                                </h5>
+                                                <p>${nestedList.getContent()}</p>
+                                            </div>
+                                        </c:if>
 
-                        </div>
-                    </c:if>
-                </c:forEach>
+                                    </c:forEach>
+
+                                </div>
+                                <br>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
+
     </c:forEach>
 
+    <form action="newArticle.jsp">
+        <button class="btn btn-md" type="submit">New Article</button>
+    </form>
 </div>
 
 
