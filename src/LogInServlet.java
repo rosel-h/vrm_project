@@ -5,6 +5,8 @@
 import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONValue;
 
+
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,7 +26,6 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         response.setContentType("text/html"); // change to text/jsp at a later stage
         PrintWriter out = response.getWriter();
 
