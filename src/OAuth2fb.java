@@ -1,6 +1,7 @@
 //import com.google.gson.Gson;
 
 import DAO_setup.MYSQLDatabase;
+import org.json.simple.JSONObject;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,6 +20,7 @@ import java.net.URLConnection;
 import java.sql.*;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 //logic to communcate with FB
 
@@ -115,27 +117,29 @@ public class OAuth2fb extends HttpServlet {
                     System.out.println(fbUser.getFirst_name());
                     System.out.println(fbUser.getLast_name());
                 }
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
 
         }
 
-        if (checkFbUser(fbUser.getEmail())) {
+        if (checkFbUser(fbUser.getEmail(), fbUser)) {
             System.out.println("good");
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 
         } else {
-            System.out.println("false");
-            RequestDispatcher rs = request.getRequestDispatcher("signup.jsp");
-            rs.forward(request, response);
+            request.setAttribute("successMessage", "Sign up successfully!");
+            request.setAttribute("directMessage", "You will be directed to login page");
+            request.setAttribute("directErrorMessage", "true");
+            request.setAttribute("success", true);
+            request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
+            System.out.println("Success = " + true);
+
         }
     }
 
-    public boolean checkFbUser(String email) {
+    public boolean checkFbUser(String email, FbResponse fbUser) {
 
         boolean loginStatus = false;
 
@@ -165,11 +169,44 @@ public class OAuth2fb extends HttpServlet {
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 
+            if (!loginStatus) {
+
+                System.out.println("User does not exist.. creating");
+
+                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+
+                    String username = fbUser.getFirst_name() + " " + fbUser.getLast_name();
+                    String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
+                    String fname = fbUser.getFirst_name();
+                    String lname = fbUser.getLast_name();
+                    String dob = "1900/11/11";
+                    String country = "";
+                    String description = "";
+                    String avatar = "avatar_01.jpg";
+                    String status = "facebook";
+
+                    stmt.setString(1, username);
+                    stmt.setString(2, password);
+                    stmt.setString(3, fname);
+                    stmt.setString(4, lname);
+                    stmt.setString(5, dob);
+                    stmt.setString(6, country);
+                    stmt.setString(7, description);
+                    stmt.setString(8, avatar);
+                    stmt.setString(9, status);
+                    stmt.setString(10, email);
+                    stmt.executeUpdate();
+
+                    System.out.println("Creation Successful");
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return loginStatus;
+
     }
 
 }

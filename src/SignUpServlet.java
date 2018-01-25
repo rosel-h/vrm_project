@@ -169,16 +169,10 @@ public class SignUpServlet extends HttpServlet {
                     req.setAttribute("directErrorMessage","true");
                     req.getRequestDispatcher("signupsuccess.jsp").forward(req,resp);
 
-
-
                     JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
                     boolean success = (boolean) jsonObject.get("success");
                     req.setAttribute("success", success);
                     System.out.println("Success = " + success);
-
-                    req.setAttribute("signUpStatus", true);
-                    req.getRequestDispatcher("index.jsp").forward(req,resp);
-
 
                 } catch (ServletException e) {
                     e.printStackTrace();

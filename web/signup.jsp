@@ -161,7 +161,7 @@
                                 data-callback="onSubmit">Sign Up
                         </button>
                         <span style="margin-left:8px; margin-right: 8px;">or</span>
-                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  
+                        <button id="btn-fbsignup" type="button" class="btn btn-primary" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"><i class="icon-facebook"></i>  
                             Sign Up with Facebook
                         </button>
                     </div>

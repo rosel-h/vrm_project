@@ -41,7 +41,6 @@ public class LogInServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        System.out.println("LoginServlet enter line 36:"+ sess.getId());
 
         System.out.println("LoginServlet enter line 38: " + checkUser(username, pass, mysqlDatabase));
 
