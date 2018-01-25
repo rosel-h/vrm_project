@@ -132,7 +132,6 @@ public class LoadArticlesServlet extends HttpServlet {
                 }
             }
 
-
             req.setAttribute("articleList", articles);
             req.setAttribute("userList", users);
             req.setAttribute("commentList", firstDegreeComments);
