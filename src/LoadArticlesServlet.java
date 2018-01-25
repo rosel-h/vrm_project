@@ -101,16 +101,23 @@ public class LoadArticlesServlet extends HttpServlet {
 //        }
         HttpSession session = req.getSession(true);
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
+        if (mysqlDatabase == null) {
+            try {
+                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
-            System.out.println("Signup done");
+            System.out.println("LoadArticlesServlet Signup done");
             List<User> users = dao.getAllUsers();
-            System.out.println("Users uploaded");
+            System.out.println("LoadArticlesServlet Users uploaded");
             List<Article> articles = dao.getAllArticles();
-            System.out.println("Articles created");
+            System.out.println("LoadArticlesServlet Articles created");
             List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
-            System.out.println("Comments on articles uploaded. Size: " + firstDegreeComments.size());
+            System.out.println("LoadArticlesServlet Comments on articles uploaded. Size: " + firstDegreeComments.size());
             List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
-            System.out.println("nestedcomments created. Size: " + nestedComments.size());
+            System.out.println("LoadArticlesServlet nestedcomments created. Size: " + nestedComments.size());
 
 
             System.out.println();
@@ -120,7 +127,7 @@ public class LoadArticlesServlet extends HttpServlet {
 //                    System.out.println(a);
                     if (a.getArticleID() == b.getArticleID()) {
                         System.out.println(a.getCommentAuthor() + ": " + a.getContent());
-                        System.out.println("yes");
+                        System.out.println("LoadArticlesServlet yes");
                     }
                 }
             }
@@ -132,7 +139,7 @@ public class LoadArticlesServlet extends HttpServlet {
             req.setAttribute("nestedList", nestedComments);
 
             req.getRequestDispatcher("explore.jsp").forward(req, resp);
-            System.out.println("request has been dispatched");
+            System.out.println("LoadArticlesServlet request has been dispatched");
 
         } catch (Exception e) {
             e.printStackTrace();
