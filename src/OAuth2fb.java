@@ -27,7 +27,7 @@ import java.util.StringJoiner;
 public class OAuth2fb extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public static String stateParam = "";
+//    public static String stateParam = "";
 
     // Facebook WebApp authentication
     private static final String clientID = "352195078594245";
@@ -50,10 +50,10 @@ public class OAuth2fb extends HttpServlet {
             String rid = request.getParameter("request_ids");
             String secretCode = request.getParameter("state");
 
-            if (!secretCode.equals(stateParam)) {
-                System.out.println("Incorrect State");
-                return;
-            }
+//            if (!secretCode.equals(stateParam)) {
+//                System.out.println("Incorrect State");
+//                return;
+//            }
 
             if (rid != null) {
                 response.sendRedirect("https://www.facebook.com/dialog/oauth?client_id="
@@ -172,8 +172,9 @@ public class OAuth2fb extends HttpServlet {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
             PreparedStatement ps = conn.prepareStatement
-                    ("select * from vrm_users where binary email_address=?");
+                    ("select * from vrm_users where binary email_address=? and status=?");
             ps.setString(1, email);
+            ps.setString(2, "facebook");
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 

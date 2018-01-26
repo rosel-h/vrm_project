@@ -22,6 +22,8 @@
         $(document).ready(function () {
             $('#summernote').summernote();
         });
+
+        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
 </head>
 <body>
