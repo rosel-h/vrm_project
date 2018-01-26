@@ -22,6 +22,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
+<%@include file="navigation.jsp" %>
 <p>Welcome!</p>
 
 
