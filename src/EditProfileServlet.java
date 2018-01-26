@@ -156,7 +156,7 @@ public class EditProfileServlet extends HttpServlet {
                             }
                         }
 
-                        if (avatar.equals("")) {
+                        if (true) {
                             if (uploadFileName.equals("")) {
                             }else {
                                 avatar = username + "_" + uploadFileName;
@@ -212,6 +212,7 @@ public class EditProfileServlet extends HttpServlet {
                             stmt.executeUpdate();
 
                             req.setAttribute("successMessage", "save profile successfully");
+                            user.setAvatar_icon(avatar);
                             req.setAttribute("user",user);
                             session.setAttribute("operation","edit");
                             req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
