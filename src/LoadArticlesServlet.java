@@ -52,14 +52,14 @@ public class LoadArticlesServlet extends HttpServlet {
 
         boolean userHasLoggedIn = session.isNew();
 
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        if (mysqlDatabase == null) {
-            try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+//        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
+//        if (mysqlDatabase == null) {
+//            try {
+//                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         ServletContext servletContext = getServletContext();
         String sessionFilePath = servletContext.getRealPath("/Sessions");
@@ -70,7 +70,7 @@ public class LoadArticlesServlet extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
-        try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
+        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
 
             if (sessionFile.exists()) {
@@ -104,9 +104,16 @@ public class LoadArticlesServlet extends HttpServlet {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
             }
+            else if ("deleteCommentOnArticle".equals(op)){
+                System.out.println("LoadArticlesServlet: delete button pressed");
+                String commentIDToBeDeleted = req.getParameter("commentID");
+                System.out.println();
+                System.out.println("LAS: id - "+ commentIDToBeDeleted);
+                dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
+            }
 
             String icon = dao.getIcon(user);
-            System.out.println(icon);
+//            System.out.println(icon);
             if (user != null) {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");

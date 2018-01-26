@@ -178,9 +178,15 @@ public class BlogDAO implements AutoCloseable {
 
     /*delete an article*/
     public void deleteArticle(int id) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE article_id = ?")) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            System.out.println("All comments with article id: "+ id+" deleted.");
+        }
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_articles WHERE article_id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            System.out.println("Article with ID: "+ id+" deleted.");
         }
     }
 
@@ -194,6 +200,17 @@ public class BlogDAO implements AutoCloseable {
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Blog Dao: Comment was not added");
+            e.printStackTrace();
+        }
+    }
+
+    /*delete comment*/
+    public void deleteCommentOnArticle(int id){
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE comment_id = ?")) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Blog Dao: Comment was not deleted");
             e.printStackTrace();
         }
     }

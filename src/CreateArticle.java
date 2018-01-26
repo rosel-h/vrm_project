@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by rher490 on 25/01/2018.
@@ -50,59 +50,42 @@ public class CreateArticle extends HttpServlet {
 
         File sessionFile = new File(fileName);
         String user = null;
+
         if (sessionFile.exists()) {
             System.out.println("session exists");
             userJson = User.readJSONFile(fileName);
             System.out.println(JSONObject.toJSONString(userJson));
             user = String.valueOf(userJson.get("username"));
-        }else{
+        } else {
             System.out.println("session doesnt exist");
         }
 
         String op = req.getParameter("operation");
-
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
         try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
-            if ("add".equals(op)) {
-                String title = req.getParameter("title");
-                String content = req.getParameter("content");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 
-//            deletelater
-                List<Article> articlesTemp = dao.getAllArticles();
-                System.out.println("CreateArticles: Articles List temp created. Size " + articlesTemp.size());
+            req.getAttributeNames();
 
-                dao.addArticle(title, content, user, sqlDate);
-                System.out.println("CreateArticles: new article made");
+            Map<String, String[]> parameterMap = req.getParameterMap();
 
-            }
-            else if ("delete".equals(op)) {
-                System.out.println("CreateArticle: Delete option");
-//                String qwak = ;
-                System.out.println(req.getParameter("articleId"));
-                int id = Integer.parseInt(req.getParameter("articleId"));
-                dao.deleteArticle(id);
+            for (String key : parameterMap.keySet()) {
+
+                String[] a = parameterMap.get(key);
+
+                for (int i = 0; i < a.length; i++) {
+
+                    System.out.println(a[i]);
+
+                }
 
             }
 
-            List<Article> articles = dao.getAllArticles();
-            System.out.println("CreateArticles: Articles List created. Size " + articles.size());
-            req.setAttribute("articleList", articles);
-            req.getRequestDispatcher("/Articles").forward(req, resp);
-            System.out.println("request from CreateArticles has been dispatched");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-//            else if ("delete".equals(op)) {
-//
-//                int id = Integer.parseInt(req.getParameter("articleId"));
-//                dao.deleteArticle(id);
-//
-//            }
 
 
     }

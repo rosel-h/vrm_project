@@ -35,11 +35,12 @@
     <h1>All Articles</h1>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as  ${personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px" alt="avatar"/>
+            <div>Logged in as ${personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px"
+                                                     alt="avatar"/>
             </div>
         </c:if>
         <c:if test="${personLoggedIn ==null}">
-            <div>Logged in as Guest </div>
+            <div>Logged in as Guest</div>
         </c:if>
     </div>
     <table class="table table-striped">
@@ -52,102 +53,114 @@
         </tr>
         </thead>
         <tbody>
-    <c:forEach var="articleList" items="${articleList}">
-        <%--<div class="panel panel-warning"> <b>${articleList.getTitle()}</b> by <i>${articleList.getUsername()}</i>--%>
+        <c:forEach var="articleList" items="${articleList}">
+            <%--<div class="panel panel-warning"> <b>${articleList.getTitle()}</b> by <i>${articleList.getUsername()}</i>--%>
             <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                    <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
+            <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
             <%--</button>--%>
-        <%--</div>--%>
-        <tr>
-            <td><b>${articleList.getTitle()}</b></td>
-            <td><i>${articleList.getUsername()}</i></td>
-            <td>${articleList.getDate()}</td>
-            <td>
-                <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                        data-target="#a${articleList.getArticleID()}">Full Article
-                </button>
-            </td>
-        </tr>
+            <%--</div>--%>
+            <tr>
+                <td><b>${articleList.getTitle()}</b></td>
+                <td><i>${articleList.getUsername()}</i></td>
+                <td>${articleList.getDate()}</td>
+                <td>
+                    <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
+                            data-target="#a${articleList.getArticleID()}">Full Article
+                    </button>
+                </td>
+            </tr>
 
 
-        <!-- Modal -->
-        <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">${articleList.getTitle()}</h4>
-                        <c:if test="${personLoggedIn == articleList.getUsername()}">
-                        <form class="form-inline" action="/Articles" method="POST">
-                        <button type="submit" class="btn btn-danger pull-right">Delete</button>
-                        <input type="hidden" name="operation" value="delete">
-                        <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
-                        </form>
-                        </c:if>
-                    </div>
-                    <div class="modal-body">
-                        <div>Written by ${articleList.getUsername()}, published
-                            on ${articleList.getDate()}</div>
-                        <div>${articleList.getContent()}</div>
-                    </div>
-
-                    <div class="media panel-footer">
-                        <div class=""><p>Comments</p></div>
-                            <%--first comments--%>
-                        <c:forEach var="commentList" items="${commentList}">
-                            <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
-                                <%--avatar icon--%>
-                                <div class="media-left">
-                                    <img src="avatars/${commentList.getAvatarIcon()}" class="media-object" style="width:30px">
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading">${commentList.getCommentAuthor()}
-                                        <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                                    </h5>
-                                    <p>${commentList.getContent()}</p>
-                                        <%--second nest comments--%>
-                                    <c:forEach var="nestedList" items="${nestedList}">
-                                        <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
-                                            <div class="media-left">
-                                                <img src="avatars/${nestedList.getAvatarIcon()}" class="media-object"
-                                                     style="width:30px">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">${nestedList.getCommentAuthor()}
-                                                    <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
-                                                </h5>
-                                                <p>${nestedList.getContent()}</p>
-                                            </div>
-                                            <br>
-                                        </c:if>
-                                    </c:forEach>
-
-                                </div>
-                                <br>
+            <!-- Modal -->
+            <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">${articleList.getTitle()}</h4>
+                            <c:if test="${personLoggedIn == articleList.getUsername()}">
+                                <form class="form-inline" action="/Articles" method="POST">
+                                    <button type="submit" class="btn btn-danger pull-right">Delete</button>
+                                    <input type="hidden" name="operation" value="delete">
+                                    <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
+                                </form>
                             </c:if>
+                        </div>
+                        <div class="modal-body">
+                            <div>Written by ${articleList.getUsername()}, published
+                                on ${articleList.getDate()}</div>
+                            <div>${articleList.getContent()}</div>
+                        </div>
 
-                        </c:forEach>
-                        <c:if test="${personLoggedIn !=null}">
-                        <form method="post" action="/Articles">
-                            <div class="form-group">
-                                <label for="newComment">Comment as ${personLoggedIn}:</label>
-                                <textarea class="form-control" rows="3" name="newComment" id="newComment" required></textarea>
-                                <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                <input type="hidden" name="operation" value="commentOnArticle">
-                                <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                <button style="float: right" type="submit" class="btn btn-sm">Post a comment</button>
-                            </div>
-                        </form>
-                        </c:if>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div class="media panel-footer">
+
+                            <div class=""><p>Comments</p></div>
+                                <%--first comments--%>
+                            <c:forEach var="commentList" items="${commentList}">
+                                <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
+                                    <%--avatar icon--%>
+                                    <div class="media-left">
+                                        <img src="avatars/${commentList.getAvatarIcon()}" class="media-object"
+                                             style="width:30px">
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">${commentList.getCommentAuthor()}
+                                            <small><i>Posted on ${commentList.getDatePublished()}</i></small>
+                                        </h5>
+                                        <p>${commentList.getContent()}</p>
+                                            <%--second nest comments--%>
+                                        <c:forEach var="nestedList" items="${nestedList}">
+                                            <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
+                                                <div class="media-left">
+                                                    <img src="avatars/${nestedList.getAvatarIcon()}"
+                                                         class="media-object"
+                                                         style="width:30px">
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">${nestedList.getCommentAuthor()}
+                                                        <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
+                                                    </h5>
+                                                    <p>${nestedList.getContent()}</p>
+                                                </div>
+                                                <br>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                                            <form method="post" action="/Articles">
+                                            <button type="submit" class="btn btn-xs">delete comment</button>
+                                                <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+
+                                            </form>
+                                        </c:if>
+                                    </div>
+                                    <br>
+                                </c:if>
+
+                            </c:forEach>
+                            <c:if test="${personLoggedIn !=null}">
+                                <form method="post" action="/Articles">
+                                    <div class="form-group">
+                                        <label for="newComment">Comment as ${personLoggedIn}:</label>
+                                        <textarea class="form-control" rows="3" name="newComment" id="newComment"
+                                                  required></textarea>
+                                        <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                        <input type="hidden" name="operation" value="commentOnArticle">
+                                        <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                        <button style="float: right" type="submit" class="btn btn-sm">Post a comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </c:if>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
 
