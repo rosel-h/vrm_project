@@ -36,6 +36,7 @@ public class EditProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
+        System.out.println("EditProfileServlet enter line 39: session id = " + session.getId());
         String operation = (String) session.getAttribute("operation");
         if (operation == null) {
             operation = "view";
@@ -63,10 +64,11 @@ public class EditProfileServlet extends HttpServlet {
             userJson = User.readJSONFile(seesionFileName);
             System.out.println(JSONObject.toJSONString(userJson));
             String username = String.valueOf(userJson.get("username"));
-            if (operation.equals("edit")) {
+            if (ServletFileUpload.isMultipartContent(req)) {
                 try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
                     System.out.println("EditProfileServlet enter line 69:");
                     User user = dao.getOneUser(username);
+
                     System.out.println("EditProfileServlet enter line 71: username = " + username);
                     //if user uploads profile image, set maxMemSize and maxFileSize allowed
                     final int maxMemSize = 10 * 1024 * 1024;
@@ -198,18 +200,20 @@ public class EditProfileServlet extends HttpServlet {
 
                         Connection conn = mysqlDatabase.getConnection();
                         try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
-                                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ?;")) {
+                                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
                             stmt.setString(1, fname);
                             stmt.setString(2, lname);
                             stmt.setString(3, dob);
                             stmt.setString(4, country);
                             stmt.setString(5, description);
                             stmt.setString(6, avatar);
+                            stmt.setString(7, username);
 
                             stmt.executeUpdate();
 
                             req.setAttribute("successMessage", "save profile successfully");
                             req.setAttribute("user",user);
+                            session.setAttribute("operation","edit");
                             req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
 
                         } catch (ServletException e) {
@@ -239,6 +243,7 @@ public class EditProfileServlet extends HttpServlet {
 //                    String description = user.getDescription();
 
                     req.setAttribute("user",user);
+                    session.setAttribute("operation","view");
                     req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
 
                 } catch (SQLException e) {
