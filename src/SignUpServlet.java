@@ -134,18 +134,14 @@ public class SignUpServlet extends HttpServlet {
 
                         if (fileName.lastIndexOf("\\") >= 0) {
                             fileName = fileName.substring(fileName.lastIndexOf("\\"));
-//                            file = new File(filePath + "\\" + fileName);
                         } else {
                             fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-//                            file = new File(filePath + "\\" + fileName);
                         }
 
                         uploadFileName = fileName;
-//                        System.out.println("SignUpServlet enter line 139: " + file.getAbsolutePath());
                         doUpload = fileItem;
                         hasUpload = true;
 
-//                        fileItem.write(file);
                     } else {
 
                         String fieldName = fileItem.getFieldName();
