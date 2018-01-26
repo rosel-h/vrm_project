@@ -333,7 +333,4 @@ public class SignUpServlet extends HttpServlet {
         return new JSONObject((Map) jsonTokener);
     }
 
-
-
-
 }

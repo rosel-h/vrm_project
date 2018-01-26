@@ -4,6 +4,7 @@
 
 import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONValue;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.security.SecureRandom;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,6 +111,19 @@ public class LogInServlet extends HttpServlet {
             System.out.println("LoginServlet connection successful");
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=?");
+
+
+
+            // code to generate random salt
+            String salt = BCrypt.gensalt(12);
+            String hashed = BCrypt.hashpw("1234", salt);
+            System.out.println("hash is " + hashed);
+            System.out.println("salt is " + salt);
+
+            if (BCrypt.checkpw("1234", hashed)) {
+                System.out.println("matches");
+            }
+
             ps.setString(1, username);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
