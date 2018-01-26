@@ -172,8 +172,9 @@ public class OAuth2fb extends HttpServlet {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
             PreparedStatement ps = conn.prepareStatement
-                    ("select * from vrm_users where binary email_address=?");
+                    ("select * from vrm_users where binary email_address=? and status=?");
             ps.setString(1, email);
+            ps.setString(2, "facebook");
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 

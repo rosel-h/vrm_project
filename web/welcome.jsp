@@ -35,6 +35,10 @@
     <button type="submit">New Article</button>
 </form>
 
+<a href="editprofile">
+    <button type="button" class="btn btn-default">My Profile</button>
+</a>
+
 
 
 <form method="post" action="Main">

@@ -66,4 +66,14 @@
         <servlet-name>add_article</servlet-name>
         <url-pattern>/CreateArticles</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>EditProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/editprofile</url-pattern>
+    </servlet-mapping>
 </web-app>

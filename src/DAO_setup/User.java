@@ -22,6 +22,7 @@ public class User {
     String avatar_icon;
     String status;
     String email;
+    String description;
 
     public User() {
     }
@@ -39,6 +40,22 @@ public class User {
             this.email = email;
         }
     }
+
+    public User(String username, String password, String fname, String lname, String dateOfBirth, String country, String description, String avatar_icon, String status, String email) {
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.dateOfBirth = dateOfBirth;
+        this.country = country;
+        this.description = description;
+        this.avatar_icon = avatar_icon;
+        this.status = status;
+        if(!String.valueOf(email).equals("null")) {
+            this.email = email;
+        }
+    }
+
 
     public String getUsername() {
         return username;
@@ -111,6 +128,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getDescription() { return description;}
+
+    public void setDescription(String description) {this.description = description;}
 
     public static JSONObject readJSONFile(String fileName){
         JSONObject o = new JSONObject();

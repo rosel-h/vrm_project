@@ -6,7 +6,6 @@ import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONValue;
 import org.mindrot.jbcrypt.BCrypt;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -112,8 +111,6 @@ public class LogInServlet extends HttpServlet {
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=?");
 
-
-
             // code to generate random salt
             String salt = BCrypt.gensalt(12);
             String hashed = BCrypt.hashpw("1234", salt);
@@ -150,7 +147,7 @@ public class LogInServlet extends HttpServlet {
 
     }
 
-    //genrates a 30 length random string to be used as StateParam
+    //generates a 30 length random string to be used as StateParam
     private String randomString() {
         String list = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String randomString = "";

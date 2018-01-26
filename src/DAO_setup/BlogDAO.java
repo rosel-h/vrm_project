@@ -84,6 +84,14 @@ public class BlogDAO implements AutoCloseable {
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
         return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("avatar_icon"), rs.getString("status"),rs.getString("email_address"));
     }
+    private User dataFromResultSet(ResultSet rs) throws SQLException {
+        if (rs.next()) {
+            return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"),rs.getString("email_address"));
+        }else {
+            System.out.println("BlogDAO enter line 91: no rs exists");
+            return null;
+        }
+    }
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
         return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username") ,rs.getString("date"),rs.getString("content"),rs.getString("avatar_icon"));
     }
@@ -144,6 +152,29 @@ public class BlogDAO implements AutoCloseable {
         }
         return u;
     }
+
+    public User getOneUser(String username){
+        System.out.println("BlogDAO: getUserDetails for "+username);
+        User u = null;
+        if(username!=null) {
+
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username=?")) {
+                stmt.setString(1, username);
+                System.out.println("BlogDAO: statement prepared = SELECT * FROM vrm_users WHERE username="+username);
+
+                try (ResultSet r = stmt.executeQuery()) {
+                    System.out.println("RS executed");
+                    u = dataFromResultSet(r);
+                    System.out.println("BlogDAO enter line 168: " + u.getUsername() + " "+u.getAvatar_icon());
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("BlogDAO enter line 174: u.username = " + u.getUsername());
+        return u;
+    }
+
 
     /*delete an article*/
     public void deleteArticle(int id) throws SQLException {
