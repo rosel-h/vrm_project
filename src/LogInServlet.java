@@ -23,7 +23,7 @@ import java.util.Properties;
 
 public class LogInServlet extends HttpServlet {
 
-    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
+//    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -137,13 +137,13 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("dispatching facebook");
-        stateParam = randomString();
-        OAuth2fb.stateParam = this.stateParam;
-
-        String url = "https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&state=" + stateParam;
-        System.out.println(url);
-        response.sendRedirect(url);
+//        System.out.println("dispatching facebook");
+//        stateParam = randomString();
+//        OAuth2fb.stateParam = this.stateParam;
+//
+//        String url = "https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&state=" + stateParam;
+//        System.out.println(url);
+//        response.sendRedirect(url);
 
     }
 
