@@ -2,6 +2,7 @@
 
 import DAO_setup.MYSQLDatabase;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -10,17 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.*;
-import java.util.Properties;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.util.*;
 
 //logic to communcate with FB
 
@@ -59,8 +55,6 @@ public class OAuth2fb extends HttpServlet {
                 response.sendRedirect("https://www.facebook.com/dialog/oauth?client_id="
                         + clientID + "&redirect_uri=" + redirectURI);
             } else {
-
-
                 // Get special code
                 String code = request.getParameter("code");
                 System.out.println(code);
@@ -134,6 +128,41 @@ public class OAuth2fb extends HttpServlet {
 
         if (checkFbUser(fbUser.getEmail(), fbUser)) {
             System.out.println("good");
+            HttpSession sess = request.getSession(true);
+
+            Map<String, String[]> map = request.getParameterMap();
+            Map<String, String> jsonMap = new HashMap<>();
+            for (String key : map.keySet()) {
+                String value = map.get(key)[0];
+                jsonMap.put(key, value);
+                System.out.println("The value is " + value);
+            }
+
+            String jsonText = JSONValue.toJSONString(jsonMap);
+
+            String sessiont_id = sess.getId();
+
+            System.out.println("Session ID:" + sessiont_id);
+
+            ServletContext servletContext = getServletContext();
+
+            String filePath = servletContext.getRealPath("/Sessions");
+            System.out.println("file path is " + filePath);
+
+            File sessionFolder = new File(filePath);
+            if (!sessionFolder.exists()) {
+                sessionFolder.mkdir();
+            }
+
+            String fileName = filePath + "\\" + sessiont_id + ".json";
+            System.out.println("Create " + fileName);
+            File sessionFile = new File(fileName);
+
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
+                System.out.println("writing file");
+                bufferedWriter.write(jsonText);
+            }
+
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 

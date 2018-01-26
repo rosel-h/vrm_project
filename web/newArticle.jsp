@@ -24,6 +24,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#summernote').summernote();
+        });
+
+        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
+    </script>
 </head>
 <body>
 <div class="container">
@@ -40,8 +52,8 @@
                     <input type="text" id="title" name="title" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea id="content" name="content" class="form-control" rows="10" required></textarea>
+                    <label for="summernote">Content</label>
+                    <textarea id="summernote" name="content" class="form-control" rows="10" required></textarea>
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="operation" value="add">

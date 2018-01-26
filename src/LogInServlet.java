@@ -58,8 +58,11 @@ public class LogInServlet extends HttpServlet {
 
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
+
             System.out.println("LoginServlet enter line 52:" + sessiont_id);
+
             ServletContext servletContext = getServletContext();
+
             String filePath = servletContext.getRealPath("/Sessions");
 
             File sessionFolder = new File(filePath);
@@ -109,7 +112,7 @@ public class LogInServlet extends HttpServlet {
             Connection conn = mysqlDatabase.getConnection();
             System.out.println("LoginServlet connection successful");
             PreparedStatement ps = conn.prepareStatement
-                    ("select * from vrm_users where binary username=? and binary psw_hash=?");
+                    ("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?");
 
             // code to generate random salt
             String salt = BCrypt.gensalt(12);
@@ -123,6 +126,7 @@ public class LogInServlet extends HttpServlet {
 
             ps.setString(1, username);
             ps.setString(2, pass);
+            ps.setString(3, "active");
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 
@@ -144,7 +148,6 @@ public class LogInServlet extends HttpServlet {
 //        String url = "https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&state=" + stateParam;
 //        System.out.println(url);
 //        response.sendRedirect(url);
-
     }
 
     //generates a 30 length random string to be used as StateParam
@@ -159,6 +162,5 @@ public class LogInServlet extends HttpServlet {
 
         System.out.println("random string is " + randomString);
         return randomString;
-
     }
 }

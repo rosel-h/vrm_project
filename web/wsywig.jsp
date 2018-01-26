@@ -29,7 +29,10 @@
 <body>
 
 <form method="post" action="/CreateArticles">
-    <textarea id="summernote" name="editordata"></textarea>
+    <textarea id="summernote" name="editordata">
+
+    </textarea>
+
     <input type="submit">
 </form>
 
