@@ -156,47 +156,55 @@ public class EditProfileServlet extends HttpServlet {
                             }
                         }
 
-                        if (true) {
-                            if (uploadFileName.equals("")) {
-                            }else {
-                                avatar = username + "_" + uploadFileName;
-                                file = new File(filePath + "\\" + avatar);
-                                System.out.println("EditProfileServlet enter line 197: " + avatar);
-                                System.out.println("EditProfileServlet enter line 197: " + file.getAbsolutePath());
-                                doUpload.write(file);
 
-                                BufferedImage img = null;
-                                try {
-                                    System.out.println("EditProfileServlet enter line 203");
-                                    img = ImageIO.read(file);
-                                    String thumbFileName = avatar.replace(avatar.substring(avatar.lastIndexOf(".")), "_thumbnail.png");
-                                    avatar = thumbFileName;
-                                    System.out.println("EditProfileServlet enter line 204: " + thumbFileName);
-                                    File thumbFile = new File(filePath + "\\" + thumbFileName);
-                                    System.out.println("EditProfileServlet enter line 205: " + thumbFile.getAbsolutePath());
-
-                                    if (img.getHeight() < 20 && img.getWidth() < 20) {
-                                        ImageIO.write(img,"png",thumbFile);
-                                    }else {
-                                        double zoom = Math.max(1.0 * img.getHeight() / 400, 1.0 * img.getWidth() / 400);
-                                        int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
-                                        BufferedImage resizedImage = new BufferedImage((int)(img.getWidth() / zoom), (int)(img.getHeight() / zoom), type);
-                                        Graphics2D g = resizedImage.createGraphics();
-                                        g.drawImage(img,0,0,(int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), null);
-                                        g.dispose();
-                                        g.setComposite(AlphaComposite.Src);
-                                        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-                                        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-                                        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                                        ImageIO.write(resizedImage, "png", thumbFile);
-
-                                    }
-
-                                }catch (IOException e) {
-                                    e.getStackTrace();
+                        if (uploadFileName.equals("")) {
+                            if (avatar.equals("")) {
+                                if (user.getAvatar_icon().equals("")) {
+                                    avatar = "avatar_01.png";
+                                }else {
+                                    avatar = user.getAvatar_icon();
                                 }
+
+                            }
+                        } else {
+                            avatar = username + "_" + uploadFileName;
+                            file = new File(filePath + "\\" + avatar);
+                            System.out.println("EditProfileServlet enter line 197: " + avatar);
+                            System.out.println("EditProfileServlet enter line 197: " + file.getAbsolutePath());
+                            doUpload.write(file);
+
+                            BufferedImage img = null;
+                            try {
+                                System.out.println("EditProfileServlet enter line 203");
+                                img = ImageIO.read(file);
+                                String thumbFileName = avatar.replace(avatar.substring(avatar.lastIndexOf(".")), "_thumbnail.png");
+                                avatar = thumbFileName;
+                                System.out.println("EditProfileServlet enter line 204: " + thumbFileName);
+                                File thumbFile = new File(filePath + "\\" + thumbFileName);
+                                System.out.println("EditProfileServlet enter line 205: " + thumbFile.getAbsolutePath());
+
+                                if (img.getHeight() < 20 && img.getWidth() < 20) {
+                                    ImageIO.write(img, "png", thumbFile);
+                                } else {
+                                    double zoom = Math.max(1.0 * img.getHeight() / 400, 1.0 * img.getWidth() / 400);
+                                    int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
+                                    BufferedImage resizedImage = new BufferedImage((int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), type);
+                                    Graphics2D g = resizedImage.createGraphics();
+                                    g.drawImage(img, 0, 0, (int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), null);
+                                    g.dispose();
+                                    g.setComposite(AlphaComposite.Src);
+                                    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                                    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                                    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                                    ImageIO.write(resizedImage, "png", thumbFile);
+
+                                }
+
+                            } catch (IOException e) {
+                                e.getStackTrace();
                             }
                         }
+
 
                         Connection conn = mysqlDatabase.getConnection();
                         try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
@@ -213,8 +221,8 @@ public class EditProfileServlet extends HttpServlet {
 
                             req.setAttribute("successMessage", "save profile successfully");
                             user.setAvatar_icon(avatar);
-                            req.setAttribute("user",user);
-                            session.setAttribute("operation","edit");
+                            req.setAttribute("user", user);
+                            session.setAttribute("operation", "edit");
                             req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
 
                         } catch (ServletException e) {
@@ -233,7 +241,7 @@ public class EditProfileServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
-            }else {
+            } else {
                 try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
                     User user = dao.getOneUser(username);
 //                    String password = user.getPassword();
@@ -243,8 +251,8 @@ public class EditProfileServlet extends HttpServlet {
 //                    String country = user.getCountry();
 //                    String description = user.getDescription();
 
-                    req.setAttribute("user",user);
-                    session.setAttribute("operation","view");
+                    req.setAttribute("user", user);
+                    session.setAttribute("operation", "view");
                     req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
 
                 } catch (SQLException e) {
@@ -252,8 +260,6 @@ public class EditProfileServlet extends HttpServlet {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
 
 
             }
