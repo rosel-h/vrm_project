@@ -58,13 +58,13 @@
 
 
     <servlet>
-        <servlet-name>add_article</servlet-name>
-        <servlet-class>CreateArticle</servlet-class>
+        <servlet-name>edit_Article</servlet-name>
+        <servlet-class>EditArticle</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>add_article</servlet-name>
-        <url-pattern>/CreateArticles</url-pattern>
+        <servlet-name>edit_Article</servlet-name>
+        <url-pattern>/editArticles</url-pattern>
     </servlet-mapping>
 
     <servlet>

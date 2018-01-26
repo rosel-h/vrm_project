@@ -91,7 +91,7 @@ public class LoadArticlesServlet extends HttpServlet {
                 System.out.println("CreateArticles: new article made");
 
             } else if ("delete".equals(op)) {
-                System.out.println("CreateArticle: Delete option");
+                System.out.println("EditArticle: Delete option");
 //                String qwak = ;
                 System.out.println(req.getParameter("articleId"));
                 int id = Integer.parseInt(req.getParameter("articleId"));
@@ -104,6 +104,15 @@ public class LoadArticlesServlet extends HttpServlet {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
 
+            }else if ("editarticle".equals(op)) {
+
+                String title = req.getParameter("title");
+                String content = req.getParameter("content");
+
+                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
+
+                dao.addArticle(title, content, user, sqlDate);
+                System.out.println("CreateArticles: new article made");
             }
             else if ("deleteCommentOnArticle".equals(op)){
                 System.out.println("LoadArticlesServlet: delete button pressed");
@@ -114,7 +123,7 @@ public class LoadArticlesServlet extends HttpServlet {
             }
 
             String icon = dao.getIcon(user);
-//            System.out.println(icon);
+            System.out.println(icon + " "+ user);
             if (user != null) {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");

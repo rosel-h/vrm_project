@@ -41,6 +41,19 @@
 
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#wOther').summernote({
+                minHeight: 20
+            });
+
+        });
+
+
+
+
+        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
+    </script>
 </head>
 <body>
 <%@include file="navigation.jsp" %>
@@ -96,10 +109,40 @@
                                 on ${articleList.getDate()}</div>
                             <c:if test="${personLoggedIn == articleList.getUsername()}">
                                 <form class="form-inline" action="/Articles" method="POST">
-                                    <button style="float: right" type="submit" class="btn btn-danger pull-right">Delete</button>
+                                    <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                                        Delete
+                                    </button>
                                     <input type="hidden" name="operation" value="delete">
                                     <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
                                 </form>
+                                <%--<form class="form-inline" action="/Articles" method="POST">--%>
+                                <button style="float: right" id="editorButton" type="button"
+                                        class="btn btn-primary pull-right">Edit
+                                </button>
+
+                                <script>
+                                    $(document).ready(function(){
+                                        $("#editorButton").click(function(){
+                                            $("#editorDiv").toggle();
+                                        });
+                                    });
+                                </script>
+                                <%--to hide--%>
+<br>
+<br>
+<br>
+                                <div id="editorDiv" style="display: none">
+
+                                <form  method="post" action="/CreateArticles">
+
+                                <textarea id="wOther" rows ="20" name="editordata">
+                                    test obe
+                                </textarea>
+                                    <input type="submit">
+                                </form>
+                                </div>
+                                <%----%>
+                                <%--</form>--%>
                             </c:if>
 
                         </div>
@@ -141,12 +184,13 @@
                                                 <br>
                                             </c:if>
                                         </c:forEach>
-                                        <%-- checks wether user logged in with author of post and user logged in--%>
+                                            <%-- checks wether user logged in with author of post and user logged in--%>
                                         <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                             <form method="post" action="/Articles">
-                                            <button type="submit" class="btn btn-xs">delete comment</button>
+                                                <button type="submit" class="btn btn-xs">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                                                <input type="hidden" name="commentID"
+                                                       value="${commentList.getCommentID()}">
 
                                             </form>
                                         </c:if>
@@ -159,12 +203,13 @@
                                 <form method="post" action="/Articles">
                                     <div class="form-group">
                                         <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                        <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
-                                                  <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
-                                        <%--<div class="form-group">--%>
-                                            <label for="summernote">Content</label>
-                                            <textarea id="summernote" name="newComment" class="form-control" rows="10" required></textarea>
-                                        <%--</div>--%>
+                                            <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
+                                            <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
+                                            <%--<div class="form-group">--%>
+                                        <label for="summernote">Content</label>
+                                        <textarea id="summernote" name="newComment" class="form-control" rows="10"
+                                                  required></textarea>
+                                            <%--</div>--%>
                                         <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
                                         <input type="hidden" name="operation" value="commentOnArticle">
                                         <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
