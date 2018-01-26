@@ -38,7 +38,7 @@
             </div>
 
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp" enctype='multipart/form-data'>
+                <form id="signupform" class="form-horizontal" role="form" method="post" action="editprofile" enctype='multipart/form-data'>
 
                     <div id="signupalert" style="display:none" class="alert alert-danger">
                         <p>Error:</p>
@@ -159,10 +159,20 @@ ${user.getDescription()}
                                     data-sitekey="6LfeHx4UAAAAAAKUx5rO5nfKMtc9-syDTdFLftnm"
                                     data-callback="onSubmit">Save
                             </button>
+
                             <span style="margin-left:20px; margin-right: 20px;">or</span>
-                            <button id="btn-fbsignup" type="button" class="btn btn-default"><i class="icon-facebook"></i>  
-                                Cancel
-                            </button>
+
+                            <a href="welcome.jsp">
+                                <button id="btn-cancel" type="button" class="btn btn-default"> 
+                                    Cancel
+                                </button>
+                            </a>
+
+                            <a href="deleteuser">
+                                <button id="btn-delete" type="button" class="btn btn-danger">  
+                                    Delete
+                                </button>
+                            </a>
                         </div>
                     </div>
 
