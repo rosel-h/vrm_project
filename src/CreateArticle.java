@@ -69,7 +69,7 @@ public class CreateArticle extends HttpServlet {
             Map<String, String[]> parameterMap = req.getParameterMap();
 
             for (String key : parameterMap.keySet()) {
-
+                System.out.println("Create articles"+key);
                 String[] a = parameterMap.get(key);
 
                 for (int i = 0; i < a.length; i++) {

@@ -85,8 +85,8 @@ public class LoadArticlesServlet extends HttpServlet {
             if ("add".equals(op)) {
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 
+                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("CreateArticles: new article made");
 
@@ -103,6 +103,7 @@ public class LoadArticlesServlet extends HttpServlet {
                 int articleID = Integer.parseInt(req.getParameter("articleID"));
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
+
             }
             else if ("deleteCommentOnArticle".equals(op)){
                 System.out.println("LoadArticlesServlet: delete button pressed");
