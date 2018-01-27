@@ -38,6 +38,69 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
+    public List<Article> getArticleByTitle(String[] keywords) throws SQLException {
+        List<Article> artic = new ArrayList<>();
+
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE title LIKE ?")) {
+                stmt.setString(1,"%" + keyword + "%");
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
+                            artic.add(dataFromResultSet(rs, new Article()));
+                        }
+                    }
+                }
+            }
+        }
+        return artic;
+    }
+
+    public List<Article> getArticleByUsername(String[] keywords) throws SQLException {
+        List<Article> artic = new ArrayList<>();
+
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username LIKE ?")) {
+                stmt.setString(1,"%" + keyword + "%");
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
+                            artic.add(dataFromResultSet(rs, new Article()));
+                        }
+                    }
+                }
+            }
+        }
+        return artic;
+    }
+
+    public List<Article> getArticleByDate(String[] keywords) throws SQLException {
+        List<Article> artic = new ArrayList<>();
+
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE date = ?")) {
+                stmt.setString(1,keyword);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
+                            artic.add(dataFromResultSet(rs, new Article()));
+                        }
+                    }
+                }
+            }
+        }
+        return artic;
+    }
+
+
+
+
     /*Gets all the users from database*/
     public List<User> getAllUsers() throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users")) {

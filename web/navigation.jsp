@@ -26,5 +26,18 @@
                 </form>
             </li>
         </ul>
+        <form class="navbar-form navbar-left" action="searcharticle">
+            <div class="form-group">
+                <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date">
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="searchType">
+                    <option value="title">Title</option>
+                    <option value="username">Username</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
     </div>
 </nav>

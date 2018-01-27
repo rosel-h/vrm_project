@@ -128,18 +128,18 @@
                                     });
                                 </script>
                                 <%--to hide--%>
-<br>
-<br>
-<br>
+                                <br>
+                                <br>
+                                <br>
                                 <div id="editorDiv" style="display: none">
 
-                                <form  method="post" action="/CreateArticles">
+                                    <form  method="post" action="/CreateArticles">
 
                                 <textarea id="wOther" rows ="20" name="editordata">
                                     test obe
                                 </textarea>
-                                    <input type="submit">
-                                </form>
+                                        <input type="submit">
+                                    </form>
                                 </div>
                                 <%----%>
                                 <%--</form>--%>

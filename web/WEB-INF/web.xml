@@ -106,4 +106,14 @@
         <servlet-name>CheckPasswordServlet</servlet-name>
         <url-pattern>/checkpassword</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SearchArticleServlet</servlet-name>
+        <servlet-class>SearchArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchArticleServlet</servlet-name>
+        <url-pattern>/searcharticle</url-pattern>
+    </servlet-mapping>
 </web-app>
