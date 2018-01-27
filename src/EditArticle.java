@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Created by rher490 on 25/01/2018.
  */
-public class CreateArticle extends HttpServlet {
+public class EditArticle extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -64,21 +64,10 @@ public class CreateArticle extends HttpServlet {
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
         try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
 
-            req.getAttributeNames();
 
-            Map<String, String[]> parameterMap = req.getParameterMap();
 
-            for (String key : parameterMap.keySet()) {
-                System.out.println("Create articles"+key);
-                String[] a = parameterMap.get(key);
 
-                for (int i = 0; i < a.length; i++) {
 
-                    System.out.println(a[i]);
-
-                }
-
-            }
 
 
         } catch (SQLException e) {

@@ -117,6 +117,7 @@ public class OAuth2fb extends HttpServlet {
                     fbUser.setEmail(fbUserEmail);
                     fbUser.setFirst_name(fbFirstName);
                     fbUser.setLast_name(fbLastName);
+                    fbUser.setUser_name(fbFirstName + "_" + fbLastName);
                     System.out.println(fbUser.getEmail());
                     System.out.println(fbUser.getFirst_name());
                     System.out.println(fbUser.getLast_name());
@@ -130,13 +131,9 @@ public class OAuth2fb extends HttpServlet {
             System.out.println("good");
             HttpSession sess = request.getSession(true);
 
-            Map<String, String[]> map = request.getParameterMap();
             Map<String, String> jsonMap = new HashMap<>();
-            for (String key : map.keySet()) {
-                String value = map.get(key)[0];
-                jsonMap.put(key, value);
-                System.out.println("The value is " + value);
-            }
+
+            jsonMap.put("username", fbUser.getUser_name());
 
             String jsonText = JSONValue.toJSONString(jsonMap);
 
@@ -214,7 +211,7 @@ public class OAuth2fb extends HttpServlet {
                 //creates new user with default values and FB data
                 try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
 
-                    String username = fbUser.getFirst_name() + " " + fbUser.getLast_name();
+                    String username = fbUser.getFirst_name() + "_" + fbUser.getLast_name();
                     String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
                     String fname = fbUser.getFirst_name();
                     String lname = fbUser.getLast_name();
