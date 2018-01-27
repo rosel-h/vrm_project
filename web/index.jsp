@@ -55,7 +55,7 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-                        <a href="">
+                        <a href="login.jsp">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
@@ -67,7 +67,7 @@
                             </div>
                         </a>
 
-                        <a href="">
+                        <a href="signup.jsp">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
