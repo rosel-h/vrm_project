@@ -30,6 +30,42 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <%--<script src="jquery.js" type="text/javascript"></script>--%>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById("username").onblur = function() {
+                var username = document.getElementById("username").value;
+                $.ajax({
+                    url: "http://localhost:8888/checkusername",
+                    type: "GET",
+                    data: {username: username},
+                    success: function (msg) {
+                        document.getElementById("usernameCheck").innerHTML = msg;
+                    }
+
+                });
+            }
+
+            document.getElementById("cPassword").onblur = function() {
+                var password = document.getElementById("password").value;
+                var cPassword = document.getElementById("cPassword").value;
+                $.ajax({
+                    url: "http://localhost:8888/checkpassword",
+                    type: "GET",
+                    data: {password: password, cPassword: cPassword},
+                    success: function (msg) {
+                        document.getElementById("passwordCheck").innerHTML = msg;
+                    }
+
+                });
+            }
+        }
+
+    </script>
 
 </head>
 
@@ -63,7 +99,7 @@
                         <div class="col-md-9">
                             <input type="text" id="username" class="form-control" name="username"
                                    placeholder="Enter Username 4~20 characters">
-                            <div style="color:red">${usernameError}</div>
+                            <div style="color:red" id="usernameCheck">${usernameError}</div>
                         </div>
                     </div>
 
@@ -80,7 +116,7 @@
                         <div class="col-md-9">
                             <input type="password" id="cPassword" class="form-control" name="cPassword"
                                    placeholder="Confirm Password">
-                            <div style="color:red">${passwordError}</div>
+                            <div style="color:red" id="passwordCheck">${passwordError}</div>
                         </div>
                     </div>
 

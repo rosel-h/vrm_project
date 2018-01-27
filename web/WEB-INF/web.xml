@@ -86,4 +86,24 @@
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/deleteuser</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckUsernameServlet</servlet-name>
+        <servlet-class>CheckUsernameServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckUsernameServlet</servlet-name>
+        <url-pattern>/checkusername</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <servlet-class>CheckPasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckPasswordServlet</servlet-name>
+        <url-pattern>/checkpassword</url-pattern>
+    </servlet-mapping>
 </web-app>
