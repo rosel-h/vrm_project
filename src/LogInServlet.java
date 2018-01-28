@@ -150,17 +150,4 @@ public class LogInServlet extends HttpServlet {
 //        response.sendRedirect(url);
     }
 
-    //generates a 30 length random string to be used as StateParam
-    private String randomString() {
-        String list = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        String randomString = "";
-
-        for (int i = 0; i < 30; i++) {
-            int random = (int) (Math.random() * 61);
-            randomString += list.charAt(random);
-        }
-
-        System.out.println("random string is " + randomString);
-        return randomString;
-    }
 }
