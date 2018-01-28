@@ -77,7 +77,8 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-                        <a href="login.jsp">
+
+                        <a href="Articles">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
@@ -89,7 +90,7 @@
                             </div>
                         </a>
 
-                        <a href="signup.jsp">
+                        <a href="Articles">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
@@ -99,7 +100,7 @@
                             </div>
                         </a>
 
-                        <a href="Articles">
+                        <a href="#">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-danger
                                         style="background-color: white; opacity: 0.6">
@@ -124,7 +125,6 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="page-heading">
                         <h1>List of Articles</h1>
-                        <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                         <br>
                     </div>
                 </div>
