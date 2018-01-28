@@ -47,19 +47,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">Home</a>
+                    <a class="nav-link" href="welcome.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">Explore</a>
+                    <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.html">My Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">My Profile</a>
+                    <a class="nav-link" href="myprofile.jsp">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">Log Out</a>
+                    <a class="nav-link" href="#">Log Out</a>
                 </li>
             </ul>
         </div>
