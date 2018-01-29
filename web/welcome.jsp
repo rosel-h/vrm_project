@@ -99,7 +99,7 @@
                             </div>
                         </a>
 
-                        <a href="newArticle.jsp">
+                        <a href="#">
                             <div class="btn-group" role="group" style="padding: 4%">
                                 <button type="button" class="btn btn-danger"
                                         style="opacity: 0.8">

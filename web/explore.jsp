@@ -54,8 +54,8 @@
 </head>
 <body>
 
-<%@include file="navigation.jsp" %>
-<%--<%@include file="test.jsp" %>--%>
+<%--<%@include file="navigation.jsp" %>--%>
+<%@include file="test.jsp" %>
 <%--Load articles --%>
 <div class="container">
     <h1>All Articles</h1>
@@ -115,17 +115,11 @@
                                     <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
                                 </form>
                                 <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                <form class="form-inline" action="editArticle.jsp" method="post">
+                                <form class="form-inline" action="/editArticles" method="post">
 
                                     <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
 
                                     <input type="hidden" name="operation" value="goToEditPage">
-                                   <%--<input type="hidden" name="articleContent" value="${articleList.getContent()}">--%>
-                                    <input type="hidden" name="articleContent" value="${articleList.getContent()}">
-
-                                    <input type="hidden" name="articleTitle" value="${articleList.getTitle()}">
-                                    <input type="hidden" name="articleObject" value="${articleList}">
-
                                     <input type="hidden" name="author" value="${personLoggedIn}">
                                     <button style="float: right" id="editorButton" type="submit"
                                             class="btn btn-primary pull-right">Edit

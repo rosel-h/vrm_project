@@ -289,8 +289,15 @@ public class BlogDAO implements AutoCloseable {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("RS executed");
+                System.out.println(rs.next());
+
                 a = dataFromResultSet(rs, new Article());
                 System.out.println("BlogDAO getOneArticle executed");
+                System.out.println(a.getArticleID());
+                System.out.println(a.getContent());
+                System.out.println(a.getDate());
+                System.out.println(a.getTitle());
+                System.out.println(a.getUsername());
             }
         } catch (SQLException e) {
             System.out.println("Blog Dao: article was not taken");

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Create Article</title>
+    <title>Revising Article: ${articleToEdit.getTitle()}</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -38,18 +38,18 @@
     </script>
 </head>
 <body>
-<%
-    String id = request.getParameter("articleID");
-    String articleStory = request.getParameter("articleContent");
-    String author= request.getParameter("author");
-    String articleTitle= request.getParameter("articleTitle");
-    System.out.println("editArticle jsp: "+ author);
-    System.out.println("editArticle jsp: "+ articleTitle);
-    System.out.println("editArticle jsp: "+ articleStory);
+<%--<%--%>
+    <%--String id = request.getParameter("articleID");--%>
+    <%--String articleStory = request.getParameter("articleContent");--%>
+    <%--String author= request.getParameter("author");--%>
+    <%--String articleTitle= request.getParameter("articleTitle");--%>
+    <%--System.out.println("editArticle jsp: "+ author);--%>
+    <%--System.out.println("editArticle jsp: "+ articleTitle);--%>
+    <%--System.out.println("editArticle jsp: "+ articleStory);--%>
 
-%>
+<%--%>--%>
 <div class="container">
-    <div>Hello, <%= author%> <%--${articleToBeEdited.getUsername()}--%>. Edit your article below</div>
+    <div>Hello, ${articleToEdit.getUsername()}. Edit your article below</div>
     <!--  A form letting users add new articles. -->
     <div class="panel panel-info">
 
@@ -60,15 +60,15 @@
             <form action="/editArticles" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" value="<%= articleTitle%><%--${articleToBeEdited.getTitle()}--%>" required>
+                    <input type="text" id="title" name="title" class="form-control" value="${articleToEdit.getTitle()}" required>
                 </div>
                 <div class="form-group">
                     <label for="summernote">Content</label>
-                    <textarea id="summernote" name="content" class="form-control" rows="10" required><%=articleStory%> <%--${articleToBeEdited.getContent()}--%></textarea>
+                    <textarea id="summernote" name="content" class="form-control" rows="10" required>${articleToEdit.getContent()}</textarea>
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="articleID" value="<%= id%><%--${articleToBeEdited.getArticleID()}--%>">
-                    <input type="hidden" name="author" value="<%=author%><%--${articleToBeEdited.getUsername()}--%>">
+                    <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                    <input type="hidden" name="author" value="${articleToEdit.getUsername()}">
                     <input type="hidden" name="operation" value="userHasEditedArticle">
                     <%--<input type="hidden" name="dateInDatabse" value="${article}">--%>
 
