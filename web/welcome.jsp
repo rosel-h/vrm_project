@@ -73,11 +73,13 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
+                    <img class="align-content-center" src="avatars/avatar_01.png" alt="avatar"
+                         style="width: 25%" class="img-circle">
+                    <br><br>
                     <h5>Explore the community or create a new article</h5>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-
                         <a href="Articles">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
@@ -103,8 +105,9 @@
                         <a href="#">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-danger
-                                        style="background-color: white; opacity: 0.6">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;New Article</span>
+                                        style=" background-color: white; opacity: 0.6
+                                ">
+                                <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;New Article</span>
                                 </button>
                             </div>
                         </a>
@@ -124,7 +127,7 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="page-heading">
-                        <h1>List of Articles</h1>
+                        <h1>Feature Articles</h1>
                         <br>
                     </div>
                 </div>
@@ -137,6 +140,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
+                <hr>
                 <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
             </div>
         </div>
