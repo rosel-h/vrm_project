@@ -59,7 +59,12 @@
                     <a class="nav-link" href="myprofile.jsp">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Main">Log Out</a>
+                    <form method="post" action="Main">
+                        <button class="btn btn-default btn-sm"
+                                style="background-color:transparent; border: 1px solid transparent; color: white; padding: 5px 5px; font-size: 16px"
+                                type="submit" name="logout_button" value="Logout"> Log Out
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
