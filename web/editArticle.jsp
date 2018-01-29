@@ -65,15 +65,25 @@
                 <div class="form-group">
                     <label for="summernote">Content</label>
                     <textarea id="summernote" name="content" class="form-control" rows="10" required>${articleToEdit.getContent()}</textarea>
+                    <label for ="futureDate">Change date published (optional)</label>
+                    <input type="date" id="futureDate" name="futureDate" value="new Date()">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
                     <input type="hidden" name="author" value="${articleToEdit.getUsername()}">
                     <input type="hidden" name="operation" value="userHasEditedArticle">
+                    <input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">
                     <%--<input type="hidden" name="dateInDatabse" value="${article}">--%>
 
                     <button type="submit" class="btn btn-primary">Done</button>
                 </div>
+                <form class="form-inline" action="/Articles" method="POST">
+                    <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                        Delete
+                    </button>
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+                </form>
 
             </form>
         </div>

@@ -1,5 +1,8 @@
 package DAO_setup;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Created by rher490 on 24/01/2018.
  */
@@ -78,5 +81,17 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean dateIsGreaterThan(String otherDate){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date1 = LocalDate.parse(this.date, formatter);
+        LocalDate date2 = LocalDate.parse(otherDate, formatter);
+        java.sql.Date thisDate = java.sql.Date.valueOf(date1);
+        java.sql.Date otherDateReformat = java.sql.Date.valueOf(date2);
+        if(thisDate.compareTo(otherDateReformat)>=1){
+            return true;
+        }
+        return false;
     }
 }

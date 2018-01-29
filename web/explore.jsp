@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -51,6 +52,12 @@
         });
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
+    <style>
+        .vrm> div{
+            width: 100%;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -85,6 +92,11 @@
             <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
             <%--</button>--%>
             <%--</div>--%>
+            <%
+                java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+                request.setAttribute("sqlDateToday",sqlDateToday);
+            %>
+            <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
             <tr>
                 <td><b>${articleList.getTitle()}</b></td>
                 <td><i>${articleList.getUsername()}</i></td>
@@ -98,10 +110,10 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
-                <div class="modal-dialog">
+            <div class="modal fade vrm" id="a${articleList.getArticleID()}" role="dialog">
+                <div class="modal-dialog modal-lg" style="width: 100%">
                     <!-- Modal content-->
-                    <div class="modal-content">
+                    <div class="modal-content" >
                         <div class="modal-header">
                             <h4 class="modal-title">${articleList.getTitle()}</h4>
                             <div>Written by ${articleList.getUsername()}, published
@@ -171,8 +183,7 @@
                                             <form method="post" action="/Articles">
                                                 <button type="submit" class="btn btn-xs">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                                <input type="hidden" name="commentID"
-                                                       value="${commentList.getCommentID()}">
+                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
 
                                             </form>
                                         </c:if>
@@ -207,7 +218,7 @@
                     </div>
                 </div>
             </div>
-
+            </c:if>
         </c:forEach>
         </tbody>
     </table>

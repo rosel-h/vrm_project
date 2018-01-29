@@ -14,6 +14,7 @@ import java.io.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -41,41 +42,54 @@ public class EditArticle extends HttpServlet {
         int articleID = Integer.parseInt(id);
 //        System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")" + "(parsed id: "+articleID+")");
         boolean articleHasBeenEdited;
-        if("goToEditPage".equals(op)) {
+        if ("goToEditPage".equals(op)) {
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
                 Article articleToBeEdited = dao.getOneArticle(articleID);
-                req.setAttribute("articleToEdit",articleToBeEdited);
+                req.setAttribute("articleToEdit", articleToBeEdited);
                 req.getRequestDispatcher("editArticle.jsp").forward(req, resp);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else if ("userHasEditedArticle".equals(op)) {
-                System.out.println("EditArticle Servlet: add to dao");
+        } else if ("userHasEditedArticle".equals(op)) {
+            System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
             String newTitle = req.getParameter("title");
             String newContent = req.getParameter("content");
+            String newDate = req.getParameter("futureDate");
+
+
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-            newContent =  newContent+ "<p> Edited on:"+sqlDate+"<p>";
 //        add date updated
-            System.out.println("EditArticle Servlet: author "+author);
-            System.out.println("EditArticle Servlet: newTitle "+newTitle);
-            System.out.println("EditArticle Servlet: newContent "+newContent);
-                try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
-                    articleHasBeenEdited= dao.editArticle(articleID,newTitle,newContent);
-                    if(articleHasBeenEdited){
-                        System.out.println("EditArticle Servlet: Artciel added to database");
-                    }
-                    req.getRequestDispatcher("/Articles").forward(req, resp);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            System.out.println("EditArticle Servlet: author " + author);
+            System.out.println("EditArticle Servlet: newTitle " + newTitle);
+            try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+                if (newDate.length() < 5) {
+                    newContent = newContent + "<p> Edited on:" + sqlDate + "<p>";
+                    System.out.println("EditArticle Servlet: newContent " + newContent);
+                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
+                    System.out.println("EditArticle Servlet: Article added to database without date");
+                } else {
+                    String origPublishDate =req.getParameter("publishedDate");
+                    newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate submittedDateReformatted = LocalDate.parse(newDate, formatter);
+                    java.sql.Date anotherSqlDate = java.sql.Date.valueOf(submittedDateReformatted);
+                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent,anotherSqlDate);
+                    System.out.println("EditArticle Servlet: Article added to database with date: " + newDate);
                 }
+                if (articleHasBeenEdited) {
+                    System.out.println("EditArticle Servlet: Article added to database");
+                }
+                req.getRequestDispatcher("/Articles").forward(req, resp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-
     }
+
+}
 

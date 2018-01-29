@@ -54,6 +54,8 @@
                 <div class="form-group">
                     <label for="summernote">Content</label>
                     <textarea id="summernote" name="content" class="form-control" rows="10" required></textarea>
+                    <label for ="futureDate">Date Published (optional)</label>
+                    <input type="date" id="futureDate" name="futureDate" value="new Date()">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="operation" value="add">

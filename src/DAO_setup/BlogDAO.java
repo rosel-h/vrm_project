@@ -240,7 +240,6 @@ public class BlogDAO implements AutoCloseable {
         return u;
     }
 
-
     /*delete an article*/
     public void deleteArticle(int id) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE article_id = ?")) {
@@ -306,6 +305,26 @@ public class BlogDAO implements AutoCloseable {
         return a;
     }
 
+    /*Edit article
+    * @param id of the article in database
+    * @newTitle title of the edited article
+    * @newContent content edited
+    * @date when the want the date published
+    *
+    *@ return true if article was added */
+    public boolean editArticle(int id, String newTitle, String newContent, Date toPublish) {
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_articles SET title = ?, content = ?, date = ? WHERE article_id=?;")) {
+            stmt.setString(1, newTitle);
+            stmt.setString(2, newContent);
+            stmt.setString(3, String.valueOf(toPublish));
+            stmt.setInt(4, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     /*Edit article
     * @param id of the article in database
     * @newTitle title of the edited article*/
