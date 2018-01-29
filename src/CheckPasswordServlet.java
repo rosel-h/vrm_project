@@ -49,8 +49,7 @@ public class CheckPasswordServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        try {
-            Connection conn = mysqlDatabase.getConnection();
+        try(Connection conn = mysqlDatabase.getConnection()) {
             System.out.println("CheckPasswordServlet Connection Successful");
 
             String password = req.getParameter("password");

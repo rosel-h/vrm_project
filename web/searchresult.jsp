@@ -49,6 +49,26 @@
 
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
+    <!-- include sorting by title, username, date -->
+    <script>
+        $(document).on('click','th',function(){
+            var table = $(this).parents('table').eq(0);
+            var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+            this.asc = !this.asc;
+            if (!this.asc){rows = rows.reverse();}
+            table.children('tbody').empty().html(rows);
+        });
+        function comparer(index) {
+            return function(a, b) {
+                var valA = getCellValue(a, index), valB = getCellValue(b, index);
+                return $.isNumeric(valA) && $.isNumeric(valB) ?
+                    valA - valB : valA.localeCompare(valB);
+            };
+        }
+        function getCellValue(row, index){
+            return $(row).children('td').eq(index).text();
+        }
+    </script>
 
 </head>
 <body>
@@ -69,9 +89,9 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><a href="">Title</a><img src="" alt="icon"/></th>
-            <th><a href="">Author</a><img src="" alt="icon"/></th>
-            <th><a href="">Date Published</a><img src="" alt="icon"/></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
             <th></th>
         </tr>
         </thead>
