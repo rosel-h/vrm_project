@@ -36,8 +36,8 @@
 
     <%--<script src="jquery.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
-        window.onload = function() {
-            document.getElementById("username").onblur = function() {
+        window.onload = function () {
+            document.getElementById("username").onblur = function () {
                 var username = document.getElementById("username").value;
                 $.ajax({
                     url: "http://localhost:8888/checkusername",
@@ -46,11 +46,10 @@
                     success: function (msg) {
                         document.getElementById("usernameCheck").innerHTML = msg;
                     }
-
                 });
             }
 
-            document.getElementById("cPassword").onblur = function() {
+            document.getElementById("cPassword").onblur = function () {
                 var password = document.getElementById("password").value;
                 var cPassword = document.getElementById("cPassword").value;
                 $.ajax({
@@ -60,15 +59,11 @@
                     success: function (msg) {
                         document.getElementById("passwordCheck").innerHTML = msg;
                     }
-
                 });
             }
         }
-
     </script>
-
 </head>
-
 
 <body>
 
@@ -241,22 +236,9 @@
                             </button>
                         </div>
                     </div>
-
-                    <%--<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">--%>
-
-                    <%--<div class="col-md-offset-3 col-md-9">--%>
-                    <%--<button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>  --%>
-                    <%--Sign Up with Facebook--%>
-                    <%--</button>--%>
-                    <%--</div>--%>
-
-                    <%--</div>--%>
-
                 </form>
             </div>
         </div>
-
-
     </div>
 </div>
 

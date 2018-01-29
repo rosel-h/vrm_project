@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Vince
+  Date: 29/01/2018
+  Time: 3:32 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,12 +33,12 @@
 
 </head>
 
-<body id="page-top">
+<body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top">VRM Travel Blog</a>
+        <a class="navbar-brand">Welcome Guest</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -39,59 +47,43 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">Contact</a>
+                    <a class="nav-link" href="welcome.jsp">Home</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('img/about-bg.jpg')">
+<header class="masthead" style="background-image: url('img/background01.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
-                    <h1>Welcome to VRM</h1>
-                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
+                    <h5>Get started by logging in or signing up</h5>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding-left: 15%; padding-right: 15%">
-                        <a href="login.jsp">
-                            <div class="btn-group" role="group" style="padding: 2%">
+                         style="padding-left: 30%; padding-right: 15%">
+                        <a href="signup.jsp">
+                            <div class="btn-group" role="group" style="padding: 4%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#loginBtn"
+                                        data-toggle="modal" data-target="#newArticles"
                                         data-backdrop="static" data-keyboard="false">
                                     <span class="glyphicon glyphicon-circle-arrow-right"
-                                          aria-hidden="true">&nbsp;Log in</span>
+                                          aria-hidden="true">&nbsp;Sign Up</span>
                                 </button>
                             </div>
                         </a>
-
-                        <a href="signup.jsp">
-                            <div class="btn-group" role="group" style="padding: 2%">
+                        <a href="login.jsp">
+                            <div class="btn-group" role="group" style="padding: 4%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#signupBtn">
-                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Sign up</span>
+                                        data-toggle="modal" data-target="#myArticles">
+                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Log In</span>
                                 </button>
                             </div>
                         </a>
-
-                        <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 2%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;Explore</span>
-                                </button>
-                            </div>
-                        </a>
-
                     </div>
                 </div>
             </div>
@@ -99,18 +91,5 @@
     </div>
     </div>
 </header>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
 </body>
 </html>
