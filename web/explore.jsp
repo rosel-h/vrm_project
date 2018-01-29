@@ -42,22 +42,37 @@
 
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
-
     <script>
         $(document).ready(function () {
             $('#wOther').summernote({
                 minHeight: 20
             });
-
         });
+
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
-    <style>
-        .vrm> div{
-            width: 100%;
+    <!-- include sorting by title, username, date -->
+    <script>
+        $(document).on('click','th',function(){
+            var table = $(this).parents('table').eq(0);
+            var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+            this.asc = !this.asc;
+            if (!this.asc){rows = rows.reverse();}
+            table.children('tbody').empty().html(rows);
+        });
+        function comparer(index) {
+            return function(a, b) {
+                var valA = getCellValue(a, index), valB = getCellValue(b, index);
+                return $.isNumeric(valA) && $.isNumeric(valB) ?
+                    valA - valB : valA.localeCompare(valB);
+            };
         }
+        function getCellValue(row, index){
+            return $(row).children('td').eq(index).text();
+        }
+    </script>
 
-    </style>
+
 </head>
 <body>
 
@@ -76,12 +91,12 @@
             <div>Logged in as Guest</div>
         </c:if>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped sorttable" id="articletable">
         <thead>
         <tr>
-            <th><a href="">Title</a><img src="" alt="icon"/></th>
-            <th><a href="">Author</a><img src="" alt="icon"/></th>
-            <th><a href="">Date Published</a><img src="" alt="icon"/></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
             <th></th>
         </tr>
         </thead>
@@ -110,10 +125,10 @@
 
 
             <!-- Modal -->
-            <div class="modal fade vrm" id="a${articleList.getArticleID()}" role="dialog">
+            <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
                 <div class="modal-dialog modal-lg" style="width: 100%">
                     <!-- Modal content-->
-                    <div class="modal-content" >
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">${articleList.getTitle()}</h4>
                             <div>Written by ${articleList.getUsername()}, published
@@ -144,7 +159,6 @@
                         <div class="modal-body">
 
                             <div>${articleList.getContent()}</div>
-                            <div>end</div>
                         </div>
 
                         <div class="panel-footer">
@@ -222,6 +236,9 @@
         </c:forEach>
         </tbody>
     </table>
+
 </div>
+
+
 </body>
 </html>

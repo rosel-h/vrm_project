@@ -50,8 +50,8 @@ public class CheckUsernameServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        try {
-            Connection conn = mysqlDatabase.getConnection();
+        try(Connection conn = mysqlDatabase.getConnection()) {
+
             System.out.println("CheckUsernameServlet Connection Successful");
 
             String username = req.getParameter("username");
