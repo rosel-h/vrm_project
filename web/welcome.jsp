@@ -59,7 +59,7 @@
                     <a class="nav-link" href="myprofile.jsp">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log Out</a>
+                    <a class="nav-link" href="Main">Log Out</a>
                 </li>
             </ul>
         </div>
