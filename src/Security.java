@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 //// contains security related methods for site
 public class Security {
 
-    //generates a 30 length random string to be used as StateParam
+    //generates a n length random string to be used as CSRF token or State_Param
     public static String randomString(int length) {
         String list = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         String randomString = "";
