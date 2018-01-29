@@ -41,6 +41,7 @@
 
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
+
     <script>
         $(document).ready(function () {
             $('#wOther').summernote({
@@ -52,7 +53,9 @@
     </script>
 </head>
 <body>
-<%@include file="navigation.jsp" %>
+
+<%--<%@include file="navigation.jsp" %>--%>
+<%@include file="test.jsp" %>
 <%--Load articles --%>
 <div class="container">
     <h1>All Articles</h1>

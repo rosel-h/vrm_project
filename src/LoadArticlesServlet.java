@@ -130,7 +130,6 @@ public class LoadArticlesServlet extends HttpServlet {
                 req.setAttribute("personAvatarIcon", icon);
             }
 
-
             List<User> users = dao.getAllUsers();
             System.out.println("LoadArticlesServlet Users uploaded");
             List<Article> articles = dao.getAllArticles();
