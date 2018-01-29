@@ -54,8 +54,8 @@
 </head>
 <body>
 
-<%--<%@include file="navigation.jsp" %>--%>
-<%@include file="test.jsp" %>
+<%@include file="navigation.jsp" %>
+<%--<%@include file="test.jsp" %>--%>
 <%--Load articles --%>
 <div class="container">
     <h1>All Articles</h1>
@@ -115,74 +115,63 @@
                                     <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
                                 </form>
                                 <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                <button style="float: right" id="editorButton" type="button"
-                                        class="btn btn-primary pull-right">Edit
-                                </button>
+                                <form class="form-inline" action="editArticle.jsp" method="post">
 
-                                <script>
-                                    $(document).ready(function(){
-                                        $("#editorButton").click(function(){
-                                            $("#editorDiv").toggle();
-                                        });
-                                    });
-                                </script>
-                                <%--to hide--%>
-                                <br>
-                                <br>
-                                <br>
-                                <div id="editorDiv" style="display: none">
+                                    <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
 
-                                    <form  method="post" action="/CreateArticles">
+                                    <input type="hidden" name="operation" value="goToEditPage">
+                                   <%--<input type="hidden" name="articleContent" value="${articleList.getContent()}">--%>
+                                    <input type="hidden" name="articleContent" value="${articleList.getContent()}">
 
-                                <textarea id="wOther" rows ="20" name="editordata">
-                                    test obe
-                                </textarea>
-                                        <input type="submit">
-                                    </form>
-                                </div>
-                                <%----%>
-                                <%--</form>--%>
+                                    <input type="hidden" name="articleTitle" value="${articleList.getTitle()}">
+                                    <input type="hidden" name="articleObject" value="${articleList}">
+
+                                    <input type="hidden" name="author" value="${personLoggedIn}">
+                                    <button style="float: right" id="editorButton" type="submit"
+                                            class="btn btn-primary pull-right">Edit
+                                    </button>
+                                </form>
+
                             </c:if>
 
                         </div>
                         <div class="modal-body">
 
                             <div>${articleList.getContent()}</div>
+                            <div>end</div>
                         </div>
 
-                        <div class="media panel-footer">
+                        <div class="panel-footer">
 
                             <div class=""><p>Comments</p></div>
                                 <%--first comments--%>
                             <c:forEach var="commentList" items="${commentList}">
                                 <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
                                     <%--avatar icon--%>
-                                    <div class="media-left">
-                                        <img src="avatars/${commentList.getAvatarIcon()}" class="media-object"
-                                             style="width:30px">
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">${commentList.getCommentAuthor()}
+
+                                    <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
+                                                       style="width:30px; display: inline-block">
+                                        <h5 class="">${commentList.getCommentAuthor()}
                                             <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                         </h5>
                                         <p>${commentList.getContent()}</p>
-                                            <%--second nest comments--%>
-                                        <c:forEach var="nestedList" items="${nestedList}">
-                                            <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
-                                                <div class="media-left">
-                                                    <img src="avatars/${nestedList.getAvatarIcon()}"
-                                                         class="media-object"
-                                                         style="width:30px">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading">${nestedList.getCommentAuthor()}
-                                                        <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
-                                                    </h5>
-                                                    <p>${nestedList.getContent()}</p>
-                                                </div>
-                                                <br>
-                                            </c:if>
-                                        </c:forEach>
+                                            <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
+                                        <%--<c:forEach var="nestedList" items="${nestedList}">--%>
+                                            <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
+                                                <%--<div class="">--%>
+                                                    <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
+                                                         <%--class=""--%>
+                                                         <%--style="width:30px">--%>
+                                                <%--</div>--%>
+                                                <%--<div class="">--%>
+                                                    <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
+                                                        <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
+                                                    <%--</h5>--%>
+                                                    <%--<p>${nestedList.getContent()}</p>--%>
+                                                <%--</div>--%>
+                                                <%--<br>--%>
+                                            <%--</c:if>--%>
+                                        <%--</c:forEach>--%>
                                             <%-- checks wether user logged in with author of post and user logged in--%>
                                         <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                             <form method="post" action="/Articles">
