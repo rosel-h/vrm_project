@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -31,51 +29,67 @@ public class EditArticle extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("mysql.properties");
-//        System.out.println("Create Article: "+session.isNew());
-//        System.out.println("Create Aritcle "+session.getAttribute("username"));
-//        String user = "thisshouldnotbehere" /*(String) session.getAttribute("username")*/;
-//        if (!session.isNew()){
-//            user = String.valueOf(session.getAttribute("username"));
-//        }
 
-        HttpSession session = req.getSession(true);
-        ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
-        String sessionID = session.getId();
-        String fileName = sessionFilePath + "\\" + sessionID + ".json";
-        JSONObject userJson;
-
-        File sessionFile = new File(fileName);
-        String user = null;
-
-        if (sessionFile.exists()) {
-            System.out.println("session exists");
-            userJson = User.readJSONFile(fileName);
-            System.out.println(JSONObject.toJSONString(userJson));
-            user = String.valueOf(userJson.get("username"));
-        } else {
-            System.out.println("session doesnt exist");
-        }
+//        PrintWriter out = resp.getWriter();
+//        out.println("<p>do the edit<p>");
 
         String op = req.getParameter("operation");
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+
+        String id = req.getParameter("articleID");
+        int articleID = Integer.parseInt(id);
+//        System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")" + "(parsed id: "+articleID+")");
+        boolean articleHasBeenEdited;
+        if ("goToEditPage".equals(op)) {
+            try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+                Article articleToBeEdited = dao.getOneArticle(articleID);
+                req.setAttribute("articleToEdit", articleToBeEdited);
+                req.getRequestDispatcher("editArticle.jsp").forward(req, resp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("userHasEditedArticle".equals(op)) {
+            System.out.println("EditArticle Servlet: add to dao");
+            String author = req.getParameter("author");
+            String newTitle = req.getParameter("title");
+            String newContent = req.getParameter("content");
+            String newDate = req.getParameter("futureDate");
 
 
-
-
-
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
+//        add date updated
+            System.out.println("EditArticle Servlet: author " + author);
+            System.out.println("EditArticle Servlet: newTitle " + newTitle);
+            try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+                if (newDate.length() < 5) {
+                    newContent = newContent + "<p> Edited on:" + sqlDate + "<p>";
+                    System.out.println("EditArticle Servlet: newContent " + newContent);
+                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
+                    System.out.println("EditArticle Servlet: Article added to database without date");
+                } else {
+                    String origPublishDate =req.getParameter("publishedDate");
+                    newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate submittedDateReformatted = LocalDate.parse(newDate, formatter);
+                    java.sql.Date anotherSqlDate = java.sql.Date.valueOf(submittedDateReformatted);
+                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent,anotherSqlDate);
+                    System.out.println("EditArticle Servlet: Article added to database with date: " + newDate);
+                }
+                if (articleHasBeenEdited) {
+                    System.out.println("EditArticle Servlet: Article added to database");
+                }
+                req.getRequestDispatcher("/Articles").forward(req, resp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-
     }
+
 }
+

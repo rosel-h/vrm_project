@@ -1,14 +1,14 @@
-<%--
+<%@ page import="DAO_setup.Article" %><%--
   Created by IntelliJ IDEA.
-  User: rher490
-  Date: 25/01/2018
-  Time: 1:28 PM
+  User: Rose
+  Date: 29/01/2018
+  Time: 10:22 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Create Article</title>
+    <title>Revising Article: ${articleToEdit.getTitle()}</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -38,29 +38,52 @@
     </script>
 </head>
 <body>
+<%--<%--%>
+    <%--String id = request.getParameter("articleID");--%>
+    <%--String articleStory = request.getParameter("articleContent");--%>
+    <%--String author= request.getParameter("author");--%>
+    <%--String articleTitle= request.getParameter("articleTitle");--%>
+    <%--System.out.println("editArticle jsp: "+ author);--%>
+    <%--System.out.println("editArticle jsp: "+ articleTitle);--%>
+    <%--System.out.println("editArticle jsp: "+ articleStory);--%>
+
+<%--%>--%>
 <div class="container">
+    <div>Hello, ${articleToEdit.getUsername()}. Edit your article below</div>
     <!--  A form letting users add new articles. -->
     <div class="panel panel-info">
 
         <div class="panel-heading">
-            <h3 class="panel-title">New Article</h3>
+            <h3 class="panel-title">Edit Article</h3>
         </div>
         <div class="panel-body">
-            <form action="/Articles" method="POST">
+            <form action="/editArticles" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" required>
+                    <input type="text" id="title" name="title" class="form-control" value="${articleToEdit.getTitle()}" required>
                 </div>
                 <div class="form-group">
                     <label for="summernote">Content</label>
-                    <textarea id="summernote" name="content" class="form-control" rows="10" required></textarea>
-                    <label for ="futureDate">Date Published (optional)</label>
+                    <textarea id="summernote" name="content" class="form-control" rows="10" required>${articleToEdit.getContent()}</textarea>
+                    <label for ="futureDate">Change date published (optional)</label>
                     <input type="date" id="futureDate" name="futureDate" value="new Date()">
                 </div>
                 <div class="form-group">
-                    <input type="hidden" name="operation" value="add">
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                    <input type="hidden" name="author" value="${articleToEdit.getUsername()}">
+                    <input type="hidden" name="operation" value="userHasEditedArticle">
+                    <input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">
+                    <%--<input type="hidden" name="dateInDatabse" value="${article}">--%>
+
+                    <button type="submit" class="btn btn-primary">Done</button>
                 </div>
+                <form class="form-inline" action="/Articles" method="POST">
+                    <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                        Delete
+                    </button>
+                    <input type="hidden" name="operation" value="delete">
+                    <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+                </form>
 
             </form>
         </div>
@@ -70,3 +93,4 @@
 
 </body>
 </html>
+

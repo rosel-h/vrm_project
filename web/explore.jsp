@@ -1,3 +1,4 @@
+<%@ page import="java.time.LocalDate" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -41,16 +42,37 @@
 
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
-
     <script>
         $(document).ready(function () {
             $('#wOther').summernote({
                 minHeight: 20
             });
-
         });
+
         $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
+    <!-- include sorting by title, username, date -->
+    <script>
+        $(document).on('click','th',function(){
+            var table = $(this).parents('table').eq(0);
+            var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+            this.asc = !this.asc;
+            if (!this.asc){rows = rows.reverse();}
+            table.children('tbody').empty().html(rows);
+        });
+        function comparer(index) {
+            return function(a, b) {
+                var valA = getCellValue(a, index), valB = getCellValue(b, index);
+                return $.isNumeric(valA) && $.isNumeric(valB) ?
+                    valA - valB : valA.localeCompare(valB);
+            };
+        }
+        function getCellValue(row, index){
+            return $(row).children('td').eq(index).text();
+        }
+    </script>
+
+
 </head>
 <body>
 
@@ -69,12 +91,12 @@
             <div>Logged in as Guest</div>
         </c:if>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped sorttable" id="articletable">
         <thead>
         <tr>
-            <th><a href="">Title</a><img src="" alt="icon"/></th>
-            <th><a href="">Author</a><img src="" alt="icon"/></th>
-            <th><a href="">Date Published</a><img src="" alt="icon"/></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1"><ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
             <th></th>
         </tr>
         </thead>
@@ -85,6 +107,11 @@
             <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
             <%--</button>--%>
             <%--</div>--%>
+            <%
+                java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+                request.setAttribute("sqlDateToday",sqlDateToday);
+            %>
+            <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
             <tr>
                 <td><b>${articleList.getTitle()}</b></td>
                 <td><i>${articleList.getUsername()}</i></td>
@@ -99,7 +126,7 @@
 
             <!-- Modal -->
             <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg" style="width: 100%">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
@@ -115,33 +142,17 @@
                                     <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
                                 </form>
                                 <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                <button style="float: right" id="editorButton" type="button"
-                                        class="btn btn-primary pull-right">Edit
-                                </button>
+                                <form class="form-inline" action="/editArticles" method="post">
 
-                                <script>
-                                    $(document).ready(function(){
-                                        $("#editorButton").click(function(){
-                                            $("#editorDiv").toggle();
-                                        });
-                                    });
-                                </script>
-                                <%--to hide--%>
-                                <br>
-                                <br>
-                                <br>
-                                <div id="editorDiv" style="display: none">
+                                    <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
 
-                                    <form  method="post" action="/CreateArticles">
+                                    <input type="hidden" name="operation" value="goToEditPage">
+                                    <input type="hidden" name="author" value="${personLoggedIn}">
+                                    <button style="float: right" id="editorButton" type="submit"
+                                            class="btn btn-primary pull-right">Edit
+                                    </button>
+                                </form>
 
-                                <textarea id="wOther" rows ="20" name="editordata">
-                                    test obe
-                                </textarea>
-                                        <input type="submit">
-                                    </form>
-                                </div>
-                                <%----%>
-                                <%--</form>--%>
                             </c:if>
 
                         </div>
@@ -150,46 +161,43 @@
                             <div>${articleList.getContent()}</div>
                         </div>
 
-                        <div class="media panel-footer">
+                        <div class="panel-footer">
 
                             <div class=""><p>Comments</p></div>
                                 <%--first comments--%>
                             <c:forEach var="commentList" items="${commentList}">
                                 <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
                                     <%--avatar icon--%>
-                                    <div class="media-left">
-                                        <img src="avatars/${commentList.getAvatarIcon()}" class="media-object"
-                                             style="width:30px">
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="media-heading">${commentList.getCommentAuthor()}
+
+                                    <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
+                                                       style="width:30px; display: inline-block">
+                                        <h5 class="">${commentList.getCommentAuthor()}
                                             <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                         </h5>
                                         <p>${commentList.getContent()}</p>
-                                            <%--second nest comments--%>
-                                        <c:forEach var="nestedList" items="${nestedList}">
-                                            <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
-                                                <div class="media-left">
-                                                    <img src="avatars/${nestedList.getAvatarIcon()}"
-                                                         class="media-object"
-                                                         style="width:30px">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5 class="media-heading">${nestedList.getCommentAuthor()}
-                                                        <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
-                                                    </h5>
-                                                    <p>${nestedList.getContent()}</p>
-                                                </div>
-                                                <br>
-                                            </c:if>
-                                        </c:forEach>
+                                            <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
+                                        <%--<c:forEach var="nestedList" items="${nestedList}">--%>
+                                            <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
+                                                <%--<div class="">--%>
+                                                    <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
+                                                         <%--class=""--%>
+                                                         <%--style="width:30px">--%>
+                                                <%--</div>--%>
+                                                <%--<div class="">--%>
+                                                    <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
+                                                        <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
+                                                    <%--</h5>--%>
+                                                    <%--<p>${nestedList.getContent()}</p>--%>
+                                                <%--</div>--%>
+                                                <%--<br>--%>
+                                            <%--</c:if>--%>
+                                        <%--</c:forEach>--%>
                                             <%-- checks wether user logged in with author of post and user logged in--%>
                                         <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                             <form method="post" action="/Articles">
                                                 <button type="submit" class="btn btn-xs">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                                <input type="hidden" name="commentID"
-                                                       value="${commentList.getCommentID()}">
+                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
 
                                             </form>
                                         </c:if>
@@ -224,10 +232,13 @@
                     </div>
                 </div>
             </div>
-
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
+
 </div>
+
+
 </body>
 </html>

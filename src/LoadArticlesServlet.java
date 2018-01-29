@@ -6,6 +6,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.jooq.tools.json.JSONObject;
 
+import javax.ejb.Local;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
 
@@ -40,7 +43,7 @@ public class LoadArticlesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.print("do get");
-        doPost(req,resp);
+        doPost(req, resp);
 
     }
 
@@ -86,7 +89,19 @@ public class LoadArticlesServlet extends HttpServlet {
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
 
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
+                //check if date is to be published today or not
+                String submittedDate = req.getParameter("futureDate");
+                System.out.println("CreateArticles: date " + submittedDate);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                java.sql.Date sqlDate;
+
+                if(submittedDate.length()<10){
+                    sqlDate = java.sql.Date.valueOf(LocalDate.now());
+                }else{
+                    LocalDate submittedDateReformatted = LocalDate.parse(submittedDate, formatter);
+                    sqlDate = java.sql.Date.valueOf(submittedDateReformatted);
+                }
+
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("CreateArticles: new article made");
 
@@ -104,7 +119,7 @@ public class LoadArticlesServlet extends HttpServlet {
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
 
-            }else if ("editarticle".equals(op)) {
+            } else if ("editarticle".equals(op)) {
 
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
@@ -113,17 +128,17 @@ public class LoadArticlesServlet extends HttpServlet {
 
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("CreateArticles: new article made");
-            }
-            else if ("deleteCommentOnArticle".equals(op)){
+            } else if ("deleteCommentOnArticle".equals(op)) {
                 System.out.println("LoadArticlesServlet: delete button pressed");
                 String commentIDToBeDeleted = req.getParameter("commentID");
                 System.out.println();
-                System.out.println("LAS: id - "+ commentIDToBeDeleted);
+                System.out.println("LAS: id - " + commentIDToBeDeleted);
                 dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
             }
 
+
             String icon = dao.getIcon(user);
-            System.out.println(icon + " "+ user);
+            System.out.println(icon + " " + user);
             if (user != null) {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");

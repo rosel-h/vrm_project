@@ -5,6 +5,8 @@
   Time: 3:49 PM
   To change this template use File | Settings | File Templates.
 --%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar navbar-inverse bg-faded">
     <div class="container-fluid">
@@ -28,10 +30,10 @@
         </ul>
         <form class="navbar-form navbar-left" action="searcharticle">
             <div class="form-group">
-                <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date">
+                <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date" id="searchkeyword">
             </div>
             <div class="form-group">
-                <select class="form-control" name="searchType">
+                <select class="form-control" name="searchType" id="searchselect">
                     <option value="title">Title</option>
                     <option value="username">Username</option>
                     <option value="date">Date</option>
@@ -41,3 +43,23 @@
         </form>
     </div>
 </nav>
+
+<script>
+    var searchselect = document.getElementById("searchselect");
+    searchselect.addEventListener("change", myFc);
+    function myFc() {
+        var x = document.getElementById("searchkeyword");
+        console.log(searchselect.value());
+        if (searchselect.value().eq("date")) {
+
+        }else {
+
+        }
+    }
+</script>
+
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    } );
+</script>
