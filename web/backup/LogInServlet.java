@@ -4,7 +4,6 @@
 
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
-import DAO_setup.UserDAO;
 import org.jooq.tools.json.JSONObject;
 import org.json.simple.JSONValue;
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,12 +33,23 @@ public class LogInServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
+
         HttpSession sess = request.getSession(true);
 
-        if (checkUser(username, pass)) {
+        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) sess.getAttribute("database");
 
+        if (mysqlDatabase == null) {
+            try {
+                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        System.out.println("LoginServlet enter line 38: " + checkUser(username, pass, mysqlDatabase));
+
+        if (checkUser(username, pass, mysqlDatabase)) {
             Map<String, String[]> map = request.getParameterMap();
-
             Map<String, String> jsonMap = new HashMap<>();
             for (String key : map.keySet()) {
                 String value = map.get(key)[0];
@@ -66,24 +76,20 @@ public class LogInServlet extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
-            System.out.println("successfully logged in");
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("avatarFile", avatarFile);
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 
         } else {
-            System.out.println("unsuccessful login");
             request.setAttribute("errorMessage", "Invalid Username or Password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
-
     //check password function
-    public boolean checkUser(String username, String pass) {
+    public boolean checkUser(String username, String pass, MYSQLDatabase mysqlDatabase) {
         boolean loginStatus = false;
-        User user;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -92,23 +98,35 @@ public class LogInServlet extends HttpServlet {
         }
 
         System.out.println("LoginServlet Connection attempt...");
+        Properties dbProps = new Properties();
+        ServletContext s = getServletContext();
+        String filepath = s.getRealPath("mysql.properties");
 
-        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
-            System.out.println("LoginServlet connection successful");
-            user = dao.getUserStandard(username, pass);
-
-            if (user == null) {
-                System.out.println("user is null");
-            } else {
-                loginStatus = true;
-                avatarFile = user.getAvatar_icon();
-                System.out.println("avatar file is " + avatarFile);
-            }
-        } catch (Exception e) {
+        try (FileInputStream fis = new FileInputStream(filepath)) {
+            dbProps.load(fis);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        System.out.println("check user method returning " + loginStatus);
+        // Establishing connection to the database
+        try {
+            System.out.println("LoginServlet connection successful");
+            Connection conn = mysqlDatabase.getConnection();
+            PreparedStatement ps = conn.prepareStatement
+                    ("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?");
+            ps.setString(1, username);
+            ps.setString(2, pass);
+            ps.setString(3, "active");
+            ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
+            loginStatus = rs.next();
+
+            if (loginStatus) {
+                avatarFile = rs.getString("avatar_icon");
+                System.out.println("avatar file is " + avatarFile);}
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return loginStatus;
     }
 

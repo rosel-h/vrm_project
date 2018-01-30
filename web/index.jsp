@@ -24,7 +24,6 @@
     <script src="js/clean-blog.min.js"></script>
 
 </head>
-
 <body id="page-top">
 
 <!-- Navigation -->
@@ -107,7 +106,6 @@
         </div>
     </div>
 </footer>
-
 
 </body>
 </html>

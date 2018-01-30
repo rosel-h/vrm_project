@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class BlogDAO implements AutoCloseable {
     private final Connection conn;
-
     private final Database db;
 
     /**
      * Creates a new UniDAO and establishes a connection to the given database.
      */
+
     public BlogDAO(Database db) throws IOException, SQLException {
         this.db = db;
         this.conn = db.getConnection();
@@ -57,8 +57,6 @@ public class BlogDAO implements AutoCloseable {
         }
         return artic;
     }
-
-
 
     public List<Article> getArticleByUsername(String[] keywords) throws SQLException {
         List<Article> artic = new ArrayList<>();
@@ -100,11 +98,11 @@ public class BlogDAO implements AutoCloseable {
         return artic;
     }
 
-    public List<Article> getMyArticles(String username)throws SQLException {
-        System.out.println("BlogDAO: getMyArticles username - "+username);
+    public List<Article> getMyArticles(String username) throws SQLException {
+        System.out.println("BlogDAO: getMyArticles username - " + username);
         List<Article> a = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =?")) {
-            stmt.setString(1,username);
+            stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("BlogDAO: rs executed in getMyArticles ");
                 while (rs.next()) {
@@ -208,6 +206,7 @@ public class BlogDAO implements AutoCloseable {
             stmt.setString(3, String.valueOf(now));
             stmt.setString(4, content);
             stmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -323,12 +322,12 @@ public class BlogDAO implements AutoCloseable {
     }
 
     /*Edit article
-    * @param id of the article in database
-    * @newTitle title of the edited article
-    * @newContent content edited
-    * @date when the want the date published
-    *
-    *@ return true if article was added */
+     * @param id of the article in database
+     * @newTitle title of the edited article
+     * @newContent content edited
+     * @date when the want the date published
+     *
+     *@ return true if article was added */
     public boolean editArticle(int id, String newTitle, String newContent, Date toPublish) {
         try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_articles SET title = ?, content = ?, date = ? WHERE article_id=?;")) {
             stmt.setString(1, newTitle);
@@ -344,8 +343,8 @@ public class BlogDAO implements AutoCloseable {
     }
 
     /*Edit article
-    * @param id of the article in database
-    * @newTitle title of the edited article*/
+     * @param id of the article in database
+     * @newTitle title of the edited article*/
     public boolean editArticle(int id, String newTitle, String newContent) {
         try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_articles SET title = ?, content = ? WHERE article_id=?;")) {
             stmt.setString(1, newTitle);
@@ -358,7 +357,6 @@ public class BlogDAO implements AutoCloseable {
         }
         return false;
     }
-
 
     /**
      * Closes the connection to the database. Implements {@link AutoCloseable} to support try-with-resources.

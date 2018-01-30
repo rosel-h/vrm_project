@@ -72,6 +72,7 @@ public class LoadArticlesServlet extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
+
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
 
