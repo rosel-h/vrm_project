@@ -29,7 +29,7 @@ public class OAuth2fb extends HttpServlet {
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
-    String avatar = "";
+    String avatarFile = "";
 
     //https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&scope=email
     //note: need to implement state-param setting in URL to prevent cross-site-request forgery attach.
@@ -200,7 +200,19 @@ public class OAuth2fb extends HttpServlet {
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 
-            if (!loginStatus) {
+            if (loginStatus) {
+                PreparedStatement getAvatar = conn.prepareStatement
+                        ("select avatar_icon from vrm_users where binary email_address=?");
+                getAvatar.setString(1, email);
+
+                ResultSet avatarIcon = getAvatar.executeQuery();
+
+                while (avatarIcon.next()) {
+                    avatarFile = avatarIcon.getString("avatar_icon");
+                    System.out.println("Facebook login avatar icon " + avatarFile);
+                }
+
+            } else if (!loginStatus) {
 
                 System.out.println("User does not exist.. creating");
 
@@ -214,7 +226,7 @@ public class OAuth2fb extends HttpServlet {
                     String dob = "1900/11/11";
                     String country = "New Zealand";
                     String description = "New facebook user";
-                    avatar = "avatar_01.png";
+                    String avatar = "avatar_01.png";
                     String status = "facebook";
 
                     stmt.setString(1, username);
@@ -228,10 +240,11 @@ public class OAuth2fb extends HttpServlet {
                     stmt.setString(9, status);
                     stmt.setString(10, email);
                     stmt.executeUpdate();
-
                     System.out.println("Creation Successful");
                 }
             }
+
+            return loginStatus;
 
         } catch (Exception e) {
             e.printStackTrace();
