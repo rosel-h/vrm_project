@@ -29,7 +29,7 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
-<header class="masthead" style="background-image: url('imgs/Edge-Of-World.jpg')">
+<header class="masthead" style="background-image: url('img/Edge-Of-World.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
