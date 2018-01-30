@@ -87,7 +87,7 @@
         }
 
         .imgbox {
-            width: 400px;
+            width: 900px;
             margin: 0 auto;
             text-align: center;
         }
@@ -169,8 +169,8 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
-                    <div class="col-md-4 offset-4">
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%" class="img-circle">
+                    <div class="col-md-4 offset-4" >
+                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
                     </div>
                     <br>
                     <h5>Explore the community or create a new blog entry</h5>
@@ -221,11 +221,11 @@
 <div class="container">
     <div class="imgbox">
         <ul id="banner_img">
-            <li><img src="img/fade-banner-01.jpg" width="400" height="200"/></li>
-            <li><img src="img/fade-banner-02.jpg" width="400" height="200"/></li>
-            <li><img src="img/fade-banner-03.jpg" width="400" height="200"/></li>
-            <li><img src="img/fade-banner-04.jpg" width="400" height="200"/></li>
-            <li><img src="img/fade-banner-02.jpg" width="400" height="200"/></li>
+            <li><img src="img/banner01.jpg" width="900" height="240"/></li>
+            <li><img src="img/banner02.jpg" width="900" height="240"/></li>
+            <li><img src="img/banner03.jpg" width="900" height="240"/></li>
+            <li><img src="img/banner04.jpg" width="900" height="240"/></li>
+            <li><img src="img/banner05.jpg" width="900" height="240"/></li>
         </ul>
         <div class="clear"></div>
         <div class="imgnum">

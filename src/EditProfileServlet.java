@@ -223,6 +223,7 @@ public class EditProfileServlet extends HttpServlet {
                             user.setAvatar_icon(avatar);
                             req.setAttribute("user", user);
                             session.setAttribute("operation", "edit");
+                            session.setAttribute("avatarFile", avatar);
                             req.getRequestDispatcher("profilesavesuccess.jsp").forward(req, resp);
 
                         } catch (ServletException e) {
