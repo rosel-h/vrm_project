@@ -134,13 +134,16 @@ public class OAuth2fb extends HttpServlet {
             HttpSession sess = request.getSession(true);
 
             Map<String, String[]> map = request.getParameterMap();
+
             Map<String, String> jsonMap = new HashMap<>();
+
             for (String key : map.keySet()) {
                 String value = map.get(key)[0];
                 jsonMap.put(key, value);
             }
 
             String jsonText = JSONValue.toJSONString(jsonMap);
+
             System.out.println("LoginServlet json text - " + jsonText);
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
