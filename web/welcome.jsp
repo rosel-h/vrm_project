@@ -56,7 +56,7 @@
                     <a class="nav-link" href="aboutus.html">My Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myprofile.jsp">My Profile</a>
+                    <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
                     <form method="post" action="Main">
@@ -72,7 +72,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/background01.jpg')">
+<header class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -137,7 +137,7 @@
     </div>
 
     <!-- Footer -->
-    <footer
+    <footer>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
@@ -148,5 +148,6 @@
     </div>
     </footer>
 
+</div>
 </body>
 </html>

@@ -1,18 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Mengjie
-  Date: 2018/1/24
-  Time: 9:34
+  Date: 2018/1/30
+  Time: 13:54
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sign up successfully | VRM Blog</title>
-</head>
-
-<head>
-    <title>Sign Up</title>
+    <title>Save profile successfully | VRM Blog</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -26,7 +22,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div id="signupsuccess" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<div id="saveprofilesuccess" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
     <div class="panel panel-info">
 
         <div class="panel-heading">
@@ -34,7 +30,7 @@
         </div>
 
         <div class="panel-body">
-            <div class="control-label">${directMessage} in <span id="countdown">6</span> seconds</div>
+            <div class="control-label">You will be directed to welcome page in <span id="countdown">6</span> seconds</div>
             <script type="text/javascript">
 
                 // Total seconds to wait
@@ -44,7 +40,7 @@
                     seconds = seconds - 1;
                     if (seconds < 0) {
                         // Chnage your redirection link here
-                        window.location = "login.jsp";
+                        window.location = "welcome.jsp";
                     } else {
                         // Update remaining seconds
                         document.getElementById("countdown").innerHTML = seconds;
@@ -59,15 +55,13 @@
             </script>
 
             <c:if test="${directErrorMessage.equals('true')}">
-                <div class="control-label">Or click <ins><a href="login.jsp">here</a></ins> to login!</div>
+                <div class="control-label">Or click <ins><a href="welcome.jsp">here</a></ins> to login!</div>
             </c:if>
         </div>
     </div>
 
 
 </div>
-
-
 
 </body>
 </html>

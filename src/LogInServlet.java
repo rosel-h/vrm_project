@@ -109,8 +109,9 @@ public class LogInServlet extends HttpServlet {
 
         // Establishing connection to the database
         try {
-            Connection conn = mysqlDatabase.getConnection();
+
             System.out.println("LoginServlet connection successful");
+            Connection conn = mysqlDatabase.getConnection();
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?");
 
