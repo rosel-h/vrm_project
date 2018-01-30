@@ -154,8 +154,7 @@
                         <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%" class="img-circle">
                     </div>
                     <br>
-                    <h5>Explore the community or create a new article</h5>
-                    <br>
+                    <h5>Explore the community or create a new blog entry</h5>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
                         <a href="/myArticles">
@@ -188,7 +187,6 @@
                                 </button>
                             </div>
                         </a>
-
                     </div>
                 </div>
             </div>
