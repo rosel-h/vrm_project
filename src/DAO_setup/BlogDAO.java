@@ -325,6 +325,7 @@ public class BlogDAO implements AutoCloseable {
         }
         return false;
     }
+
     /*Edit article
     * @param id of the article in database
     * @newTitle title of the edited article*/

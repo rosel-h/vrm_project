@@ -115,8 +115,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <%--<a class="navbar-brand">Welcome ${requestScope.get()} </a>--%>
-        <a class="navbar-brand">Welcome ${personLoggedIn} </a>
+        <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -155,7 +154,7 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-                        <a href="Articles">
+                        <a href="/myArticles">
                             <div class="btn-group" role="group" style="padding: 8%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
