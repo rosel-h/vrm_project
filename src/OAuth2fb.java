@@ -154,6 +154,7 @@ public class OAuth2fb extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
+            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 
@@ -210,8 +211,8 @@ public class OAuth2fb extends HttpServlet {
                     String fname = fbUser.getFirst_name();
                     String lname = fbUser.getLast_name();
                     String dob = "1900/11/11";
-                    String country = "";
-                    String description = "";
+                    String country = "New Zealand";
+                    String description = "New facebook user";
                     String avatar = "avatar_01.jpg";
                     String status = "facebook";
 

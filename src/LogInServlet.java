@@ -3,6 +3,8 @@
  */
 
 import DAO_setup.MYSQLDatabase;
+import DAO_setup.User;
+import org.jooq.tools.json.JSONObject;
 import org.json.simple.JSONValue;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -57,7 +59,7 @@ public class LogInServlet extends HttpServlet {
 
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
-            System.out.println("LoginServlet enter line 52:" + sessiont_id);
+            System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/Sessions");
             File sessionFolder = new File(filePath);
@@ -66,16 +68,10 @@ public class LogInServlet extends HttpServlet {
                 sessionFolder.mkdir();
             }
 
-            String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("LoginServlet: " + fileName);
-            File sessionFile = new File(fileName);
-
-            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
-                bufferedWriter.write(jsonText);
-            }
-
+            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
+
         } else {
             request.setAttribute("errorMessage", "Invalid Username or Password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
@@ -105,22 +101,18 @@ public class LogInServlet extends HttpServlet {
 
         // Establishing connection to the database
         try {
-
             System.out.println("LoginServlet connection successful");
             Connection conn = mysqlDatabase.getConnection();
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?");
-
             ps.setString(1, username);
             ps.setString(2, pass);
             ps.setString(3, "active");
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return loginStatus;
     }
 
