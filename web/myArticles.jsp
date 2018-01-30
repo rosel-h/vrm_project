@@ -10,24 +10,42 @@
 <html>
 <head>
     <title>${personLoggedIn} Articles</title>
-    <title>VRM Explore(in JSP)</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <%--<!-- Latest compiled and minified CSS -->--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
+    <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <%--<!-- Optional theme -->--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
+    <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%--<!-- Latest compiled and minified JavaScript -->--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
+    <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
+    <%--crossorigin="anonymous"></script>--%>
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
 
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="featured.js"></script>
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
@@ -59,6 +77,7 @@
             }
             table.children('tbody').empty().html(rows);
         });
+
         function comparer(index) {
             return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
@@ -66,6 +85,7 @@
                     valA - valB : valA.localeCompare(valB);
             };
         }
+
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
@@ -114,139 +134,137 @@
         <%
             System.out.println("myArticles jsp: inside table body");
         %>
-            <c:forEach var="myArticles" items="${myArticles}">
-                <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
+        <c:forEach var="myArticles" items="${myArticles}">
+            <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
 
-                    <tr>
-                        <td><b>${myArticles.getTitle()}</b></td>
-                        <td><i>${myArticles.getUsername()}</i></td>
-                        <td>${myArticles.getDate()}</td>
-                        <td>
-                            <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                                    data-target="#a${myArticles.getArticleID()}">Full Article
-                            </button>
-                        </td>
-                    </tr>
+            <tr>
+                <td><b>${myArticles.getTitle()}</b></td>
+                <td><i>${myArticles.getUsername()}</i></td>
+                <td>${myArticles.getDate()}</td>
+                <td>
+                    <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
+                            data-target="#a${myArticles.getArticleID()}">Full Article
+                    </button>
+                </td>
+            </tr>
 
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="a${myArticles.getArticleID()}" role="dialog">
-                        <div class="modal-dialog modal-lg" style="width: 100%">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">${myArticles.getTitle()}</h4>
-                                    <div>Written by ${myArticles.getUsername()}, published
-                                        on ${myArticles.getDate()}</div>
-                                    <%--<c:if test="${personLoggedIn == myArticles.getUsername()}">--%>
-                                        <form class="form-inline" action="/Articles" method="POST">
-                                            <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                                                Delete
-                                            </button>
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
-                                        </form>
-                                        <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                        <form class="form-inline" action="/editArticles" method="post">
+            <!-- Modal -->
+            <div class="modal fade" id="a${myArticles.getArticleID()}" role="dialog">
+                <div class="modal-dialog modal-lg" style="width: 100%">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">${myArticles.getTitle()}</h4>
+                            <div>Written by ${myArticles.getUsername()}, published
+                                on ${myArticles.getDate()}</div>
+                                <%--<c:if test="${personLoggedIn == myArticles.getUsername()}">--%>
+                            <form class="form-inline" action="/Articles" method="POST">
+                                <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                                    Delete
+                                </button>
+                                <input type="hidden" name="operation" value="delete">
+                                <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
+                            </form>
+                                <%--<form class="form-inline" action="/Articles" method="POST">--%>
+                            <form class="form-inline" action="/editArticles" method="post">
 
-                                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
 
-                                            <input type="hidden" name="operation" value="goToEditPage">
-                                            <input type="hidden" name="author" value="${personLoggedIn}">
-                                            <button style="float: right" id="editorButton" type="submit"
-                                                    class="btn btn-primary pull-right">Edit
-                                            </button>
-                                        </form>
+                                <input type="hidden" name="operation" value="goToEditPage">
+                                <input type="hidden" name="author" value="${personLoggedIn}">
+                                <button style="float: right" id="editorButton" type="submit"
+                                        class="btn btn-primary pull-right">Edit
+                                </button>
+                            </form>
 
-                                    <%--</c:if>--%>
+                                <%--</c:if>--%>
 
-                                </div>
-                                <div class="modal-body">
+                        </div>
+                        <div class="modal-body">
 
-                                    <div>${myArticles.getContent()}</div>
-                                </div>
+                            <div>${myArticles.getContent()}</div>
+                        </div>
 
-                                <div class="panel-footer">
+                        <div class="panel-footer">
 
-                                    <div class=""><p>Comments</p></div>
-                                        <%--first comments--%>
-                                    <c:forEach var="commentList" items="${commentList}">
-                                        <c:if test="${myArticles.getArticleID()==commentList.getArticleID()}">
-                                            <%--avatar icon--%>
+                            <div class=""><p>Comments</p></div>
+                                <%--first comments--%>
+                            <c:forEach var="commentList" items="${commentList}">
+                                <c:if test="${myArticles.getArticleID()==commentList.getArticleID()}">
+                                    <%--avatar icon--%>
 
-                                            <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
-                                                               style="width:30px; display: inline-block">
-                                                <h5 class="">${commentList.getCommentAuthor()}
-                                                    <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                                                </h5>
-                                                <p>${commentList.getContent()}</p>
-                                                    <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
-                                                    <%--<c:forEach var="nestedList" items="${nestedList}">--%>
-                                                    <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
-                                                    <%--<div class="">--%>
-                                                    <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
-                                                    <%--class=""--%>
-                                                    <%--style="width:30px">--%>
-                                                    <%--</div>--%>
-                                                    <%--<div class="">--%>
-                                                    <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
-                                                    <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
-                                                    <%--</h5>--%>
-                                                    <%--<p>${nestedList.getContent()}</p>--%>
-                                                    <%--</div>--%>
-                                                    <%--<br>--%>
-                                                    <%--</c:if>--%>
-                                                    <%--</c:forEach>--%>
-                                                    <%-- checks wether user logged in with author of post and user logged in--%>
-                                                <c:if test="${( personLoggedIn == commentList.getCommentAuthor())}">
-                                                    <form method="post" action="/Articles">
-                                                        <button type="submit" class="btn btn-xs">delete comment</button>
-                                                        <input type="hidden" name="operation"
-                                                               value="deleteCommentOnArticle">
-                                                        <input type="hidden" name="commentID"
-                                                               value="${commentList.getCommentID()}">
+                                    <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
+                                                       style="width:30px; display: inline-block">
+                                        <h5 class="">${commentList.getCommentAuthor()}
+                                            <small><i>Posted on ${commentList.getDatePublished()}</i></small>
+                                        </h5>
+                                        <p>${commentList.getContent()}</p>
+                                            <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
+                                            <%--<c:forEach var="nestedList" items="${nestedList}">--%>
+                                            <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
+                                            <%--<div class="">--%>
+                                            <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
+                                            <%--class=""--%>
+                                            <%--style="width:30px">--%>
+                                            <%--</div>--%>
+                                            <%--<div class="">--%>
+                                            <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
+                                            <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
+                                            <%--</h5>--%>
+                                            <%--<p>${nestedList.getContent()}</p>--%>
+                                            <%--</div>--%>
+                                            <%--<br>--%>
+                                            <%--</c:if>--%>
+                                            <%--</c:forEach>--%>
+                                            <%-- checks wether user logged in with author of post and user logged in--%>
+                                        <c:if test="${( personLoggedIn == commentList.getCommentAuthor())}">
+                                            <form method="post" action="/Articles">
+                                                <button type="submit" class="btn btn-xs">delete comment</button>
+                                                <input type="hidden" name="operation"
+                                                       value="deleteCommentOnArticle">
+                                                <input type="hidden" name="commentID"
+                                                       value="${commentList.getCommentID()}">
 
-                                                    </form>
-                                                </c:if>
-                                            </div>
-                                            <br>
+                                            </form>
                                         </c:if>
+                                    </div>
+                                    <br>
+                                </c:if>
 
-                                    </c:forEach>
-                                    <c:if test="${personLoggedIn !=null}">
-                                        <form method="post" action="/Articles">
-                                            <div class="form-group">
-                                                <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                                    <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
-                                                    <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
-                                                    <%--<div class="form-group">--%>
-                                                <label for="summernote">Content</label>
-                                                <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                                          required></textarea>
-                                                    <%--</div>--%>
-                                                <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                                <input type="hidden" name="operation" value="commentOnArticle">
-                                                <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                                                <button style="float: right" type="submit" class="btn btn-sm">Post a comment
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </c:if>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
+                            </c:forEach>
+                            <c:if test="${personLoggedIn !=null}">
+                                <form method="post" action="/Articles">
+                                    <div class="form-group">
+                                        <label for="summernote">Comment as ${personLoggedIn}:</label>
+                                            <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
+                                            <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
+                                            <%--<div class="form-group">--%>
+                                        <label for="summernote">Content</label>
+                                        <textarea id="summernote" name="newComment" class="form-control" rows="10"
+                                                  required></textarea>
+                                            <%--</div>--%>
+                                        <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                        <input type="hidden" name="operation" value="commentOnArticle">
+                                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                                        <button style="float: right" type="submit" class="btn btn-sm">Post a comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </c:if>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                <%--</c:if>--%>
+                </div>
+            </div>
+            <%--</c:if>--%>
 
 
-            </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
-
-
 
 
 </div>

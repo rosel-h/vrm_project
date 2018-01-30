@@ -30,6 +30,7 @@ public class OAuth2fb extends HttpServlet {
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
     String avatarFile = "";
+    String username = "";
 
     //https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&scope=email
     //note: need to implement state-param setting in URL to prevent cross-site-request forgery attach.
@@ -132,30 +133,37 @@ public class OAuth2fb extends HttpServlet {
             System.out.println("Facebook User Exists in Database");
             HttpSession sess = request.getSession(true);
 
+            Map<String, String[]> map = request.getParameterMap();
             Map<String, String> jsonMap = new HashMap<>();
-            jsonMap.put("username", fbUser.getUser_name());
+            for (String key : map.keySet()) {
+                String value = map.get(key)[0];
+                jsonMap.put(key, value);
+            }
+
             String jsonText = JSONValue.toJSONString(jsonMap);
+            System.out.println("LoginServlet json text - " + jsonText);
+//            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
-            System.out.println("Session ID:" + sessiont_id);
+            System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/Sessions");
-            System.out.println("file path is " + filePath);
-
             File sessionFolder = new File(filePath);
+
             if (!sessionFolder.exists()) {
                 sessionFolder.mkdir();
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("Create " + fileName);
+            System.out.println("LoginServlet enter line 53: " + fileName);
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
-                System.out.println("writing file");
                 bufferedWriter.write(jsonText);
             }
 
-            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            sess.setAttribute("personLoggedIn", username);
+            sess.setAttribute("avatarFile", avatarFile);
+            System.out.println("Avatar File is " + avatarFile);
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 
@@ -201,18 +209,10 @@ public class OAuth2fb extends HttpServlet {
             loginStatus = rs.next();
 
             if (loginStatus) {
-                PreparedStatement getAvatar = conn.prepareStatement
-                        ("select avatar_icon from vrm_users where binary email_address=?");
-                getAvatar.setString(1, email);
+                avatarFile = rs.getString("avatar_icon");
+                username = rs.getString("username");
 
-                ResultSet avatarIcon = getAvatar.executeQuery();
-
-                while (avatarIcon.next()) {
-                    avatarFile = avatarIcon.getString("avatar_icon");
-                    System.out.println("Facebook login avatar icon " + avatarFile);
-                }
-
-            } else if (!loginStatus) {
+            } else {
 
                 System.out.println("User does not exist.. creating");
 
@@ -243,8 +243,6 @@ public class OAuth2fb extends HttpServlet {
                     System.out.println("Creation Successful");
                 }
             }
-
-            return loginStatus;
 
         } catch (Exception e) {
             e.printStackTrace();

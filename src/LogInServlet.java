@@ -25,7 +25,7 @@ import java.util.Properties;
 
 public class LogInServlet extends HttpServlet {
 
-//    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
+    //    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
     String avatarFile = "";
 
     @Override
@@ -57,7 +57,7 @@ public class LogInServlet extends HttpServlet {
             }
 
             String jsonText = JSONValue.toJSONString(jsonMap);
-            System.out.println("LoginServlet json text - "+jsonText);
+            System.out.println("LoginServlet json text - " + jsonText);
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
             System.out.println("LoginServlet: " + sessiont_id);
@@ -121,19 +121,9 @@ public class LogInServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
 
-            if(loginStatus){
-                PreparedStatement getAvatar = conn.prepareStatement
-                        ("select avatar_icon from vrm_users where binary username=?");
-                getAvatar.setString(1, username);
-
-                ResultSet avatarIcon = getAvatar.executeQuery();
-
-                while (avatarIcon.next()){
-
-                    avatarFile = avatarIcon.getString("avatar_icon");
-                    System.out.println(avatarFile);
-                }
-
+            if (loginStatus) {
+                avatarFile = rs.getString("avatar_icon");
+                System.out.println("avatar file is " + avatarFile);
             }
 
         } catch (Exception e) {

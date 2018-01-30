@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,43 +160,30 @@
                     <br>
                     <h5>Explore the community or create a new blog entry</h5>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding-left: 15%; padding-right: 15%">
-                        <a href="/myArticles">
-                            <div class="btn-group" role="group" style="padding: 8%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#newArticles"
-                                        data-backdrop="static" data-keyboard="false">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"
-                                          aria-hidden="true">&nbsp;My Articles</span>
-                                </button>
-                            </div>
-                        </a>
-
-                        <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 8%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#myArticles">
-                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Community</span>
-                                </button>
-                            </div>
-                        </a>
-
-                        <a href="newArticle.jsp">
-                            <div class="btn-group" role="group" style="padding: 8%">
-                                <button type="button" class="btn btn-danger"
-                                        style="opacity: 0.8">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;New Article</span>
-                                </button>
-                            </div>
-                        </a>
+                         style="padding: 1%">
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="/myArticles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="/myArticles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Community</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="newArticle.jsp" class="btn btn-danger"
+                               style=" color: white;opacity: 0.8">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
     </div>
 </header>
 
@@ -202,11 +193,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <div class="page-heading">
-                        <h1>Feature Articles</h1>
+                        <h1>Featured Articles</h1>
                         <br>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -234,8 +223,8 @@
     </div>
 </div>
 
+<!-- Footer -->
 <div class="container">
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
