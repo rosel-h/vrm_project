@@ -29,6 +29,7 @@ public class OAuth2fb extends HttpServlet {
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
+    String avatar = "";
 
     //https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&scope=email
     //note: need to implement state-param setting in URL to prevent cross-site-request forgery attach.
@@ -213,7 +214,7 @@ public class OAuth2fb extends HttpServlet {
                     String dob = "1900/11/11";
                     String country = "New Zealand";
                     String description = "New facebook user";
-                    String avatar = "avatar_01.jpg";
+                    avatar = "avatar_01.png";
                     String status = "facebook";
 
                     stmt.setString(1, username);

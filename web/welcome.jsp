@@ -72,7 +72,11 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading">
+                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                    <div class="col-md-4 offset-4">
+                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%" class="img-circle">
+                    </div>
+                    <br>
                     <h5>Explore the community or create a new article</h5>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
@@ -133,14 +137,14 @@
 
     <!-- Footer -->
     <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <hr>
-                <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <hr>
+                    <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
+                </div>
             </div>
         </div>
-    </div>
     </footer>
 </div>
 </body>

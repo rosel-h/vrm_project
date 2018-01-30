@@ -26,6 +26,7 @@ import java.util.Properties;
 public class LogInServlet extends HttpServlet {
 
 //    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
+    String avatarFile = "";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,6 +70,7 @@ public class LogInServlet extends HttpServlet {
             }
 
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            sess.setAttribute("avatarFile", avatarFile);
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
 
@@ -110,6 +112,22 @@ public class LogInServlet extends HttpServlet {
             ps.setString(3, "active");
             ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
             loginStatus = rs.next();
+
+            if(loginStatus){
+                PreparedStatement getAvatar = conn.prepareStatement
+                        ("select avatar_icon from vrm_users where binary username=?");
+                getAvatar.setString(1, username);
+
+                ResultSet avatarIcon = getAvatar.executeQuery();
+
+                while (avatarIcon.next()){
+
+                    avatarFile = avatarIcon.getString("avatar_icon");
+                    System.out.println(avatarFile);
+                }
+
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

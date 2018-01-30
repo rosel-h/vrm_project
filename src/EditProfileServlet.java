@@ -89,7 +89,7 @@ public class EditProfileServlet extends HttpServlet {
                     FileItem doUpload = null;
                     String fname = "";
                     String lname = "";
-                    String dob = "1970-01-01";//if user's dob field is empty, use 1970-01-01 as default
+                    String dob = "1900-01-01";//if user's dob field is empty, use 1970-01-01 as default
                     String country = "";
                     String description = "";
                     String avatar = "";
