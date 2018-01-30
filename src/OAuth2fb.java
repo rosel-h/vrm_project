@@ -128,21 +128,15 @@ public class OAuth2fb extends HttpServlet {
         }
 
         if (checkFbUser(fbUser.getEmail(), fbUser)) {
-            System.out.println("good");
+            System.out.println("Facebook User Exists in Database");
             HttpSession sess = request.getSession(true);
 
             Map<String, String> jsonMap = new HashMap<>();
-
             jsonMap.put("username", fbUser.getUser_name());
-
             String jsonText = JSONValue.toJSONString(jsonMap);
-
             String sessiont_id = sess.getId();
-
             System.out.println("Session ID:" + sessiont_id);
-
             ServletContext servletContext = getServletContext();
-
             String filePath = servletContext.getRealPath("/Sessions");
             System.out.println("file path is " + filePath);
 
