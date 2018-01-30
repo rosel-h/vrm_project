@@ -54,22 +54,21 @@ public class DeleteServlet extends HttpServlet {
                     System.out.println("EditProfileServlet enter line 69:");
                     User user = dao.getOneUser(username);
 
-                    Connection conn = mysqlDatabase.getConnection();
-                    try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
-                            "SET status = ? WHERE username = ?;")) {
+                    try (Connection conn = mysqlDatabase.getConnection()){
+                        try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
+                                "SET status = ? WHERE username = ?;")) {
 
-                        stmt.setString(1,"inactive");
-                        stmt.setString(2, username);
+                            stmt.setString(1,"inactive");
+                            stmt.setString(2, username);
 
-                        stmt.executeUpdate();
+                            stmt.executeUpdate();
 
-                        req.getRequestDispatcher("index.jsp").forward(req, resp);
+                            req.getRequestDispatcher("index.jsp").forward(req, resp);
 
-                    } catch (ServletException e) {
-                        e.printStackTrace();
+                        } catch (ServletException e) {
+                            e.printStackTrace();
+                        }
                     }
-
-
 
                 } catch (SQLException e) {
                     e.printStackTrace();

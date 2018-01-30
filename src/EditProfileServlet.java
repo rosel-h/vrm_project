@@ -42,7 +42,6 @@ public class EditProfileServlet extends HttpServlet {
             operation = "view";
         }
         System.out.println("EditProfileServlet enter line 43: operation = " + operation);
-//        boolean userHasLoggedIn = session.isNew();
 
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
         if (mysqlDatabase == null) {
@@ -65,7 +64,8 @@ public class EditProfileServlet extends HttpServlet {
             System.out.println(JSONObject.toJSONString(userJson));
             String username = String.valueOf(userJson.get("username"));
             if (ServletFileUpload.isMultipartContent(req)) {
-                try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
+                try  {
+                    BlogDAO dao = new BlogDAO(mysqlDatabase);
                     System.out.println("EditProfileServlet enter line 69:");
                     User user = dao.getOneUser(username);
 
@@ -219,11 +219,11 @@ public class EditProfileServlet extends HttpServlet {
 
                             stmt.executeUpdate();
 
-                            req.setAttribute("successMessage", "save profile successfully");
+                            req.setAttribute("successMessage", "Save profile successfully");
                             user.setAvatar_icon(avatar);
                             req.setAttribute("user", user);
                             session.setAttribute("operation", "edit");
-                            req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
+                            req.getRequestDispatcher("profilesavesuccess.jsp").forward(req, resp);
 
                         } catch (ServletException e) {
                             e.printStackTrace();

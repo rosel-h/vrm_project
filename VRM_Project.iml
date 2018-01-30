@@ -30,10 +30,6 @@
     <orderEntry type="library" exported="" name="mysql-connector-java-5.1.45-bin" level="project" />
     <orderEntry type="library" exported="" name="postgresql-42.1.4" level="project" />
     <orderEntry type="library" exported="" name="java-json" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="TomEE 8.5.24" level="application_server_libraries" />
-    <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
-    <orderEntry type="library" name="lib (2)" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
@@ -44,5 +40,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="jBCrypt-0.4" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.5.24" level="application_server_libraries" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
