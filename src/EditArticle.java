@@ -39,6 +39,7 @@ public class EditArticle extends HttpServlet {
         String op = req.getParameter("operation");
 
         String id = req.getParameter("articleID");
+        System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")");
         int articleID = Integer.parseInt(id);
 //        System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")" + "(parsed id: "+articleID+")");
         boolean articleHasBeenEdited;
@@ -58,8 +59,6 @@ public class EditArticle extends HttpServlet {
             String newTitle = req.getParameter("title");
             String newContent = req.getParameter("content");
             String newDate = req.getParameter("futureDate");
-
-
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 //        add date updated
             System.out.println("EditArticle Servlet: author " + author);

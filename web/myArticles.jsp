@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: rher490
   Date: 30/01/2018
@@ -113,6 +113,8 @@
         <tbody>
         <%
             System.out.println("myArticles jsp: inside table body");
+            java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+            request.setAttribute("sqlDateToday", sqlDateToday);
         %>
             <c:forEach var="myArticles" items="${myArticles}">
                 <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
@@ -120,7 +122,11 @@
                     <tr>
                         <td><b>${myArticles.getTitle()}</b></td>
                         <td><i>${myArticles.getUsername()}</i></td>
-                        <td>${myArticles.getDate()}</td>
+                        <td >${myArticles.getDate()}
+                            <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
+                                (not yet published)
+                            </c:if>
+                        </td>
                         <td>
                             <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
                                     data-target="#a${myArticles.getArticleID()}">Full Article
@@ -144,12 +150,12 @@
                                                 Delete
                                             </button>
                                             <input type="hidden" name="operation" value="delete">
-                                            <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
+                                            <input type="hidden" name="articleId" value="${myArticles.getArticleID()}">
                                         </form>
                                         <%--<form class="form-inline" action="/Articles" method="POST">--%>
                                         <form class="form-inline" action="/editArticles" method="post">
 
-                                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                            <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
 
                                             <input type="hidden" name="operation" value="goToEditPage">
                                             <input type="hidden" name="author" value="${personLoggedIn}">
