@@ -30,7 +30,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
@@ -138,7 +137,6 @@
                     </td>
                 </tr>
 
-
                 <!-- Modal -->
                 <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
                     <div class="modal-dialog modal-lg" style="width: 100%">
@@ -156,58 +154,32 @@
                                         <input type="hidden" name="operation" value="delete">
                                         <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
                                     </form>
-                                    <%--<form class="form-inline" action="/Articles" method="POST">--%>
                                     <form class="form-inline" action="/editArticles" method="post">
-
                                         <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-
                                         <input type="hidden" name="operation" value="goToEditPage">
                                         <input type="hidden" name="author" value="${personLoggedIn}">
                                         <button style="float: right" id="editorButton" type="submit"
                                                 class="btn btn-primary pull-right">Edit
                                         </button>
                                     </form>
-
                                 </c:if>
 
                             </div>
                             <div class="modal-body">
-
                                 <div>${articleList.getContent()}</div>
                             </div>
 
                             <div class="panel-footer">
-
                                 <div class=""><p>Comments</p></div>
                                     <%--first comments--%>
                                 <c:forEach var="commentList" items="${commentList}">
                                     <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
-                                        <%--avatar icon--%>
-
                                         <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
                                                            style="width:30px; display: inline-block">
                                             <h5 class="">${commentList.getCommentAuthor()}
                                                 <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                             </h5>
                                             <p>${commentList.getContent()}</p>
-                                                <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
-                                                <%--<c:forEach var="nestedList" items="${nestedList}">--%>
-                                                <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
-                                                <%--<div class="">--%>
-                                                <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
-                                                <%--class=""--%>
-                                                <%--style="width:30px">--%>
-                                                <%--</div>--%>
-                                                <%--<div class="">--%>
-                                                <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
-                                                <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
-                                                <%--</h5>--%>
-                                                <%--<p>${nestedList.getContent()}</p>--%>
-                                                <%--</div>--%>
-                                                <%--<br>--%>
-                                                <%--</c:if>--%>
-                                                <%--</c:forEach>--%>
-                                                <%-- checks wether user logged in with author of post and user logged in--%>
                                             <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                                 <form method="post" action="/Articles">
                                                     <button type="submit" class="btn btn-xs">delete comment</button>
@@ -215,25 +187,19 @@
                                                            value="deleteCommentOnArticle">
                                                     <input type="hidden" name="commentID"
                                                            value="${commentList.getCommentID()}">
-
                                                 </form>
                                             </c:if>
                                         </div>
                                         <br>
                                     </c:if>
-
                                 </c:forEach>
                                 <c:if test="${personLoggedIn !=null}">
                                     <form method="post" action="/Articles">
                                         <div class="form-group">
                                             <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                                <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
-                                                <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
-                                                <%--<div class="form-group">--%>
                                             <label for="summernote">Content</label>
                                             <textarea id="summernote" name="newComment" class="form-control" rows="10"
                                                       required></textarea>
-                                                <%--</div>--%>
                                             <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
                                             <input type="hidden" name="operation" value="commentOnArticle">
                                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
@@ -253,9 +219,7 @@
         </c:forEach>
         </tbody>
     </table>
-
 </div>
-
 
 </body>
 </html>

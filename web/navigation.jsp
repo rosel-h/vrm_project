@@ -9,59 +9,60 @@
 
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <%--<nav class="navbar navbar-inverse bg-faded">--%>
-    <%--<div class="container-fluid">--%>
-        <%--<div class="navbar-header">--%>
-            <%--<a class="navbar-brand">VRM</a>--%>
-        <%--</div>--%>
-        <%--<ul class="nav navbar-nav">--%>
-            <%--<li ><a href="welcome.jsp">Home</a></li>--%>
-            <%--<li><a href="/Articles">Explore</a></li>--%>
-            <%--<li><a href="">My Articles</a></li>--%>
-        <%--</ul>--%>
-        <%--<ul class="nav navbar-nav navbar-right">--%>
-            <%--<li><a href="#">MyAccount</a></li>--%>
-            <%--<li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
-            <%--<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
-            <%--<li>--%>
-                <%--<form method="post" action="Main">--%>
-                    <%--<button type="submit" name="logout_button" value="Logout">Log out</button>--%>
-                <%--</form>--%>
-            <%--</li>--%>
-        <%--</ul>--%>
-        <%--<form class="navbar-form navbar-left" action="searcharticle">--%>
-            <%--<div class="form-group">--%>
-                <%--<input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date" id="searchkeyword">--%>
-            <%--</div>--%>
-            <%--<div class="form-group">--%>
-                <%--<select class="form-control" name="searchType" id="searchselect">--%>
-                    <%--<option value="title">Title</option>--%>
-                    <%--<option value="username">Username</option>--%>
-                    <%--<option value="date">Date</option>--%>
-                <%--</select>--%>
-            <%--</div>--%>
-            <%--<button type="submit" class="btn btn-default">Search</button>--%>
-        <%--</form>--%>
-    <%--</div>--%>
+<%--<div class="container-fluid">--%>
+<%--<div class="navbar-header">--%>
+<%--<a class="navbar-brand">VRM</a>--%>
+<%--</div>--%>
+<%--<ul class="nav navbar-nav">--%>
+<%--<li ><a href="welcome.jsp">Home</a></li>--%>
+<%--<li><a href="/Articles">Explore</a></li>--%>
+<%--<li><a href="">My Articles</a></li>--%>
+<%--</ul>--%>
+<%--<ul class="nav navbar-nav navbar-right">--%>
+<%--<li><a href="#">MyAccount</a></li>--%>
+<%--<li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
+<%--<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
+<%--<li>--%>
+<%--<form method="post" action="Main">--%>
+<%--<button type="submit" name="logout_button" value="Logout">Log out</button>--%>
+<%--</form>--%>
+<%--</li>--%>
+<%--</ul>--%>
+<%--<form class="navbar-form navbar-left" action="searcharticle">--%>
+<%--<div class="form-group">--%>
+<%--<input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date" id="searchkeyword">--%>
+<%--</div>--%>
+<%--<div class="form-group">--%>
+<%--<select class="form-control" name="searchType" id="searchselect">--%>
+<%--<option value="title">Title</option>--%>
+<%--<option value="username">Username</option>--%>
+<%--<option value="date">Date</option>--%>
+<%--</select>--%>
+<%--</div>--%>
+<%--<button type="submit" class="btn btn-default">Search</button>--%>
+<%--</form>--%>
+<%--</div>--%>
 <%--</nav>--%>
 
 <script>
     var searchselect = document.getElementById("searchselect");
     searchselect.addEventListener("change", myFc);
+
     function myFc() {
         var x = document.getElementById("searchkeyword");
         console.log(searchselect.value());
         if (searchselect.value().eq("date")) {
 
-        }else {
+        } else {
 
         }
     }
 </script>
 
 <script>
-    $( function() {
-        $( "#datepicker" ).datepicker();
-    } );
+    $(function () {
+        $("#datepicker").datepicker();
+    });
 </script>
 
 
@@ -73,7 +74,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome to VRM</title>
+    <title>Welcome to the Community</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -90,14 +91,16 @@
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
 
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="featured.js"></script>
+
 </head>
-
-
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -112,18 +115,13 @@
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/myArticles">My Articles</a>
+                    <a class="nav-link" href="aboutus.html">My Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myprofile.jsp">My Profile</a>
+                    <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <form method="post" action="Main">
-                        <button class="btn btn-default btn-sm"
-                                style="background-color:transparent; border: 1px solid transparent; color: white; padding: 5px 5px; font-size: 16px"
-                                type="submit" name="logout_button" value="Logout"> Log Out
-                        </button>
-                    </form>
+                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -136,47 +134,35 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading">
-                    <h5>Explore the community or create a new article</h5>
+                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                    <div class="col-md-4 offset-4">
+                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%" class="img-circle">
+                    </div>
                     <br>
+                    <h5>Explore the community or create a new blog entry</h5>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding-left: 15%; padding-right: 15%">
-                        <a href="/myArticles">
-                            <div class="btn-group" role="group" style="padding: 4%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#newArticles"
-                                        data-backdrop="static" data-keyboard="false">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"
-                                          aria-hidden="true">&nbsp;My Articles</span>
-                                </button>
-                            </div>
-                        </a>
-
-                        <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 4%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#myArticles">
-                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Community</span>
-                                </button>
-                            </div>
-                        </a>
-
-                        <a href="newArticle.jsp">
-                            <div class="btn-group" role="group" style="padding: 4%">
-                                <button type="button" class="btn btn-danger"
-                                        style="opacity: 0.8">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;New Article</span>
-                                </button>
-                            </div>
-                        </a>
-
+                         style="padding: 1%">
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="/myArticles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="/myArticles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-send" aria-hidden="true"> &nbsp;Community</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="newArticle.jsp" class="btn btn-danger"
+                               style=" color: white;opacity: 0.8">
+                                <span class="glyphicon glyphicon-globe" aria-hidden="true"> &nbsp;New Article</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </header>
