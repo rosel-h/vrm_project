@@ -101,14 +101,14 @@ public class BlogDAO implements AutoCloseable {
     }
 
     public List<Article> getMyArticles(String username)throws SQLException {
-        System.out.println("BlogDAO: username - "+username);
+        System.out.println("BlogDAO: getMyArticles username - "+username);
         List<Article> a = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =?")) {
             stmt.setString(1,username);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("BlogDAO: rs executed in getMyArticles ");
                 while (rs.next()) {
-                    System.out.println("rs has next");
+//                    System.out.println("rs has next");
                     a.add(dataFromResultSet(rs, new Article()));
                 }
                 return a;
