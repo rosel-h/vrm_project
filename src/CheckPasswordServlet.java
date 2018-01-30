@@ -1,15 +1,18 @@
 import DAO_setup.MYSQLDatabase;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by Mengjie
@@ -30,14 +33,14 @@ public class CheckPasswordServlet extends HttpServlet {
 
         System.out.println("CheckPasswordServlet Connection attempt...");
         //plan A:
-/*        Properties dbProps = new Properties();
+        Properties dbProps = new Properties();
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("mysql.properties");
         try (FileInputStream fis = new FileInputStream(filepath)) {
             dbProps.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         //plan B:
         HttpSession session = req.getSession(true);
         System.out.println("CheckPasswordServlet enter line 44:" + session.getId());

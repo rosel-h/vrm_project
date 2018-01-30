@@ -51,7 +51,7 @@
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
             $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
-            console.log(imageCollection[numImage]); 
+            console.log(imageCollection[numImage]);
         }
 
         var time = "";
@@ -169,8 +169,9 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
-                    <div class="col-md-4 offset-4" >
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
+                    <div class="col-md-4 offset-4">
+                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%"
+                             class="img-circle">
                     </div>
                     <br>
                     <h5>Explore the community or create a new blog entry</h5>
@@ -221,11 +222,31 @@
 <div class="container">
     <div class="imgbox">
         <ul id="banner_img">
-            <li><img src="img/banner01.jpg" width="900" height="240"/></li>
-            <li><img src="img/banner02.jpg" width="900" height="240"/></li>
-            <li><img src="img/banner03.jpg" width="900" height="240"/></li>
-            <li><img src="img/banner04.jpg" width="900" height="240"/></li>
-            <li><img src="img/banner05.jpg" width="900" height="240"/></li>
+            <li>
+                <div id="banner-1">
+                    <img src="img/banner01.jpg" width="900" height="240" id="bannerimg-1"/>
+                </div>
+            </li>
+            <li>
+                <div id="banner-2">
+                    <img src="img/banner02.jpg" width="900" height="240" id="bannerimg-2"/>
+                </div>
+            </li>
+            <li>
+                <div id="banner-3">
+                    <img src="img/banner03.jpg" width="900" height="240" id="bannerimg-3"/>
+                </div>
+            </li>
+            <li>
+                <div id="banner-4">
+                    <img src="img/banner04.jpg" width="900" height="240" id="bannerimg-4"/>
+                </div>
+            </li>
+            <li>
+                <div id="banner-5">
+                    <img src="img/banner05.jpg" width="900" height="240" id="bannerimg-5"/>
+                </div>
+            </li>
         </ul>
         <div class="clear"></div>
         <div class="imgnum">

@@ -58,7 +58,6 @@ public class LogInServlet extends HttpServlet {
 
             String jsonText = JSONValue.toJSONString(jsonMap);
             System.out.println("LoginServlet json text - " + jsonText);
-//            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
             System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
