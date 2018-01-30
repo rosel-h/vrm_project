@@ -49,3 +49,5 @@ SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_com
 UPDATE vrm_articles SET title = 'Edit Sql 1', content = 'this page was edited with filldumyarticles.sql' WHERE article_id=41;
 
 SELECT * FROM vrm_articles WHERE article_id = 4;
+
+SELECT * FROM vrm_articles WHERE username = 'sam';

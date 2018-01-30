@@ -83,10 +83,10 @@
 </c:choose>
 
 <div class="container">
-    <h1>All Articles</h1>
+    <h1>All Articles by ${personLoggedIn}</h1>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${personAvatarIcon}"
+            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${avatarFile}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>

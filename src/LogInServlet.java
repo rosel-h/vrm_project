@@ -57,7 +57,7 @@ public class LogInServlet extends HttpServlet {
             }
 
             String jsonText = JSONValue.toJSONString(jsonMap);
-
+            System.out.println("LoginServlet json text - "+jsonText);
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
             System.out.println("LoginServlet: " + sessiont_id);
@@ -67,6 +67,14 @@ public class LogInServlet extends HttpServlet {
 
             if (!sessionFolder.exists()) {
                 sessionFolder.mkdir();
+            }
+
+            String fileName = filePath + "\\" + sessiont_id + ".json";
+            System.out.println("LoginServlet enter line 53: " + fileName);
+            File sessionFile = new File(fileName);
+
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
+                bufferedWriter.write(jsonText);
             }
 
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
