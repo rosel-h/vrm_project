@@ -51,7 +51,7 @@
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
             $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
-            console.log(imageCollection[numImage]);
+            console.log(imageCollection[numImage]); 
         }
 
         var time = "";
