@@ -112,7 +112,7 @@
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">My Articles</a>
+                    <a class="nav-link" href="/myArticles">My Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="myprofile.jsp">My Profile</a>
@@ -141,7 +141,7 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-                        <a href="Articles">
+                        <a href="/myArticles">
                             <div class="btn-group" role="group" style="padding: 4%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"

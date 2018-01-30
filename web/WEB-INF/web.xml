@@ -122,5 +122,15 @@
         <location>/error404.jsp</location>
     </error-page>
 
+    <servlet>
+        <servlet-name>MyArticles</servlet-name>
+        <servlet-class>PersonalArticles</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyArticles</servlet-name>
+        <url-pattern>/myArticles</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

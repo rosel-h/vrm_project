@@ -31,6 +31,83 @@
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
 
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <script src="featured.js"></script>
+
+    <script type="text/javascript">
+        var time = "";
+        var index = 1;
+        $(function () {
+            showimg(index);
+            $(".imgnum span").hover(function () {
+                clearTimeout(time);
+                var icon = $(this).text();
+                $(".imgnum span").removeClass("onselect").eq(icon - 1).addClass("onselect");
+                $("#banner_img li").hide().stop(true, true).eq(icon - 1).fadeIn("slow");
+            }, function () {
+                index = $(this).text() > 4 ? 1 : parseInt($(this).text()) + 1;
+                time = setTimeout("showimg(" + index + ")", 3000);
+            });
+        });
+
+        function showimg(num) {
+            index = num;
+            $(".imgnum span").removeClass("onselect").eq(index - 1).addClass("onselect");
+            $("#banner_img li").hide().stop(true, true).eq(index - 1).fadeIn("slow");
+            index = index + 1 > 5 ? 1 : index + 1;
+            time = setTimeout("showimg(" + index + ")", 3000);
+        }
+    </script>
+    <style type="text/css">
+        .clear {
+            overflow: hidden;
+            clear: both;
+            width: 0px;
+            height: 0px;
+        }
+
+        .imgbox {
+            width: 400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        ul {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        ul li {
+            float: left;
+            list-style: none;
+        }
+
+        ul li.select {
+            display: block;
+        }
+
+        .imgnum span {
+            border-radius: 10px;
+            color: #FFF;
+            margin-left: 5px;
+            padding: 3px 6px 3px 6px;
+            background-color: #F90;
+            cursor: pointer;
+        }
+
+        .imgnum span.onselect {
+            background-color: #F00;
+        }
+
+        .imgnum {
+            text-align: center;
+            float: right;
+            margin: -30px 30px;
+            position: relative;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -38,7 +115,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -53,10 +130,10 @@
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/aboutus.html">My Articles</a>
+                    <a class="nav-link" href="aboutus.html">My Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/editprofile">My Profile</a>
+                    <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
@@ -81,7 +158,7 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
-                        <a href="Articles">
+                        <a href="/myArticles">
                             <div class="btn-group" role="group" style="padding: 8%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
@@ -129,12 +206,37 @@
                     <div class="page-heading">
                         <h1>Feature Articles</h1>
                         <br>
+
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+<%--this is code for fade in fade out effect of featured articles--%>
+<div class="container">
+    <div class="imgbox">
+        <ul id="banner_img">
+            <li><img src="img/fade-banner-01.jpg" width="400" height="200"/></li>
+            <li><img src="img/fade-banner-02.jpg" width="400" height="200"/></li>
+            <li><img src="img/fade-banner-03.jpg" width="400" height="200"/></li>
+            <li><img src="img/fade-banner-04.jpg" width="400" height="200"/></li>
+            <li><img src="img/fade-banner-02.jpg" width="400" height="200"/></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="imgnum">
+            <span class="onselect">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
     <!-- Footer -->
     <footer>
         <div class="container">
