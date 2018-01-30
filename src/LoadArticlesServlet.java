@@ -6,7 +6,6 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 import org.jooq.tools.json.JSONObject;
 
-import javax.ejb.Local;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

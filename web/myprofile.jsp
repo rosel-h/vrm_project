@@ -168,6 +168,8 @@ ${user.getDescription()}
                                 </button>
                             </a>
 
+                            <span style="margin-left:20px; margin-right: 20px;">or</span>
+
                             <a href="deleteuser">
                                 <button id="btn-delete" type="button" class="btn btn-danger">  
                                     Delete

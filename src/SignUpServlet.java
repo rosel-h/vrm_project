@@ -53,16 +53,19 @@ public class SignUpServlet extends HttpServlet {
 
         System.out.println("SignUpServlet Connection attempt...");
         //plan A:
-/*        Properties dbProps = new Properties();
+        Properties dbProps = new Properties();
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("mysql.properties");
         try (FileInputStream fis = new FileInputStream(filepath)) {
             dbProps.load(fis);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
+
+        MYSQLDatabase mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+
         //plan B:
-        HttpSession session = req.getSession(true);
+/*        HttpSession session = req.getSession(true);
         System.out.println("SignUpServlet enter line 44:" + session.getId());
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
         if (mysqlDatabase == null) {
@@ -71,11 +74,11 @@ public class SignUpServlet extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         // connect to the database
-        try {
-            Connection conn = mysqlDatabase.getConnection();
+        try(Connection conn = mysqlDatabase.getConnection()) {
+//            Connection conn = mysqlDatabase.getConnection();
             System.out.println("SignUpServlet Connection Successful");
 
             //if user uploads profile image, set maxMemSize and maxFileSize allowed

@@ -38,7 +38,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome UserName</a>
+        <a class="navbar-brand">Welcome ${requestScope.get()} </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -56,15 +56,10 @@
                     <a class="nav-link" href="aboutus.html">My Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="myprofile.jsp">My Profile</a>
+                    <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <form method="post" action="Main">
-                        <button class="btn btn-default btn-sm"
-                                style="background-color:transparent; border: 1px solid transparent; color: white; padding: 5px 5px; font-size: 16px"
-                                type="submit" name="logout_button" value="Logout"> Log Out
-                        </button>
-                    </form>
+                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -83,7 +78,7 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
                         <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 4%">
+                            <div class="btn-group" role="group" style="padding: 8%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
                                         data-toggle="modal" data-target="#newArticles"
@@ -95,7 +90,7 @@
                         </a>
 
                         <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 4%">
+                            <div class="btn-group" role="group" style="padding: 8%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
                                         data-toggle="modal" data-target="#myArticles">
@@ -105,7 +100,7 @@
                         </a>
 
                         <a href="newArticle.jsp">
-                            <div class="btn-group" role="group" style="padding: 4%">
+                            <div class="btn-group" role="group" style="padding: 8%">
                                 <button type="button" class="btn btn-danger"
                                         style="opacity: 0.8">
                                     <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;New Article</span>

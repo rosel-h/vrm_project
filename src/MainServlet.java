@@ -41,6 +41,7 @@ public class MainServlet extends HttpServlet {
         String logout = req.getParameter("logout_button");
         if (logout != null && logout.equals("Logout")) {
             sess.invalidate();
+            System.out.println("successful invalidation");
             System.out.println("MainServlet enter line 32: session is invalidated");
             req.getRequestDispatcher("index.jsp").forward(req,resp);
 

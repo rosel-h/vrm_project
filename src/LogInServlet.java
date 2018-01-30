@@ -46,7 +46,6 @@ public class LogInServlet extends HttpServlet {
         System.out.println("LoginServlet enter line 38: " + checkUser(username, pass, mysqlDatabase));
 
         if (checkUser(username, pass, mysqlDatabase)) {
-
             Map<String, String[]> map = request.getParameterMap();
             Map<String, String> jsonMap = new HashMap<>();
             for (String key : map.keySet()) {
@@ -58,20 +57,17 @@ public class LogInServlet extends HttpServlet {
 
 //            HttpSession sess = request.getSession(true);
             String sessiont_id = sess.getId();
-
             System.out.println("LoginServlet enter line 52:" + sessiont_id);
-
             ServletContext servletContext = getServletContext();
-
             String filePath = servletContext.getRealPath("/Sessions");
-
             File sessionFolder = new File(filePath);
+
             if (!sessionFolder.exists()) {
                 sessionFolder.mkdir();
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("LoginServlet enter line 53: " + fileName);
+            System.out.println("LoginServlet: " + fileName);
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
@@ -109,20 +105,11 @@ public class LogInServlet extends HttpServlet {
 
         // Establishing connection to the database
         try {
-            Connection conn = mysqlDatabase.getConnection();
+
             System.out.println("LoginServlet connection successful");
+            Connection conn = mysqlDatabase.getConnection();
             PreparedStatement ps = conn.prepareStatement
                     ("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?");
-
-            // code to generate random salt
-            String salt = BCrypt.gensalt(12);
-            String hashed = BCrypt.hashpw("1234", salt);
-            System.out.println("hash is " + hashed);
-            System.out.println("salt is " + salt);
-
-            if (BCrypt.checkpw("1234", hashed)) {
-                System.out.println("matches");
-            }
 
             ps.setString(1, username);
             ps.setString(2, pass);
@@ -140,14 +127,7 @@ public class LogInServlet extends HttpServlet {
     //get function is post function
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//        System.out.println("dispatching facebook");
-//        stateParam = randomString();
-//        OAuth2fb.stateParam = this.stateParam;
-//
-//        String url = "https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email&state=" + stateParam;
-//        System.out.println(url);
-//        response.sendRedirect(url);
+        doPost(request, response);
     }
 
 }
