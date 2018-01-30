@@ -18,7 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome to VRM</title>
+    <title>Welcome to VRM Blog</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -40,6 +40,20 @@
     <script src="featured.js"></script>
 
     <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
         var time = "";
         var index = 1;
         $(function () {
@@ -63,6 +77,7 @@
             time = setTimeout("showimg(" + index + ")", 3000);
         }
     </script>
+
     <style type="text/css">
         .clear {
             overflow: hidden;
@@ -148,7 +163,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/background02.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -236,5 +251,9 @@
         </div>
     </footer>
 </div>
+
+<script>
+    Document.onload = loadRandomImage();
+</script>
 </body>
 </html>

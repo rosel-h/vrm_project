@@ -62,7 +62,7 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding-left: 15%; padding-right: 15%">
                         <a href="login.jsp">
-                            <div class="btn-group" role="group" style="padding: 7%">
+                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
                                         data-toggle="modal" data-target="#loginBtn"
@@ -73,7 +73,7 @@
                             </div>
                         </a>
                         <a href="signup.jsp">
-                            <div class="btn-group" role="group" style="padding: 7%">
+                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6"
                                         data-toggle="modal" data-target="#signupBtn">
@@ -82,7 +82,7 @@
                             </div>
                         </a>
                         <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 7%">
+                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
                                 <button type="button" class="btn btn-default"
                                         style="background-color: white; opacity: 0.6">
                                     <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;Explore</span>
