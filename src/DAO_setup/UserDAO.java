@@ -56,6 +56,9 @@ public class UserDAO implements AutoCloseable {
         return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"));
     }
 
+
+
+
     @Override
     public void close() throws Exception {
         System.out.println("logging out of UserDao connection");

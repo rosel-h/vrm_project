@@ -79,7 +79,6 @@ public class LogInServlet extends HttpServlet {
         }
     }
 
-
     //check password function
     public boolean checkUser(String username, String pass) {
         boolean loginStatus = false;
