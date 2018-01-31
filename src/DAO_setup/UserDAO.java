@@ -46,27 +46,13 @@ public class UserDAO implements AutoCloseable {
 
     public User getUserFacebook(String email) {
         User user = new User();
-
         try (PreparedStatement ps = conn.prepareStatement
-                ("select * from vrm_users where binary email_address like ?")) {
+                ("select * from vrm_users where binary email_address like ? and status like ?")) {
             System.out.println("email to be used to selection is " + email);
             ps.setString(1, email);
-//            ps.setString(2, "facebook");
+            ps.setString(2, "facebook");
 
             try (ResultSet rs = ps.executeQuery()) {
-
-                System.out.println("rs true " + rs.next());
-                // will be an empty set if login in correct
-                System.out.println(rs.getString("username"));
-                System.out.println(rs.getString("psw_hash"));
-                System.out.println(rs.getString("fname"));
-                System.out.println(rs.getString("lname"));
-                System.out.println(rs.getString("dob"));
-                System.out.println(rs.getString("country"));
-                System.out.println(rs.getString("avatar_icon"));
-                System.out.println(rs.getString("status"));
-                System.out.println(rs.getString("email_address"));
-
                 if (rs.next()) {
                     user = dataFromResultSet(rs, new User());
                 } else {
@@ -76,9 +62,7 @@ public class UserDAO implements AutoCloseable {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return user;
-
     }
 
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {

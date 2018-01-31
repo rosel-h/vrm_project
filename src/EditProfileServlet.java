@@ -57,12 +57,14 @@ public class EditProfileServlet extends HttpServlet {
         String sessionID = session.getId();
         String seesionFileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
-
         File sessionFile = new File(seesionFileName);
+
         if (sessionFile.exists()) {
+            System.out.println("session file exists");
             userJson = User.readJSONFile(seesionFileName);
             System.out.println(JSONObject.toJSONString(userJson));
             String username = String.valueOf(userJson.get("username"));
+            System.out.println("line 66 - EditProfile, username is");
             if (ServletFileUpload.isMultipartContent(req)) {
                 try  {
                     BlogDAO dao = new BlogDAO(mysqlDatabase);
