@@ -182,10 +182,34 @@ public class SignUpServlet extends HttpServlet {
                     }
                 }
 
+                boolean hasUppercase = false;
+                boolean hasLowercase = false;
+                boolean hasInteger = false;
+                boolean hasFour = false;
+                for (int j = 0; j < password.length(); j++) {
+                    if (password.charAt(j) >= 'A' && password.charAt(j) <= 'Z') {
+                        hasUppercase = true;
+                    }
+                    if (password.charAt(j) >= 'a' && password.charAt(j) <= 'z') {
+                        hasLowercase = true;
+                    }
+                    if (password.charAt(j) >= '0' && password.charAt(j) <= '9') {
+                        hasInteger = true;
+                    }
+                    if (password.length() >= 4) {
+                        hasFour = true;
+                    }
+                }
+
                 if (!cPassword.equals(password)) {
                     req.setAttribute("passwordError", "two passwords are different");
                     req.getRequestDispatcher("signup.jsp").forward(req, resp);
+                }else if (!hasUppercase || !hasLowercase || !hasInteger || !hasFour) {
+                    req.setAttribute("passwordError", "Your password should contain at least 1 UPPERCASE character, 1 lowercase character, 1 digit number, and minimum length is 4!");
+                    req.getRequestDispatcher("signup.jsp").forward(req, resp);
                 }
+
+
 
                 if (avatar.equals("")) {
                     if (uploadFileName.equals("")) {

@@ -76,6 +76,8 @@
             index = index + 1 > 5 ? 1 : index + 1;
             time = setTimeout("showimg(" + index + ")", 3000);
         }
+
+
     </script>
 
     <style type="text/css">
@@ -248,6 +250,7 @@
                 </div>
             </li>
         </ul>
+
         <div class="clear"></div>
         <div class="imgnum">
             <span class="onselect">1</span>
