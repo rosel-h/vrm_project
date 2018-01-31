@@ -174,7 +174,7 @@ public class BlogDAO implements AutoCloseable {
     }
 
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
-        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"));
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"),rs.getInt("parent_comment_id"));
     }
 
     private CommentsOnComments dataFromResultSet(ResultSet rs, CommentsOnComments n) throws SQLException {

@@ -190,7 +190,7 @@
 
                                             <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
                                                                style="width:30px; display: inline-block">
-                                                <h5 class="">${commentList.getCommentAuthor()}
+                                                <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
                                                     <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                                 </h5>
                                                 <p>${commentList.getContent()}</p>

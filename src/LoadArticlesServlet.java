@@ -151,12 +151,12 @@ public class LoadArticlesServlet extends HttpServlet {
             System.out.println("LoadArticlesServlet Articles created");
             List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
             System.out.println("LoadArticlesServlet Comments on articles uploaded. Size: " + firstDegreeComments.size());
-            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
-            System.out.println("LoadArticlesServlet nestedcomments created. Size: " + nestedComments.size());
+//            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
+//            System.out.println("LoadArticlesServlet nestedcomments created. Size: " + nestedComments.size());
             req.setAttribute("articleList", articles);
             req.setAttribute("userList", users);
             req.setAttribute("commentList", firstDegreeComments);
-            req.setAttribute("nestedList", nestedComments);
+//            req.setAttribute("nestedList", nestedComments);
 
             req.getRequestDispatcher("explore.jsp").forward(req, resp);
             System.out.println("LoadArticlesServlet request has been dispatched");
