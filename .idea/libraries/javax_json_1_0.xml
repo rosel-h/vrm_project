@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jooq-3.10.2">
+  <library name="javax.json-1.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/jooq-3.10.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javax.json-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

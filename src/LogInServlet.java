@@ -52,6 +52,7 @@ public class LogInServlet extends HttpServlet {
             System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/Sessions");
+            System.out.println("LoginServlet enter line 55: filePath= " + filePath);
             File sessionFolder = new File(filePath);
 
             if (!sessionFolder.exists()) {

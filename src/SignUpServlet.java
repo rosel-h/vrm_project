@@ -1,6 +1,7 @@
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
 import DAO_setup.UserDAO;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -12,6 +13,8 @@ import org.jooq.util.mysql.mysql.Mysql;
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.JSONTokener;
+import org.omg.CORBA.NameValuePair;
+import sun.net.www.http.HttpClient;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -25,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
@@ -44,6 +48,15 @@ public class SignUpServlet extends HttpServlet {
 
 
     public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
+
+        String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+        System.out.println(gRecaptchaResponse);
+        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+
+        if (!verify) {
+            System.out.println("SignUpServlet enter line 57: verify=" + verify);
+        }
+
 
         System.out.println("SignUpServlet enter sign up servlet");
         try {
@@ -230,15 +243,19 @@ public class SignUpServlet extends HttpServlet {
                 boolean signupSuccess = userDAO.addUser(username, password, fname, lname, dob, country, description, avatar, "active", "");
                 System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
 
+
+
+/*                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
+                boolean success = (boolean) jsonObject.get("success");
+                req.setAttribute("success", success);
+                System.out.println("recaptcha Success = " + success);*/
+
                 req.setAttribute("successMessage", "Sign up successfully!");
                 req.setAttribute("directMessage", "You will be directed to login page");
                 req.setAttribute("directErrorMessage", "true");
                 req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
 
-                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
-                boolean success = (boolean) jsonObject.get("success");
-                req.setAttribute("success", success);
-                System.out.println("Success = " + success);
+
 
 
             } catch (FileUploadException e) {
@@ -268,7 +285,7 @@ public class SignUpServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-    private String checkNull(Object object) {
+/*    private String checkNull(Object object) {
         String returnStr = "";
         if (object == null) {
             return returnStr;
@@ -290,6 +307,7 @@ public class SignUpServlet extends HttpServlet {
         if (postData.length() != 0) {
             postData.append("&");
         }
+        System.out.println("addParam enter line 295: param=" + param + ", value=" + value );
         return postData.append(
                 String.format("%s=%s",
                         URLEncoder.encode(param, StandardCharsets.UTF_8.displayName()),
@@ -311,6 +329,6 @@ public class SignUpServlet extends HttpServlet {
                 .write(postData.getBytes(StandardCharsets.UTF_8));
         JSONTokener jsonTokener = new JSONTokener(urlConnection.getInputStream());
         return new JSONObject((Map) jsonTokener);
-    }
+    }*/
 
 }
