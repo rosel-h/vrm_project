@@ -83,7 +83,7 @@ public class UserDAO implements AutoCloseable {
         addUser(username, password, fname, lname, dob, country, description, avatar, email, status);
     }
 
-    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String email, String status) {
+    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email) {
         Boolean success = false;
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
             stmt.setString(1, username);
@@ -104,6 +104,28 @@ public class UserDAO implements AutoCloseable {
         }
 
         return success;
+    }
+
+    public User getUserByUsername(String username) {
+        User user = new User();
+
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where username=?")) {
+            ps.setString(1, username);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                // will be an empty set if login in correct
+                if (rs.next()) {
+                    user = dataFromResultSet(rs, new User());
+                } else {
+                    user = null;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return user;
     }
 
     @Override

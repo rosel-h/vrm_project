@@ -1,4 +1,6 @@
 import DAO_setup.MYSQLDatabase;
+import DAO_setup.User;
+import DAO_setup.UserDAO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -52,40 +54,13 @@ public class SignUpServlet extends HttpServlet {
         // Establishing connection to the database
 
         System.out.println("SignUpServlet Connection attempt...");
-        //plan A:
-        Properties dbProps = new Properties();
-        ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
-        try (FileInputStream fis = new FileInputStream(filepath)) {
-            dbProps.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        MYSQLDatabase mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
-
-        //plan B:
-/*        HttpSession session = req.getSession(true);
-        System.out.println("SignUpServlet enter line 44:" + session.getId());
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        if (mysqlDatabase == null) {
-            try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }*/
-
-        // connect to the database
-        try(Connection conn = mysqlDatabase.getConnection()) {
-//            Connection conn = mysqlDatabase.getConnection();
+        try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
             System.out.println("SignUpServlet Connection Successful");
 
-            //if user uploads profile image, set maxMemSize and maxFileSize allowed
+            //setting for upload a photo***************************************************
             final int maxMemSize = 10 * 1024 * 1024;
             final int maxFileSize = 50 * 1024 * 1024;
 
-            //get the path of directory which stores all avatar images
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("/avatars");
 
@@ -94,6 +69,7 @@ public class SignUpServlet extends HttpServlet {
             factory.setRepository(new File("c:\\temp"));
             ServletFileUpload upload = new ServletFileUpload(factory);
             upload.setSizeMax(maxFileSize);
+            //end of setting for upload a photo***************************************************
 
             //declare and initiate all for fields
             File file = null;
@@ -122,7 +98,6 @@ public class SignUpServlet extends HttpServlet {
                     if (!fileItem.isFormField()) {
                         String fieldName = fileItem.getFieldName();
                         String fileName = fileItem.getName();
-                        System.out.println("fileName " + fileName);
                         String contentType = fileItem.getContentType();
                         boolean isInMemory = fileItem.isInMemory();
                         long sizeInBytes = fileItem.getSize();
@@ -133,7 +108,7 @@ public class SignUpServlet extends HttpServlet {
                         }
 
                         // Write the file
-                        System.out.println("SignUpServlet enter line 133: " + filePath);
+                        System.out.println("SignUpServlet enter line 112: " + filePath);
 
                         if (fileName.lastIndexOf("\\") >= 0) {
                             fileName = fileName.substring(fileName.lastIndexOf("\\"));
@@ -146,9 +121,9 @@ public class SignUpServlet extends HttpServlet {
                         hasUpload = true;
 
                     } else {
-
+                        //logic for normal form fields
                         String fieldName = fileItem.getFieldName();
-                        System.out.println("SignUpServlet enter line 169: fieldName: " + fieldName + "," + fileItem.getString());
+                        System.out.println("SignUpServlet enter line 127: fieldName: " + fieldName + "," + fileItem.getString());
                         if (fieldName.equals("username")) {
                             username = fileItem.getString();
                         } else if (fieldName.equals("password")) {
@@ -171,15 +146,12 @@ public class SignUpServlet extends HttpServlet {
                     }
                 }
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username = ?;")) {
-                    stmt.setString(1, username);
-                    try (ResultSet r = stmt.executeQuery()) {
-                        while (r.next()) {
-                            req.setAttribute("usernameError", "username already exists");
-                            req.getRequestDispatcher("signup.jsp").forward(req, resp);
-                            break;
-                        }
-                    }
+                System.out.println("SignUpServlet enter line 147: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
+
+                if (userDAO.getUserByUsername("username") != null) {
+                    System.out.println("SignUpServlet enter line 149: username exists");
+                    req.setAttribute("usernameError", "username already exists");
+                    req.getRequestDispatcher("signup.jsp").forward(req, resp);
                 }
 
                 boolean hasUppercase = false;
@@ -200,45 +172,45 @@ public class SignUpServlet extends HttpServlet {
                         hasFour = true;
                     }
                 }
+                System.out.println("SignUpServlet enter line 173: " + hasUppercase + "," + hasLowercase + "," + hasInteger + "," + hasFour);
 
+                System.out.println("SignUpServlet enter line 175: " + password + "," + cPassword);
                 if (!cPassword.equals(password)) {
                     req.setAttribute("passwordError", "two passwords are different");
                     req.getRequestDispatcher("signup.jsp").forward(req, resp);
-                }else if (!hasUppercase || !hasLowercase || !hasInteger || !hasFour) {
+                } else if (!hasUppercase || !hasLowercase || !hasInteger || !hasFour) {
                     req.setAttribute("passwordError", "Your password should contain at least 1 UPPERCASE character, 1 lowercase character, 1 digit number, and minimum length is 4!");
                     req.getRequestDispatcher("signup.jsp").forward(req, resp);
                 }
 
-
-
                 if (avatar.equals("")) {
                     if (uploadFileName.equals("")) {
                         avatar = "avatar_01.png";
-                    }else {
+                    } else {
                         avatar = username + "_" + uploadFileName;
                         file = new File(filePath + "\\" + avatar);
-                        System.out.println("SignUpServlet enter line 197: " + avatar);
-                        System.out.println("SignUpServlet enter line 197: " + file.getAbsolutePath());
+                        System.out.println("SignUpServlet enter line 189: " + avatar);
+                        System.out.println("SignUpServlet enter line 190: " + file.getAbsolutePath());
                         doUpload.write(file);
 
                         BufferedImage img = null;
                         try {
-                            System.out.println("SignUpServlet enter line 203");
+                            System.out.println("SignUpServlet enter line 195");
                             img = ImageIO.read(file);
                             String thumbFileName = avatar.replace(avatar.substring(avatar.lastIndexOf(".")), "_thumbnail.png");
                             avatar = thumbFileName;
-                            System.out.println("SignUpServlet enter line 204: " + thumbFileName);
+                            System.out.println("SignUpServlet enter line 199: " + thumbFileName);
                             File thumbFile = new File(filePath + "\\" + thumbFileName);
-                            System.out.println("SignUpServlet enter line 205: " + thumbFile.getAbsolutePath());
+                            System.out.println("SignUpServlet enter line 201: " + thumbFile.getAbsolutePath());
 
                             if (img.getHeight() < 20 && img.getWidth() < 20) {
-                                ImageIO.write(img,"png",thumbFile);
-                            }else {
+                                ImageIO.write(img, "png", thumbFile);
+                            } else {
                                 double zoom = Math.max(1.0 * img.getHeight() / 400, 1.0 * img.getWidth() / 400);
                                 int type = img.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : img.getType();
-                                BufferedImage resizedImage = new BufferedImage((int)(img.getWidth() / zoom), (int)(img.getHeight() / zoom), type);
+                                BufferedImage resizedImage = new BufferedImage((int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), type);
                                 Graphics2D g = resizedImage.createGraphics();
-                                g.drawImage(img,0,0,(int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), null);
+                                g.drawImage(img, 0, 0, (int) (img.getWidth() / zoom), (int) (img.getHeight() / zoom), null);
                                 g.dispose();
                                 g.setComposite(AlphaComposite.Src);
                                 g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -248,52 +220,37 @@ public class SignUpServlet extends HttpServlet {
 
                             }
 
-                        }catch (IOException e) {
+                        } catch (IOException e) {
                             e.getStackTrace();
                         }
                     }
                 }
 
-                System.out.println("SignUpServlet enter line 190: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
-                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
-                    stmt.setString(1, username);
-                    stmt.setString(2, password);
-                    stmt.setString(3, fname);
-                    stmt.setString(4, lname);
-                    stmt.setString(5, dob);
-                    stmt.setString(6, country);
-                    stmt.setString(7, description);
-                    stmt.setString(8, avatar);
-                    stmt.setString(9, "active");
-                    stmt.setString(10, email);
+                boolean signupSuccess = userDAO.addUser(username, password, fname, lname, dob, country, description, avatar, "active", "");
+                System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
 
-                    stmt.executeUpdate();
+                req.setAttribute("successMessage", "Sign up successfully!");
+                req.setAttribute("directMessage", "You will be directed to login page");
+                req.setAttribute("directErrorMessage", "true");
+                req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
 
-                    req.setAttribute("successMessage", "Sign up successfully!");
-                    req.setAttribute("directMessage", "You will be directed to login page");
-                    req.setAttribute("directErrorMessage", "true");
-                    req.getRequestDispatcher("signupsuccess.jsp").forward(req, resp);
+                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
+                boolean success = (boolean) jsonObject.get("success");
+                req.setAttribute("success", success);
+                System.out.println("Success = " + success);
 
-                    JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
-                    boolean success = (boolean) jsonObject.get("success");
-                    req.setAttribute("success", success);
-                    System.out.println("Success = " + success);
-
-                } catch (ServletException e) {
-                    e.printStackTrace();
-                }
 
             } catch (FileUploadException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
