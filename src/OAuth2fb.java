@@ -195,6 +195,5 @@ public class OAuth2fb extends HttpServlet {
 
         System.out.println("check user method returning " + loginStatus);
         return loginStatus;
-
     }
 }
