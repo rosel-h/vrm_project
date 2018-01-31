@@ -28,16 +28,16 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
+    <script src="vendor/js/clean-blog.min.js"></script>
 
-    <script src="jquery.min.js"></script>
-    <script src="jquery-ui.min.js"></script>
-    <script src="featured.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+    <script src="vendor/js/featured.js"></script>
 
     <script type="text/javascript">
         var imageCollection = [
@@ -127,7 +127,7 @@
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/myArticles">My Articles</a>
+                    <a class="nav-link" href="myArticles">My Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
@@ -162,7 +162,7 @@
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="/myArticles" class="btn btn-default"
+                            <a href="/Articles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Community</span>

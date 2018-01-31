@@ -38,7 +38,6 @@ function showimg(num) {
 
 }
 
-
 $(document).ready(function () {
 
     $("#banner-base").css("visibility", "hidden"); // Use hidden to keep width and height of div same as image

@@ -16,12 +16,12 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
+    <script src="vendor/js/clean-blog.min.js"></script>
 
 </head>
 <body id="page-top">
@@ -92,7 +92,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </header>
 
