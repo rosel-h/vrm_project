@@ -285,7 +285,8 @@ public class SignUpServlet extends HttpServlet {
         doGet(req, resp);
     }
 
-/*    private String checkNull(Object object) {
+/*
+    private String checkNull(Object object) {
         String returnStr = "";
         if (object == null) {
             return returnStr;
@@ -329,6 +330,7 @@ public class SignUpServlet extends HttpServlet {
                 .write(postData.getBytes(StandardCharsets.UTF_8));
         JSONTokener jsonTokener = new JSONTokener(urlConnection.getInputStream());
         return new JSONObject((Map) jsonTokener);
-    }*/
+    }
+*/
 
 }

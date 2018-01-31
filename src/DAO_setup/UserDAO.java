@@ -96,6 +96,9 @@ public class UserDAO implements AutoCloseable {
             stmt.setString(8, avatar);
             stmt.setString(9, status);
             stmt.setString(10, email);
+
+            stmt.executeUpdate();
+
             System.out.println("Creation Successful");
             success = true;
 
