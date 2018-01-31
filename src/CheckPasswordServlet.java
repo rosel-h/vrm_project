@@ -58,13 +58,54 @@ public class CheckPasswordServlet extends HttpServlet {
 
             String password = req.getParameter("password");
             String cPassword = req.getParameter("cPassword");
-            System.out.println("CheckPasswordServlet enter line 57: " + password + "," + cPassword);
 
-            if (!cPassword.equals(password)) {
-                resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-                resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-                resp.getWriter().write("two passwords are different!");
+            boolean hasUppercase = false;
+            boolean hasLowercase = false;
+            boolean hasInteger = false;
+            boolean hasFour = false;
+            for (int i = 0; i < password.length(); i++) {
+                if (password.charAt(i) >= 'A' && password.charAt(i) <= 'Z') {
+                    hasUppercase = true;
+                }
+                if (password.charAt(i) >= 'a' && password.charAt(i) <= 'z') {
+                    hasLowercase = true;
+                }
+                if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
+                    hasInteger = true;
+                }
+                if (password.length() >= 4) {
+                    hasFour = true;
+                }
             }
+
+            resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+            resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+            if (!password.equals("") && cPassword.equals("")) {
+                if (!hasUppercase) {
+                    resp.getWriter().write("At least contain 1 UPPERCASE character!");
+                } else if (!hasLowercase) {
+                    resp.getWriter().write("At least contain 1 lowercase character!");
+                } else if (!hasInteger) {
+                    resp.getWriter().write("At least contain 1 digit number!");
+                } else if (!hasFour) {
+                    resp.getWriter().write("Minimum length of password is 4!");
+                } else {
+                    resp.getWriter().write("Password is valid!");
+                }
+            }
+
+
+            System.out.println("CheckPasswordServlet enter line 57: " + password + "," + cPassword);
+            resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+            resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+            if (!cPassword.equals("")) {
+                if (!cPassword.equals(password)) {
+                    resp.getWriter().write("Two passwords are different!");
+                } else {
+                    resp.getWriter().write("Password is valid!");
+                }
+            }
+
 
 
         } catch (SQLException e) {

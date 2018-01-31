@@ -64,7 +64,7 @@ public class CheckUsernameServlet extends HttpServlet {
                         System.out.println("CheckUsernameServlet enter line 62: " + r);
                         resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
                         resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-                        resp.getWriter().write("username already exists");
+                        resp.getWriter().write("Username already exists");
 
                     }
                 }

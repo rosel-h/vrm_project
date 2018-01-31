@@ -40,11 +40,34 @@
             document.getElementById("username").onblur = function () {
                 var username = document.getElementById("username").value;
                 $.ajax({
-                    url: "http://localhost:8888/checkusername",
+                    url: "checkusername",
                     type: "GET",
                     data: {username: username},
                     success: function (msg) {
-                        document.getElementById("usernameCheck").innerHTML = msg;
+                        if (msg != "Username already exists") {
+                            document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Username is valid";
+                            document.getElementById("usernameCheck").style.color = "green";
+                        }else {
+                            document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
+                        }
+                    }
+                });
+            }
+
+            document.getElementById("password").onblur = function () {
+                var password = document.getElementById("password").value;
+                var cPassword = document.getElementById("cPassword").value;
+                $.ajax({
+                    url: "checkpassword",
+                    type: "GET",
+                    data: {password: password, cPassword: cPassword},
+                    success: function (msg) {
+                        if (msg == "Password is valid!") {
+                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Password is valid";
+                            document.getElementById("passwordFormatCheck").style.color = "green";
+                        } else if (password != "") {
+                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
+                        }
                     }
                 });
             }
@@ -53,11 +76,17 @@
                 var password = document.getElementById("password").value;
                 var cPassword = document.getElementById("cPassword").value;
                 $.ajax({
-                    url: "http://localhost:8888/checkpassword",
+                    url: "checkpassword",
                     type: "GET",
                     data: {password: password, cPassword: cPassword},
                     success: function (msg) {
-                        document.getElementById("passwordCheck").innerHTML = msg;
+                        if (msg == "Password is valid!") {
+                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Password is valid";
+                            document.getElementById("passwordCheck").style.color = "green";
+                        }else if (msg == "Two passwords are different!") {
+                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
+
+                        }
                     }
                 });
             }
@@ -103,6 +132,7 @@
                         <div class="col-md-9">
                             <input type="password" id="password" class="form-control" name="password"
                                    placeholder="Enter Password 4~20 characters">
+                            <div style="color:red" id="passwordFormatCheck"></div>
                         </div>
                     </div>
 

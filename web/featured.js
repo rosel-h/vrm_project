@@ -5,14 +5,23 @@
 var current_banner_num = 1;
 
 function crossfade() {
-    $("#banner-" + current_banner_num).fadeOut();
 
-    if (current_banner_num == 4) {
+    if (current_banner_num == 5) {
         current_banner_num = 1;
     } else {
         current_banner_num++;
     }
     $("#banner-" + current_banner_num).fadeIn();
+
+    var old_banner_num;
+    if (current_banner_num == 1) {
+        old_banner_num = 5;
+    }else {
+        old_banner_num = current_banner_num - 1;
+    }
+
+    $("#banner-" + old_banner_num).fadeOut();
+
 }
 
 
