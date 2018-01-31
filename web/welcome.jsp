@@ -54,8 +54,6 @@
             console.log(imageCollection[numImage]);
         }
 
-
-
     </script>
 
     <style type="text/css">
@@ -129,7 +127,7 @@
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">My Articles</a>
+                    <a class="nav-link" href="/myArticles">My Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
