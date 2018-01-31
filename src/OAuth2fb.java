@@ -1,6 +1,8 @@
 //import com.google.gson.Gson;
 
 import DAO_setup.MYSQLDatabase;
+import DAO_setup.User;
+import DAO_setup.UserDAO;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -41,13 +43,13 @@ public class OAuth2fb extends HttpServlet {
 
     //setup get
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        FbResponse fbUser = new FbResponse();
+        String fbUserEmail = "";
+        String fbFirstName = "";
+        String fbLastName = "";
 
         try {
             //checks if request_id exists, this is used for games and should not show up for our requests
             String rid = request.getParameter("request_ids");
-
             // Get special code
             String code = request.getParameter("code");
             System.out.println(code);
@@ -94,38 +96,29 @@ public class OAuth2fb extends HttpServlet {
                     }
                 }
 
-                System.out.println(outputString);
-
                 //get facebook email
-                String fbUserEmail = outputString.substring(outputString.indexOf("{\"email\":") + 10, outputString.indexOf("\",\"first_name\""));
+                fbUserEmail = outputString.substring(outputString.indexOf("{\"email\":") + 10, outputString.indexOf("\",\"first_name\""));
                 fbUserEmail = fbUserEmail.replace("\\u0040", "@");
 
                 //get facebook first name
-                String fbFirstName = outputString.substring(outputString.indexOf("first_name\":\"") + 13, outputString.indexOf("\",\"last_name"));
+                fbFirstName = outputString.substring(outputString.indexOf("first_name\":\"") + 13, outputString.indexOf("\",\"last_name"));
+
                 //get facebook last name
+                fbLastName = outputString.substring(outputString.indexOf("\"last_name\":\"") + 13, outputString.indexOf("\",\"id\""));
 
-                String fbLastName = outputString.substring(outputString.indexOf("\"last_name\":\"") + 13, outputString.indexOf("\",\"id\""));
-
-                //put all into FBResponse object
-                fbUser.setEmail(fbUserEmail);
-                fbUser.setFirst_name(fbFirstName);
-                fbUser.setLast_name(fbLastName);
-                fbUser.setUser_name(fbFirstName + "_" + fbLastName);
-                System.out.println(fbUser.getEmail());
-                System.out.println(fbUser.getFirst_name());
-                System.out.println(fbUser.getLast_name());
+                System.out.println("Facebook email is " + fbUserEmail);
+                System.out.println("Facebook fname is " + fbFirstName);
+                System.out.println("Facebook lname is " + fbLastName);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (checkFbUser(fbUser.getEmail(), fbUser)) {
+        if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
             System.out.println("Facebook User Exists in Database");
             HttpSession sess = request.getSession(true);
-
             Map<String, String[]> map = request.getParameterMap();
-
             Map<String, String> jsonMap = new HashMap<>();
 
             for (String key : map.keySet()) {
@@ -169,11 +162,12 @@ public class OAuth2fb extends HttpServlet {
             request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
             System.out.println("Success = " + true);
         }
+
     }
 
-    public boolean checkFbUser(String email, FbResponse fbUser) {
-
+    public boolean checkFbUser(String email, String firstName, String lastName) {
         boolean loginStatus = false;
+        User user;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -181,67 +175,25 @@ public class OAuth2fb extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("Connection attempt...");
-        Properties dbProps = new Properties();
-        ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
+        System.out.println("LoginServlet Connection attempt...");
 
-        try (FileInputStream fis = new FileInputStream(filepath)) {
-            dbProps.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+            System.out.println("LoginServlet connection successful");
+            user = dao.getUserFacebook(email);
 
-        // Establishing connection to the database
-        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
-            PreparedStatement ps = conn.prepareStatement
-                    ("select * from vrm_users where binary email_address=? and status=?");
-            ps.setString(1, email);
-            ps.setString(2, "facebook");
-            ResultSet rs = ps.executeQuery(); // will be an empty set if login in correct
-            loginStatus = rs.next();
-
-            if (loginStatus) {
-                avatarFile = rs.getString("avatar_icon");
-                username = rs.getString("username");
-
+            if (user == null) {
+                System.out.println("user is null");
+                dao.addUserFB(firstName, lastName, email);
             } else {
-
-                System.out.println("User does not exist.. creating");
-
-                //creates new user with default values and FB data
-                try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
-
-                    String username = fbUser.getFirst_name() + "_" + fbUser.getLast_name();
-                    String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
-                    String fname = fbUser.getFirst_name();
-                    String lname = fbUser.getLast_name();
-                    String dob = "1900/11/11";
-                    String country = "New Zealand";
-                    String description = "New facebook user";
-                    String avatar = "avatar_01.png";
-                    String status = "facebook";
-
-                    stmt.setString(1, username);
-                    stmt.setString(2, password);
-                    stmt.setString(3, fname);
-                    stmt.setString(4, lname);
-                    stmt.setString(5, dob);
-                    stmt.setString(6, country);
-                    stmt.setString(7, description);
-                    stmt.setString(8, avatar);
-                    stmt.setString(9, status);
-                    stmt.setString(10, email);
-                    stmt.executeUpdate();
-                    System.out.println("Creation Successful");
-                }
+                loginStatus = true;
+                avatarFile = user.getAvatar_icon();
+                System.out.println("avatar file is " + avatarFile);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        System.out.println("check user method returning " + loginStatus);
         return loginStatus;
 
     }

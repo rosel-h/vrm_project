@@ -1,8 +1,9 @@
 import org.mindrot.jbcrypt.BCrypt;
+
 import java.security.SecureRandom;
 
 //// contains security related methods for site
-public class Security {
+public class SecurityMan {
 
     //generates a n length random string to be used as CSRF token or State_Param
     public static String randomString(int length) {
@@ -19,11 +20,11 @@ public class Security {
         return randomString;
     }
 
-    public String hashString(String string) {
+    public static String hashString(String string) {
         return BCrypt.hashpw(string, BCrypt.gensalt(15));
     }
 
-    public boolean checkPassword(String password, String hash) {
+    public static boolean checkPassword(String password, String hash) {
 
         return BCrypt.checkpw(password, hash);
     }
