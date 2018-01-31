@@ -37,7 +37,6 @@ public class EditArticle extends HttpServlet {
 //        out.println("<p>do the edit<p>");
 
         String op = req.getParameter("operation");
-
         String id = req.getParameter("articleID");
         System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")");
         int articleID = Integer.parseInt(id);
