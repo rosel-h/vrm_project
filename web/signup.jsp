@@ -174,9 +174,13 @@
                             <select name="country" id="country" class="form-control">
                                 <option value="nz" selected>New Zealand</option>
                                 <option value="aus">Australia</option>
+                                <option value="in">China</option>
                                 <option value="in">India</option>
+                                <option value="in">Philippines</option>
+                                <option value="in">European Union</option>
+                                <option value="in">United Kingdom</option>
                                 <option value="us">United States</option>
-                                <option value="other">other</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                     </div>
@@ -185,7 +189,6 @@
                         <label for="description" class="col-md-3 control-label">Description</label>
                         <div class="col-md-9">
                         <textarea id="description" class="form-control" name="description" rows="4" columns="40">
-
                         </textarea>
                         </div>
                     </div>

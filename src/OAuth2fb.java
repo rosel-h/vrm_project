@@ -40,7 +40,6 @@ public class OAuth2fb extends HttpServlet {
         HttpSession sess = request.getSession(false); // will be used for csrf
         String url = "https://www.facebook.com/dialog/oauth?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope;
         response.sendRedirect(url);
-
     }
 
     //setup get request to listen for FBServer contact - this is used for the actual token creation
@@ -99,7 +98,6 @@ public class OAuth2fb extends HttpServlet {
     }
 
     private void connectFB(HttpServletRequest request, HttpServletResponse response) {
-
         try {
             //checks if request_id exists, this is used for games and should not show up for our requests
             String rid = request.getParameter("request_ids");

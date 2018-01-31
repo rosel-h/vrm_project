@@ -6,44 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<nav class="navbar navbar-inverse bg-faded">--%>
-<%--<div class="container-fluid">--%>
-<%--<div class="navbar-header">--%>
-<%--<a class="navbar-brand">VRM</a>--%>
-<%--</div>--%>
-<%--<ul class="nav navbar-nav">--%>
-<%--<li ><a href="welcome.jsp">Home</a></li>--%>
-<%--<li><a href="/Articles">Explore</a></li>--%>
-<%--<li><a href="">My Articles</a></li>--%>
-<%--</ul>--%>
-<%--<ul class="nav navbar-nav navbar-right">--%>
-<%--<li><a href="#">MyAccount</a></li>--%>
-<%--<li><a href="signup.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>--%>
-<%--<li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
-<%--<li>--%>
-<%--<form method="post" action="Main">--%>
-<%--<button type="submit" name="logout_button" value="Logout">Log out</button>--%>
-<%--</form>--%>
-<%--</li>--%>
-<%--</ul>--%>
-<%--<form class="navbar-form navbar-left" action="searcharticle">--%>
-<%--<div class="form-group">--%>
-<%--<input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date" id="searchkeyword">--%>
-<%--</div>--%>
-<%--<div class="form-group">--%>
-<%--<select class="form-control" name="searchType" id="searchselect">--%>
-<%--<option value="title">Title</option>--%>
-<%--<option value="username">Username</option>--%>
-<%--<option value="date">Date</option>--%>
-<%--</select>--%>
-<%--</div>--%>
-<%--<button type="submit" class="btn btn-default">Search</button>--%>
-<%--</form>--%>
-<%--</div>--%>
-<%--</nav>--%>
-
 <script>
     var searchselect = document.getElementById("searchselect");
     searchselect.addEventListener("change", myFc);
@@ -84,16 +46,16 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
+    <script src="vendor/js/clean-blog.min.js"></script>
 
-    <script src="jquery.min.js"></script>
-    <script src="jquery-ui.min.js"></script>
-    <script src="featured.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+    <script src="vendor/js/featured.js"></script>
 
 </head>
 
@@ -143,13 +105,13 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
-                            <a href="/myArticles" class="btn btn-default"
+                            <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="/myArticles" class="btn btn-default"
+                            <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-send" aria-hidden="true"> &nbsp;Community</span>
                             </a>
