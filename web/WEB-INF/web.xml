@@ -171,4 +171,15 @@
         <url-pattern>/Signin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>NewArticle</servlet-name>
+        <jsp-file>/newArticle.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewArticle</servlet-name>
+        <url-pattern>/NewArticle</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

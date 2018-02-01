@@ -86,7 +86,7 @@
     <%@include file="navigation.jsp" %>
     </c:when>
     <c:otherwise>
-        <%@include file="test.jsp" %>
+        <%@include file="guestnavigation.jsp" %>
     </c:otherwise>
 </c:choose>
 <%--Load articles --%>

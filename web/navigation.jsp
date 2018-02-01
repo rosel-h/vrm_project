@@ -71,13 +71,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="welcome.jsp">Home</a>
+                    <a class="nav-link" href="Main">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">My Articles</a>
+                    <a class="nav-link" href="myArticles">My Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
@@ -107,19 +107,19 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                <span> &nbsp;My Articles</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="myArticles" class="btn btn-default"
+                            <a href="Articles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-send" aria-hidden="true"> &nbsp;Community</span>
+                                <span> &nbsp;Community</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="newArticle.jsp" class="btn btn-danger"
+                            <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-globe" aria-hidden="true"> &nbsp;New Article</span>
+                                <span> &nbsp;New Article</span>
                             </a>
                         </div>
                     </div>
