@@ -5,10 +5,17 @@
   Time: 11:57 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+
+<c:if test="${sessionScope.personLoggedIn != null}">
+    <c:redirect url="Welcome"/>
+</c:if>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -31,6 +38,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Login to VRM</title>
+    <style>
+        .btn {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 
@@ -39,7 +51,8 @@
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Sign In</div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="mailto:vrm@vrm.com">Forgot password?</a>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="mailto:vrm@vrm.com">Forgot
+                    password?</a>
                 </div>
             </div>
             <div style="padding-top:30px" class="panel-body">
@@ -52,7 +65,8 @@
                     </div>
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input type="password" onfocus="this.value=''" required="true" class="form-control" name="pass"
+                        <input type="password" onfocus="this.value=''" required="true" class="form-control"
+                               name="pass"
                                placeholder="Password">
                     </div>
                     <div style="color:red">${errorMessage}</div>
@@ -66,12 +80,9 @@
                     <div style="margin-top:10px" class="form-group">
                         <div class="col-sm-12 controls">
                             <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
-                            <form action="" method="post">
-                                <input type="hidden" name="csrftoken" value=${csrfToken}>
-                                <button id="btn-fblogin" class="btn btn-primary" type ="button" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
-                                    Connect via Facebook
-                                </button>
-                            </form>
+                            <button id="btn-fblogin" class="btn btn-primary" type="button" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
+                                Connect via Facebook
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -79,9 +90,8 @@
                     <div class="col-md-12 control">
                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                             Don't have an account!
-                            <a href="signup.jsp">
-                                Sign Up
-                                <Here></Here>
+                            <a href="SignUp">
+                                Sign Up Here
                             </a>
                         </div>
                     </div>

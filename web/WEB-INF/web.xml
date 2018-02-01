@@ -55,7 +55,6 @@
     </servlet-mapping>
 
 
-
     <servlet>
         <servlet-name>edit_Article</servlet-name>
         <servlet-class>EditArticle</servlet-class>
@@ -119,6 +118,11 @@
     <error-page>
         <error-code>404</error-code>
         <location>/error404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>666</error-code>
+        <location>/error666.jsp</location>
     </error-page>
 
     <servlet>

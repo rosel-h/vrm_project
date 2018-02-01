@@ -55,8 +55,12 @@ public class LogInServlet extends HttpServlet {
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
                 bufferedWriter.write(jsonText);
             }
+
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("user", user);
+
+            // Mr Meads generates a long random key for csrfToken
+            sess.setAttribute("csrfSessionToken",MrMeads.randomString(60));
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
 
