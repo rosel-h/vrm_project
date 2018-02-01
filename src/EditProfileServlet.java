@@ -46,7 +46,7 @@ public class EditProfileServlet extends HttpServlet {
         MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
         if (mysqlDatabase == null) {
             try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties"));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

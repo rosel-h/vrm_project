@@ -19,11 +19,8 @@
     <meta name="author" content="">
 
     <title>Welcome to VRM Blog</title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <%--<!-- Bootstrap core CSS -->--%>
-    <%--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -33,15 +30,15 @@
 
     <!-- Custom styles for this template -->
     <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
+
     <%--<!-- Bootstrap core JavaScript -->--%>
-    <%--<script src="vendor/jquery/jquery.min.js"></script>--%>
-    <%--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>--%>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
-
-    <%--<script src="vendor/jquery/jquery.js"></script>--%>
-    <%--<script src="vendor/jquery/jquery-ui.min.js"></script>--%>
-
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
     <script type="text/javascript">
@@ -146,15 +143,15 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
-                    <div class="col-md-4 offset-4">
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%"
-                             class="img-circle">
+                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
+                    <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 5%">
+                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 50%; border-radius: 50%"
+                             class="img-circle img-fluid">
                     </div>
                     <br>
                     <h5>Explore the community or create a new blog entry</h5>

@@ -180,7 +180,7 @@ public class OAuth2fb extends HttpServlet {
 
         System.out.println("LoginServlet Connection attempt...");
 
-        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserFacebook(email);
 

@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
         HttpSession sess = req.getSession(true);
 
         ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
+        String filepath = s.getRealPath("WEB-INF/mysql.properties");
         try {
             MYSQLDatabase mysqlDatabase = new MYSQLDatabase(filepath);
             sess.setAttribute("database",mysqlDatabase);

@@ -31,7 +31,7 @@ public class EditArticle extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
+        String filepath = s.getRealPath("WEB-INF/mysql.properties");
 
 //        PrintWriter out = resp.getWriter();
 //        out.println("<p>do the edit<p>");
