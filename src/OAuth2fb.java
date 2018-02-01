@@ -63,7 +63,7 @@ public class OAuth2fb extends HttpServlet {
                 String sessiont_id = sess.getId();
                 System.out.println("LoginServlet: " + sessiont_id);
                 ServletContext servletContext = getServletContext();
-                String filePath = servletContext.getRealPath("/Sessions");
+                String filePath = servletContext.getRealPath("WEB-INF/Sessions");
                 File sessionFolder = new File(filePath);
 
                 if (!sessionFolder.exists()) {

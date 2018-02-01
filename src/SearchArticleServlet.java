@@ -38,7 +38,7 @@ public class SearchArticleServlet extends HttpServlet {
         }
 
         ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
+        String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
