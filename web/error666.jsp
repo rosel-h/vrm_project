@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error | VRM Blog</title>
+    <title>Error 666 </title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -37,8 +37,10 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
                 <div class="site-heading">
-                    <p>You are reaching the edge of the world!</p>
-                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a> or go back to your <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
+                    <p>Session Error</p>
+                    <p>There is something wrong with your session information. Please log out and log in or clear browser cache and try again!</p>
+                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a>
+                        or go back to your <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
                 </div>
             </div>
         </div>

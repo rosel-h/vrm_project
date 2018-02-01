@@ -30,31 +30,12 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<c:if test="${sessionScope.personLoggedIn == null}">
+    <c:redirect url="Index"/>
+</c:if>
 
-    <%--<title>Welcome to the Community</title>--%>
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-    <!-- Custom styles for this template -->
-    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom scripts for this template -->
-    <script src="vendor/js/clean-blog.min.js"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/jquery/jquery-ui.min.js"></script>
-    <script src="vendor/js/featured.js"></script>
+<head>
+
 
 </head>
 
@@ -83,6 +64,9 @@
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
 
@@ -99,7 +83,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
                     <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 5%">
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 50%; border-radius: 50%"
+                        <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="width: 50%; border-radius: 50%"
                              class="img-circle img-fluid">
                     </div>
                     <br>

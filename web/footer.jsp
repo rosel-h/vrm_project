@@ -13,7 +13,8 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <hr>
-                    <p class="copyright text-muted"><a href="privacy">Privacy Policy</a></p>
+                    <p class="copyright text-muted"><a href="privacy">Privacy Policy</a> | <a href="mailto:vrm@vrm.com">Contact
+                        Us</a></p>
                     <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
                 </div>
             </div>

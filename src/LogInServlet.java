@@ -5,7 +5,6 @@
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
 import DAO_setup.UserDAO;
-import org.jooq.tools.json.JSONObject;
 import org.json.simple.JSONValue;
 
 import javax.servlet.RequestDispatcher;
@@ -21,32 +20,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
 public class LogInServlet extends HttpServlet {
-
-    //    String stateParam = ""; //StateParam is a secret random code generated that passes to FB to prevent cross-site-request forgery attacks.
-    String avatarFile = "";
+    User user;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
+        String duration = request.getParameter("remember");
 
         HttpSession sess = request.getSession(true);
 
         if (checkUser(username, pass)) {
-
-//            Map<String, String[]> map = request.getParameterMap();
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", username);
-            jsonMap.put("pass", pass);
-
-//            for (String key : map.keySet()) {
-//                System.out.println("Writing JSON from LoginServlet");
-//                String value = map.get(key)[0];
-//                jsonMap.put(key, value);
-//            }
 
             String jsonText = JSONValue.toJSONString(jsonMap);
             System.out.println("LoginServlet json text - " + jsonText);
@@ -74,9 +62,17 @@ public class LogInServlet extends HttpServlet {
                 sess.setAttribute("user",new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties"))).getUserByUsername(username));
             } catch (SQLException e) {
                 e.printStackTrace();
+            sess.setAttribute("user", user);
+
+            if (duration != null) {
+                System.out.println("setting maximum session duration");
+                sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity
+                System.out.println("max session set to " + sess.getMaxInactiveInterval());
             }
-            sess.setAttribute("avatarFile", avatarFile);
-            RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
+
+            // Mr Meads generates a long random key for csrfToken
+            sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
+            RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
 
         } else {
@@ -88,7 +84,6 @@ public class LogInServlet extends HttpServlet {
     //check password function
     public boolean checkUser(String username, String pass) {
         boolean loginStatus = false;
-        User user;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -100,15 +95,12 @@ public class LogInServlet extends HttpServlet {
 
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoginServlet connection successful");
-            user = dao.getUserStandard(username,pass);
+            user = dao.getUserStandard(username, pass);
 
-            if (user==null){
-                loginStatus = false;
-            } else {
+            if (user != null) {
                 loginStatus = true;
-                avatarFile = user.getAvatar_icon();
-                System.out.println("avatar file is " + avatarFile);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

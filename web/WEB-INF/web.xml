@@ -55,7 +55,6 @@
     </servlet-mapping>
 
 
-
     <servlet>
         <servlet-name>edit_Article</servlet-name>
         <servlet-class>EditArticle</servlet-class>
@@ -121,6 +120,11 @@
         <location>/error404.jsp</location>
     </error-page>
 
+    <error-page>
+        <error-code>666</error-code>
+        <location>/error666.jsp</location>
+    </error-page>
+
     <servlet>
         <servlet-name>MyArticles</servlet-name>
         <servlet-class>PersonalArticles</servlet-class>
@@ -181,7 +185,6 @@
         <url-pattern>/NewArticle</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Index</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -190,6 +193,17 @@
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Welcome</servlet-name>
+        <jsp-file>/welcome.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Welcome</servlet-name>
+        <url-pattern>/Welcome</url-pattern>
     </servlet-mapping>
 
 </web-app>

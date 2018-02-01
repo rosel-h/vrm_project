@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: rher490
@@ -6,6 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<c:if test="${sessionScope.personLoggedIn == null}">
+    <c:redirect url="Index"/>
+</c:if>
+
 <html>
 <head>
     <title>Create Article</title>
@@ -46,6 +52,7 @@
     </script>
 </head>
 <body>
+
 <div class="container">
     <!--  A form letting users add new articles. -->
     <div class="panel panel-info">

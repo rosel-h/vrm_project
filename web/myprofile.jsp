@@ -8,6 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${sessionScope.personLoggedIn == null}">
+    <c:redirect url="Index"/>
+</c:if>
+
 <html>
 <head>
     <title>My Profile | VRM BLOG</title>
@@ -50,6 +54,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
@@ -234,6 +241,7 @@ ${user.getDescription()}
 
 </div>
 
+<%@include file="footer.jsp" %>
 <%--<div class="container">
     <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">

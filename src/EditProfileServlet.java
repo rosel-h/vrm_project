@@ -206,6 +206,7 @@ public class EditProfileServlet extends HttpServlet {
                         System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
                         req.setAttribute("successMessage", "Save profile successfully");
                         req.setAttribute("user",user);
+                        session.setAttribute("user", user);
                         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
                     }
 

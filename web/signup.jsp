@@ -338,7 +338,7 @@
                             <button id="btn-fbsignup" type="button"
                                     onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
                                     class="btn btn-primary"><i class="icon-facebook"></i>  
-                                Continue with Facebook
+                                Connect via Facebook
                             </button>
                         </div>
                     </div>

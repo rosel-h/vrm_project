@@ -54,15 +54,6 @@ public class LoadArticlesServlet extends HttpServlet {
 
         boolean userHasLoggedIn = session.isNew();
 
-//        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-//        if (mysqlDatabase == null) {
-//            try {
-//                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-
         ServletContext servletContext = getServletContext();
         String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
