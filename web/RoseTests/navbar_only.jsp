@@ -1,68 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: rher490
-  Date: 22/01/2018
-  Time: 3:49 PM
+  Date: 1/02/2018
+  Time: 5:16 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<script>
-    var searchselect = document.getElementById("searchselect");
-    searchselect.addEventListener("change", myFc);
-
-    function myFc() {
-        var x = document.getElementById("searchkeyword");
-        console.log(searchselect.value());
-        if (searchselect.value().eq("date")) {
-
-        } else {
-
-        }
-    }
-</script>
-
-<script>
-    $(function () {
-        $("#datepicker").datepicker();
-    });
-</script>
-
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<c:if test="${sessionScope.personLoggedIn == null}">
-    <c:redirect url="Index"/>
-</c:if>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <%--<title>Welcome to the Community</title>--%>
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-    <!-- Custom styles for this template -->
-    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom scripts for this template -->
-    <script src="vendor/js/clean-blog.min.js"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/jquery/jquery-ui.min.js"></script>
-    <script src="vendor/js/featured.js"></script>
-
-</head>
-
-<!-- Navigation -->
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
@@ -74,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="Welcome">Home</a>
+                    <a class="nav-link" href="Main">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
@@ -94,14 +37,14 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead" style="background-image: url('../img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
                     <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 5%">
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 50%; border-radius: 50%"
+                        <img src="../avatars/${avatarFile}" alt="avatar" style="width: 50%; border-radius: 50%"
                              class="img-circle img-fluid">
                     </div>
                     <br>

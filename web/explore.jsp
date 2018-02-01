@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <%--<%@include file="RoseTests/allTheThingsInTheHead.jsp" %>--%>
     <script>
         $(document).ready(function () {
             $('#summernote').summernote({
@@ -83,6 +83,7 @@
 <c:choose>
     <c:when test="${personLoggedIn !=null}">
     <%@include file="navigation.jsp" %>
+        <%--<%@include file="RoseTests/navbar_only.jsp" %>--%>
     </c:when>
     <c:otherwise>
         <%@include file="guestnavigation.jsp" %>
@@ -130,7 +131,7 @@
             %>
             <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                 <tr>
-                    <td><b>${articleList.getTitle()}</b></td>
+                    <td><h2 class="post-title">${articleList.getTitle()}</h2></td>
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>
@@ -146,8 +147,8 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">${articleList.getTitle()}</h4>
-                                <div>Written by ${articleList.getUsername()}, published
+                                <h3 class="<%--modal-title --%>post-title">${articleList.getTitle()}</h3>
+                                <div class="post-meta">Written by ${articleList.getUsername()}, published
                                     on ${articleList.getDate()}</div>
                                 <c:if test="${personLoggedIn == articleList.getUsername()}">
                                     <form class="form-inline" action="/Articles" method="POST">
@@ -193,7 +194,37 @@
                                                            value="${commentList.getCommentID()}">
                                                 </form>
                                             </c:if>
-
+                                            <c:if test="${personLoggedIn !=null}">
+                                                <small id="replyToThis${commentList.getCommentID()}">Reply</small>
+                                                <div id="replyBox${commentList.getCommentID()}" style="display: none">
+                                                    <form method="post" action="/Articles">
+                                                        <div class="form-group">
+                                                            <label for="summernote" style="font-size: x-small">Comment as ${personLoggedIn}:</label>
+                                                            <textarea name="newComment" class="form-control" rows="3"
+                                                                      required></textarea>
+                                                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                                            <input type="hidden" name="operation" value="replyToAComment">
+                                                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                                            <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
+                                                            <button style="float: right" type="submit" class="btn btn-sm">Reply
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </c:if>
+                                            <script>
+                                                $(document).ready(function(){
+//                                                    $(".replyToThis").click(function(){
+//                                                        $(".replyBox").css("display","block");
+//                                                    });
+//                                                    $(".replyToThis").click(function(){
+//                                                        $(".replyBox").css("display","none");
+//                                                    });
+                                                    $("#replyToThis${commentList.getCommentID()}").click(function(){
+                                                        $("#replyBox${commentList.getCommentID()}").toggle();
+                                                    });
+                                                });
+                                            </script>
                                             <%--nested comment second degree--%>
                                             <c:if test="${commentList.hasChildren()}">
 
@@ -208,6 +239,37 @@
                                                         </h5>
                                                         <p>${children.getContent()}</p>
                                                     </div>
+                                                    <c:if test="${personLoggedIn !=null}">
+                                                        <small id="replyToThis${children.getCommentID()}">Reply</small>
+                                                        <div id="replyBox${children.getCommentID()}" style="display: none">
+                                                            <form method="post" action="/Articles">
+                                                                <div class="form-group">
+                                                                    <label for="summernote" style="font-size: x-small">Comment as ${personLoggedIn}:</label>
+                                                                    <textarea name="newComment" class="form-control" rows="3"
+                                                                              required></textarea>
+                                                                    <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                                                    <input type="hidden" name="operation" value="replyToAComment">
+                                                                    <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                                                    <input type="hidden" name="fatherComment" value="${children.getCommentID()}">
+                                                                    <button style="float: right" type="submit" class="btn btn-sm">Reply
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </c:if>
+                                                    <script>
+                                                        $(document).ready(function(){
+//                                                    $(".replyToThis").click(function(){
+//                                                        $(".replyBox").css("display","block");
+//                                                    });
+//                                                    $(".replyToThis").click(function(){
+//                                                        $(".replyBox").css("display","none");
+//                                                    });
+                                                            $("#replyToThis${children.getCommentID()}").click(function(){
+                                                                $("#replyBox${children.getCommentID()}").toggle();
+                                                            });
+                                                        });
+                                                    </script>
                                                 </c:forEach>
                                             </c:if>
 

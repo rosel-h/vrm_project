@@ -111,21 +111,16 @@ public class LoadArticlesServlet extends HttpServlet {
                 System.out.println(req.getParameter("articleId"));
                 int id = Integer.parseInt(req.getParameter("articleId"));
                 dao.deleteArticle(id);
-
             } else if ("commentOnArticle".equals(op)) {
                 String userWhoCommented = req.getParameter("userWhoCommented");
                 String comment = req.getParameter("newComment");
                 int articleID = Integer.parseInt(req.getParameter("articleID"));
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                 dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
-
             } else if ("editarticle".equals(op)) {
-
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
-
                 java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("CreateArticles: new article made");
             } else if ("deleteCommentOnArticle".equals(op)) {
@@ -134,6 +129,14 @@ public class LoadArticlesServlet extends HttpServlet {
                 System.out.println();
                 System.out.println("LAS: id - " + commentIDToBeDeleted);
                 dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
+            } else if ("replyToAComment".equals(op)){
+                System.out.println("LoadArticleServlet: replying to comment button pressed");
+                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
+                String userWhoCommented = req.getParameter("userWhoCommented");
+                String comment = req.getParameter("newComment");
+                int articleID = Integer.parseInt(req.getParameter("articleID"));
+                int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
+                dao.addCommentToAnotherComment(articleID,userWhoCommented,sqlDate,comment,parentComment);
             }
 
 
