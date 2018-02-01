@@ -67,7 +67,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
                     <div class="col-md-4 offset-4" >
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
                     </div>
                     <br>
                     <h5>My VRM Profile</h5>
@@ -136,7 +136,7 @@
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
                         <textarea id="description" class="form-control" name="description" rows="4" columns="40">
-                            ${user.getDescription()}
+${user.getDescription()}
                         </textarea>
                     </div>
                 </div>

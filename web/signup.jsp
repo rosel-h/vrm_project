@@ -62,12 +62,53 @@
                     type: "GET",
                     data: {password: password, cPassword: cPassword},
                     success: function (msg) {
-                        if (msg == "Password is valid!") {
-                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Password is valid";
+                        if (msg =="000") {
+                            var out =  "Password is valid";
+                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
                             document.getElementById("passwordFormatCheck").style.color = "green";
-                        } else if (password != "") {
-                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
+                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
+                            document.getElementById("passwordCheck").style.color = "green";
+                        }else {
+                            var out = "";
+
+                            if (msg == "999") {
+                                out = "Password cannot be empty!";
+                            }else if (msg == "888") {
+                                out = "Password cannot be empty!";
+                            }else if (msg.charAt(0) == "1") {
+                                out = "At least contain 1 UPPERCASE character!";
+                            }else if (msg.charAt(0) == "2") {
+                                out = "At least contain 1 lowercase character!";
+                            }else if (msg.charAt(0) == "3") {
+                                out = "At least contain 1 digit number!";
+                            }else if (msg.charAt(0) == "4") {
+                                out = "Minimum length of password is 4!";
+                            }
+
+                            if (out != "") {
+                                document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
+                                document.getElementById("passwordFormatCheck").style.color = "red";
+                                if (msg.charAt(2) == "0") {
+                                    out = "Two passwords are different!";
+                                    document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
+                                    document.getElementById("passwordCheck").style.color = "red";
+                                }
+                            }
+
+                            if (msg.charAt(0) == "0") {
+                                var out =  "Password is valid";
+                                document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
+                                document.getElementById("passwordFormatCheck").style.color = "green";
+
+                                if (msg == "0004") {
+                                    out = "Two passwords are different!";
+                                    document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
+                                    document.getElementById("passwordCheck").style.color = "red";
+                                }
+                            }
+
                         }
+
                     }
                 });
             }
@@ -80,11 +121,41 @@
                     type: "GET",
                     data: {password: password, cPassword: cPassword},
                     success: function (msg) {
-                        if (msg == "Password is valid!") {
-                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Password is valid";
+                        if (msg =="000") {
+                            var out =  "Password is valid";
+                            document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
+                            document.getElementById("passwordFormatCheck").style.color = "green";
+                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
                             document.getElementById("passwordCheck").style.color = "green";
-                        }else if (msg == "Two passwords are different!") {
-                            document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
+                        }else {
+                            var out = "";
+
+                            if (msg == "999") {
+                                out = "Password cannot be empty!";
+                            }else if (msg.charAt(1) == "0" && msg.length == 2) {
+                                out = "Password cannot be empty!";
+                            }else if (msg.charAt(2) == "1") {
+                                out = "At least contain 1 UPPERCASE character!";
+                            }else if (msg.charAt(2) == "2") {
+                                out = "At least contain 1 lowercase character!";
+                            }else if (msg.charAt(2) == "3") {
+                                out = "At least contain 1 digit number!";
+                            }else if (msg.charAt(2) == "4") {
+                                out = "Minimum length of password is 4!";
+                            }else if (msg.charAt(2) == "0") {
+                                out = "Two passwords are different!";
+                            }else if (msg == "0004") {
+                                out = "Two passwords are different!";
+                            }
+
+                            if (out != "") {
+                                document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
+                                document.getElementById("passwordCheck").style.color = "red";
+                            }
+
+
+
+
 
                         }
                     }

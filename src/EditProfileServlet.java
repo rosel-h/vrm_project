@@ -48,9 +48,10 @@ public class EditProfileServlet extends HttpServlet {
             try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
                 System.out.println("EditProfileServlet Connection Successful");
                 System.out.println("EditProfileServlet enter line 50: username=" + username);
-                User user = userDAO.getUserByUsername(username);
+
 
                 if (ServletFileUpload.isMultipartContent(req)) {
+                    User user = userDAO.getUserByUsername(username);
                     System.out.println("EditProfileServlet enter line 53: multipartcontent");
                     //if user uploads profile image, set maxMemSize and maxFileSize allowed
                     final int maxMemSize = 10 * 1024 * 1024;
@@ -190,6 +191,7 @@ public class EditProfileServlet extends HttpServlet {
                     } catch (FileUploadException e) {
                         e.printStackTrace();
                     }
+                    user = userDAO.getUserByUsername(username);
 
                     user.setFname(fname);
                     user.setLname(lname);
@@ -199,13 +201,17 @@ public class EditProfileServlet extends HttpServlet {
                     user.setAvatar_icon(avatar);
 
                     boolean updateSuccess = userDAO.updateUser(user);
+
                     if (updateSuccess) {
                         System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
                         req.setAttribute("successMessage", "Save profile successfully");
-                        req.getRequestDispatcher("profilesavesuccess.jsp").forward(req, resp);
+                        req.setAttribute("user",user);
+                        req.getRequestDispatcher("welcome.jsp").forward(req, resp);
                     }
 
                 }else {
+                    User user = userDAO.getUserByUsername(username);
+                    System.out.println("EditProfileServlet enter line 213:" + user.toString());
                     System.out.println("EditProfileServlet ener line 207: not multipartcontent");
                     req.setAttribute("user", user);
                     req.getRequestDispatcher("myprofile.jsp").forward(req, resp);

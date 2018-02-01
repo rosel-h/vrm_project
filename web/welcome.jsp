@@ -148,7 +148,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
                     <div class="col-md-4 offset-4">
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%"
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
                              class="img-circle">
                     </div>
                     <br>
