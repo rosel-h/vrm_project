@@ -64,7 +64,7 @@ public class SearchArticleServlet extends HttpServlet {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");
                 req.setAttribute("personAvatarIcon", icon);
-            }
+            } 
 
             List<Article> articles = new ArrayList<>();
 
