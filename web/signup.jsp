@@ -96,6 +96,8 @@
 
 <body>
 
+
+
 <div class="container">
     <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
@@ -174,11 +176,11 @@
                             <select name="country" id="country" class="form-control">
                                 <option value="nz" selected>New Zealand</option>
                                 <option value="aus">Australia</option>
-                                <option value="in">China</option>
+                                <option value="cn">China</option>
                                 <option value="in">India</option>
-                                <option value="in">Philippines</option>
-                                <option value="in">European Union</option>
-                                <option value="in">United Kingdom</option>
+                                <option value="ph">Philippines</option>
+                                <option value="eu">European Union</option>
+                                <option value="uk">United Kingdom</option>
                                 <option value="us">United States</option>
                                 <option value="other">Other</option>
                             </select>
