@@ -28,6 +28,7 @@ public class LogInServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
+        String duration = request.getParameter("remember");
 
         HttpSession sess = request.getSession(true);
 
@@ -59,8 +60,14 @@ public class LogInServlet extends HttpServlet {
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("user", user);
 
+            if (duration != null) {
+                System.out.println("setting maximum session duration");
+                sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity
+                System.out.println("max session set to " + sess.getMaxInactiveInterval());
+            }
+
             // Mr Meads generates a long random key for csrfToken
-            sess.setAttribute("csrfSessionToken",MrMeads.randomString(60));
+            sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
 

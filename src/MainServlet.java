@@ -31,9 +31,9 @@ public class MainServlet extends HttpServlet {
         String filepath = s.getRealPath("WEB-INF/mysql.properties");
         try {
             MYSQLDatabase mysqlDatabase = new MYSQLDatabase(filepath);
-            sess.setAttribute("database",mysqlDatabase);
+            sess.setAttribute("database", mysqlDatabase);
             System.out.println("MainServlet enter line 37: " + sess.getId());
-            req.setAttribute("database",mysqlDatabase);
+            req.setAttribute("database", mysqlDatabase);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,9 +43,10 @@ public class MainServlet extends HttpServlet {
             sess.invalidate();
             System.out.println("successful invalidation");
             System.out.println("MainServlet enter line 32: session is invalidated");
-            req.getRequestDispatcher("index.jsp").forward(req,resp);
+//            req.getRequestDispatcher("index.jsp").forward(req,resp);
+            resp.sendRedirect("Index");
 
-        }else {
+        } else {
 
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("WEB-INF/Sessions");
@@ -57,9 +58,12 @@ public class MainServlet extends HttpServlet {
             System.out.println("MainServlet enter line 40: " + sessiont_id);
 
             if (sessionFile.exists()) {
-                req.getRequestDispatcher("welcome.jsp").forward(req,resp);
-            }else {
-                req.getRequestDispatcher("index.jsp").forward(req,resp);
+//                req.getRequestDispatcher("welcome.jsp").forward(req,resp);
+
+                resp.sendRedirect("Welcome");
+            } else {
+//                req.getRequestDispatcher("index.jsp").forward(req,resp);
+                resp.sendRedirect("Index");
             }
         }
     }
