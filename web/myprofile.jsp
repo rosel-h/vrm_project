@@ -20,11 +20,10 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 
 </head>
 <body>
@@ -41,13 +40,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="welcome.jsp">Home</a>
+                    <a class="nav-link" href="Welcome">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">My Articles</a>
+                    <a class="nav-link" href="myArticles">My Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
@@ -68,7 +67,7 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
                     <div class="col-md-4 offset-4" >
-                        <img src="avatars/${avatarFile}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
                     </div>
                     <br>
                     <h5>My VRM Profile</h5>
@@ -136,7 +135,8 @@
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
-                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">${user.getDescription()}
+                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">
+${user.getDescription()}
                         </textarea>
                     </div>
                 </div>
@@ -189,6 +189,10 @@
                         </span>
                     </div>
                 </div>
+
+                <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+                <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
                 <script>
                     $(document).on('click', '.browse', function () {
                         var file = $(this).parent().parent().parent().find('.file');

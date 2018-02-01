@@ -27,33 +27,19 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <title>Login VRM</title>
+    <link href="vendor/css/bootstrap-social.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Login to VRM</title>
 </head>
 <body>
-<%--<div class="container">--%>
-<%--<form class="form-signin" method="post" action="/Login">--%>
-<%--<h2 class="form-signin-heading">Please Log On</h2>--%>
-<%--<label for="inputUser" class="sr-only">Username</label>--%>
-<%--<input type="user" name="username" id="inputUser" class="form-control" placeholder="Username" required--%>
-<%--autofocus>--%>
-<%--<label for="inputPassword" class="sr-only">Password</label>--%>
-<%--<input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password" required>--%>
-<%--<div class="checkbox">--%>
-<%--<label>--%>
-<%--<input type="checkbox" value="remember-me"> Remember me--%>
-<%--</label>--%>
-<%--<div style="color:red">${errorMessage}</div>--%>
-<%--</div>--%>
-<%--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>--%>
-<%--</form>--%>
-<%--</div>--%>
 
 <div class="container">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Sign In</div>
-                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="mailto:vrm@vrm.com">Forgot password?</a>
                 </div>
             </div>
             <div style="padding-top:30px" class="panel-body">
@@ -81,7 +67,7 @@
                         <div class="col-sm-12 controls">
                             <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
                             <button id="btn-fblogin" class="btn btn-primary" type ="button" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
-                                Continue with Facebook
+                                Connect via Facebook
                             </button>
                         </div>
                     </div>

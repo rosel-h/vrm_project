@@ -151,4 +151,8 @@ public class User {
         }
         return o;
     }
+
+    public String toString() {
+        return "username=" + username + ",fname=" + fname + ",lname=" + lname + ",dob=" + dateOfBirth + ",country=" + country + ",description=" + description + ",avatar=" + avatar_icon;
+    }
 }

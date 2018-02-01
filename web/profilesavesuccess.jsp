@@ -34,7 +34,7 @@
             <script type="text/javascript">
 
                 // Total seconds to wait
-                var seconds = 6;
+                var seconds = 4;
 
                 function countdown() {
                     seconds = seconds - 1;

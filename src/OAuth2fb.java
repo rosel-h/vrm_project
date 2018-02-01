@@ -27,8 +27,8 @@ public class OAuth2fb extends HttpServlet {
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
     private static final String scope = "email";
     private String stateParam;
+    User user;
 
-    private String avatarFile = "";
     private String username = "";
     private String fbUserEmail = "";
     private String fbFirstName = "";
@@ -79,10 +79,10 @@ public class OAuth2fb extends HttpServlet {
                 }
 
                 sess.setAttribute("personLoggedIn", username);
-                sess.setAttribute("avatarFile", avatarFile);
+                sess.setAttribute("user", user);
+
 
                 System.out.println(username);
-                System.out.println(avatarFile);
                 RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
                 rs.forward(request, response);
 
@@ -170,7 +170,6 @@ public class OAuth2fb extends HttpServlet {
 
     public boolean checkFbUser(String email, String firstName, String lastName) {
         boolean loginStatus = false;
-        User user;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -189,9 +188,7 @@ public class OAuth2fb extends HttpServlet {
                 dao.addUserFB(firstName, lastName, email);
             } else {
                 loginStatus = true;
-                avatarFile = user.getAvatar_icon();
                 username = user.getUsername();
-                System.out.println("avatar file is " + avatarFile);
             }
         } catch (Exception e) {
             e.printStackTrace();
