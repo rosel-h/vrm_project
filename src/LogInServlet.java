@@ -71,7 +71,7 @@ public class LogInServlet extends HttpServlet {
 
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             try {
-                sess.setAttribute("user",new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"))).getUserByUsername(username));
+                sess.setAttribute("user",new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("/WEB-INF/mysql.properties"))).getUserByUsername(username));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
