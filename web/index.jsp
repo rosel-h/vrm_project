@@ -68,8 +68,7 @@
                     <h1>Welcome to VRM</h1>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
-                    <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding: 1%">
+                    <div class="btn-group btn-group-justified col-xs-10" role="group">
                         <div style="padding: 1%;margin: 1%">
                             <a href="Signin" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">

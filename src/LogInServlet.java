@@ -58,23 +58,18 @@ public class LogInServlet extends HttpServlet {
             }
 
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
-            try {
-                sess.setAttribute("user",new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties"))).getUserByUsername(username));
-            } catch (SQLException e) {
-                e.printStackTrace();
             sess.setAttribute("user", user);
 
-            if (duration != null) {
-                System.out.println("setting maximum session duration");
-                sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity
-                System.out.println("max session set to " + sess.getMaxInactiveInterval());
-            }
+                if (duration != null) {
+                    System.out.println("setting maximum session duration");
+                    sess.setMaxInactiveInterval(20); // log out after a month of inactivity
+                    System.out.println("max session set to " + sess.getMaxInactiveInterval());
+                }
 
             // Mr Meads generates a long random key for csrfToken
             sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
-
         } else {
             request.setAttribute("errorMessage", "Invalid Username or Password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
