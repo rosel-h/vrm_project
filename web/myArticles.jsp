@@ -47,15 +47,6 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $('#wOther').summernote({
-                minHeight: 20
-            });
-        });
-
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>
     <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {

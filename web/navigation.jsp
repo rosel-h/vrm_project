@@ -36,7 +36,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Welcome to the Community</title>
+    <%--<title>Welcome to the Community</title>--%>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
