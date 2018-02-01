@@ -66,7 +66,7 @@ public class UserDAO implements AutoCloseable {
     }
 
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
-        return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"));
+        return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"));
     }
 
     public void addUserFB(String fName, String lName, String email) {

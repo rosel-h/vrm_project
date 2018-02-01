@@ -30,53 +30,88 @@ public class CheckPasswordServlet extends HttpServlet {
         String password = req.getParameter("password");
         String cPassword = req.getParameter("cPassword");
 
-        boolean hasUppercase = false;
-        boolean hasLowercase = false;
-        boolean hasInteger = false;
+        System.out.println("CheckPasswordServlet enter line 33: password=" + password + ", cPassword=" + cPassword);
+
+        String error = "";
+        if (password.equals("")) {
+            if (cPassword.equals("")) {
+                //both empty
+                error = "999";
+            }else {
+                //psw empty
+                error = "888";
+            }
+        }else {
+            if (cPassword.equals("")) {
+                //check psw, confirm empty
+                error = checkPassword(password) + "0";
+            }else {
+                //check psw and confirm
+                error = checkPassword(password) + "0" + checkPassword(cPassword);
+
+                if (error.equals("000")) {
+                    if (!password.equals(cPassword)) {
+                        error = "0004";
+                    }
+                }else if (error.charAt(0) == '0') {
+                    error = "0004";
+                }
+
+            }
+        }
+
+        System.out.println("CheckPasswordServlet enter line 55: error=" + error);
+        resp.getWriter().write(error);
+
+    }
+
+    public int checkPassword(String password) {
+
+        int msg = 0;
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        boolean hasInt = false;
         boolean hasFour = false;
+
         for (int i = 0; i < password.length(); i++) {
             if (password.charAt(i) >= 'A' && password.charAt(i) <= 'Z') {
-                hasUppercase = true;
+                hasUpper = true;
             }
             if (password.charAt(i) >= 'a' && password.charAt(i) <= 'z') {
-                hasLowercase = true;
+                hasLower = true;
             }
             if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
-                hasInteger = true;
+                hasInt = true;
             }
             if (password.length() >= 4) {
                 hasFour = true;
             }
         }
 
-        resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-        resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-        if (!password.equals("") && cPassword.equals("")) {
-            if (!hasUppercase) {
-                resp.getWriter().write("At least contain 1 UPPERCASE character!");
-            } else if (!hasLowercase) {
-                resp.getWriter().write("At least contain 1 lowercase character!");
-            } else if (!hasInteger) {
-                resp.getWriter().write("At least contain 1 digit number!");
-            } else if (!hasFour) {
-                resp.getWriter().write("Minimum length of password is 4!");
-            } else {
-                resp.getWriter().write("Password is valid!");
-            }
+        if (!hasUpper) {
+            msg = 1;
+        }else if (!hasLower) {
+            msg = 2;
+        }else if (!hasInt) {
+            msg = 3;
+        }else if (!hasFour) {
+            msg = 4;
         }
 
-        System.out.println("CheckPasswordServlet enter line 57: " + password + "," + cPassword);
-        resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-        resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-        if (!cPassword.equals("")) {
-            if (!cPassword.equals(password)) {
-                resp.getWriter().write("Two passwords are different!");
-            } else {
-                resp.getWriter().write("Password is valid!");
-            }
-        }
+        return msg;
 
     }
+
+    public boolean checkTwoPasswords(String psw, String cpsw) {
+        boolean msg = false;
+        if (psw.equals(cpsw)) {
+            msg = true;
+        }
+
+        return msg;
+    }
+
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

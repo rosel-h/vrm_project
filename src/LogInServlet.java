@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +70,11 @@ public class LogInServlet extends HttpServlet {
             }
 
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            try {
+                sess.setAttribute("user",new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"))).getUserByUsername(username));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             sess.setAttribute("avatarFile", avatarFile);
             RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
             rs.forward(request, response);
