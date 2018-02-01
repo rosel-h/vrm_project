@@ -30,6 +30,8 @@ public class OAuth2fb extends HttpServlet {
     User user;
 
     private String username = "";
+
+    //used for authentication and account creation
     private String fbUserEmail = "";
     private String fbFirstName = "";
     private String fbLastName = "";
@@ -37,69 +39,67 @@ public class OAuth2fb extends HttpServlet {
     @Override
     //listens to requests from out server
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String url = "https://www.facebook.com/dialog/oauth?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope;
-            response.sendRedirect(url);
+//            String url = "https://www.facebook.com/dialog/oauth?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope;
+//            response.sendRedirect(url);
         //        window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'
     }
 
     //setup get request to listen for FBServer contact - this is used for the actual token creation
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getParameter("type") != stateParam) {
-            response.sendError(404);
-        }
+//        if (request.getParameter("type") != stateParam) {
+//            response.sendError(404);
+//        } else {
+        connectFB(request, response);
+        if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
+            System.out.println("Facebook User Exists in Database");
 
-        else {
-            connectFB(request, response);
-            if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
-                System.out.println("Facebook User Exists in Database");
+            HttpSession sess = request.getSession(true);
 
-                HttpSession sess = request.getSession(true);
+            Map<String, String> jsonMap = new HashMap<>();
+            jsonMap.put("username", username);
+            System.out.println("jsonmap string" + jsonMap.toString());
 
-                Map<String, String> jsonMap = new HashMap<>();
-                jsonMap.put("username", username);
-                System.out.println("jsonmap string" + jsonMap.toString());
+            String jsonText = JSONValue.toJSONString(jsonMap);
+            System.out.println("LoginServlet json text - " + jsonText);
+            String sessiont_id = sess.getId();
+            System.out.println("LoginServlet: " + sessiont_id);
+            ServletContext servletContext = getServletContext();
+            String filePath = servletContext.getRealPath("WEB-INF/Sessions");
+            File sessionFolder = new File(filePath);
 
-                String jsonText = JSONValue.toJSONString(jsonMap);
-                System.out.println("LoginServlet json text - " + jsonText);
-                String sessiont_id = sess.getId();
-                System.out.println("LoginServlet: " + sessiont_id);
-                ServletContext servletContext = getServletContext();
-                String filePath = servletContext.getRealPath("WEB-INF/Sessions");
-                File sessionFolder = new File(filePath);
+            if (!sessionFolder.exists()) {
+                sessionFolder.mkdir();
+            }
 
-                if (!sessionFolder.exists()) {
-                    sessionFolder.mkdir();
-                }
+            String fileName = filePath + "\\" + sessiont_id + ".json";
+            System.out.println("LoginServlet enter line 53: " + fileName);
+            File sessionFile = new File(fileName);
 
-                String fileName = filePath + "\\" + sessiont_id + ".json";
-                System.out.println("LoginServlet enter line 53: " + fileName);
-                File sessionFile = new File(fileName);
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
+                bufferedWriter.write(jsonText);
+            }
 
-                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
-                    bufferedWriter.write(jsonText);
-                }
+            sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
+            sess.setAttribute("personLoggedIn", username);
+            sess.setAttribute("user", user);
 
-                sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
-                sess.setAttribute("personLoggedIn", username);
-                sess.setAttribute("user", user);
-
-                String url = "Welcome";
-                response.sendRedirect(url);
+            String url = "Welcome";
+            response.sendRedirect(url);
 
 //                RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
 //                rs.forward(request, response);
 
 
-            } else {
-                request.setAttribute("successMessage", "Sign up successfully!");
-                request.setAttribute("directMessage", "You will be directed to login page");
-                request.setAttribute("directErrorMessage", "true");
-                request.setAttribute("success", true);
-                request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
-                System.out.println("Success = " + true);
-            }
+        } else {
+            request.setAttribute("successMessage", "Sign up successfully!");
+            request.setAttribute("directMessage", "You will be directed to login page");
+            request.setAttribute("directErrorMessage", "true");
+            request.setAttribute("success", true);
+            request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
+            System.out.println("Success = " + true);
         }
+//        }
     }
 
     private void connectFB(HttpServletRequest request, HttpServletResponse response) {
