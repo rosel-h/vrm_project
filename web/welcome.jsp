@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: vwen239
@@ -104,10 +105,13 @@
             position: relative;
         }
     </style>
-
 </head>
-
 <body>
+
+<c:if test="${personLoggedIn ==null}">
+    <c:redirect url="Index"/>
+</c:if>
+
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
