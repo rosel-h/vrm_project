@@ -52,3 +52,5 @@ ALTER TABLE vrm_comments_on_comments Modify COLUMN child_comment_id INT auto_inc
 ALTER TABLE vrm_comments_on_articles Modify COLUMN comment_id INT auto_increment;
 
 ALTER TABLE vrm_users Modify COLUMN avatar_icon VARCHAR(500) NOT NULL;
+
+ALTER TABLE vrm_comments_on_articles ADD parent_comment_id INT;

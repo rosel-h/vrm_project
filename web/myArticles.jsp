@@ -34,10 +34,18 @@
 
     <script>
         $(document).ready(function () {
-            $('#summernote').summernote();
+            $('#summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
         });
-
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
     <script>
         $(document).ready(function () {
@@ -182,7 +190,7 @@
 
                                             <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
                                                                style="width:30px; display: inline-block">
-                                                <h5 class="">${commentList.getCommentAuthor()}
+                                                <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
                                                     <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                                 </h5>
                                                 <p>${commentList.getContent()}</p>

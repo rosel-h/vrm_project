@@ -36,10 +36,18 @@
 
     <script>
         $(document).ready(function () {
-            $('#summernote').summernote();
+            $('#summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
         });
-
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
     <script>
         $(document).ready(function () {
@@ -48,7 +56,7 @@
             });
         });
 
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
+//        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
     <!-- include sorting by title, username, date -->
     <script>
@@ -173,10 +181,10 @@
                                 <div class=""><p>Comments</p></div>
                                     <%--first comments--%>
                                 <c:forEach var="commentList" items="${commentList}">
-                                    <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
-                                        <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
-                                                           style="width:30px; display: inline-block">
-                                            <h5 class="">${commentList.getCommentAuthor()}
+                                    <c:if test="${articleList.getArticleID()==commentList.getArticleID() }">
+                                        <div class="">
+                                            <img src="avatars/${commentList.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
+                                            <h5 class=""  style="display: inline-block">${commentList.getCommentAuthor()}
                                                 <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                             </h5>
                                             <p>${commentList.getContent()}</p>
@@ -197,7 +205,6 @@
                                     <form method="post" action="/Articles">
                                         <div class="form-group">
                                             <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                            <label for="summernote">Content</label>
                                             <textarea id="summernote" name="newComment" class="form-control" rows="10"
                                                       required></textarea>
                                             <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
