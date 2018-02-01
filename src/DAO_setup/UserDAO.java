@@ -131,6 +131,51 @@ public class UserDAO implements AutoCloseable {
         return user;
     }
 
+    public boolean deleteUser(String username) {
+        boolean deleteSuccess = false;
+
+        try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users SET status = ? WHERE username = ?;")) {
+
+            ps.setString(1,"inactive");
+            ps.setString(2, username);
+
+            ps.executeUpdate();
+
+            deleteSuccess = true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return deleteSuccess;
+    }
+
+    public boolean updateUser(User user) {
+        boolean updateSuccess = false;
+
+        try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
+                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
+
+            ps.setString(1,user.getFname());
+            ps.setString(2,user.getLname());
+            ps.setString(3,user.getDateOfBirth());
+            ps.setString(4,user.getCountry());
+            ps.setString(5,user.getDescription());
+            ps.setString(6,user.getAvatar_icon());
+            ps.setString(7,user.getUsername());
+
+            ps.executeUpdate();
+
+            updateSuccess = true;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateSuccess;
+    }
+
     @Override
     public void close() throws Exception {
         System.out.println("logging out of UserDao connection");

@@ -1,4 +1,6 @@
 import DAO_setup.MYSQLDatabase;
+import DAO_setup.User;
+import DAO_setup.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +20,6 @@ import java.sql.SQLException;
  **/
 public class CheckUsernameServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("CheckUsernameServlet enter sign up servlet");
@@ -30,51 +31,25 @@ public class CheckUsernameServlet extends HttpServlet {
         }
 
         System.out.println("CheckUsernameServlet Connection attempt...");
-        //plan A:
-/*        Properties dbProps = new Properties();
-        ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
-        try (FileInputStream fis = new FileInputStream(filepath)) {
-            dbProps.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        //plan B:
-        HttpSession session = req.getSession(true);
-        System.out.println("CheckUsernameServlet enter line 44:" + session.getId());
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        if (mysqlDatabase == null) {
-            try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        try(Connection conn = mysqlDatabase.getConnection()) {
 
+        try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
             System.out.println("CheckUsernameServlet Connection Successful");
 
             String username = req.getParameter("username");
-            System.out.println("CheckUsernameServlet enter line 57: " + username);
 
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users WHERE username = ?;")) {
-                stmt.setString(1, username);
-                try (ResultSet r = stmt.executeQuery()) {
-                    while (r.next()) {
-                        System.out.println("CheckUsernameServlet enter line 62: " + r);
-                        resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-                        resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-                        resp.getWriter().write("Username already exists");
-
-                    }
-                }
+            User user = userDAO.getUserByUsername(username);
+            System.out.println("CheckUsernameServlet enter line 48: " + username);
+            if (user != null) {
+                resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+                resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+                resp.getWriter().write("Username already exists");
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
 
     }
 
