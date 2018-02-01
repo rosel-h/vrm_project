@@ -135,9 +135,20 @@
         <servlet-name>AboutUs</servlet-name>
         <jsp-file>/aboutus.jsp</jsp-file>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>AboutUs</servlet-name>
         <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Privacy</servlet-name>
+        <jsp-file>/privacy.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Privacy</servlet-name>
+        <url-pattern>/privacy</url-pattern>
     </servlet-mapping>
 
 

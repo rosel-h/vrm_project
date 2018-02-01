@@ -54,7 +54,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
+                <div class="page-heading">
                     <h1>Welcome to VRM</h1>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
