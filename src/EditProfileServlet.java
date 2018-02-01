@@ -1,6 +1,7 @@
 import DAO_setup.BlogDAO;
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
+import DAO_setup.UserDAO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,48 +36,28 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(false);
         System.out.println("EditProfileServlet enter line 39: session id = " + session.getId());
-        String operation = (String) session.getAttribute("operation");
-        if (operation == null) {
-            operation = "view";
-        }
-        System.out.println("EditProfileServlet enter line 43: operation = " + operation);
 
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        if (mysqlDatabase == null) {
-            try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        if (session == null) {
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
 
-        ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
-        String sessionID = session.getId();
-        String seesionFileName = sessionFilePath + "\\" + sessionID + ".json";
-        JSONObject userJson;
-        File sessionFile = new File(seesionFileName);
+        } else {
+            String username = (String) session.getAttribute("personLoggedIn");
 
-        if (sessionFile.exists()) {
-            System.out.println("session file exists");
-            userJson = User.readJSONFile(seesionFileName);
-            System.out.println(JSONObject.toJSONString(userJson));
-            String username = String.valueOf(userJson.get("username"));
-            System.out.println("line 66 - EditProfile, username is");
-            if (ServletFileUpload.isMultipartContent(req)) {
-                try  {
-                    BlogDAO dao = new BlogDAO(mysqlDatabase);
-                    System.out.println("EditProfileServlet enter line 69:");
-                    User user = dao.getOneUser(username);
+            try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+                System.out.println("EditProfileServlet Connection Successful");
+                System.out.println("EditProfileServlet enter line 50: username=" + username);
+                User user = userDAO.getUserByUsername(username);
 
-                    System.out.println("EditProfileServlet enter line 71: username = " + username);
+                if (ServletFileUpload.isMultipartContent(req)) {
+                    System.out.println("EditProfileServlet enter line 53: multipartcontent");
                     //if user uploads profile image, set maxMemSize and maxFileSize allowed
                     final int maxMemSize = 10 * 1024 * 1024;
                     final int maxFileSize = 50 * 1024 * 1024;
 
                     //get the path of directory which stores all avatar images
+                    ServletContext servletContext = getServletContext();
                     String filePath = servletContext.getRealPath("/avatars");
                     System.out.println("EditProfileServlet enter line 76: filePath = " + filePath);
                     DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -96,6 +77,7 @@ public class EditProfileServlet extends HttpServlet {
                     String description = "";
                     String avatar = "";
 
+                    //read new
                     try {
                         System.out.println("EditProfileServlet enter line 95:");
                         List fileItems = upload.parseRequest(req);
@@ -158,15 +140,13 @@ public class EditProfileServlet extends HttpServlet {
                             }
                         }
 
-
                         if (uploadFileName.equals("")) {
                             if (avatar.equals("")) {
                                 if (user.getAvatar_icon().equals("")) {
                                     avatar = "avatar_01.png";
-                                }else {
+                                } else {
                                     avatar = user.getAvatar_icon();
                                 }
-
                             }
                         } else {
                             avatar = username + "_" + uploadFileName;
@@ -207,70 +187,37 @@ public class EditProfileServlet extends HttpServlet {
                             }
                         }
 
-
-                        Connection conn = mysqlDatabase.getConnection();
-                        try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
-                                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
-                            stmt.setString(1, fname);
-                            stmt.setString(2, lname);
-                            stmt.setString(3, dob);
-                            stmt.setString(4, country);
-                            stmt.setString(5, description);
-                            stmt.setString(6, avatar);
-                            stmt.setString(7, username);
-
-                            stmt.executeUpdate();
-
-                            req.setAttribute("successMessage", "Save profile successfully");
-                            user.setAvatar_icon(avatar);
-                            req.setAttribute("user", user);
-                            session.setAttribute("operation", "edit");
-                            session.setAttribute("avatarFile", avatar);
-                            req.getRequestDispatcher("profilesavesuccess.jsp").forward(req, resp);
-
-                        } catch (ServletException e) {
-                            e.printStackTrace();
-                        }
-
                     } catch (FileUploadException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                    user.setFname(fname);
+                    user.setLname(lname);
+                    user.setDateOfBirth(dob);
+                    user.setCountry(country);
+                    user.setDescription(description);
+                    user.setAvatar_icon(avatar);
 
-            } else {
-                try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
-                    User user = dao.getOneUser(username);
-//                    String password = user.getPassword();
-//                    String fname = user.getFname();
-//                    String lname = user.getLname();
-//                    String dob = user.getDateOfBirth();
-//                    String country = user.getCountry();
-//                    String description = user.getDescription();
+                    boolean updateSuccess = userDAO.updateUser(user);
+                    if (updateSuccess) {
+                        System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
+                        req.setAttribute("successMessage", "Save profile successfully");
+                        req.getRequestDispatcher("profilesavesuccess.jsp").forward(req, resp);
+                    }
 
+                }else {
+                    System.out.println("EditProfileServlet ener line 207: not multipartcontent");
                     req.setAttribute("user", user);
-                    session.setAttribute("operation", "view");
                     req.getRequestDispatcher("myprofile.jsp").forward(req, resp);
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
 
 
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } else {
-            System.out.println("EditProfileServlet enter line 247: session doesnt exist");
         }
-
 
     }
 

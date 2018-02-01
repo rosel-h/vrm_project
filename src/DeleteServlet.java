@@ -1,6 +1,7 @@
 import DAO_setup.BlogDAO;
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
+import DAO_setup.UserDAO;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.jooq.tools.json.JSONObject;
 
@@ -24,59 +25,31 @@ import java.sql.SQLException;
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(true);
-        System.out.println("DeleteServlet enter line 26: session id = " + session.getId());
+        HttpSession session = req.getSession(false);
 
-        MYSQLDatabase mysqlDatabase = (MYSQLDatabase) session.getAttribute("database");
-        if (mysqlDatabase == null) {
-            try {
-                mysqlDatabase = new MYSQLDatabase(getServletContext().getRealPath("mysql.properties"));
+        if (session == null) {
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+        }else {
+            String username = (String) session.getAttribute("personLoggedIn");
+            System.out.println("DeleteServlet enter line 26: session id = " + session.getId() + ", username=" + username);
+
+            try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+                System.out.println("DeleteServlet Connection Successful");
+
+                boolean deleteSuccess =  userDAO.deleteUser(username);
+                if (deleteSuccess) {
+                    System.out.println("DeleteServlet enter line 41: delete success");
+                    session.invalidate();
+                    req.getRequestDispatcher("Main").forward(req, resp);
+                }
+
             } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
-        String sessionID = session.getId();
-        String seesionFileName = sessionFilePath + "\\" + sessionID + ".json";
-        JSONObject userJson;
-
-        File sessionFile = new File(seesionFileName);
-        System.out.println("DeleteServlet enter line 46:");
-        if (sessionFile.exists()) {
-            System.out.println("DeleteServlet enter line 48:");
-            userJson = User.readJSONFile(seesionFileName);
-            System.out.println(JSONObject.toJSONString(userJson));
-            String username = String.valueOf(userJson.get("username"));
-            if (true) {
-                try (BlogDAO dao = new BlogDAO(mysqlDatabase)) {
-                    System.out.println("EditProfileServlet enter line 69:");
-                    User user = dao.getOneUser(username);
-
-                    try (Connection conn = mysqlDatabase.getConnection()){
-                        try (PreparedStatement stmt = conn.prepareStatement("UPDATE vrm_users " +
-                                "SET status = ? WHERE username = ?;")) {
-
-                            stmt.setString(1,"inactive");
-                            stmt.setString(2, username);
-
-                            stmt.executeUpdate();
-
-                            req.getRequestDispatcher("index.jsp").forward(req, resp);
-
-                        } catch (ServletException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     @Override
