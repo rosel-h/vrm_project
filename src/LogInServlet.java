@@ -55,10 +55,8 @@ public class LogInServlet extends HttpServlet {
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
                 bufferedWriter.write(jsonText);
             }
-
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("user", user);
-
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
 

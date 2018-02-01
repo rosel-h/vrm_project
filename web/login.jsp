@@ -66,9 +66,12 @@
                     <div style="margin-top:10px" class="form-group">
                         <div class="col-sm-12 controls">
                             <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
-                            <button id="btn-fblogin" class="btn btn-primary" type ="button" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
-                                Connect via Facebook
-                            </button>
+                            <form action="" method="post">
+                                <input type="hidden" name="csrftoken" value=${csrfToken}>
+                                <button id="btn-fblogin" class="btn btn-primary" type ="button" onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
+                                    Connect via Facebook
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </form>

@@ -9,24 +9,26 @@
 <html>
 <head>
     <title>Error | VRM Blog</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <link href="vendor/css/index.css" rel="stylesheet">
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!-- Custom styles for this template -->
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
+    <!-- Custom scripts for this template -->
+    <script src="vendor/js/clean-blog.min.js"></script>
+    <script src="vendor/js/featured.js"></script>
 </head>
 <body>
 <header class="masthead" style="background-image: url('img/Edge-Of-World.jpg')">
@@ -36,7 +38,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
                 <div class="site-heading">
                     <p>You are reaching the edge of the world!</p>
-                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">previous page</a> or go back to your <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
+                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a> or go back to your <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
                 </div>
             </div>
         </div>

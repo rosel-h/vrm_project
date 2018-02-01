@@ -57,7 +57,6 @@ public class OAuth2fb extends HttpServlet {
                 jsonMap.put("username",  username);
                 System.out.println("jsonmap string" + jsonMap.toString());
 
-
                 String jsonText = JSONValue.toJSONString(jsonMap);
                 System.out.println("LoginServlet json text - " + jsonText);
                 String sessiont_id = sess.getId();
@@ -80,7 +79,6 @@ public class OAuth2fb extends HttpServlet {
 
                 sess.setAttribute("personLoggedIn", username);
                 sess.setAttribute("user", user);
-
                 System.out.println(username);
                 RequestDispatcher rs = request.getRequestDispatcher("Welcome");
                 rs.forward(request, response);
@@ -165,7 +163,6 @@ public class OAuth2fb extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 
     public boolean checkFbUser(String email, String firstName, String lastName) {
         boolean loginStatus = false;
