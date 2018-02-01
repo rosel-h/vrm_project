@@ -117,7 +117,7 @@
         </c:if>
     </div>
 
-    <table class="table table-striped sorttable" id="articletable">
+    <table class="table table-striped sorttable" id="articletable">f
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">

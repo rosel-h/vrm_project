@@ -63,6 +63,9 @@
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
             </ul>
