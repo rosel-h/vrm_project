@@ -364,6 +364,7 @@ public class BlogDAO implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
+        System.out.println("BlogDAO connection closing!");
         this.conn.close();
     }
 }
