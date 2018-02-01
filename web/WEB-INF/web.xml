@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-
     <servlet>
         <servlet-name>LoadArticles</servlet-name>
         <servlet-class>LoadArticlesServlet</servlet-class>
@@ -130,6 +129,56 @@
     <servlet-mapping>
         <servlet-name>MyArticles</servlet-name>
         <url-pattern>/myArticles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AboutUs</servlet-name>
+        <jsp-file>/aboutus.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AboutUs</servlet-name>
+        <url-pattern>/about</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Privacy</servlet-name>
+        <jsp-file>/privacy.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Privacy</servlet-name>
+        <url-pattern>/privacy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignupPage</servlet-name>
+        <jsp-file>/signup.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignupPage</servlet-name>
+        <url-pattern>/Signuppage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginPage</servlet-name>
+        <jsp-file>/login.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginPage</servlet-name>
+        <url-pattern>/Signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NewArticle</servlet-name>
+        <jsp-file>/newArticle.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewArticle</servlet-name>
+        <url-pattern>/NewArticle</url-pattern>
     </servlet-mapping>
 
 

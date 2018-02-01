@@ -38,7 +38,7 @@ public class SearchArticleServlet extends HttpServlet {
         }
 
         ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
+        String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
@@ -46,7 +46,7 @@ public class SearchArticleServlet extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
-        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("SearchArticleServlet enter line 50: ");
 
             if (sessionFile.exists()) {

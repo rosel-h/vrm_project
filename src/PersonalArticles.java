@@ -28,7 +28,7 @@ public class PersonalArticles extends HttpServlet {
         //get username details
         HttpSession session = req.getSession(true);
         ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
+        String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
@@ -36,7 +36,7 @@ public class PersonalArticles extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
-        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("Personal Articles Signup done");
 
             if (sessionFile.exists()) {

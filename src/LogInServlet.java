@@ -53,7 +53,7 @@ public class LogInServlet extends HttpServlet {
             String sessiont_id = sess.getId();
             System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
-            String filePath = servletContext.getRealPath("/Sessions");
+            String filePath = servletContext.getRealPath("WEB-INF/Sessions");
             System.out.println("LoginServlet enter line 55: filePath= " + filePath);
             File sessionFolder = new File(filePath);
 
@@ -98,7 +98,7 @@ public class LogInServlet extends HttpServlet {
 
         System.out.println("LoginServlet Connection attempt...");
 
-        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserStandard(username,pass);
 

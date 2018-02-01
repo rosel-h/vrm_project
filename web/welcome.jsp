@@ -121,7 +121,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="welcome.jsp">Home</a>
+                    <a class="nav-link" href="Main">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
@@ -141,7 +141,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -156,20 +156,20 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
-                            <a href="/myArticles" class="btn btn-default"
+                            <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="/Articles" class="btn btn-default"
+                            <a href="Articles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Community</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="newArticle.jsp" class="btn btn-danger"
+                            <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
                             </a>
@@ -238,19 +238,7 @@
     </div>
 </div>
 
-<!-- Footer -->
-<div class="container">
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <hr>
-                    <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
+<%@include file="footer.jsp" %>
 
 <script>
     Document.onload = loadRandomImage();

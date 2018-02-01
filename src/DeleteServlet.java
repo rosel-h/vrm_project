@@ -33,7 +33,7 @@ public class DeleteServlet extends HttpServlet {
             String username = (String) session.getAttribute("personLoggedIn");
             System.out.println("DeleteServlet enter line 26: session id = " + session.getId() + ", username=" + username);
 
-            try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+            try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
                 System.out.println("DeleteServlet Connection Successful");
 
                 boolean deleteSuccess =  userDAO.deleteUser(username);

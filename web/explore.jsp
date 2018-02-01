@@ -13,7 +13,7 @@
 <%--<%@ page import ="DAO_setup" %>--%>
 <html>
 <head>
-    <title>VRM Explore(in JSP)</title>
+    <title>Explore Community</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -29,10 +29,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- include summernote css/js -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -90,7 +86,7 @@
     <%@include file="navigation.jsp" %>
     </c:when>
     <c:otherwise>
-        <%@include file="test.jsp" %>
+        <%@include file="guestnavigation.jsp" %>
     </c:otherwise>
 </c:choose>
 <%--Load articles --%>
@@ -188,6 +184,7 @@
                                                 <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                             </h5>
                                             <p>${commentList.getContent()}</p>
+                                            <%--delete comment if user is logged in--%>
                                             <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                                 <form method="post" action="/Articles">
                                                     <button type="submit" class="btn btn-xs">delete comment</button>
@@ -197,6 +194,24 @@
                                                            value="${commentList.getCommentID()}">
                                                 </form>
                                             </c:if>
+
+                                            <%--nested comment second degree--%>
+                                            <c:if test="${commentList.hasChildren()}">
+
+                                                <% System.out.println("in children");%>
+
+                                                <c:forEach var="children" items="${commentList.getChildren()}">
+                                                    <%System.out.println("in for loop");%>
+                                                    <div class="nested" style="padding-left: 10%">
+                                                        <img src="avatars/${children.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
+                                                        <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
+                                                            <small><i>Posted on ${children.getDatePublished()}</i></small>
+                                                        </h5>
+                                                        <p>${children.getContent()}</p>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
+
                                         </div>
                                         <br>
                                     </c:if>

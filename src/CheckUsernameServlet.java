@@ -32,7 +32,7 @@ public class CheckUsernameServlet extends HttpServlet {
 
         System.out.println("CheckUsernameServlet Connection attempt...");
 
-        try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("CheckUsernameServlet Connection Successful");
 
             String username = req.getParameter("username");

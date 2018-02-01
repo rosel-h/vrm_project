@@ -47,15 +47,6 @@
             });
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $('#wOther').summernote({
-                minHeight: 20
-            });
-        });
-
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>
     <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {
@@ -86,7 +77,7 @@
         <%@include file="navigation.jsp" %>
     </c:when>
     <c:otherwise>
-        <%@include file="test.jsp" %>
+        <%@include file="guestnavigation.jsp" %>
     </c:otherwise>
 </c:choose>
 
@@ -153,7 +144,7 @@
                                     <div>Written by ${myArticles.getUsername()}, published
                                         on ${myArticles.getDate()}</div>
                                     <%--<c:if test="${personLoggedIn == myArticles.getUsername()}">--%>
-                                        <form class="form-inline" action="/Articles" method="POST">
+                                        <form class="form-inline" action="Articles" method="POST">
                                             <button style="float: right" type="submit" class="btn btn-danger pull-right">
                                                 Delete
                                             </button>
@@ -161,7 +152,7 @@
                                             <input type="hidden" name="articleId" value="${myArticles.getArticleID()}">
                                         </form>
                                         <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                        <form class="form-inline" action="/editArticles" method="post">
+                                        <form class="form-inline" action="editArticles" method="post">
 
                                             <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
 

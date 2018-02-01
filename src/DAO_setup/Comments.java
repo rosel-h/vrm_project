@@ -1,5 +1,8 @@
 package DAO_setup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by rher490 on 24/01/2018.
  * This will show both comments on articles and on comments
@@ -10,6 +13,7 @@ public class Comments {
     public String commentAuthor;
     public String content;
     public String avatarIcon;
+    List<Comments> comments;
 
     public String getAvatarIcon() {
         return avatarIcon;
@@ -25,7 +29,7 @@ public class Comments {
         this.commentAuthor = commentAuthor;
         this.content = content;
         this.avatarIcon = avatarIcon;
-
+        this.comments = new ArrayList<>();
     }
 
     //does nothing
@@ -71,5 +75,23 @@ public class Comments {
                 ", commentAuthor='" + commentAuthor + '\'' +
                 ", content='" + content + '\'' +
                 '}';
+    }
+    /*add comment to the list*/
+    public boolean addChild (Comments comment){
+        comments.add(comment);
+        System.out.println("Comments class: "+comment.getCommentID()+" has been added as a child of "+this.getCommentID());
+        System.out.println(this.hasChildren());
+        return false;
+    }
+
+    public boolean hasChildren(){
+        if(comments.size()>=1){
+            return true;
+        }
+        return false;
+    }
+
+    public List<Comments> getChildren(){
+        return comments;
     }
 }

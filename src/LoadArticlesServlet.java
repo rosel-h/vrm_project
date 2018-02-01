@@ -64,7 +64,7 @@ public class LoadArticlesServlet extends HttpServlet {
 //        }
 
         ServletContext servletContext = getServletContext();
-        String sessionFilePath = servletContext.getRealPath("/Sessions");
+        String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
@@ -73,7 +73,7 @@ public class LoadArticlesServlet extends HttpServlet {
         String user = null;
         String op = req.getParameter("operation");
 
-        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("mysql.properties")))) {
+        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
 
             if (sessionFile.exists()) {
@@ -151,11 +151,14 @@ public class LoadArticlesServlet extends HttpServlet {
             System.out.println("LoadArticlesServlet Articles created");
             List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
             System.out.println("LoadArticlesServlet Comments on articles uploaded. Size: " + firstDegreeComments.size());
+            List<CommentOnArticles> commentsWithChildren = CommentOnArticles.pairCommentsRelationship(firstDegreeComments);
+            System.out.println("LoadArticlesServlet Comments as nestedshape. Size: " + commentsWithChildren.size());
 //            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
 //            System.out.println("LoadArticlesServlet nestedcomments created. Size: " + nestedComments.size());
             req.setAttribute("articleList", articles);
             req.setAttribute("userList", users);
-            req.setAttribute("commentList", firstDegreeComments);
+            req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
+
 //            req.setAttribute("nestedList", nestedComments);
 
             req.getRequestDispatcher("explore.jsp").forward(req, resp);
@@ -166,4 +169,6 @@ public class LoadArticlesServlet extends HttpServlet {
         }
 
     }
+
+
 }

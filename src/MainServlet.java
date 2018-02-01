@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
         HttpSession sess = req.getSession(true);
 
         ServletContext s = getServletContext();
-        String filepath = s.getRealPath("mysql.properties");
+        String filepath = s.getRealPath("WEB-INF/mysql.properties");
         try {
             MYSQLDatabase mysqlDatabase = new MYSQLDatabase(filepath);
             sess.setAttribute("database",mysqlDatabase);
@@ -48,7 +48,7 @@ public class MainServlet extends HttpServlet {
         }else {
 
             ServletContext servletContext = getServletContext();
-            String filePath = servletContext.getRealPath("/Sessions");
+            String filePath = servletContext.getRealPath("WEB-INF/Sessions");
 
             String sessiont_id = sess.getId();
             String fileName = filePath + "\\" + sessiont_id + ".json";
