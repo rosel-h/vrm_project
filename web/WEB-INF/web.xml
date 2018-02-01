@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-
     <servlet>
         <servlet-name>LoadArticles</servlet-name>
         <servlet-class>LoadArticlesServlet</servlet-class>
@@ -130,6 +129,15 @@
     <servlet-mapping>
         <servlet-name>MyArticles</servlet-name>
         <url-pattern>/myArticles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AboutUs</servlet-name>
+        <jsp-file>/aboutus.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AboutUs</servlet-name>
+        <url-pattern>/about</url-pattern>
     </servlet-mapping>
 
 
