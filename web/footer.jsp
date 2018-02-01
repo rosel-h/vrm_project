@@ -1,10 +1,22 @@
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                    <ul id="footer-menu" class="">
-                        <li id="footer-item-1" class=""><a href="index.jsp">Home</a></li>
-                        <li id="footer-item-2" class=""><a href="aboutus.html">About Us</a></li>
-                    </ul>
+<%--
+  Created by IntelliJ IDEA.
+  User: Vince
+  Date: 1/02/2018
+  Time: 4:28 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- Footer -->
+<div class="container">
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <hr>
+                    <p class="copyright text-muted"><a href="privacy">Privacy Policy</a></p>
+                    <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
+                </div>
             </div>
         </div>
-    </div>
+    </footer>
+</div>

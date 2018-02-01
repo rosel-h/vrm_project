@@ -54,20 +54,21 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
+                <div class="page-heading">
                     <h1>Welcome to VRM</h1>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
-                            <a href="Login" class="btn btn-default"
+                            <a href="Signin" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Login</span>
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Login</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="SignUp" class="btn btn-default"
+                            <a href="Signuppage" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span> &nbsp;Sign Up</span>
                             </a>
@@ -75,7 +76,8 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Explore</span>
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Explore</span>
                             </a>
                         </div>
                     </div>
@@ -85,16 +87,7 @@
     </div>
 </header>
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
-            </div>
-        </div>
-    </div>
-</footer>
+<%@include file="footer.jsp" %>
 
 </body>
 </html>
