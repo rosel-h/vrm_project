@@ -7,6 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<c:if test="${sessionScope.personLoggedIn == null}">
+    <c:redirect url="Index"/>
+</c:if>
+
 <html>
 <head>
     <title>Create Article</title>
@@ -47,10 +52,6 @@
     </script>
 </head>
 <body>
-
-<c:if test="${sessionScope.personLoggedIn == null}">
-    <c:redirect url="Index"/>
-</c:if>
 
 <div class="container">
     <!--  A form letting users add new articles. -->
