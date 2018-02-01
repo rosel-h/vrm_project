@@ -108,7 +108,7 @@
 </head>
 <body>
 
-<c:if test="${personLoggedIn ==null}">
+<c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
 

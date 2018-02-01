@@ -181,7 +181,6 @@
         <url-pattern>/NewArticle</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>Index</servlet-name>
         <jsp-file>/index.jsp</jsp-file>
@@ -190,6 +189,17 @@
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>Welcome</servlet-name>
+        <jsp-file>/welcome.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Welcome</servlet-name>
+        <url-pattern>/Welcome</url-pattern>
     </servlet-mapping>
 
 </web-app>
