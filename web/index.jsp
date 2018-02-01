@@ -24,12 +24,12 @@
     <script src="vendor/js/clean-blog.min.js"></script>
 
 </head>
-<body id="page-top">
+<body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top">VRM Travel Blog</a>
+        <a class="navbar-brand">VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -38,10 +38,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">About</a>
+                    <a class="nav-link" href="about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="aboutus.html">Contact</a>
+                    <a class="nav-link" href="mailto:vrm@vrm.com">Contact</a>
                 </li>
             </ul>
         </div>
@@ -49,45 +49,35 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/about-bg.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/about-bg.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="padding: auto; margin: auto;">
+                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
                     <h1>Welcome to VRM</h1>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding-left: 15%; padding-right: 15%">
-                        <a href="login.jsp">
-                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#loginBtn"
-                                        data-backdrop="static" data-keyboard="false">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"
-                                          aria-hidden="true">&nbsp;Log in</span>
-                                </button>
-                            </div>
-                        </a>
-                        <a href="signup.jsp">
-                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
-                                        data-toggle="modal" data-target="#signupBtn">
-                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Sign up</span>
-                                </button>
-                            </div>
-                        </a>
-                        <a href="Articles">
-                            <div class="btn-group" role="group" style="padding: 1%; margin: 1%">
-                                <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;Explore</span>
-                                </button>
-                            </div>
-                        </a>
+                         style="padding: 1%">
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="Login" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Login</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="SignUp" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span> &nbsp;Sign Up</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="Articles" class="btn btn-danger"
+                               style=" color: white;opacity: 0.8">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Explore</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
