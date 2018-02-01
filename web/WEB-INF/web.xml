@@ -181,5 +181,14 @@
         <url-pattern>/NewArticle</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Welcome</servlet-name>
+        <jsp-file>/welcome.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Welcome</servlet-name>
+        <url-pattern>/Welcome</url-pattern>
+    </servlet-mapping>
 
 </web-app>
