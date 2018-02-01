@@ -61,13 +61,14 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
-                            <a href="Login" class="btn btn-default"
+                            <a href="Signin" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Login</span>
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Login</span>
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="SignUp" class="btn btn-default"
+                            <a href="Signuppage" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span> &nbsp;Sign Up</span>
                             </a>
@@ -75,7 +76,8 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;Explore</span>
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Explore</span>
                             </a>
                         </div>
                     </div>

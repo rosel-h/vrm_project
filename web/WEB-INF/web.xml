@@ -151,5 +151,24 @@
         <url-pattern>/privacy</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SignupPage</servlet-name>
+        <jsp-file>/signup.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignupPage</servlet-name>
+        <url-pattern>/Signuppage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginPage</servlet-name>
+        <jsp-file>/login.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginPage</servlet-name>
+        <url-pattern>/Signin</url-pattern>
+    </servlet-mapping>
 
 </web-app>
