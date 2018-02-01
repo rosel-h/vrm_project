@@ -181,7 +181,7 @@
                                 <div class=""><p>Comments</p></div>
                                     <%--first comments--%>
                                 <c:forEach var="commentList" items="${commentList}">
-                                    <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
+                                    <c:if test="${articleList.getArticleID()==commentList.getArticleID() }">
                                         <div class="">
                                             <img src="avatars/${commentList.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
                                             <h5 class=""  style="display: inline-block">${commentList.getCommentAuthor()}
