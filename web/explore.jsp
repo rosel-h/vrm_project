@@ -184,6 +184,7 @@
                                                 <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                                             </h5>
                                             <p>${commentList.getContent()}</p>
+                                            <%--delete comment if user is logged in--%>
                                             <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                                 <form method="post" action="/Articles">
                                                     <button type="submit" class="btn btn-xs">delete comment</button>
@@ -193,6 +194,24 @@
                                                            value="${commentList.getCommentID()}">
                                                 </form>
                                             </c:if>
+
+                                            <%--nested comment second degree--%>
+                                            <c:if test="${commentList.hasChildren()}">
+
+                                                <% System.out.println("in children");%>
+
+                                                <c:forEach var="children" items="${commentList.getChildren()}">
+                                                    <%System.out.println("in for loop");%>
+                                                    <div class="nested" style="padding-left: 10%">
+                                                        <img src="avatars/${children.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
+                                                        <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
+                                                            <small><i>Posted on ${children.getDatePublished()}</i></small>
+                                                        </h5>
+                                                        <p>${children.getContent()}</p>
+                                                    </div>
+                                                </c:forEach>
+                                            </c:if>
+
                                         </div>
                                         <br>
                                     </c:if>

@@ -295,6 +295,24 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
+
+
+    public void addCommentToAnotherComment(int articleID, String userWhoCommented, Date date, String comment, int parentCommentID){
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_comments_on_articles (article_id, username, date, content,parent_comment_id) VALUE (?,?,?,?,?)")) {
+            stmt.setInt(1, articleID);
+            stmt.setString(2, userWhoCommented);
+            stmt.setDate(3, date);
+            stmt.setString(4, comment);
+            stmt.setInt(5, parentCommentID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Blog Dao: CommentOnAnotherComment was not added");
+            e.printStackTrace();
+        }
+
+    }
+
+
     /*get one article base on id*/
     public Article getOneArticle(int id) {
         Article a = null;
