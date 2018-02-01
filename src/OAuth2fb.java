@@ -81,9 +81,8 @@ public class OAuth2fb extends HttpServlet {
                 sess.setAttribute("personLoggedIn", username);
                 sess.setAttribute("user", user);
 
-
                 System.out.println(username);
-                RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
+                RequestDispatcher rs = request.getRequestDispatcher("Welcome");
                 rs.forward(request, response);
 
             } else {

@@ -1,9 +1,11 @@
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.SecureRandom;
+import java.io.*;
 
-//// contains security related methods for site
-public class SecurityMan {
+// Mr Meads is a static class with security related methods and logging to be used by servlets :D
+
+public class MrMeads {
 
     //generates a n length random string to be used as CSRF token or State_Param
     public static String randomString(int length) {
@@ -16,7 +18,6 @@ public class SecurityMan {
             randomString += list.charAt(random);
         }
 
-        System.out.println("random string is " + randomString);
         return randomString;
     }
 
@@ -25,7 +26,6 @@ public class SecurityMan {
     }
 
     public static boolean checkPassword(String password, String hash) {
-
         return BCrypt.checkpw(password, hash);
     }
 
