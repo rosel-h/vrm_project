@@ -69,6 +69,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
@@ -84,6 +85,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -123,6 +125,16 @@
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
                             </a>
                         </div>
+
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="Articles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Community</span>
+                            </a>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

@@ -105,6 +105,12 @@
             position: relative;
         }
     </style>
+    <style type="text/css">
+        #headingID > form {
+            width: 100%;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -124,6 +130,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
@@ -139,17 +146,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
+                <li class="nav-item">
+                    <i class="glyphicon glyphicon-search" style="color: white;"
+                       data-toggle="modal" data-target="#searchbar"></i>
+                </li>
             </ul>
         </div>
+
     </div>
+
 </nav>
+
 
 <!-- Page Header -->
 <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
                     <div class="col-md-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
@@ -180,6 +194,27 @@
                         </div>
                     </div>
                 </div>
+
+                <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+                    <div class="row">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                                   id="searchkeyword">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="searchType" id="searchselect">
+                                <option value="title">Title</option>
+                                <option value="username">Username</option>
+                                <option value="date">Date</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-control">Search</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
