@@ -38,10 +38,11 @@ public class CheckUsernameServlet extends HttpServlet {
             String username = req.getParameter("username");
 
             User user = userDAO.getUserByUsername(username);
-            System.out.println("CheckUsernameServlet enter line 48: " + username);
+
+            System.out.println("CheckUsernameServlet enter line 42: " + username);
             if (user != null) {
                 resp.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-                resp.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+                resp.setCharacterEncoding("UTF-8");
                 resp.getWriter().write("Username already exists");
             }
 

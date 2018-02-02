@@ -23,10 +23,9 @@ public class UserDAO implements AutoCloseable {
     public User getUserStandard(String username, String pass) {
         User user = new User();
 
-        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=?")) {
             ps.setString(1, username);
             ps.setString(2, pass);
-            ps.setString(3, "active");
 
             try (ResultSet rs = ps.executeQuery()) {
                 // will be an empty set if login in correct
@@ -46,11 +45,11 @@ public class UserDAO implements AutoCloseable {
 
     public User getUserFacebook(String email) {
         User user = new User();
+//        reactivateFBUser(email);
         try (PreparedStatement ps = conn.prepareStatement
-                ("select * from vrm_users where binary email_address like ? and status like ?")) {
+                ("select * from vrm_users where binary email_address like ?")) {
             System.out.println("email to be used to selection is " + email);
             ps.setString(1, email);
-            ps.setString(2, "facebook");
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -94,8 +93,8 @@ public class UserDAO implements AutoCloseable {
             stmt.setString(6, country);
             stmt.setString(7, description);
             stmt.setString(8, avatar);
-            stmt.setString(9, status);
-            stmt.setString(10, email);
+            stmt.setString(9, email);
+            stmt.setString(10, status);
 
             stmt.executeUpdate();
 
@@ -136,11 +135,9 @@ public class UserDAO implements AutoCloseable {
 
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users SET status = ? WHERE username = ?;")) {
 
-            ps.setString(1,"inactive");
+            ps.setString(1, "inactive");
             ps.setString(2, username);
-
             ps.executeUpdate();
-
             deleteSuccess = true;
 
         } catch (SQLException e) {
@@ -156,13 +153,13 @@ public class UserDAO implements AutoCloseable {
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
                 "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
 
-            ps.setString(1,user.getFname());
-            ps.setString(2,user.getLname());
-            ps.setString(3,user.getDateOfBirth());
-            ps.setString(4,user.getCountry());
-            ps.setString(5,user.getDescription());
-            ps.setString(6,user.getAvatar_icon());
-            ps.setString(7,user.getUsername());
+            ps.setString(1, user.getFname());
+            ps.setString(2, user.getLname());
+            ps.setString(3, user.getDateOfBirth());
+            ps.setString(4, user.getCountry());
+            ps.setString(5, user.getDescription());
+            ps.setString(6, user.getAvatar_icon());
+            ps.setString(7, user.getUsername());
 
             ps.executeUpdate();
 

@@ -1,20 +1,12 @@
-import DAO_setup.BlogDAO;
 import DAO_setup.MYSQLDatabase;
-import DAO_setup.User;
 import DAO_setup.UserDAO;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.jooq.tools.json.JSONObject;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -25,20 +17,30 @@ import java.sql.SQLException;
 public class DeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
+        System.out.println("DeleteServlet enter delete user servlet");
 
-        if (session == null) {
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
-        }else {
+        HttpSession session = req.getSession(false);
+        String csrfSessionToken = (String) (session.getAttribute("csrfSessionToken"));
+        String reqCsrfToken = req.getParameter("csrfToken");
+
+        System.out.println("Delete Function - csrfSessionToken is " + csrfSessionToken);
+        System.out.println("Delete Function - reqCSRFToken is " + reqCsrfToken);
+
+        if (!csrfSessionToken.equals(reqCsrfToken)) {
+            System.out.println("Session Error");
+            resp.sendError(666);
+            return;
+
+        } else {
             String username = (String) session.getAttribute("personLoggedIn");
             System.out.println("DeleteServlet enter line 26: session id = " + session.getId() + ", username=" + username);
 
             try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
                 System.out.println("DeleteServlet Connection Successful");
 
-                boolean deleteSuccess =  userDAO.deleteUser(username);
+                boolean deleteSuccess = userDAO.deleteUser(username);
                 if (deleteSuccess) {
-                    System.out.println("DeleteServlet enter line 41: delete success");
+                    System.out.println("DeleteServlet enter line 43: delete success");
                     session.invalidate();
                     req.getRequestDispatcher("Main").forward(req, resp);
                 }
