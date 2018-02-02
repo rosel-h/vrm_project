@@ -129,7 +129,7 @@
                                 States
                             </option>
                             <option value="other" <c:if test="${user.getCountry() eq 'other'}">selected</c:if>>
-                                other
+                                Other
                             </option>
                         </select>
                     </div>
