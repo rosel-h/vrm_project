@@ -3,7 +3,6 @@ import DAO_setup.User;
 import DAO_setup.UserDAO;
 import org.json.simple.JSONValue;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,6 +49,7 @@ public class OAuth2fb extends HttpServlet {
 //        if (request.getParameter("type") != stateParam) {
 //            response.sendError(404);
 //        } else {
+
         connectFB(request, response);
         if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
             System.out.println("Facebook User Exists in Database");
@@ -81,7 +81,7 @@ public class OAuth2fb extends HttpServlet {
             }
 
             sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity i.e. long log in
-            sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
+            sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("personLoggedIn", username);
             sess.setAttribute("user", user);
 

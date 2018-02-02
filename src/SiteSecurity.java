@@ -5,7 +5,7 @@ import java.io.*;
 
 // Mr Meads is a static class with security related methods and logging to be used by servlets :D
 
-public class MrMeads {
+public class SiteSecurity {
 
     //generates a n length random string to be used as CSRF token or State_Param
     public static String randomString(int length) {

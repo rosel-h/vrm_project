@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,7 +66,7 @@ public class LogInServlet extends HttpServlet {
             }
 
             // Mr Meads generates a long random key for csrfToken
-            sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));
+            sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
         } else {

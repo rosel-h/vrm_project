@@ -73,8 +73,9 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
-                    <div class="col-md-4 offset-4" >
-                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%" class="img-circle">
+                    <div class="col-md-4 offset-4">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
+                             class="img-circle">
                     </div>
                     <br>
                     <h5>My VRM Profile</h5>
@@ -88,7 +89,8 @@
 </header>
 
 <div class="container">
-    <form id="signupform" class="form-horizontal" role="form" method="post" action="editprofile" enctype="multipart/form-data">
+    <form id="signupform" class="form-horizontal" role="form" method="post" action="editprofile"
+          enctype="multipart/form-data">
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="form-group">
@@ -129,12 +131,11 @@
                                 States
                             </option>
                             <option value="other" <c:if test="${user.getCountry() eq 'other'}">selected</c:if>>
-                                Other
+                                other
                             </option>
                         </select>
                     </div>
                 </div>
-
 
 
             </div>
@@ -143,7 +144,7 @@
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
                         <textarea id="description" class="form-control" name="description" rows="4" columns="40">
-${user.getDescription()}
+                            ${user.getDescription()}
                         </textarea>
                     </div>
                 </div>
@@ -227,11 +228,10 @@ ${user.getDescription()}
 
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
 
-                        <a href="deleteuser">
-                            <button id="btn-delete" type="button" class="btn btn-danger">  
-                                Delete
-                            </button>
-                        </a>
+                        <button id="btn-delete" onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'" type="button" class="btn btn-danger">  
+                            Delete
+                        </button>
+
                     </div>
                 </div>
             </div>

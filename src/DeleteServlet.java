@@ -20,17 +20,25 @@ public class DeleteServlet extends HttpServlet {
         System.out.println("DeleteServlet enter delete user servlet");
 
         HttpSession session = req.getSession(false);
+        String csrfSessionToken = (String) (session.getAttribute("csrfSessionToken"));
+        String reqCsrfToken = req.getParameter("csrfToken");
 
-        if (session == null) {
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
-        }else {
+        System.out.println("csrfSessionToken is " + csrfSessionToken);
+        System.out.println("reqCSRFToken is " + reqCsrfToken);
+
+        if (!csrfSessionToken.equals(reqCsrfToken)) {
+            System.out.println("Session Error");
+            resp.sendError(666);
+            return;
+
+        } else {
             String username = (String) session.getAttribute("personLoggedIn");
             System.out.println("DeleteServlet enter line 26: session id = " + session.getId() + ", username=" + username);
 
             try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
                 System.out.println("DeleteServlet Connection Successful");
 
-                boolean deleteSuccess =  userDAO.deleteUser(username);
+                boolean deleteSuccess = userDAO.deleteUser(username);
                 if (deleteSuccess) {
                     System.out.println("DeleteServlet enter line 43: delete success");
                     session.invalidate();

@@ -216,4 +216,13 @@
         <url-pattern>/OneArticle</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Contact</servlet-name>
+        <jsp-file>/contact.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Contact</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
 </web-app>
