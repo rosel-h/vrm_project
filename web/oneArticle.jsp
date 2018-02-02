@@ -54,12 +54,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
+                <c:if test="${sessionScope.personLoggedIn !=null}">
                 <li class="nav-item">
                     <a class="nav-link" href="myArticles">My Articles</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
+                </c:if>
                 <li class="nav-item">
                     <a class="nav-link" href="about">About</a>
                 </li>
@@ -121,11 +124,12 @@
             <div class="row" style="float: right;">
                 <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
                     <form class="form-inline" action="OneArticle" method="POST">
+
+                        <input type="hidden" name="operation" value="delete">
+                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                         <button style="float: right" type="submit" class="btn btn-danger pull-right">
                             Delete
                         </button>
-                        <input type="hidden" name="operation" value="delete">
-                        <input type="hidden" name="articleId" value="${articleToLoad.getArticleID()}">
                     </form>
                     <%--<form class="form-inline" action="/Articles" method="POST">--%>
                     <form class="form-inline" action="editArticles" method="post">
@@ -157,18 +161,19 @@
                             <p>${commentList.getContent()}</p>
                                 <%--delete comment if user is logged in--%>
                             <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
-                                <form method="post" action="/OneArticles">
+                                <form method="post" action="/OneArticle">
                                     <button type="submit" class="btn btn-xs btn-transparent">delete comment</button>
                                     <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                                    <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
                                     <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
                                 </form>
                             </c:if>
                             <c:if test="${personLoggedIn !=null}">
                                 <small id="replyToThis${commentList.getCommentID()}"
-                                       style="display: inline-block;font-size: 8px">Reply
+                                       style="display: inline-block;">Reply
                                 </small>
                                 <div id="replyBox${commentList.getCommentID()}" style="display: none">
-                                    <form method="post" action="/OneArticles">
+                                    <form method="post" action="/OneArticle">
                                         <div class="form-group">
                                             <label for="summernote" style="font-size: x-small">Comment
                                                 as ${personLoggedIn}:</label>
@@ -197,10 +202,10 @@
                                 <%--nested comment second degree--%>
                             <c:if test="${commentList.hasChildren()}">
 
-                                <% System.out.println("in children");%>
+                                <%--<% System.out.println("in children");%>--%>
 
                                 <c:forEach var="children" items="${commentList.getChildren()}">
-                                    <%System.out.println("in for loop");%>
+                                    <%--<%System.out.println("in for loop");%>--%>
                                     <div class="nested" style="padding-left: 10%">
                                         <img src="avatars/${children.getAvatarIcon()}" class=""
                                              style="width:30px; display: inline-block">
@@ -214,7 +219,7 @@
                                                    style="display: inline-block;">Reply
                                             </small>
                                             <div id="replyBox${children.getCommentID()}" style="display: none">
-                                                <form method="post" action="/OneArticles">
+                                                <form method="post" action="/OneArticle">
                                                     <div class="form-group">
                                                         <label for="summernote" style="font-size: x-small">Comment
                                                             as ${personLoggedIn}:</label>
@@ -234,6 +239,14 @@
                                                 </form>
                                             </div>
                                         </c:if>
+                                        <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                                            <form method="post" action="/OneArticle">
+                                                <button type="submit" class="btn btn-xs btn-transparent">delete comment</button>
+                                                <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                                                <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                                            </form>
+                                        </c:if>
                                     </div>
                                     <script>
                                         $(document).ready(function () {
@@ -250,7 +263,7 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="${personLoggedIn !=null}">
-                    <form method="post" action="/OneArticles">
+                    <form method="post" action="/OneArticle">
                         <div class="form-group">
                             <label for="summernote">Comment as ${personLoggedIn}:</label>
                             <textarea id="summernote" name="newComment" class="form-control" rows="10"

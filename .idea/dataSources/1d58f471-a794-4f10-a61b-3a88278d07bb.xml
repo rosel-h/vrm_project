@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="vwen239@db.sporadic.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
     <root id="1"/>
     <schema id="2" parent="1" name="vwen239">
       <Current>1</Current>
@@ -39,6 +39,7 @@
       <DataType>longtext|0</DataType>
     </column>
     <key id="15" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>article_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -73,6 +74,7 @@
       <DataType>int(11)|0</DataType>
     </column>
     <key id="22" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -103,6 +105,7 @@
       <NotNull>1</NotNull>
     </column>
     <key id="28" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>child_comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -156,6 +159,7 @@
       <DataType>varchar(50)|0</DataType>
     </column>
     <key id="39" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>

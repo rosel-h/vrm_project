@@ -1,7 +1,7 @@
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.User;
 import DAO_setup.UserDAO;
-import com.sun.deploy.net.HttpResponse;
+//import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -14,7 +14,7 @@ import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.JSONTokener;
 import org.omg.CORBA.NameValuePair;
-import sun.net.www.http.HttpClient;
+//import sun.net.www.http.HttpClient;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;

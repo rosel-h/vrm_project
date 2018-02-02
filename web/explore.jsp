@@ -56,30 +56,22 @@
     <script src="vendor/jquery/jquery-ui.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#summernote').summernote({
-                toolbar: [
-                    // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ]
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#wOther').summernote({
-                minHeight: 20
-            });
-        });
+    <%--<script>--%>
+        <%--$(document).ready(function () {--%>
+            <%--$('#summernote').summernote({--%>
+                <%--toolbar: [--%>
+                    <%--// [groupName, [list of button]]--%>
+                    <%--['style', ['bold', 'italic', 'underline', 'clear']],--%>
+                    <%--['font', ['strikethrough', 'superscript', 'subscript']],--%>
+                    <%--['fontsize', ['fontsize']],--%>
+                    <%--['color', ['color']],--%>
+                    <%--['para', ['ul', 'ol', 'paragraph']],--%>
+                    <%--['height', ['height']]--%>
+                <%--]--%>
+            <%--});--%>
+        <%--});--%>
+    <%--</script>--%>
 
-//        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>
     <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {
@@ -102,14 +94,138 @@
             return $(row).children('td').eq(index).text();
         }
     </script>
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+    </script>
 
 </head>
 <body>
 
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
-    <%@include file="navigation.jsp" %>
-        <%--<%@include file="RoseTests/navbar_only.jsp" %>--%>
+    <%--<%@include file="navigation.jsp" %>--%>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Welcome">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Articles">Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="myArticles">My Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="editprofile">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
+                        </li>
+                        <li class="nav-item">
+                            <i class="glyphicon glyphicon-search" style="color: white;"
+                               data-toggle="modal" data-target="#searchbar"></i>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </nav>
+
+
+        <!-- Page Header -->
+        <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                        <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                            <div class="col-md-4 offset-4">
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
+                                     class="img-circle">
+                            </div>
+                            <br>
+                            <h5>Explore the community or create a new blog entry</h5>
+                            <div class="btn-group btn-group-justified col-xs-10" role="group"
+                                 style="padding: 1%">
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="myArticles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.6">
+                                        <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="Articles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Community</span>
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="NewArticle" class="btn btn-danger"
+                                       style=" color: white;opacity: 0.8">
+                                        <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                                           id="searchkeyword">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="searchType" id="searchselect">
+                                        <option value="title">Title</option>
+                                        <option value="username">Username</option>
+                                        <option value="date">Date</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="form-control">Search</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+
+
     </c:when>
     <c:otherwise>
         <%@include file="guestnavigation.jsp" %>
@@ -162,6 +278,7 @@
 
                         <form action="/OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                            <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                             <button type="submit" class="btn">Full Article</button>
                         </form>
                     </td>

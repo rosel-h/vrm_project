@@ -72,7 +72,7 @@
             <h3 class="panel-title">New Article</h3>
         </div>
         <div class="panel-body">
-            <form action="/OneArticles" method="POST">
+            <form action="/OneArticle" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" required>

@@ -102,11 +102,12 @@
 
             </form>
             <form class="form-inline" action="/OneArticles" method="POST">
-            <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                Delete
-            </button>
+
             <input type="hidden" name="operation" value="delete">
             <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+                <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                    Delete
+                </button>
         </form>
         </div>
     </div>

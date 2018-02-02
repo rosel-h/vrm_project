@@ -39,12 +39,14 @@ public class IndividualArticleServlet extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
+        System.out.println("in do post again");
         String checkIfTheresArticle= req.getParameter("articleID");
-        if(checkIfTheresArticle==null){
+        System.out.println("IndividualArticleServlet - article  " + checkIfTheresArticle+ " operation "+op);
+        if(checkIfTheresArticle==null&&op==null){
+            System.out.println("IAS: this is being redirected to allarticles");
             req.getRequestDispatcher("/Articles").forward(req,resp);
         }else{
-        int articleID = Integer.parseInt(req.getParameter("articleID"));
-        System.out.println("IndividualArticleServlet - article  " + articleID + " operation "+op);
+//            int articleID = Integer.parseInt(req.getParameter("articleID"));
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("IndividualArticleServlet Connection success");
 
@@ -89,17 +91,18 @@ public class IndividualArticleServlet extends HttpServlet {
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } else if ("delete".equals(op)) {
                 System.out.println("IndividualArticleServlet: Delete option");
-                System.out.println(req.getParameter("articleId"));
-                int id = Integer.parseInt(req.getParameter("articleId"));
+                System.out.println(req.getParameter("articleID"));
+                int id = Integer.parseInt(req.getParameter("articleID"));
                 dao.deleteArticle(id);
                 //deleting articles goes to my articles as well
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } else {
+                System.out.println("IndividualArticleServlet: Else Statement");
                 //deals with article manipulation
                 if ("commentOnArticle".equals(op)) {
                     String userWhoCommented = req.getParameter("userWhoCommented");
                     String comment = req.getParameter("newComment");
-//                int articleID = Integer.parseInt(req.getParameter("articleID"));
+                int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
                 } else if ("editarticle".equals(op)) {
@@ -119,11 +122,11 @@ public class IndividualArticleServlet extends HttpServlet {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     String userWhoCommented = req.getParameter("userWhoCommented");
                     String comment = req.getParameter("newComment");
-//                int articleID = Integer.parseInt(req.getParameter("articleID"));
+                int articleID = Integer.parseInt(req.getParameter("articleID"));
                     int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
                     dao.addCommentToAnotherComment(articleID, userWhoCommented, sqlDate, comment, parentComment);
                 }
-
+                int articleID = Integer.parseInt(req.getParameter("articleID"));
                 Article articleToLoad = dao.getOneArticle(articleID);
                 System.out.println("IndividualArticleServlet - articletitle: " + articleToLoad.getTitle());
                 List<CommentOnArticles> list = dao.getAllCommentOfArticle(articleID);

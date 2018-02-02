@@ -293,6 +293,7 @@ public class BlogDAO implements AutoCloseable {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE comment_id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            System.out.println("Blog Dao: Comment with id: "+id+" deleted");
         } catch (SQLException e) {
             System.out.println("Blog Dao: Comment was not deleted");
             e.printStackTrace();
