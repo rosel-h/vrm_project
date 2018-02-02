@@ -21,6 +21,7 @@ import java.util.Map;
 
 public class LogInServlet extends HttpServlet {
     User user;
+    String errorMessage = ""; //error message to be send back to the login if failed
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,15 +71,13 @@ public class LogInServlet extends HttpServlet {
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
         } else {
-            request.setAttribute("errorMessage", "Invalid Username or Password");
+            request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
     //check password function
     public boolean checkUser(String username, String pass) {
-        boolean loginStatus = false;
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -91,15 +90,22 @@ public class LogInServlet extends HttpServlet {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserStandard(username, pass);
 
-            if (user != null) {
-                loginStatus = true;
+            if (user == null) {
+                errorMessage = "Invalid Username or Password";
+                return false;
+            }
+
+            if (user.getStatus().equals("inactive")) {
+                errorMessage = "User account has been inactivated, please contact us to reactivate.";
+                return false;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return loginStatus;
+        return true;
+
     }
 
     //get function is post function

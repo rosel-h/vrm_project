@@ -23,8 +23,8 @@ public class DeleteServlet extends HttpServlet {
         String csrfSessionToken = (String) (session.getAttribute("csrfSessionToken"));
         String reqCsrfToken = req.getParameter("csrfToken");
 
-        System.out.println("csrfSessionToken is " + csrfSessionToken);
-        System.out.println("reqCSRFToken is " + reqCsrfToken);
+        System.out.println("Delete Function - csrfSessionToken is " + csrfSessionToken);
+        System.out.println("Delete Function - reqCSRFToken is " + reqCsrfToken);
 
         if (!csrfSessionToken.equals(reqCsrfToken)) {
             System.out.println("Session Error");

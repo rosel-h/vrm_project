@@ -23,10 +23,9 @@ public class UserDAO implements AutoCloseable {
     public User getUserStandard(String username, String pass) {
         User user = new User();
 
-        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=?")) {
             ps.setString(1, username);
             ps.setString(2, pass);
-            ps.setString(3, "active");
 
             try (ResultSet rs = ps.executeQuery()) {
                 // will be an empty set if login in correct
@@ -48,10 +47,9 @@ public class UserDAO implements AutoCloseable {
         User user = new User();
 //        reactivateFBUser(email);
         try (PreparedStatement ps = conn.prepareStatement
-                ("select * from vrm_users where binary email_address like ? and status like ?")) {
+                ("select * from vrm_users where binary email_address like ?")) {
             System.out.println("email to be used to selection is " + email);
             ps.setString(1, email);
-            ps.setString(2, "facebook");
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -139,9 +137,7 @@ public class UserDAO implements AutoCloseable {
 
             ps.setString(1, "inactive");
             ps.setString(2, username);
-
             ps.executeUpdate();
-
             deleteSuccess = true;
 
         } catch (SQLException e) {
