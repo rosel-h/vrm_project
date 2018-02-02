@@ -118,9 +118,9 @@
                 </div>
 
             </div>
-            <div class="row" style="float: left;">
+            <div class="row" style="float: right;">
                 <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
-                    <form class="form-inline" action="Articles" method="POST">
+                    <form class="form-inline" action="OneArticle" method="POST">
                         <button style="float: right" type="submit" class="btn btn-danger pull-right">
                             Delete
                         </button>
@@ -141,6 +141,7 @@
 
                 </c:if>
             </div>
+            <br>
 
             <div>
                 <p>Comments</p>
@@ -210,7 +211,7 @@
 
                                         <c:if test="${personLoggedIn !=null}">
                                             <small id="replyToThis${children.getCommentID()}"
-                                                   style="display: inline-block;font-size: 8px">Reply
+                                                   style="display: inline-block;">Reply
                                             </small>
                                             <div id="replyBox${children.getCommentID()}" style="display: none">
                                                 <form method="post" action="/OneArticles">
@@ -225,7 +226,7 @@
                                                         <input type="hidden" name="articleID"
                                                                value="${articleToLoad.getArticleID()}">
                                                         <input type="hidden" name="fatherComment"
-                                                               value="${children.getCommentID()}">
+                                                               value="${children.getParentCommentID()}">
                                                         <button style="float: right" type="submit"
                                                                 class="btn btn-sm btn-transparent">Reply
                                                         </button>
@@ -266,8 +267,8 @@
         </div>
     </article>
 </div>
-<div>end</div>
-
+<%--<div>end</div>--%>
+<br>
 </div>
 </body>
 </html>

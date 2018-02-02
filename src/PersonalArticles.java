@@ -58,14 +58,14 @@ public class PersonalArticles extends HttpServlet {
             System.out.println();
             List<Article> myArticles = dao.getMyArticles(user);
             System.out.println("Personal Articles: Articles added (size: "+myArticles.size()+")");
-            List<User> users = dao.getAllUsers();
-            System.out.println("Personal Articles Users uploaded");
-            List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
-            System.out.println("Personal Articles Comments on articles uploaded. Size: " + firstDegreeComments.size());
+//            List<User> users = dao.getAllUsers();
+//            System.out.println("Personal Articles Users uploaded");
+//            List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
+//            System.out.println("Personal Articles Comments on articles uploaded. Size: " + firstDegreeComments.size());
 //            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
 //            System.out.println("Personal Articles nestedcomments created. Size: " + nestedComments.size());
-            req.setAttribute("userList", users);
-            req.setAttribute("commentList", firstDegreeComments);
+//            req.setAttribute("userList", users);
+//            req.setAttribute("commentList", firstDegreeComments);
 //            req.setAttribute("nestedList", nestedComments);
 
             req.setAttribute("myArticles",myArticles);

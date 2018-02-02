@@ -39,9 +39,12 @@ public class IndividualArticleServlet extends HttpServlet {
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
-
+        String checkIfTheresArticle= req.getParameter("articleID");
+        if(checkIfTheresArticle==null){
+            req.getRequestDispatcher("/Articles").forward(req,resp);
+        }else{
         int articleID = Integer.parseInt(req.getParameter("articleID"));
-        System.out.println("IndividualArticleServlet - article to load : " + articleID);
+        System.out.println("IndividualArticleServlet - article  " + articleID + " operation "+op);
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("IndividualArticleServlet Connection success");
 
@@ -141,6 +144,6 @@ public class IndividualArticleServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
+        }
     }
 }

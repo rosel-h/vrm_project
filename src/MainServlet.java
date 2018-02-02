@@ -24,6 +24,7 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("MainServlet enter main servlet");
 
         HttpSession sess = req.getSession(true);
 
@@ -32,7 +33,7 @@ public class MainServlet extends HttpServlet {
         try {
             MYSQLDatabase mysqlDatabase = new MYSQLDatabase(filepath);
             sess.setAttribute("database", mysqlDatabase);
-            System.out.println("MainServlet enter line 37: " + sess.getId());
+            System.out.println("MainServlet enter line 35: " + sess.getId());
             req.setAttribute("database", mysqlDatabase);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,9 +42,7 @@ public class MainServlet extends HttpServlet {
         String logout = req.getParameter("logout_button");
         if (logout != null && logout.equals("Logout")) {
             sess.invalidate();
-            System.out.println("successful invalidation");
-            System.out.println("MainServlet enter line 32: session is invalidated");
-//            req.getRequestDispatcher("index.jsp").forward(req,resp);
+            System.out.println("MainServlet enter line 45: session is invalidated");
             resp.sendRedirect("Index");
 
         } else {
@@ -58,11 +57,8 @@ public class MainServlet extends HttpServlet {
             System.out.println("MainServlet enter line 40: " + sessiont_id);
 
             if (sessionFile.exists()) {
-//                req.getRequestDispatcher("welcome.jsp").forward(req,resp);
-
                 resp.sendRedirect("Welcome");
             } else {
-//                req.getRequestDispatcher("index.jsp").forward(req,resp);
                 resp.sendRedirect("Index");
             }
         }

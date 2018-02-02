@@ -15,61 +15,73 @@
 <html>
 <head>
     <title>Search Result | VRM Blog</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <!-- Custom styles for this template -->
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="vendor/js/clean-blog.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+    <script src="vendor/js/featured.js"></script>
 
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
-    <script>
+<%--    <script>
         $(document).ready(function () {
-            $('#summernote').summernote();
+            $('#summernote').summernote({
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ]
+            });
         });
-
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
     </script>
     <script>
         $(document).ready(function () {
             $('#wOther').summernote({
                 minHeight: 20
             });
-
         });
 
-        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>
+        //        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
+    </script>--%>
     <!-- include sorting by title, username, date -->
     <script>
-        $(document).on('click','th',function(){
+        $(document).on('click', 'th', function () {
             var table = $(this).parents('table').eq(0);
             var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
             this.asc = !this.asc;
-            if (!this.asc){rows = rows.reverse();}
+            if (!this.asc) {
+                rows = rows.reverse();
+            }
             table.children('tbody').empty().html(rows);
         });
         function comparer(index) {
-            return function(a, b) {
+            return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
                 return $.isNumeric(valA) && $.isNumeric(valB) ?
                     valA - valB : valA.localeCompare(valB);
             };
         }
-        function getCellValue(row, index){
+        function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
     </script>
@@ -78,7 +90,31 @@
 <body>
 <%@include file="navigation.jsp" %>
 <div class="container">
+    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
     <h1>Search Results</h1>
+    </div>
+    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
+        <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+            <div class="row">
+                <div class="form-group" style="padding: 1%">
+                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                           style="opacity: 0.6"
+                           id="searchkeyword">
+                </div>
+                <div class="form-group" style="padding: 1%">
+                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.6">
+                        <option value="title">Title</option>
+                        <option value="username">Username</option>
+                        <option value="date">Date</option>
+                    </select>
+                </div>
+                <div class="form-group" style="padding: 1%">
+                    <button type="submit" class="form-control" style="opacity: 0.6">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
             <div>Logged in as ${personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px"
