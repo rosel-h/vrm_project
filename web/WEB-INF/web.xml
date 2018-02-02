@@ -207,14 +207,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Contact</servlet-name>
-        <jsp-file>/contact.jsp</jsp-file>
+        <servlet-name>getOneArticle</servlet-name>
+        <servlet-class>IndividualArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Contact</servlet-name>
-        <url-pattern>/contact</url-pattern>
+        <servlet-name>getOneArticle</servlet-name>
+        <url-pattern>/OneArticle</url-pattern>
     </servlet-mapping>
-
 
 </web-app>
