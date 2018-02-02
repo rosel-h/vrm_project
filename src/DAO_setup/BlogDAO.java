@@ -156,8 +156,12 @@ public class BlogDAO implements AutoCloseable {
      * Translates the current row of the given ResultSet into a Article,User,Comment object depending on the Object type passed in.
      */
     private Article dataFromResultSet(ResultSet rs, Article a) throws SQLException {
-//        System.out.println("rs = [" + rs + "], a = [" + a + "]");
-        return new Article(rs.getString("username"), rs.getInt("article_id"), rs.getString("content"), rs.getString("date"), rs.getString("title"));
+        String user = rs.getString("username");
+        int aID = rs.getInt("article_id");
+        String story = rs.getString("content");
+        String date = rs.getString("date");
+        String title =  rs.getString("title");
+        return new Article(user, aID, story,date , title);
     }
 
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
@@ -323,20 +327,33 @@ public class BlogDAO implements AutoCloseable {
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("RS executed");
                 System.out.println(rs.next());
-
                 a = dataFromResultSet(rs, new Article());
-                System.out.println("BlogDAO getOneArticle executed");
-                System.out.println(a.getArticleID());
-                System.out.println(a.getContent());
-                System.out.println(a.getDate());
-                System.out.println(a.getTitle());
-                System.out.println(a.getUsername());
+                System.out.println("BlogDAO getOneArticle executed for id: "+id);
+//                System.out.println(a.getArticleID());
+//                System.out.println(a.getContent());
+//                System.out.println(a.getDate());
+//                System.out.println(a.getTitle());
+//                System.out.println(a.getUsername());
             }
         } catch (SQLException e) {
             System.out.println("Blog Dao: article was not taken");
             e.printStackTrace();
         }
         return a;
+    }
+
+    public List<CommentOnArticles> getAllCommentOfArticle(int id) throws SQLException{
+        ArrayList<CommentOnArticles> comments = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE vrm_comments_on_articles.article_id =  ? AND  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
+            stmt.setInt(1, id);
+            CommentOnArticles c;
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()){
+                    comments.add(dataFromResultSet(rs,new CommentOnArticles()));
+                }
+            }
+        }
+        return comments;
     }
 
     /*Edit article

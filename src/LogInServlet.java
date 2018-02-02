@@ -60,11 +60,11 @@ public class LogInServlet extends HttpServlet {
             sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("user", user);
 
-                if (duration != null) {
-                    System.out.println("setting maximum session duration");
-                    sess.setMaxInactiveInterval(20); // log out after a month of inactivity
-                    System.out.println("max session set to " + sess.getMaxInactiveInterval());
-                }
+            if (duration != null) {
+                System.out.println("setting maximum session duration");
+                sess.setMaxInactiveInterval(3600 * 24 * 10); // log out after a month of inactivity
+                System.out.println("max session set to " + sess.getMaxInactiveInterval());
+            }
 
             // Mr Meads generates a long random key for csrfToken
             sess.setAttribute("csrfSessionToken", MrMeads.randomString(60));

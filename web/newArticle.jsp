@@ -45,9 +45,20 @@
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
+                    ['height', ['height']],
+                    ['insert',['picture']]
+
                 ]
+//                popover: {
+//                    image: [
+//                        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+//                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+//                        ['remove', ['removeMedia']]
+//                    ]
+//                }
+
             });
+            $('#summernote').summernote('insertImage', url, filename);
         });
     </script>
 </head>
@@ -61,7 +72,7 @@
             <h3 class="panel-title">New Article</h3>
         </div>
         <div class="panel-body">
-            <form action="/Articles" method="POST">
+            <form action="/OneArticles" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" required>

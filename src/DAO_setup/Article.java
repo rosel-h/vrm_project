@@ -94,4 +94,14 @@ public class Article {
         }
         return false;
     }
+
+    public String getContentPreview(){
+        String submit="";
+        try{
+            return content.substring(0,50)+"...";
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.println("Article error: array out of bound");
+            return content;
+        }
+    }
 }

@@ -14,7 +14,12 @@ public class testRandomCode {
     public static void main(String[] args) {
 //        new testRandomCode().start();
 //        new testRandomCode().testDates();
-        new testRandomCode().testNest();
+//        new testRandomCode().testNest();
+        try {
+            System.out.println("hello".substring(0, 9));
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.println("OOB caught");
+        }
     }
 
     private void start(){
@@ -48,7 +53,6 @@ public class testRandomCode {
         System.out.println(sqlDate1.compareTo(sqlDate2));
         System.out.println(sqlDate2.compareTo(sqlDate1));
     }
-
     private void testNest(){
         System.out.println("test nest");
 
@@ -79,8 +83,6 @@ public class testRandomCode {
             e.printStackTrace();
         }
     }
-
-
     private ArrayList<CommentOnArticles> getNestedList(List<CommentOnArticles> comments, int parent){
         ArrayList<CommentOnArticles> newList = new ArrayList<>();
         for (CommentOnArticles com:comments) {
