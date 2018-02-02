@@ -56,8 +56,7 @@ public class LogInServlet extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
-            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
-            sess.setAttribute("user", user);
+
 
             if (duration != null) {
                 System.out.println("setting maximum session duration");
@@ -65,8 +64,15 @@ public class LogInServlet extends HttpServlet {
                 System.out.println("max session set to " + sess.getMaxInactiveInterval());
             }
 
+            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            sess.setAttribute("user", user);
+
+            String csrfToken = SiteSecurity.randomString(60);
             // Mr Meads generates a long random key for csrfToken
-            sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
+
+            sess.setAttribute("csrfSessionToken", csrfToken);
+            System.out.println(csrfToken);
+
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
         } else {
