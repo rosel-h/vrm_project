@@ -151,123 +151,127 @@
                             </c:if>
                         </td>
                         <td>
-                            <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                                    data-target="#a${myArticles.getArticleID()}">Full Article
-                            </button>
+                            <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
+                                    <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
+                            <%--</button>--%>
+                                <form action="/OneArticle" method="post">
+                                    <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                                    <button type="submit" class="btn">Full Article</button>
+                                </form>
                         </td>
                     </tr>
 
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="a${myArticles.getArticleID()}" role="dialog">
-                        <div class="modal-dialog modal-lg" style="width: 100%">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">${myArticles.getTitle()}</h4>
-                                    <div>Written by ${myArticles.getUsername()}, published
-                                        on ${myArticles.getDate()}</div>
-                                    <%--<c:if test="${personLoggedIn == myArticles.getUsername()}">--%>
-                                        <form class="form-inline" action="Articles" method="POST">
-                                            <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                                                Delete
-                                            </button>
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input type="hidden" name="articleId" value="${myArticles.getArticleID()}">
-                                        </form>
-                                        <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                        <form class="form-inline" action="editArticles" method="post">
+                    <%--<!-- Modal -->--%>
+                    <%--<div class="modal fade" id="a${myArticles.getArticleID()}" role="dialog">--%>
+                        <%--<div class="modal-dialog modal-lg" style="width: 100%">--%>
+                            <%--<!-- Modal content-->--%>
+                            <%--<div class="modal-content">--%>
+                                <%--<div class="modal-header">--%>
+                                    <%--<h4 class="modal-title">${myArticles.getTitle()}</h4>--%>
+                                    <%--<div>Written by ${myArticles.getUsername()}, published--%>
+                                        <%--on ${myArticles.getDate()}</div>--%>
+                                    <%--&lt;%&ndash;<c:if test="${personLoggedIn == myArticles.getUsername()}">&ndash;%&gt;--%>
+                                        <%--<form class="form-inline" action="Articles" method="POST">--%>
+                                            <%--<button style="float: right" type="submit" class="btn btn-danger pull-right">--%>
+                                                <%--Delete--%>
+                                            <%--</button>--%>
+                                            <%--<input type="hidden" name="operation" value="delete">--%>
+                                            <%--<input type="hidden" name="articleId" value="${myArticles.getArticleID()}">--%>
+                                        <%--</form>--%>
+                                        <%--&lt;%&ndash;<form class="form-inline" action="/Articles" method="POST">&ndash;%&gt;--%>
+                                        <%--<form class="form-inline" action="editArticles" method="post">--%>
 
-                                            <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                                            <%--<input type="hidden" name="articleID" value="${myArticles.getArticleID()}">--%>
 
-                                            <input type="hidden" name="operation" value="goToEditPage">
-                                            <input type="hidden" name="author" value="${personLoggedIn}">
-                                            <button style="float: right" id="editorButton" type="submit"
-                                                    class="btn btn-primary pull-right">Edit
-                                            </button>
-                                        </form>
+                                            <%--<input type="hidden" name="operation" value="goToEditPage">--%>
+                                            <%--<input type="hidden" name="author" value="${personLoggedIn}">--%>
+                                            <%--<button style="float: right" id="editorButton" type="submit"--%>
+                                                    <%--class="btn btn-primary pull-right">Edit--%>
+                                            <%--</button>--%>
+                                        <%--</form>--%>
 
+                                    <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
+
+                                <%--</div>--%>
+                                <%--<div class="modal-body">--%>
+
+                                    <%--<div>${myArticles.getContent()}</div>--%>
+                                <%--</div>--%>
+
+                                <%--<div class="panel-footer">--%>
+
+                                    <%--<div class=""><p>Comments</p></div>--%>
+                                        <%--&lt;%&ndash;first comments&ndash;%&gt;--%>
+                                    <%--<c:forEach var="commentList" items="${commentList}">--%>
+                                        <%--<c:if test="${myArticles.getArticleID()==commentList.getArticleID()}">--%>
+                                            <%--&lt;%&ndash;avatar icon&ndash;%&gt;--%>
+
+                                            <%--<div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""--%>
+                                                               <%--style="width:30px; display: inline-block">--%>
+                                                <%--<h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}--%>
+                                                    <%--<small><i>Posted on ${commentList.getDatePublished()}</i></small>--%>
+                                                <%--</h5>--%>
+                                                <%--<p>${commentList.getContent()}</p>--%>
+                                                    <%--&lt;%&ndash;&lt;%&ndash;second nest comments&ndash;%&gt;&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<c:forEach var="nestedList" items="${nestedList}">&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<div class="">&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<img src="avatars/${nestedList.getAvatarIcon()}"&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;class=""&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;style="width:30px">&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<div class="">&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<h5 class="">${nestedList.getCommentAuthor()}&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<small><i>Posted on ${nestedList.getDatePublished()}</i></small>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;</h5>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<p>${nestedList.getContent()}</p>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash; checks wether user logged in with author of post and user logged in&ndash;%&gt;--%>
+                                                <%--<c:if test="${( personLoggedIn == commentList.getCommentAuthor())}">--%>
+                                                    <%--<form method="post" action="/Articles">--%>
+                                                        <%--<button type="submit" class="btn btn-xs">delete comment</button>--%>
+                                                        <%--<input type="hidden" name="operation"--%>
+                                                               <%--value="deleteCommentOnArticle">--%>
+                                                        <%--<input type="hidden" name="commentID"--%>
+                                                               <%--value="${commentList.getCommentID()}">--%>
+
+                                                    <%--</form>--%>
+                                                <%--</c:if>--%>
+                                            <%--</div>--%>
+                                            <%--<br>--%>
+                                        <%--</c:if>--%>
+
+                                    <%--</c:forEach>--%>
+                                    <%--<c:if test="${personLoggedIn !=null}">--%>
+                                        <%--<form method="post" action="/Articles">--%>
+                                            <%--<div class="form-group">--%>
+                                                <%--<label for="summernote">Comment as ${personLoggedIn}:</label>--%>
+                                                    <%--&lt;%&ndash;<textarea class="form-control" rows="3" name="newComment" id="newComment"&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;style="max-width: 100%; min-width: 100%;" required></textarea>&ndash;%&gt;--%>
+                                                    <%--&lt;%&ndash;<div class="form-group">&ndash;%&gt;--%>
+                                                <%--<label for="summernote">Content</label>--%>
+                                                <%--<textarea id="summernote" name="newComment" class="form-control" rows="10"--%>
+                                                          <%--required></textarea>--%>
+                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                                                <%--<input type="hidden" name="userWhoCommented" value="${personLoggedIn}">--%>
+                                                <%--<input type="hidden" name="operation" value="commentOnArticle">--%>
+                                                <%--<input type="hidden" name="articleID" value="${myArticles.getArticleID()}">--%>
+                                                <%--<button style="float: right" type="submit" class="btn btn-sm">Post a comment--%>
+                                                <%--</button>--%>
+                                            <%--</div>--%>
+                                        <%--</form>--%>
                                     <%--</c:if>--%>
-
-                                </div>
-                                <div class="modal-body">
-
-                                    <div>${myArticles.getContent()}</div>
-                                </div>
-
-                                <div class="panel-footer">
-
-                                    <div class=""><p>Comments</p></div>
-                                        <%--first comments--%>
-                                    <c:forEach var="commentList" items="${commentList}">
-                                        <c:if test="${myArticles.getArticleID()==commentList.getArticleID()}">
-                                            <%--avatar icon--%>
-
-                                            <div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""
-                                                               style="width:30px; display: inline-block">
-                                                <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
-                                                    <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                                                </h5>
-                                                <p>${commentList.getContent()}</p>
-                                                    <%--&lt;%&ndash;second nest comments&ndash;%&gt;--%>
-                                                    <%--<c:forEach var="nestedList" items="${nestedList}">--%>
-                                                    <%--<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">--%>
-                                                    <%--<div class="">--%>
-                                                    <%--<img src="avatars/${nestedList.getAvatarIcon()}"--%>
-                                                    <%--class=""--%>
-                                                    <%--style="width:30px">--%>
-                                                    <%--</div>--%>
-                                                    <%--<div class="">--%>
-                                                    <%--<h5 class="">${nestedList.getCommentAuthor()}--%>
-                                                    <%--<small><i>Posted on ${nestedList.getDatePublished()}</i></small>--%>
-                                                    <%--</h5>--%>
-                                                    <%--<p>${nestedList.getContent()}</p>--%>
-                                                    <%--</div>--%>
-                                                    <%--<br>--%>
-                                                    <%--</c:if>--%>
-                                                    <%--</c:forEach>--%>
-                                                    <%-- checks wether user logged in with author of post and user logged in--%>
-                                                <c:if test="${( personLoggedIn == commentList.getCommentAuthor())}">
-                                                    <form method="post" action="/Articles">
-                                                        <button type="submit" class="btn btn-xs">delete comment</button>
-                                                        <input type="hidden" name="operation"
-                                                               value="deleteCommentOnArticle">
-                                                        <input type="hidden" name="commentID"
-                                                               value="${commentList.getCommentID()}">
-
-                                                    </form>
-                                                </c:if>
-                                            </div>
-                                            <br>
-                                        </c:if>
-
-                                    </c:forEach>
-                                    <c:if test="${personLoggedIn !=null}">
-                                        <form method="post" action="/Articles">
-                                            <div class="form-group">
-                                                <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                                    <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
-                                                    <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
-                                                    <%--<div class="form-group">--%>
-                                                <label for="summernote">Content</label>
-                                                <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                                          required></textarea>
-                                                    <%--</div>--%>
-                                                <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                                <input type="hidden" name="operation" value="commentOnArticle">
-                                                <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                                                <button style="float: right" type="submit" class="btn btn-sm">Post a comment
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </c:if>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <%--</div>--%>
+                                <%--<div class="modal-footer">--%>
+                                    <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 <%--</c:if>--%>
 
 

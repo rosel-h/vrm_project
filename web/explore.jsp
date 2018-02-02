@@ -146,11 +146,6 @@
         </thead>
         <tbody>
         <c:forEach var="articleList" items="${articleList}">
-            <%--<div class="panel panel-warning"> <b>${articleList.getTitle()}</b> by <i>${articleList.getUsername()}</i>--%>
-            <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-            <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
-            <%--</button>--%>
-            <%--</div>--%>
             <%
                 java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
                 request.setAttribute("sqlDateToday", sqlDateToday);
@@ -161,169 +156,18 @@
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>
-                        <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                                data-target="#a${articleList.getArticleID()}">Full Article
-                        </button>
+                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
+                                <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
+                        <%--</button>--%>
+
+                        <form action="/OneArticle" method="post">
+                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                            <button type="submit" class="btn">Full Article</button>
+                        </form>
                     </td>
                 </tr>
 
-                <!-- Modal -->
-                <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
-                    <div class="modal-dialog modal-lg" style="width: 100%">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="<%--modal-title --%>post-title">${articleList.getTitle()}</h3>
-                                <div class="post-meta">Written by ${articleList.getUsername()}, published
-                                    on ${articleList.getDate()}</div>
-                                <c:if test="${personLoggedIn == articleList.getUsername()}">
-                                    <form class="form-inline" action="/Articles" method="POST">
-                                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                                            Delete
-                                        </button>
-                                        <input type="hidden" name="operation" value="delete">
-                                        <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
-                                    </form>
-                                    <form class="form-inline" action="/editArticles" method="post">
-                                        <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                        <input type="hidden" name="operation" value="goToEditPage">
-                                        <input type="hidden" name="author" value="${personLoggedIn}">
-                                        <button style="float: right" id="editorButton" type="submit"
-                                                class="btn btn-primary pull-right">Edit
-                                        </button>
-                                    </form>
-                                </c:if>
 
-                            </div>
-                            <div class="modal-body">
-                                <div>${articleList.getContent()}</div>
-                            </div>
-
-                            <div class="panel-footer">
-                                <div class=""><p>Comments</p></div>
-                                    <%--first comments--%>
-                                <c:forEach var="commentList" items="${commentList}">
-                                    <c:if test="${articleList.getArticleID()==commentList.getArticleID() }">
-                                        <div class="">
-                                            <img src="avatars/${commentList.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
-                                            <h5 class=""  style="display: inline-block">${commentList.getCommentAuthor()}
-                                                <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                                            </h5>
-                                            <p>${commentList.getContent()}</p>
-                                            <%--delete comment if user is logged in--%>
-                                            <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
-                                                <form method="post" action="/Articles">
-                                                    <button type="submit" class="btn btn-xs">delete comment</button>
-                                                    <input type="hidden" name="operation"
-                                                           value="deleteCommentOnArticle">
-                                                    <input type="hidden" name="commentID"
-                                                           value="${commentList.getCommentID()}">
-                                                </form>
-                                            </c:if>
-                                            <c:if test="${personLoggedIn !=null}">
-                                                <small id="replyToThis${commentList.getCommentID()}">Reply</small>
-                                                <div id="replyBox${commentList.getCommentID()}" style="display: none">
-                                                    <form method="post" action="/Articles">
-                                                        <div class="form-group">
-                                                            <label for="summernote" style="font-size: x-small">Comment as ${personLoggedIn}:</label>
-                                                            <textarea name="newComment" class="form-control" rows="3"
-                                                                      required></textarea>
-                                                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                                            <input type="hidden" name="operation" value="replyToAComment">
-                                                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                                            <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
-                                                            <button style="float: right" type="submit" class="btn btn-sm">Reply
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </c:if>
-                                            <script>
-                                                $(document).ready(function(){
-//                                                    $(".replyToThis").click(function(){
-//                                                        $(".replyBox").css("display","block");
-//                                                    });
-//                                                    $(".replyToThis").click(function(){
-//                                                        $(".replyBox").css("display","none");
-//                                                    });
-                                                    $("#replyToThis${commentList.getCommentID()}").click(function(){
-                                                        $("#replyBox${commentList.getCommentID()}").toggle();
-                                                    });
-                                                });
-                                            </script>
-                                            <%--nested comment second degree--%>
-                                            <c:if test="${commentList.hasChildren()}">
-
-                                                <% System.out.println("in children");%>
-
-                                                <c:forEach var="children" items="${commentList.getChildren()}">
-                                                    <%System.out.println("in for loop");%>
-                                                    <div class="nested" style="padding-left: 10%">
-                                                        <img src="avatars/${children.getAvatarIcon()}" class="" style="width:30px; display: inline-block">
-                                                        <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
-                                                            <small><i>Posted on ${children.getDatePublished()}</i></small>
-                                                        </h5>
-                                                        <p>${children.getContent()}</p>
-                                                    </div>
-                                                    <c:if test="${personLoggedIn !=null}">
-                                                        <small id="replyToThis${children.getCommentID()}">Reply</small>
-                                                        <div id="replyBox${children.getCommentID()}" style="display: none">
-                                                            <form method="post" action="/Articles">
-                                                                <div class="form-group">
-                                                                    <label for="summernote" style="font-size: x-small">Comment as ${personLoggedIn}:</label>
-                                                                    <textarea name="newComment" class="form-control" rows="3"
-                                                                              required></textarea>
-                                                                    <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                                                    <input type="hidden" name="operation" value="replyToAComment">
-                                                                    <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                                                    <input type="hidden" name="fatherComment" value="${children.getCommentID()}">
-                                                                    <button style="float: right" type="submit" class="btn btn-sm">Reply
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </c:if>
-                                                    <script>
-                                                        $(document).ready(function(){
-//                                                    $(".replyToThis").click(function(){
-//                                                        $(".replyBox").css("display","block");
-//                                                    });
-//                                                    $(".replyToThis").click(function(){
-//                                                        $(".replyBox").css("display","none");
-//                                                    });
-                                                            $("#replyToThis${children.getCommentID()}").click(function(){
-                                                                $("#replyBox${children.getCommentID()}").toggle();
-                                                            });
-                                                        });
-                                                    </script>
-                                                </c:forEach>
-                                            </c:if>
-
-                                        </div>
-                                        <br>
-                                    </c:if>
-                                </c:forEach>
-                                <c:if test="${personLoggedIn !=null}">
-                                    <form method="post" action="/Articles">
-                                        <div class="form-group">
-                                            <label for="summernote">Comment as ${personLoggedIn}:</label>
-                                            <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                                      required></textarea>
-                                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                            <input type="hidden" name="operation" value="commentOnArticle">
-                                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                            <button style="float: right" type="submit" class="btn btn-sm">Post a comment
-                                            </button>
-                                        </div>
-                                    </form>
-                                </c:if>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </c:if>
         </c:forEach>
         </tbody>

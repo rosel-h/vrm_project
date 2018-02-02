@@ -97,7 +97,7 @@
 
                     <button type="submit" class="btn btn-primary">Done</button>
                 </div>
-                <form class="form-inline" action="/Articles" method="POST">
+                <form class="form-inline" action="/OneArticles" method="POST">
                     <button style="float: right" type="submit" class="btn btn-danger pull-right">
                         Delete
                     </button>

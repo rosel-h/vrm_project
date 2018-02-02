@@ -206,4 +206,14 @@
         <url-pattern>/Welcome</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getOneArticle</servlet-name>
+        <servlet-class>IndividualArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getOneArticle</servlet-name>
+        <url-pattern>/OneArticle</url-pattern>
+    </servlet-mapping>
+
 </web-app>

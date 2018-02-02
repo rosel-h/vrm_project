@@ -59,7 +59,6 @@ public class LoadArticlesServlet extends HttpServlet {
         String sessionID = session.getId();
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
-
         File sessionFile = new File(fileName);
         String user = null;
         String op = req.getParameter("operation");
@@ -75,60 +74,7 @@ public class LoadArticlesServlet extends HttpServlet {
             } else {
                 System.out.println("session doesnt exist");
             }
-            //add articles
-            if ("add".equals(op)) {
-                String title = req.getParameter("title");
-                String content = req.getParameter("content");
 
-                //check if date is to be published today or not
-                String submittedDate = req.getParameter("futureDate");
-                System.out.println("CreateArticles: date " + submittedDate);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                java.sql.Date sqlDate;
-
-                if(submittedDate.length()<10){
-                    sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                }else{
-                    LocalDate submittedDateReformatted = LocalDate.parse(submittedDate, formatter);
-                    sqlDate = java.sql.Date.valueOf(submittedDateReformatted);
-                }
-
-                dao.addArticle(title, content, user, sqlDate);
-                System.out.println("CreateArticles: new article made");
-
-            } else if ("delete".equals(op)) {
-                System.out.println("EditArticle: Delete option");
-//                String qwak = ;
-                System.out.println(req.getParameter("articleId"));
-                int id = Integer.parseInt(req.getParameter("articleId"));
-                dao.deleteArticle(id);
-            } else if ("commentOnArticle".equals(op)) {
-                String userWhoCommented = req.getParameter("userWhoCommented");
-                String comment = req.getParameter("newComment");
-                int articleID = Integer.parseInt(req.getParameter("articleID"));
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
-            } else if ("editarticle".equals(op)) {
-                String title = req.getParameter("title");
-                String content = req.getParameter("content");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                dao.addArticle(title, content, user, sqlDate);
-                System.out.println("CreateArticles: new article made");
-            } else if ("deleteCommentOnArticle".equals(op)) {
-                System.out.println("LoadArticlesServlet: delete button pressed");
-                String commentIDToBeDeleted = req.getParameter("commentID");
-                System.out.println();
-                System.out.println("LAS: id - " + commentIDToBeDeleted);
-                dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
-            } else if ("replyToAComment".equals(op)){
-                System.out.println("LoadArticleServlet: replying to comment button pressed");
-                java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                String userWhoCommented = req.getParameter("userWhoCommented");
-                String comment = req.getParameter("newComment");
-                int articleID = Integer.parseInt(req.getParameter("articleID"));
-                int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
-                dao.addCommentToAnotherComment(articleID,userWhoCommented,sqlDate,comment,parentComment);
-            }
 
 
             String icon = dao.getIcon(user);
@@ -139,19 +85,19 @@ public class LoadArticlesServlet extends HttpServlet {
                 req.setAttribute("personAvatarIcon", icon);
             }
 
-            List<User> users = dao.getAllUsers();
-            System.out.println("LoadArticlesServlet Users uploaded");
+//            List<User> users = dao.getAllUsers();
+//            System.out.println("LoadArticlesServlet Users uploaded");
             List<Article> articles = dao.getAllArticles();
+            req.setAttribute("articleList", articles);
             System.out.println("LoadArticlesServlet Articles created");
-            List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
-            System.out.println("LoadArticlesServlet Comments on articles uploaded. Size: " + firstDegreeComments.size());
-            List<CommentOnArticles> commentsWithChildren = CommentOnArticles.pairCommentsRelationship(firstDegreeComments);
-            System.out.println("LoadArticlesServlet Comments as nestedshape. Size: " + commentsWithChildren.size());
+//            List<CommentOnArticles> firstDegreeComments = dao.getAllFirstComments();
+//            System.out.println("LoadArticlesServlet Comments on articles uploaded. Size: " + firstDegreeComments.size());
+//            List<CommentOnArticles> commentsWithChildren = CommentOnArticles.pairCommentsRelationship(firstDegreeComments);
+//            System.out.println("LoadArticlesServlet Comments as nestedshape. Size: " + commentsWithChildren.size());
 //            List<CommentsOnComments> nestedComments = dao.getAllNestedComments();
 //            System.out.println("LoadArticlesServlet nestedcomments created. Size: " + nestedComments.size());
-            req.setAttribute("articleList", articles);
-            req.setAttribute("userList", users);
-            req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
+//            req.setAttribute("userList", users);
+//            req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
 
 //            req.setAttribute("nestedList", nestedComments);
 
