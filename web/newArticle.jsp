@@ -45,9 +45,20 @@
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
+                    ['height', ['height']],
+                    ['insert',['picture']]
+
                 ]
+//                popover: {
+//                    image: [
+//                        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+//                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+//                        ['remove', ['removeMedia']]
+//                    ]
+//                }
+
             });
+            $('#summernote').summernote('insertImage', url, filename);
         });
     </script>
 </head>

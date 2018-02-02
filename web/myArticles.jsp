@@ -64,7 +64,8 @@
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
+                    ['height', ['height']],
+                    ['insert',['picture']]
                 ]
             });
         });
@@ -117,7 +118,7 @@
         </c:if>
     </div>
 
-    <table class="table table-striped sorttable" id="articletable">f
+    <table class="table table-striped sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">
@@ -143,7 +144,7 @@
                 <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
 
                     <tr>
-                        <td><b>${myArticles.getTitle()}</b></td>
+                        <td><b>${myArticles.getTitle()}</b> <br>${myArticles.getContentPreview()}</td>
                         <td><i>${myArticles.getUsername()}</i></td>
                         <td >${myArticles.getDate()}
                             <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">

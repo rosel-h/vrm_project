@@ -51,7 +51,8 @@
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
+                    ['height', ['height']],
+                    ['insert',['picture']]
                 ]
             });
         });
@@ -97,15 +98,16 @@
 
                     <button type="submit" class="btn btn-primary">Done</button>
                 </div>
-                <form class="form-inline" action="/OneArticles" method="POST">
-                    <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                        Delete
-                    </button>
-                    <input type="hidden" name="operation" value="delete">
-                    <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
-                </form>
+
 
             </form>
+            <form class="form-inline" action="/OneArticles" method="POST">
+            <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                Delete
+            </button>
+            <input type="hidden" name="operation" value="delete">
+            <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+        </form>
         </div>
     </div>
 </div>

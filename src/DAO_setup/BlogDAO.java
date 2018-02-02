@@ -329,11 +329,11 @@ public class BlogDAO implements AutoCloseable {
                 System.out.println(rs.next());
                 a = dataFromResultSet(rs, new Article());
                 System.out.println("BlogDAO getOneArticle executed for id: "+id);
-                System.out.println(a.getArticleID());
-                System.out.println(a.getContent());
-                System.out.println(a.getDate());
-                System.out.println(a.getTitle());
-                System.out.println(a.getUsername());
+//                System.out.println(a.getArticleID());
+//                System.out.println(a.getContent());
+//                System.out.println(a.getDate());
+//                System.out.println(a.getTitle());
+//                System.out.println(a.getUsername());
             }
         } catch (SQLException e) {
             System.out.println("Blog Dao: article was not taken");
