@@ -200,7 +200,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background03.jpg');">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -208,8 +208,8 @@
                 <div class="page-heading" style="margin-top: 15%; padding-top: 5%">
                     <div class="panel-title"><h3>Sign in?</h3></div>
                     <div style="float:right; font-size: 85%; position: relative; top:-1%;">
-                        <a style="color: white" id="signinlink" href="/Signin">
-                            Sign In
+                        <a style="color: red" id="signinlink" href="/Signin">
+                            Already registered? Sign in now!
                         </a>
                     </div>
                     <div style="padding-top:30px" class="panel-body">
