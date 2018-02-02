@@ -23,7 +23,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Log In to VRM</title>
+    <title>Welcome to VRM Blog</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -44,6 +44,7 @@
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
+
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
@@ -182,8 +183,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">VRM Travel Blog
-        </a>
+        <a class="navbar-brand">Welcome </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -194,19 +194,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 
+
+<!-- Page Header -->
 <!-- Page Header -->
 <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin-top: 15%; padding-top: 5%">
-                    <div class="panel-title"><h3>Sign in?</h3></div>
+            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                    <div class="panel-title"><h3>Sign up</h3></div>
                     <div style="float:right; font-size: 85%; position: relative; top:-1%;">
                         <a style="color: red" id="signinlink" href="/Signin">
                             Already registered? Sign in now!
@@ -300,10 +305,10 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" style="float: left;">
 
                                 <div class="col-md-12">
-                                    <label for="dob" style="float: left;">Profile Photo</label>
+                                    <label for="dob">Profile Photo</label>
 
                                     <input type="radio" id="avatar01" name="avatar" value="avatar_01.png">
                                     <label for="avatar01"><img src="avatars/avatar_01.png" height="40"></label>
@@ -327,7 +332,7 @@
                                     <label for="avatar07"><img src="avatars/avatar_07.png" height="40"></label>
 
                                 </div>
-                            </div>
+                    </div>
 
                             <div class="form-group">
 
