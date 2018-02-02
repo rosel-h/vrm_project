@@ -46,6 +46,7 @@ public class UserDAO implements AutoCloseable {
 
     public User getUserFacebook(String email) {
         User user = new User();
+//        reactivateFBUser(email);
         try (PreparedStatement ps = conn.prepareStatement
                 ("select * from vrm_users where binary email_address like ? and status like ?")) {
             System.out.println("email to be used to selection is " + email);
@@ -136,7 +137,7 @@ public class UserDAO implements AutoCloseable {
 
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users SET status = ? WHERE username = ?;")) {
 
-            ps.setString(1,"inactive");
+            ps.setString(1, "inactive");
             ps.setString(2, username);
 
             ps.executeUpdate();
@@ -156,13 +157,13 @@ public class UserDAO implements AutoCloseable {
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
                 "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
 
-            ps.setString(1,user.getFname());
-            ps.setString(2,user.getLname());
-            ps.setString(3,user.getDateOfBirth());
-            ps.setString(4,user.getCountry());
-            ps.setString(5,user.getDescription());
-            ps.setString(6,user.getAvatar_icon());
-            ps.setString(7,user.getUsername());
+            ps.setString(1, user.getFname());
+            ps.setString(2, user.getLname());
+            ps.setString(3, user.getDateOfBirth());
+            ps.setString(4, user.getCountry());
+            ps.setString(5, user.getDescription());
+            ps.setString(6, user.getAvatar_icon());
+            ps.setString(7, user.getUsername());
 
             ps.executeUpdate();
 
