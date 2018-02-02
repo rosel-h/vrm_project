@@ -15,6 +15,34 @@
 <html>
 <head>
     <title>Create Article</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
+    <!-- Custom scripts for this template -->
+    <script src="vendor/js/clean-blog.min.js"></script>
+    <script src="vendor/js/featured.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -64,14 +92,71 @@
 </head>
 <body>
 
+<%--%>--%>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Welcome">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Articles">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myArticles">My Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="editprofile">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <i class="glyphicon glyphicon-search" style="color: white;"
+                       data-toggle="modal" data-target="#searchbar"></i>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+
+<header id="backgroundImage" class="masthead" style="background-image: url('img/starry-night-sky.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                <div class="post-heading">
+                    <h1>Tell us your journey. </h1>
+                    <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
+                    <span class="meta" style="font-size: 90%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
 <div class="container">
     <!--  A form letting users add new articles. -->
-    <div class="panel panel-info">
+    <div class="">
 
-        <div class="panel-heading">
-            <h3 class="panel-title">New Article</h3>
+        <div class="">
+            <%--<h3 class="panel-title">New Article</h3>--%>
         </div>
-        <div class="panel-body">
+        <div class="">
             <form action="/OneArticle" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -79,20 +164,20 @@
                 </div>
                 <div class="form-group">
                     <label for="summernote">Content</label>
-                    <textarea id="summernote" name="content" class="form-control" rows="10" required></textarea>
+                    <textarea id="summernote" name="content"  class="form-control" rows="40" required></textarea>
                     <label for ="futureDate">Date Published (optional)</label>
                     <input type="date" id="futureDate" name="futureDate" value="new Date()">
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="operation" value="add">
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary float-right">Post</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
-
+</article>
 
 </body>
 </html>
