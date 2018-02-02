@@ -25,6 +25,7 @@ public class OAuth2fb extends HttpServlet {
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
     private static final String redirectURI = "http://localhost:8181/oauth2fb";
     private static final String scope = "email";
+    private String stateParam;
     User user;
 
     private String username = "";
@@ -44,6 +45,10 @@ public class OAuth2fb extends HttpServlet {
 
     //setup get request to listen for FBServer contact - this is used for the actual token creation
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        if (request.getParameter("type") != stateParam) {
+//            response.sendError(404);
+//        } else {
 
         connectFB(request, response);
         if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
@@ -75,6 +80,7 @@ public class OAuth2fb extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
+            sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity i.e. long log in
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("personLoggedIn", username);
             sess.setAttribute("user", user);
@@ -84,6 +90,7 @@ public class OAuth2fb extends HttpServlet {
 
 //                RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
 //                rs.forward(request, response);
+
 
         } else {
             request.setAttribute("successMessage", "Sign up successfully!");
