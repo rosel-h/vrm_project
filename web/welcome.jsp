@@ -9,9 +9,11 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+
+<% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
@@ -58,7 +60,7 @@
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
