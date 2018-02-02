@@ -110,16 +110,10 @@
                             </a>
                         </div>
 
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Articles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Community</span>
-                            </a>
-                        </div>
-
 
                     </div>
+
+
                 </div>
             </div>
         </div>

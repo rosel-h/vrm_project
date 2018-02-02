@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class SignUpServlet extends HttpServlet {
 
-    private static final String SITE_SECRET = "6LdzZkIUAAAAAEqAh4IqpMguulLqX0O1CzG7twq7";
+    private static final String SITE_SECRET = "6Lf57kMUAAAAAFYb2gFexhONG7i6mjovX3SaFNDp";
     private static final String SECRET_PARAM = "secret";
     private static final String RESPONSE_PARAM = "response";
     private static final String G_RECAPTCHA_RESPONSE = "g-recaptcha-response";
@@ -48,14 +48,12 @@ public class SignUpServlet extends HttpServlet {
 
 
     public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
-
-        String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
-        System.out.println(gRecaptchaResponse);
-        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
-
-        if (!verify) {
-            System.out.println("SignUpServlet enter line 57: verify=" + verify);
-        }
+//
+//        String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+//        System.out.println("g-recaptcha-response=" + gRecaptchaResponse);
+//        boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
+//
+//        System.out.println("SignUpServlet enter line 57: verify=" + verify);
 
 
         System.out.println("SignUpServlet enter sign up servlet");
@@ -136,7 +134,7 @@ public class SignUpServlet extends HttpServlet {
                     } else {
                         //logic for normal form fields
                         String fieldName = fileItem.getFieldName();
-                        System.out.println("SignUpServlet enter line 127: fieldName: " + fieldName + "," + fileItem.getString());
+//                        System.out.println("SignUpServlet enter line 127: fieldName: " + fieldName + "," + fileItem.getString());
                         if (fieldName.equals("username")) {
                             username = fileItem.getString();
                         } else if (fieldName.equals("password")) {
@@ -245,10 +243,15 @@ public class SignUpServlet extends HttpServlet {
 
 
 
-/*                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
+                Map<String, String[]> maps = req.getParameterMap();
+                for (String key : maps.keySet()) {
+                    System.out.println("enter line 248: key=" + key + ",value=" + maps.get(key));
+                }
+
+                JSONObject jsonObject = performRecaptchaSiteVerify(req.getParameter(G_RECAPTCHA_RESPONSE));
                 boolean success = (boolean) jsonObject.get("success");
                 req.setAttribute("success", success);
-                System.out.println("recaptcha Success = " + success);*/
+                System.out.println("recaptcha Success = " + success);
 
                 req.setAttribute("successMessage", "Sign up successfully!");
                 req.setAttribute("directMessage", "You will be directed to login page");
@@ -283,16 +286,6 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
-    }
-
-/*
-    private String checkNull(Object object) {
-        String returnStr = "";
-        if (object == null) {
-            return returnStr;
-        } else {
-            return object.toString();
-        }
     }
 
     private JSONObject performRecaptchaSiteVerify(String recaptchaResponseToken) throws IOException, JSONException {
@@ -331,6 +324,5 @@ public class SignUpServlet extends HttpServlet {
         JSONTokener jsonTokener = new JSONTokener(urlConnection.getInputStream());
         return new JSONObject((Map) jsonTokener);
     }
-*/
 
 }

@@ -97,7 +97,8 @@
             color: #FFF;
             margin-left: 5px;
             padding: 3px 6px 3px 6px;
-            background-color: #F90;
+            background-color: black;
+            opacity: 0.6;
             cursor: pointer;
         }
 
@@ -151,10 +152,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
-                <li class="nav-item">
-                    <i class="glyphicon glyphicon-search" style="color: white;"
-                       data-toggle="modal" data-target="#searchbar"></i>
-                </li>
             </ul>
         </div>
 
@@ -197,28 +194,37 @@
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
                             </a>
                         </div>
+
+
+                    </div>
+
+                    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%; display: none">
+                        <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+                            <div class="row">
+                                <div class="form-group" style="padding: 1%">
+                                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                                           style="opacity: 0.6"
+                                           id="searchkeyword">
+                                </div>
+                                <div class="form-group" style="padding: 1%">
+                                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.6">
+                                        <option value="title">Title</option>
+                                        <option value="username">Username</option>
+                                        <option value="date">Date</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="padding: 1%">
+                                    <button type="submit" class="form-control" style="opacity: 0.6">Search</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
-                <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
 
-                    <div class="row">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
-                                   id="searchkeyword">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" name="searchType" id="searchselect">
-                                <option value="title">Title</option>
-                                <option value="username">Username</option>
-                                <option value="date">Date</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control">Search</button>
-                        </div>
-                    </div>
-                </form>
+
+
 
             </div>
         </div>
