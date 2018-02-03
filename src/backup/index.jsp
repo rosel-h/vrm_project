@@ -44,7 +44,7 @@
 
 </c:if>
 
-<header class="masthead" style="background-image: url('imgs/backgroud01.jpg')">
+<header class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

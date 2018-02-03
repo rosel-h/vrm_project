@@ -188,7 +188,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -226,7 +226,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

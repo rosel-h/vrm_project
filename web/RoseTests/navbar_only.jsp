@@ -37,7 +37,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('../img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

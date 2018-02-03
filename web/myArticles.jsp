@@ -107,7 +107,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -169,7 +169,7 @@
 
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -226,7 +226,7 @@
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1; width: 55%">
+            <th class="sort-alpha" style="color: #0085a1; width: 65%">
                 <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
             </th>
             <th class="sort-alpha" style="color: #0085a1">
@@ -251,8 +251,14 @@
             <tr>
                 <td><h4 class="post-title">${myArticles.getTitle()}</h4>
                     <div style="font-size: small">${myArticles.getContentPreview()}</div>
+                    <form action="OneArticle" method="post">
+                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                        <button type="submit" style="font-weight: lighter; background-color: transparent" class="btn">Read More...</button>
+                    </form>
                 </td>
-                <td><i>${myArticles.getUsername()}</i></td>
+                <td>by <i>${myArticles.getUsername()}</i></td>
                 <td>${myArticles.getDate()}
                     <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
                         (not yet published)
@@ -262,12 +268,7 @@
                         <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
                         <%--data-target="#a${myArticles.getArticleID()}">Read More...--%>
                         <%--</button>--%>
-                    <form action="OneArticle" method="post">
-                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
-                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                        <button type="submit" style="float: right; background-color: transparent" class="btn">Read More...</button>
-                    </form>
+
                 </td>
             </tr>
 
@@ -276,6 +277,6 @@
     </table>
 
 </div>
-
+<%@include file="footer.jsp" %>
 </body>
 </html>

@@ -61,7 +61,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -175,7 +175,7 @@
 
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -183,7 +183,7 @@
                 <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
                     <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
-                             class="img-circle img-fluid">
+                             class="img-fluid">
                     </div>
                     <br>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>

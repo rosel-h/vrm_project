@@ -47,6 +47,7 @@
             }
             table.children('tbody').empty().html(rows);
         });
+
         function comparer(index) {
             return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
@@ -54,6 +55,7 @@
                     valA - valB : valA.localeCompare(valB);
             };
         }
+
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
@@ -70,7 +72,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -79,7 +81,7 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
 
@@ -89,17 +91,16 @@
 <body>
 
 
-
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
-        <% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-            response.setHeader("Pragma","no-cache"); //HTTP 1.0
-            response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+        <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
         %>
-    <%--<%@include file="navigation.jsp" %>--%>
+        <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
-                <a  class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
@@ -111,18 +112,18 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Welcome">Home</a>
                         </li>
-                        <%--<li class="nav-item">--%>
+                            <%--<li class="nav-item">--%>
                             <%--<a class="nav-link" href="Articles">Community</a>--%>
-                        <%--</li>--%>
-                        <%--<li class="nav-item">--%>
+                            <%--</li>--%>
+                            <%--<li class="nav-item">--%>
                             <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                        <%--</li>--%>
+                            <%--</li>--%>
                         <li class="nav-item">
                             <a class="nav-link" href="editprofile">My Profile</a>
                         </li>
-                        <%--<li class="nav-item">--%>
+                            <%--<li class="nav-item">--%>
                             <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                        <%--</li>--%>
+                            <%--</li>--%>
                     </ul>
                 </div>
             </div>
@@ -152,13 +153,13 @@
                                 <div style="padding: 1%;margin: 1%">
                                     <a href="Articles" class="btn btn-default"
                                        style=" background-color: white; opacity: 0.8">
-                                Community
+                                        Community
                                     </a>
                                 </div>
                                 <div style="padding: 1%;margin: 1%">
                                     <a href="NewArticle" class="btn btn-danger"
                                        style=" color: white;opacity: 0.8">
-                                       New Article
+                                        New Article
                                     </a>
                                 </div>
                             </div>
@@ -177,14 +178,15 @@
 <div class="container">
     <div class="row" style="vertical-align: middle">
         <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-        <h1>All Articles &nbsp;</h1>
+            <h1>All Articles &nbsp;</h1>
         </div>
         <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
             <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
 
                 <div class="row">
                     <div class="form-group" style="padding: 1%">
-                        <input type="text" required class="form-control" name="keywords" placeholder="Title/Username/Date"
+                        <input size="60" type="text" required class="form-control" name="keywords"
+                               placeholder="Title/Username/Date"
                                style="opacity: 0.8"
                                id="searchkeyword">
                     </div>
@@ -202,22 +204,23 @@
             </form>
         </div>
     </div>
-
+    <br>
     <div style="float: right">
         <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
-            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
-                                                                            <%--style="height: 30px"--%>
-                                                                            <%--alt="avatar"/></a>--%>
-            <%--</div>--%>
+        <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
+        <%--style="height: 30px"--%>
+        <%--alt="avatar"/></a>--%>
+        <%--</div>--%>
         <%--</c:if>--%>
         <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
+    <br>
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1; width: 55%">
+            <th class="sort-alpha" style="color: #0085a1; width: 65%">
                 <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
             </th>
             <th class="sort-alpha" style="color: #0085a1">
@@ -237,22 +240,23 @@
             %>
             <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                 <tr>
-                    <td><h4 class="post-title">${articleList.getTitle()}</h4></td>
-                    <td><i>${articleList.getUsername()}</i></td>
-                    <td>${articleList.getDate()}</td>
-                    <td>
+                    <td><h4 class="post-title">${articleList.getTitle()}</h4>
                         <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
-                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button type="submit" style="background: transparent" class="btn">Read More...</button>
+                            <input type="hidden" id="csrfToken" name="csrfToken"
+                                   value="${sessionScope.get("csrfSessionToken")}">
+                            <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
                         </form>
                     </td>
+                    <td>by <i>${articleList.getUsername()}</i></td>
+                    <td>${articleList.getDate()}</td>
                 </tr>
             </c:if>
         </c:forEach>
         </tbody>
     </table>
 </div>
+<%@include file="footer.jsp" %>
 </body>
 </html>
