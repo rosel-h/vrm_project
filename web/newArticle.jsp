@@ -96,6 +96,7 @@
                     ['height', ['height']],
                     ['insert',['picture']]
                 ],
+                maximumImageFileSize: 2097152,
                 height: 600,
                popover: {
                    image: [],
