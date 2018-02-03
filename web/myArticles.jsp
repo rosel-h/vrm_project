@@ -17,16 +17,16 @@
     <title>${sessionScope.personLoggedIn} Articles</title>
     <%--<!-- Latest compiled and minified CSS -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
-          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
+    <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
 
     <%--<!-- Optional theme -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
-          <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
+    <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
 
     <%--<!-- Latest compiled and minified JavaScript -->--%>
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
-            <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
-            <%--crossorigin="anonymous"></script>--%>
+    <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
+    <%--crossorigin="anonymous"></script>--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
@@ -65,7 +65,7 @@
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
-                    ['insert',['picture']]
+                    ['insert', ['picture']]
                 ]
             });
         });
@@ -81,6 +81,7 @@
             }
             table.children('tbody').empty().html(rows);
         });
+
         function comparer(index) {
             return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
@@ -88,6 +89,7 @@
                     valA - valB : valA.localeCompare(valB);
             };
         }
+
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
@@ -122,14 +124,15 @@
 
 </head>
 <body>
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a href = "#mainNav" class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
+    <
+    <div id="top" class="container">
+        <a href="#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -210,9 +213,10 @@
     <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
     <div style="float: right">
         <c:if test="${sessionScope.personLoggedIn !=null}">
-            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
-                                                                            style="height: 30px"
-                                                                            alt="avatar"/></a>
+            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img
+                    src="avatars/${user.getAvatar_icon()}"
+                    style="height: 30px"
+                    alt="avatar"/></a>
             </div>
         </c:if>
         <c:if test="${sessionScope.personLoggedIn ==null}">
@@ -242,33 +246,33 @@
             java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
             request.setAttribute("sqlDateToday", sqlDateToday);
         %>
-            <c:forEach var="myArticles" items="${myArticles}">
-                <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
+        <c:forEach var="myArticles" items="${myArticles}">
+            <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
 
-                    <tr>
-                        <td><b>${myArticles.getTitle()}</b>
-                            <%--<br>--%>
-                            <div style="font-size: small">${myArticles.getContentPreview()}</div>
-                        </td>
-                        <td><i>${myArticles.getUsername()}</i></td>
-                        <td >${myArticles.getDate()}
-                            <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
-                                (not yet published)
-                            </c:if>
-                        </td>
-                        <td>
-                            <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                                    <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
-                            <%--</button>--%>
-                                <form action="OneArticle" method="post">
-                                    <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                                    <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
-                                    <button type="submit" class="btn">Full Article</button>
-                                </form>
-                        </td>
-                    </tr>
+            <tr>
+                <td><b>${myArticles.getTitle()}</b>
+                        <%--<br>--%>
+                    <div style="font-size: small">${myArticles.getContentPreview()}</div>
+                </td>
+                <td><i>${myArticles.getUsername()}</i></td>
+                <td>${myArticles.getDate()}
+                    <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
+                        (not yet published)
+                    </c:if>
+                </td>
+                <td>
+                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
+                        <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
+                        <%--</button>--%>
+                    <form action="OneArticle" method="post">
+                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                        <button type="submit" class="btn">Full Article</button>
+                    </form>
+                </td>
+            </tr>
 
-            </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
 

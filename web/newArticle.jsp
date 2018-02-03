@@ -149,7 +149,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="post-heading" style="margin: 10% 0 0 0; padding: 10%;">
+                <div class="post-heading" style="margin: 10% 0 0 0; padding: 15%;">
                     <h1>Tell us your journey. </h1>
                     <span class="meta" style="font-size: 100%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
                 </div>
