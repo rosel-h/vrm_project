@@ -109,6 +109,11 @@
             console.log(imageCollection[numImage]);
         }
 
+        $(document).ready(function() {
+            loadRandomImage();
+        });
+
+
     </script>
 
 </head>
@@ -160,7 +165,6 @@
 
         </nav>
 
-
         <!-- Page Header -->
         <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
             <div class="overlay"></div>
@@ -197,26 +201,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
-
-                            <div class="row">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
-                                           id="searchkeyword">
-                                </div>
-                                <div class="form-group">
-                                    <select class="form-control" name="searchType" id="searchselect">
-                                        <option value="title">Title</option>
-                                        <option value="username">Username</option>
-                                        <option value="date">Date</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="form-control">Search</button>
-                                </div>
-                            </div>
-                        </form>
 
                     </div>
                 </div>
@@ -313,8 +297,6 @@
                         </form>
                     </td>
                 </tr>
-
-
             </c:if>
         </c:forEach>
         </tbody>
