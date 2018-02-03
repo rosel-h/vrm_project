@@ -88,13 +88,14 @@
 </head>
 <body>
 
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
-%>
+
 
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
+        <% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma","no-cache"); //HTTP 1.0
+            response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+        %>
     <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
@@ -134,9 +135,11 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
-                            <div style="padding-top: 3%; margin: 1%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%" class="img-circle img-fluid">
+                            <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                                     class="img-circle img-fluid">
                             </div>
+                            <br>
                             <h5>Explore the community or create a new blog entry</h5>
                             <div class="btn-group btn-group-justified col-xs-10" role="group"
                                  style="padding: 1%">
@@ -214,7 +217,7 @@
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1">
+            <th class="sort-alpha" style="color: #0085a1; width: 55%">
                 <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
             </th>
             <th class="sort-alpha" style="color: #0085a1">
@@ -234,7 +237,7 @@
             %>
             <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                 <tr>
-                    <td><h3 class="post-title">${articleList.getTitle()}</h3></td>
+                    <td><h4 class="post-title">${articleList.getTitle()}</h4></td>
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>
@@ -242,7 +245,7 @@
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                             <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button type="submit" style="opacity: 0.8" class="btn">Full Article</button>
+                            <button type="submit" style="background: transparent" class="btn">Full Article</button>
                         </form>
                     </td>
                 </tr>

@@ -46,6 +46,32 @@
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+    </script>
 </head>
 <body>
 
@@ -97,10 +123,12 @@
                             <div style="color:red">${errorMessage}</div>
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8" id="btn-login" class="btn btn-success"
+                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8" id="btn-login"
+                                            class="btn btn-success"
                                             type="submit">Sign in
                                     </button>
-                                    <button style="color:white; margin: 1%; padding: 1%;opacity: 0.8" id="btn-fblogin" class="btn btn-primary"
+                                    <button style="color:white; margin: 1%; padding: 1%;opacity: 0.8" id="btn-fblogin"
+                                            class="btn btn-primary"
                                             type="button"
                                             onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
                                         Connect via Facebook

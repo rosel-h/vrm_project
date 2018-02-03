@@ -226,7 +226,7 @@
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1">
+            <th class="sort-alpha" style="color: #0085a1; width: 55%">
                 <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
             </th>
             <th class="sort-alpha" style="color: #0085a1">
@@ -245,12 +245,11 @@
             java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
             request.setAttribute("sqlDateToday", sqlDateToday);
         %>
+
         <c:forEach var="myArticles" items="${myArticles}">
             <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
-
             <tr>
-                <td><b>${myArticles.getTitle()}</b>
-                        <%--<br>--%>
+                <td><h4 class="post-title">${myArticles.getTitle()}</h4>
                     <div style="font-size: small">${myArticles.getContentPreview()}</div>
                 </td>
                 <td><i>${myArticles.getUsername()}</i></td>
@@ -267,7 +266,7 @@
                         <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
                         <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
                         <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                        <button type="submit" class="btn">Full Article</button>
+                        <button type="submit" style="float: right; background-color: transparent" class="btn">Full Article</button>
                     </form>
                 </td>
             </tr>
