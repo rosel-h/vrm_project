@@ -55,14 +55,26 @@
             "background02.jpg",
             "background03.jpg",
             "background04.jpg",
-            "background05.jpg"
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
         ];
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
+
+        $(document).ready(function() {
+            loadRandomImage();
+        });
+
 
     </script>
 

@@ -132,11 +132,9 @@ public class IndividualArticleServlet extends HttpServlet {
                 System.out.println("IndividualArticleServlet - commentListCompressed: " + commentsWithChildren.size());
                 req.setAttribute("articleToLoad", articleToLoad);
                 req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
-
                 req.getRequestDispatcher("oneArticle.jsp").forward(req, resp);
 
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();

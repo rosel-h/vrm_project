@@ -62,7 +62,7 @@ public class OAuth2fb extends HttpServlet {
             HttpSession sess = request.getSession(true);
 
             Map<String, String> jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
+            jsonMap.put("username", user.getUsername());
             System.out.println("jsonmap string" + jsonMap.toString());
 
             String jsonText = JSONValue.toJSONString(jsonMap);
@@ -89,7 +89,6 @@ public class OAuth2fb extends HttpServlet {
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
-
             String url = "Welcome";
             response.sendRedirect(url);
 

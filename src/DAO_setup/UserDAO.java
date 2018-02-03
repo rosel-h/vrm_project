@@ -99,8 +99,8 @@ public class UserDAO implements AutoCloseable {
             stmt.setString(6, country);
             stmt.setString(7, description);
             stmt.setString(8, avatar);
-            stmt.setString(9, email);
-            stmt.setString(10, status);
+            stmt.setString(9, status);
+            stmt.setString(10, email);
 
             stmt.executeUpdate();
 
