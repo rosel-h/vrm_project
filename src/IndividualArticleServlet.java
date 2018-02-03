@@ -27,10 +27,7 @@ public class IndividualArticleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("> do post");
-        HttpSession session = req.getSession(true);
-
-        boolean userHasLoggedIn = session.isNew();
-
+        HttpSession session = req.getSession(false);
         ServletContext servletContext = getServletContext();
         String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
