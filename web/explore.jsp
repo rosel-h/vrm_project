@@ -10,33 +10,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<%@ page import ="DAO_setup" %>--%>
 <html>
 <head>
     <title>Explore Community</title>
-    <%--<!-- Latest compiled and minified CSS -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
-          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
-
-    <%--<!-- Optional theme -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
-          <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
-
-    <%--<!-- Latest compiled and minified JavaScript -->--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
-            <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
-            <%--crossorigin="anonymous"></script>--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-    <%--&lt;%&ndash;<%@include file="RoseTests/allTheThingsInTheHead.jsp" %>&ndash;%&gt;--%>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <%--<title>Welcome to the Community</title>--%>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -57,31 +38,6 @@
     <script src="vendor/js/featured.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#summernote').summernote({
-                toolbar: [
-                    // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ]
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#wOther').summernote({
-                minHeight: 20
-            });
-        });
-
-//        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>
-    <!-- include sorting by title, username, date -->
-    <script>
         $(document).on('click', 'th', function () {
             var table = $(this).parents('table').eq(0);
             var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
@@ -101,15 +57,121 @@
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
+
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function() {
+            loadRandomImage();
+        });
+
     </script>
 
 </head>
 <body>
 
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
+
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
-    <%@include file="navigation.jsp" %>
-        <%--<%@include file="RoseTests/navbar_only.jsp" %>--%>
+    <%--<%@include file="navigation.jsp" %>--%>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div id="top" class="container">
+                <a href = "#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Welcome">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Articles">Explore</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="myArticles">My Articles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="editprofile">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
+                        </li>
+                        <li class="nav-item">
+                            <i class="glyphicon glyphicon-search" style="color: white;"
+                               data-toggle="modal" data-target="#searchbar"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Header -->
+        <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                        <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                            <div class="col-md-4 offset-4">
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
+                                     class="img-circle">
+                            </div>
+                            <br>
+                            <h5>Explore the community or create a new blog entry</h5>
+                            <div class="btn-group btn-group-justified col-xs-10" role="group"
+                                 style="padding: 1%">
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="myArticles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.6">
+                                        <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="Articles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Community</span>
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="NewArticle" class="btn btn-danger"
+                                       style=" color: white;opacity: 0.8">
+                                        <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
     </c:when>
     <c:otherwise>
         <%@include file="guestnavigation.jsp" %>
@@ -126,7 +188,7 @@
 
                 <div class="row">
                     <div class="form-group" style="padding: 1%">
-                        <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                        <input type="text" required class="form-control" name="keywords" placeholder="Title/Username/Date"
                                style="opacity: 0.6"
                                id="searchkeyword">
                     </div>
@@ -146,17 +208,17 @@
     </div>
 
     <div style="float: right">
-        <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
+        <c:if test="${sessionScope.personLoggedIn !=null}">
+            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>
         </c:if>
-        <c:if test="${personLoggedIn ==null}">
+        <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
-    <table class="table table-striped sorttable" id="articletable">
+    <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">
@@ -179,27 +241,21 @@
             %>
             <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                 <tr>
-                    <td><h2 class="post-title">${articleList.getTitle()}</h2></td>
+                    <td><h3 class="post-title">${articleList.getTitle()}</h3></td>
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>
-                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                                <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
-                        <%--</button>--%>
-
-                        <form action="/OneArticle" method="post">
+                        <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                            <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                             <button type="submit" class="btn">Full Article</button>
                         </form>
                     </td>
                 </tr>
-
-
             </c:if>
         </c:forEach>
         </tbody>
     </table>
 </div>
-
 </body>
 </html>

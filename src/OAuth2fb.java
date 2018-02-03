@@ -3,6 +3,7 @@ import DAO_setup.User;
 import DAO_setup.UserDAO;
 import org.json.simple.JSONValue;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,7 @@ public class OAuth2fb extends HttpServlet {
     User user;
 
     private String username = "";
+    private String errorMessage = null;
 
     //used for authentication and account creation
     private String fbUserEmail = "";
@@ -46,18 +48,21 @@ public class OAuth2fb extends HttpServlet {
     //setup get request to listen for FBServer contact - this is used for the actual token creation
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        if (request.getParameter("type") != stateParam) {
-//            response.sendError(404);
-//        } else {
-
         connectFB(request, response);
         if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
-            System.out.println("Facebook User Exists in Database");
 
+            if (errorMessage != null) {
+                request.setAttribute("errorMessage", errorMessage);
+                RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
+                rs.forward(request, response);
+                return;
+            }
+
+            System.out.println("Facebook User Exists in Database");
             HttpSession sess = request.getSession(true);
 
             Map<String, String> jsonMap = new HashMap<>();
-            jsonMap.put("username", username);
+            jsonMap.put("username", user.getUsername());
             System.out.println("jsonmap string" + jsonMap.toString());
 
             String jsonText = JSONValue.toJSONString(jsonMap);
@@ -80,17 +85,12 @@ public class OAuth2fb extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
-            sess.setMaxInactiveInterval(60 * 60 * 24 * 21); // log out after a month of inactivity i.e. long log in
+            sess.setMaxInactiveInterval(3600 * 24 * 21); // log out after a month of inactivity i.e. long log in
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
-            sess.setAttribute("personLoggedIn", username);
+            sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
-
             String url = "Welcome";
             response.sendRedirect(url);
-
-//                RequestDispatcher rs = request.getRequestDispatcher("welcome.jsp");
-//                rs.forward(request, response);
-
 
         } else {
             request.setAttribute("successMessage", "Sign up successfully!");
@@ -175,7 +175,6 @@ public class OAuth2fb extends HttpServlet {
 
 
     private boolean checkFbUser(String email, String firstName, String lastName) {
-        boolean loginStatus = false;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -189,19 +188,24 @@ public class OAuth2fb extends HttpServlet {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserFacebook(email);
 
+
             if (user == null) {
                 System.out.println("user is null");
                 dao.addUserFB(firstName, lastName, email);
-            } else {
-                loginStatus = true;
-                username = user.getUsername();
+                return false;
             }
+
+            if (user.getStatus().equals("inactive")) {
+                errorMessage = "User account has been deleted, please contact us to reactivate.";
+                return true;
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("check user method returning " + loginStatus);
-        return loginStatus;
+        return true;
 
     }
 }

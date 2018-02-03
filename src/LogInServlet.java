@@ -21,20 +21,22 @@ import java.util.Map;
 
 public class LogInServlet extends HttpServlet {
     User user;
+    String errorMessage = ""; //error message to be send back to the login if failed
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println(SiteSecurity.hashString("1234"));
+
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
+        System.out.println("the hashed pw is " + pass);
         String duration = request.getParameter("remember");
-
         HttpSession sess = request.getSession(true);
 
         if (checkUser(username, pass)) {
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", username);
-
             String jsonText = JSONValue.toJSONString(jsonMap);
             System.out.println("LoginServlet json text - " + jsonText);
             String sessiont_id = sess.getId();
@@ -56,29 +58,21 @@ public class LogInServlet extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
-            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
-
-            if (duration != null) {
-                System.out.println("setting maximum session duration");
-                sess.setMaxInactiveInterval(3600 * 24 * 10); // log out after a month of inactivity
-                System.out.println("max session set to " + sess.getMaxInactiveInterval());
-            }
 
             // Mr Meads generates a long random key for csrfToken
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             RequestDispatcher rs = request.getRequestDispatcher("Welcome");
             rs.forward(request, response);
         } else {
-            request.setAttribute("errorMessage", "Invalid Username or Password");
+            request.setAttribute("errorMessage", errorMessage);
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
 
     //check password function
     public boolean checkUser(String username, String pass) {
-        boolean loginStatus = false;
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -91,15 +85,23 @@ public class LogInServlet extends HttpServlet {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserStandard(username, pass);
 
-            if (user != null) {
-                loginStatus = true;
+            if (user == null) {
+                System.out.println("User login has failed");
+                errorMessage = "Invalid Username or Password";
+                return false;
+            }
+
+            if (user.getStatus().equals("inactive")) {
+                errorMessage = "User account has been deleted, please contact us to reactivate.";
+                return false;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return loginStatus;
+        return true;
+
     }
 
     //get function is post function

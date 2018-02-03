@@ -20,7 +20,34 @@
         }
     }
 </script>
+<script type="text/javascript">
+    var imageCollection = [
+        "background01.jpg",
+        "background02.jpg",
+        "background03.jpg",
+        "background04.jpg",
+        "background05.jpg",
+        "background06.jpg",
+        "background07.jpg",
+        "background08.jpg",
+        "background09.jpg",
+        "background10.jpg",
+        "background11.jpg",
+        "background12.jpg"
+    ];
 
+    function loadRandomImage() {
+        var numImage = Math.floor(Math.random() * (imageCollection.length));
+        $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+        console.log(imageCollection[numImage]);
+    }
+
+    $(document).ready(function() {
+        loadRandomImage();
+    });
+
+
+</script>
 <script>
     $(function () {
         $("#datepicker").datepicker();
@@ -29,20 +56,22 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
 
 <head>
 
-
 </head>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
+    <div id="top" class="container">
+        <a href = "#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -62,9 +91,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
@@ -110,9 +136,7 @@
                             </a>
                         </div>
 
-
                     </div>
-
 
                 </div>
             </div>

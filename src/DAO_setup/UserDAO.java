@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Created by Mengjie
  * Date : 2018/1/31
@@ -21,19 +23,22 @@ public class UserDAO implements AutoCloseable {
     }
 
     public User getUserStandard(String username, String pass) {
-        User user = new User();
+        User user = null;
 
-        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=? and status = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=?")) {
             ps.setString(1, username);
-            ps.setString(2, pass);
-            ps.setString(3, "active");
-
             try (ResultSet rs = ps.executeQuery()) {
-                // will be an empty set if login in correct
                 if (rs.next()) {
                     user = dataFromResultSet(rs, new User());
-                } else {
-                    user = null;
+                    //check the password is matching
+                    String hashed_PW = user.getPassword();
+                    System.out.println("The Hashed PW is " + hashed_PW);
+                    System.out.println("The pw to be checked is " + pass);
+
+                    if (!BCrypt.checkpw(pass, hashed_PW)) {
+                        System.out.println("password check is returning fail    ");
+                        user = null;
+                    }
                 }
             }
 
@@ -46,11 +51,11 @@ public class UserDAO implements AutoCloseable {
 
     public User getUserFacebook(String email) {
         User user = new User();
+//        reactivateFBUser(email);
         try (PreparedStatement ps = conn.prepareStatement
-                ("select * from vrm_users where binary email_address like ? and status like ?")) {
+                ("select * from vrm_users where binary email_address like ?")) {
             System.out.println("email to be used to selection is " + email);
             ps.setString(1, email);
-            ps.setString(2, "facebook");
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -136,11 +141,9 @@ public class UserDAO implements AutoCloseable {
 
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users SET status = ? WHERE username = ?;")) {
 
-            ps.setString(1,"inactive");
+            ps.setString(1, "inactive");
             ps.setString(2, username);
-
             ps.executeUpdate();
-
             deleteSuccess = true;
 
         } catch (SQLException e) {
@@ -156,13 +159,13 @@ public class UserDAO implements AutoCloseable {
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
                 "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
 
-            ps.setString(1,user.getFname());
-            ps.setString(2,user.getLname());
-            ps.setString(3,user.getDateOfBirth());
-            ps.setString(4,user.getCountry());
-            ps.setString(5,user.getDescription());
-            ps.setString(6,user.getAvatar_icon());
-            ps.setString(7,user.getUsername());
+            ps.setString(1, user.getFname());
+            ps.setString(2, user.getLname());
+            ps.setString(3, user.getDateOfBirth());
+            ps.setString(4, user.getCountry());
+            ps.setString(5, user.getDescription());
+            ps.setString(6, user.getAvatar_icon());
+            ps.setString(7, user.getUsername());
 
             ps.executeUpdate();
 

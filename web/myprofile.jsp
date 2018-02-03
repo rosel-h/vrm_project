@@ -28,14 +28,43 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function() {
+            loadRandomImage();
+        });
+    </script>
 
 </head>
 <body>
-
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}!<%--${requestScope.get()}--%> </a>
+    <div id="top" class="container">
+        <a href = "#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -56,9 +85,6 @@
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
             </ul>
@@ -67,7 +93,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/background02.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -131,7 +157,7 @@
                                 States
                             </option>
                             <option value="other" <c:if test="${user.getCountry() eq 'other'}">selected</c:if>>
-                                other
+                                Other
                             </option>
                         </select>
                     </div>
@@ -143,8 +169,7 @@
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
-                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">
-                            ${user.getDescription()}
+                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">${user.getDescription()}
                         </textarea>
                     </div>
                 </div>

@@ -14,19 +14,19 @@
 
 <html>
 <head>
-    <title>${personLoggedIn} Articles</title>
+    <title>${sessionScope.personLoggedIn} Articles</title>
     <%--<!-- Latest compiled and minified CSS -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
-          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
+    <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
 
     <%--<!-- Optional theme -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
-          <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
+    <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
 
     <%--<!-- Latest compiled and minified JavaScript -->--%>
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
-            <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
-            <%--crossorigin="anonymous"></script>--%>
+    <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
+    <%--crossorigin="anonymous"></script>--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
@@ -65,7 +65,7 @@
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
-                    ['insert',['picture']]
+                    ['insert', ['picture']]
                 ]
             });
         });
@@ -81,6 +81,7 @@
             }
             table.children('tbody').empty().html(rows);
         });
+
         function comparer(index) {
             return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
@@ -88,37 +89,142 @@
                     valA - valB : valA.localeCompare(valB);
             };
         }
+
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
     </script>
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+
+    </script>
+
 </head>
 <body>
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
 
-<c:choose>
-    <c:when test="${personLoggedIn !=null}">
-        <%@include file="navigation.jsp" %>
-    </c:when>
-    <c:otherwise>
-        <%@include file="guestnavigation.jsp" %>
-    </c:otherwise>
-</c:choose>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
+    <div id="top" class="container">
+        <a  class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Welcome">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Articles">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="myArticles">My Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="editprofile">My Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
+                </li>
+                <li class="nav-item">
+                    <i class="glyphicon glyphicon-search" style="color: white;"
+                       data-toggle="modal" data-target="#searchbar"></i>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- Page Header -->
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                    <div class="col-md-4 offset-4">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
+                             class="img-circle">
+                    </div>
+                    <br>
+                    <h5>Explore the community or create a new blog entry</h5>
+                    <div class="btn-group btn-group-justified col-xs-10" role="group"
+                         style="padding: 1%">
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="myArticles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="Articles" class="btn btn-default"
+                               style=" background-color: white; opacity: 0.6">
+                                <span class="glyphicon glyphicon-circle-arrow-right"
+                                      aria-hidden="true"> &nbsp;Community</span>
+                            </a>
+                        </div>
+                        <div style="padding: 1%;margin: 1%">
+                            <a href="NewArticle" class="btn btn-danger"
+                               style=" color: white;opacity: 0.8">
+                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
 <div class="container">
-    <h1>All Articles by ${personLoggedIn}</h1>
+    <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
     <div style="float: right">
-        <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
-                                                                            style="height: 30px"
-                                                                            alt="avatar"/></a>
+        <c:if test="${sessionScope.personLoggedIn !=null}">
+            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img
+                    src="avatars/${user.getAvatar_icon()}"
+                    style="height: 30px"
+                    alt="avatar"/></a>
             </div>
         </c:if>
-        <c:if test="${personLoggedIn ==null}">
+        <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
 
-    <table class="table table-striped sorttable" id="articletable">
+    <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">
@@ -140,148 +246,35 @@
             java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
             request.setAttribute("sqlDateToday", sqlDateToday);
         %>
-            <c:forEach var="myArticles" items="${myArticles}">
-                <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
+        <c:forEach var="myArticles" items="${myArticles}">
+            <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
 
-                    <tr>
-                        <td><b>${myArticles.getTitle()}</b> <br>${myArticles.getContentPreview()}</td>
-                        <td><i>${myArticles.getUsername()}</i></td>
-                        <td >${myArticles.getDate()}
-                            <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
-                                (not yet published)
-                            </c:if>
-                        </td>
-                        <td>
-                            <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                                    <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
-                            <%--</button>--%>
-                                <form action="/OneArticle" method="post">
-                                    <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                                    <button type="submit" class="btn">Full Article</button>
-                                </form>
-                        </td>
-                    </tr>
+            <tr>
+                <td><b>${myArticles.getTitle()}</b>
+                        <%--<br>--%>
+                    <div style="font-size: small">${myArticles.getContentPreview()}</div>
+                </td>
+                <td><i>${myArticles.getUsername()}</i></td>
+                <td>${myArticles.getDate()}
+                    <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
+                        (not yet published)
+                    </c:if>
+                </td>
+                <td>
+                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
+                        <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
+                        <%--</button>--%>
+                    <form action="OneArticle" method="post">
+                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                        <button type="submit" class="btn">Full Article</button>
+                    </form>
+                </td>
+            </tr>
 
-
-                    <%--<!-- Modal -->--%>
-                    <%--<div class="modal fade" id="a${myArticles.getArticleID()}" role="dialog">--%>
-                        <%--<div class="modal-dialog modal-lg" style="width: 100%">--%>
-                            <%--<!-- Modal content-->--%>
-                            <%--<div class="modal-content">--%>
-                                <%--<div class="modal-header">--%>
-                                    <%--<h4 class="modal-title">${myArticles.getTitle()}</h4>--%>
-                                    <%--<div>Written by ${myArticles.getUsername()}, published--%>
-                                        <%--on ${myArticles.getDate()}</div>--%>
-                                    <%--&lt;%&ndash;<c:if test="${personLoggedIn == myArticles.getUsername()}">&ndash;%&gt;--%>
-                                        <%--<form class="form-inline" action="Articles" method="POST">--%>
-                                            <%--<button style="float: right" type="submit" class="btn btn-danger pull-right">--%>
-                                                <%--Delete--%>
-                                            <%--</button>--%>
-                                            <%--<input type="hidden" name="operation" value="delete">--%>
-                                            <%--<input type="hidden" name="articleId" value="${myArticles.getArticleID()}">--%>
-                                        <%--</form>--%>
-                                        <%--&lt;%&ndash;<form class="form-inline" action="/Articles" method="POST">&ndash;%&gt;--%>
-                                        <%--<form class="form-inline" action="editArticles" method="post">--%>
-
-                                            <%--<input type="hidden" name="articleID" value="${myArticles.getArticleID()}">--%>
-
-                                            <%--<input type="hidden" name="operation" value="goToEditPage">--%>
-                                            <%--<input type="hidden" name="author" value="${personLoggedIn}">--%>
-                                            <%--<button style="float: right" id="editorButton" type="submit"--%>
-                                                    <%--class="btn btn-primary pull-right">Edit--%>
-                                            <%--</button>--%>
-                                        <%--</form>--%>
-
-                                    <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-
-                                <%--</div>--%>
-                                <%--<div class="modal-body">--%>
-
-                                    <%--<div>${myArticles.getContent()}</div>--%>
-                                <%--</div>--%>
-
-                                <%--<div class="panel-footer">--%>
-
-                                    <%--<div class=""><p>Comments</p></div>--%>
-                                        <%--&lt;%&ndash;first comments&ndash;%&gt;--%>
-                                    <%--<c:forEach var="commentList" items="${commentList}">--%>
-                                        <%--<c:if test="${myArticles.getArticleID()==commentList.getArticleID()}">--%>
-                                            <%--&lt;%&ndash;avatar icon&ndash;%&gt;--%>
-
-                                            <%--<div class=""><img src="avatars/${commentList.getAvatarIcon()}" class=""--%>
-                                                               <%--style="width:30px; display: inline-block">--%>
-                                                <%--<h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}--%>
-                                                    <%--<small><i>Posted on ${commentList.getDatePublished()}</i></small>--%>
-                                                <%--</h5>--%>
-                                                <%--<p>${commentList.getContent()}</p>--%>
-                                                    <%--&lt;%&ndash;&lt;%&ndash;second nest comments&ndash;%&gt;&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<c:forEach var="nestedList" items="${nestedList}">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<c:if test="${nestedList.getParentID()==commentList.getCommentID()}">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<div class="">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<img src="avatars/${nestedList.getAvatarIcon()}"&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;class=""&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;style="width:30px">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<div class="">&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<h5 class="">${nestedList.getCommentAuthor()}&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<small><i>Posted on ${nestedList.getDatePublished()}</i></small>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;</h5>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<p>${nestedList.getContent()}</p>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<br>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;</c:if>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash; checks wether user logged in with author of post and user logged in&ndash;%&gt;--%>
-                                                <%--<c:if test="${( personLoggedIn == commentList.getCommentAuthor())}">--%>
-                                                    <%--<form method="post" action="/Articles">--%>
-                                                        <%--<button type="submit" class="btn btn-xs">delete comment</button>--%>
-                                                        <%--<input type="hidden" name="operation"--%>
-                                                               <%--value="deleteCommentOnArticle">--%>
-                                                        <%--<input type="hidden" name="commentID"--%>
-                                                               <%--value="${commentList.getCommentID()}">--%>
-
-                                                    <%--</form>--%>
-                                                <%--</c:if>--%>
-                                            <%--</div>--%>
-                                            <%--<br>--%>
-                                        <%--</c:if>--%>
-
-                                    <%--</c:forEach>--%>
-                                    <%--<c:if test="${personLoggedIn !=null}">--%>
-                                        <%--<form method="post" action="/Articles">--%>
-                                            <%--<div class="form-group">--%>
-                                                <%--<label for="summernote">Comment as ${personLoggedIn}:</label>--%>
-                                                    <%--&lt;%&ndash;<textarea class="form-control" rows="3" name="newComment" id="newComment"&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;style="max-width: 100%; min-width: 100%;" required></textarea>&ndash;%&gt;--%>
-                                                    <%--&lt;%&ndash;<div class="form-group">&ndash;%&gt;--%>
-                                                <%--<label for="summernote">Content</label>--%>
-                                                <%--<textarea id="summernote" name="newComment" class="form-control" rows="10"--%>
-                                                          <%--required></textarea>--%>
-                                                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-                                                <%--<input type="hidden" name="userWhoCommented" value="${personLoggedIn}">--%>
-                                                <%--<input type="hidden" name="operation" value="commentOnArticle">--%>
-                                                <%--<input type="hidden" name="articleID" value="${myArticles.getArticleID()}">--%>
-                                                <%--<button style="float: right" type="submit" class="btn btn-sm">Post a comment--%>
-                                                <%--</button>--%>
-                                            <%--</div>--%>
-                                        <%--</form>--%>
-                                    <%--</c:if>--%>
-                                <%--</div>--%>
-                                <%--<div class="modal-footer">--%>
-                                    <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</c:if>--%>
-
-
-            </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
-
-
-
 
 </div>
 

@@ -70,7 +70,7 @@ public class SignUpServlet extends HttpServlet {
                 }
 
                 String username = (paraMaps.get("username")[0].equals("")) ? "" : paraMaps.get("username")[0];
-                String password = (paraMaps.get("password")[0].equals("")) ? "" : paraMaps.get("password")[0];
+                String password= (paraMaps.get("password")[0].equals("")) ? "" : paraMaps.get("password")[0];
                 String cPassword = (paraMaps.get("cPassword")[0].equals("")) ? "" : paraMaps.get("cPassword")[0];
                 String fname = (paraMaps.get("fname")[0].equals("")) ? "" : paraMaps.get("fname")[0];
                 String lname = (paraMaps.get("lname")[0].equals("")) ? "" : paraMaps.get("lname")[0];
@@ -278,6 +278,8 @@ public class SignUpServlet extends HttpServlet {
                 //end of logging code
 
 
+                String password_hashed = SiteSecurity.hashString(password);
+                boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
                 System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
 
 

@@ -38,7 +38,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
                 <div class="site-heading">
                     <p>You are reaching the edge of the world!</p>
-                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a> or go back to your <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
+                    <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a> or go back to our <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
                 </div>
             </div>
         </div>

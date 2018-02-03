@@ -7,9 +7,10 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
     <c:redirect url="Welcome"/>
@@ -51,8 +52,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">VRM Travel Blog
-        </a>
+        <a class="navbar-brand">VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -94,14 +94,14 @@
                                        placeholder="Password">
                             </div>
                             <div style="color:red">${errorMessage}</div>
-                            <div class="input-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input id="login-remember" type="checkbox" name="remember" value="1"> Remember
-                                        me
-                                    </label>
-                                </div>
-                            </div>
+                            <%--<div class="input-group">--%>
+                                <%--<div class="checkbox">--%>
+                                    <%--<label>--%>
+                                        <%--<input id="login-remember" type="checkbox" name="remember" value="1"> Remember--%>
+                                        <%--me--%>
+                                    <%--</label>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
                                     <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>

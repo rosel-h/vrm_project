@@ -56,3 +56,4 @@ SELECT parent_comment_id FROM vrm_comments_on_articles;
 
 SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE vrm_comments_on_articles.article_id = 2 AND  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;
 
+SELECT FROM vrm_comments_on_articles WHERE comment_id =

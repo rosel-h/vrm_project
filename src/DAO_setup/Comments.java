@@ -79,8 +79,8 @@ public class Comments {
     /*add comment to the list*/
     public boolean addChild (Comments comment){
         comments.add(comment);
-        System.out.println("Comments class: "+comment.getCommentID()+" has been added as a child of "+this.getCommentID());
-        System.out.println(this.hasChildren());
+//        System.out.println("Comments class: "+comment.getCommentID()+" has been added as a child of "+this.getCommentID());
+//        System.out.println(this.hasChildren());
         return false;
     }
 

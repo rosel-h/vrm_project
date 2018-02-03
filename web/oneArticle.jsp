@@ -36,10 +36,14 @@
 
 </head>
 <body>
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+    <div id="top" class="container">
+        <a  class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -54,12 +58,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Articles">Explore</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myArticles">My Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="editprofile">My Profile</a>
-                </li>
+                <c:if test="${sessionScope.personLoggedIn !=null}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="myArticles">My Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="editprofile">My Profile</a>
+                    </li>
+                </c:if>
                 <li class="nav-item">
                     <a class="nav-link" href="about">About</a>
                 </li>
@@ -78,14 +84,8 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
-
-                <li class="nav-item">
-                    <i class="glyphicon glyphicon-search" style="color: white;"
-                       data-toggle="modal" data-target="#searchbar"></i>
-                </li>
             </ul>
         </div>
-
     </div>
 
 </nav>
@@ -120,155 +120,168 @@
             </div>
             <div class="row" style="float: right;">
                 <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
-                    <form class="form-inline" action="OneArticle" method="POST">
-                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                            Delete
-                        </button>
-                        <input type="hidden" name="operation" value="delete">
-                        <input type="hidden" name="articleId" value="${articleToLoad.getArticleID()}">
-                    </form>
-                    <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                    <form class="form-inline" action="editArticles" method="post">
-
-                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-
-                        <input type="hidden" name="operation" value="goToEditPage">
-                        <input type="hidden" name="author" value="${personLoggedIn}">
-                        <button style="float: right" id="editorButton" type="submit"
-                                class="btn btn-primary pull-right">Edit
-                        </button>
-                    </form>
-
-                </c:if>
+                <div class="btn-group btn-group-justified col-xs-10" role="group">
+                    <div style="padding: 1%; margin: 1%">
+                        <form class="form-inline" action="OneArticle" method="POST">
+                            <input type="hidden" name="operation" value="delete">
+                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                            <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                    <div style="padding: 1%; margin: 1%">
+                            <%--<form class="form-inline" action="/Articles" method="POST">--%>
+                        <form class="form-inline" action="editArticles" method="post">
+                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                            <input type="hidden" name="operation" value="goToEditPage">
+                            <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
+                            <button style="float: right" id="editorButton" type="submit"
+                                    class="btn btn-primary pull-right">Edit
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <br>
+            </c:if>
+        </div>
+        <br>
 
-            <div>
-                <p>Comments</p>
-                <%--first comments--%>
-                <c:forEach var="commentList" items="${commentList}">
-                    <c:if test="${articleToLoad.getArticleID()==commentList.getArticleID() }">
-                        <div class="">
-                            <img src="avatars/${commentList.getAvatarIcon()}" class=""
-                                 style="width:30px; display: inline-block">
-                            <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
-                                <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                            </h5>
-                            <p>${commentList.getContent()}</p>
-                                <%--delete comment if user is logged in--%>
-                            <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
-                                <form method="post" action="/OneArticles">
-                                    <button type="submit" class="btn btn-xs btn-transparent">delete comment</button>
-                                    <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                    <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+        <div class="container">
+            <p>Comments</p>
+            <%--first comments--%>
+            <c:forEach var="commentList" items="${commentList}">
+                <c:if test="${articleToLoad.getArticleID()==commentList.getArticleID() }">
+                    <div class="">
+                        <img src="avatars/${commentList.getAvatarIcon()}" class=""
+                             style="width:30px; display: inline-block">
+                        <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
+                            <small><i>Posted on ${commentList.getDatePublished()}</i></small>
+                        </h5>
+                        <p>${commentList.getContent()}</p>
+                            <%--delete comment if user is logged in--%>
+                        <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                            <form method="post" action="OneArticle">
+                                <button type="submit" class="btn btn-xs btn-danger">delete comment</button>
+                                <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                                <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                            </form>
+                        </c:if>
+                        <c:if test="${sessionScope.personLoggedIn !=null}">
+                            <small id="replyToThis${commentList.getCommentID()}"
+                                   style="display: inline-block;">Reply
+                            </small>
+                            <div id="replyBox${commentList.getCommentID()}" style="display: none">
+                                <form method="post" action="OneArticle">
+                                    <div class="form-group">
+                                        <label for="summernote" style="font-size: x-small">Comment
+                                            as ${sessionScope.personLoggedIn}:</label>
+                                        <textarea name="newComment" class="form-control" rows="3"
+                                                  required></textarea>
+                                        <input type="hidden" name="userWhoCommented"
+                                               value="${sessionScope.personLoggedIn}">
+                                        <input type="hidden" name="operation" value="replyToAComment">
+                                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                                        <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
+                                        <button style="float: right" type="submit"
+                                                class="btn btn-xs btn-success">Reply
+                                        </button>
+                                    </div>
                                 </form>
-                            </c:if>
-                            <c:if test="${personLoggedIn !=null}">
-                                <small id="replyToThis${commentList.getCommentID()}"
-                                       style="display: inline-block;font-size: 8px">Reply
-                                </small>
-                                <div id="replyBox${commentList.getCommentID()}" style="display: none">
-                                    <form method="post" action="/OneArticles">
-                                        <div class="form-group">
-                                            <label for="summernote" style="font-size: x-small">Comment
-                                                as ${personLoggedIn}:</label>
-                                            <textarea name="newComment" class="form-control" rows="3"
-                                                      required></textarea>
-                                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                                            <input type="hidden" name="operation" value="replyToAComment">
+                            </div>
+                        </c:if>
+                        <script>
+                            $(document).ready(function () {
+                                $("#replyToThis${commentList.getCommentID()}").click(function () {
+                                    $("#replyBox${commentList.getCommentID()}").toggle();
+                                });
+                            });
+                        </script>
+                            <%--nested comment second degree--%>
+                        <c:if test="${commentList.hasChildren()}">
+
+                            <%--<% System.out.println("in children");%>--%>
+
+                            <c:forEach var="children" items="${commentList.getChildren()}">
+                                <%--<%System.out.println("in for loop");%>--%>
+                                <div class="nested" style="padding-left: 10%">
+                                    <img src="avatars/${children.getAvatarIcon()}" class=""
+                                         style="width:30px; display: inline-block">
+                                    <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
+                                        <small><i>Posted on ${children.getDatePublished()}</i></small>
+                                    </h5>
+                                    <p>${children.getContent()}</p>
+
+                                    <c:if test="${sessionScope.personLoggedIn !=null}">
+                                        <small id="replyToThis${children.getCommentID()}"
+                                               style="display: inline-block;">Reply
+                                        </small>
+                                        <div id="replyBox${children.getCommentID()}" style="display: none">
+                                            <form method="post" action="OneArticle">
+                                                <div class="form-group">
+                                                    <label for="summernote" style="font-size: x-small">Comment
+                                                        as ${sessionScope.personLoggedIn}:</label>
+                                                    <textarea name="newComment" class="form-control" rows="3"
+                                                              required></textarea>
+                                                    <input type="hidden" name="userWhoCommented"
+                                                           value="${sessionScope.personLoggedIn}">
+                                                    <input type="hidden" name="operation" value="replyToAComment">
+                                                    <input type="hidden" name="articleID"
+                                                           value="${articleToLoad.getArticleID()}">
+                                                    <input type="hidden" name="fatherComment"
+                                                           value="${children.getParentCommentID()}">
+                                                    <button style="float: right" type="submit"
+                                                            class="btn btn-sm btn-success">Reply
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
+                                        <form method="post" action="OneArticle">
+                                            <button type="submit" class="btn btn-xs btn-danger">delete comment
+                                            </button>
+                                            <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                             <input type="hidden" name="articleID"
                                                    value="${articleToLoad.getArticleID()}">
-                                            <input type="hidden" name="fatherComment"
-                                                   value="${commentList.getCommentID()}">
-                                            <button style="float: right" type="submit"
-                                                    class="btn btn-sm btn-transparent">Reply
-                                            </button>
-                                        </div>
-                                    </form>
+                                            <input type="hidden" name="commentID" value="${children.getCommentID()}">
+                                        </form>
+                                    </c:if>
                                 </div>
-                            </c:if>
-                            <script>
-                                $(document).ready(function () {
-                                    $("#replyToThis${commentList.getCommentID()}").click(function () {
-                                        $("#replyBox${commentList.getCommentID()}").toggle();
-                                    });
-                                });
-                            </script>
-                                <%--nested comment second degree--%>
-                            <c:if test="${commentList.hasChildren()}">
-
-                                <% System.out.println("in children");%>
-
-                                <c:forEach var="children" items="${commentList.getChildren()}">
-                                    <%System.out.println("in for loop");%>
-                                    <div class="nested" style="padding-left: 10%">
-                                        <img src="avatars/${children.getAvatarIcon()}" class=""
-                                             style="width:30px; display: inline-block">
-                                        <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
-                                            <small><i>Posted on ${children.getDatePublished()}</i></small>
-                                        </h5>
-                                        <p>${children.getContent()}</p>
-
-                                        <c:if test="${personLoggedIn !=null}">
-                                            <small id="replyToThis${children.getCommentID()}"
-                                                   style="display: inline-block;">Reply
-                                            </small>
-                                            <div id="replyBox${children.getCommentID()}" style="display: none">
-                                                <form method="post" action="/OneArticles">
-                                                    <div class="form-group">
-                                                        <label for="summernote" style="font-size: x-small">Comment
-                                                            as ${personLoggedIn}:</label>
-                                                        <textarea name="newComment" class="form-control" rows="3"
-                                                                  required></textarea>
-                                                        <input type="hidden" name="userWhoCommented"
-                                                               value="${personLoggedIn}">
-                                                        <input type="hidden" name="operation" value="replyToAComment">
-                                                        <input type="hidden" name="articleID"
-                                                               value="${articleToLoad.getArticleID()}">
-                                                        <input type="hidden" name="fatherComment"
-                                                               value="${children.getParentCommentID()}">
-                                                        <button style="float: right" type="submit"
-                                                                class="btn btn-sm btn-transparent">Reply
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </c:if>
-                                    </div>
-                                    <script>
-                                        $(document).ready(function () {
-                                            $("#replyToThis${children.getCommentID()}").click(function () {
-                                                $("#replyBox${children.getCommentID()}").toggle();
-                                            });
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#replyToThis${children.getCommentID()}").click(function () {
+                                            $("#replyBox${children.getCommentID()}").toggle();
                                         });
-                                    </script>
-                                </c:forEach>
-                            </c:if>
+                                    });
+                                </script>
+                            </c:forEach>
+                        </c:if>
 
-                        </div>
-                        <br>
-                    </c:if>
-                </c:forEach>
-                <c:if test="${personLoggedIn !=null}">
-                    <form method="post" action="/OneArticles">
-                        <div class="form-group">
-                            <label for="summernote">Comment as ${personLoggedIn}:</label>
-                            <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                      required></textarea>
-                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
-                            <input type="hidden" name="operation" value="commentOnArticle">
-                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                            <button style="float: right" type="submit" class="btn btn-sm btn-transparent">Post a comment
-                            </button>
-                        </div>
-                    </form>
+                    </div>
+                    <br>
                 </c:if>
-            </div>
+            </c:forEach>
+            <c:if test="${sessionScope.personLoggedIn !=null}">
+                <form method="post" action="OneArticle">
+                    <div class="form-group">
+                        <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
+                        <textarea id="summernote" name="newComment" class="form-control" rows="10"
+                                  required></textarea>
+                        <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
+                        <input type="hidden" name="operation" value="commentOnArticle">
+                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                        <button style="float: right;margin: 1%; padding: 1%" type="submit" class="btn btn-sm btn-primary"> Post a comment
+                        </button>
+                    </div>
+                </form>
+            </c:if>
         </div>
+
     </article>
-</div>
-<%--<div>end</div>--%>
-<br>
-</div>
+
+    <br>
+    <%@include file="footer.jsp" %>
 </body>
 </html>

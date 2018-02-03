@@ -50,7 +50,6 @@ public class EditProfileServlet extends HttpServlet {
 
         } else {
             String username = (String) session.getAttribute("personLoggedIn");
-
             try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
                 System.out.println("EditProfileServlet Connection Successful");
                 System.out.println("EditProfileServlet enter line 51: username=" + username);
