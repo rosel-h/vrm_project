@@ -68,7 +68,7 @@ public class IndividualArticleServlet extends HttpServlet {
             if ("add".equals(op)) {
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
-
+                user = String.valueOf( session.getAttribute("personLoggedIn"));
                 //check if date is to be published today or not
                 String submittedDate = req.getParameter("futureDate");
                 System.out.println("IndividualArticleServlet: date " + submittedDate);

@@ -256,13 +256,13 @@
     </div>
 
     <div style="float: right">
-        <c:if test="${personLoggedIn !=null}">
+        <c:if test="${sessionScope.personLoggedIn !=null}">
             <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>
         </c:if>
-        <c:if test="${personLoggedIn ==null}">
+        <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
@@ -297,7 +297,7 @@
                                 <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
                         <%--</button>--%>
 
-                        <form action="/OneArticle" method="post">
+                        <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                             <button type="submit" class="btn">Full Article</button>

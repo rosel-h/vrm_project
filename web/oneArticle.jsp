@@ -126,7 +126,7 @@
 
             </div>
             <div class="row" style="float: right;">
-                <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
+                <c:if test="${sessionScope.personLoggedIn == articleToLoad.getUsername()}">
                     <form class="form-inline" action="OneArticle" method="POST">
 
                         <input type="hidden" name="operation" value="delete">
@@ -164,7 +164,7 @@
                             </h5>
                             <p>${commentList.getContent()}</p>
                                 <%--delete comment if user is logged in--%>
-                            <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                            <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
                                 <form method="post" action="/OneArticle">
                                     <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                     <input type="hidden" name="operation" value="deleteCommentOnArticle">
@@ -172,7 +172,7 @@
                                     <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
                                 </form>
                             </c:if>
-                            <c:if test="${personLoggedIn !=null}">
+                            <c:if test="${sessionScope.personLoggedIn !=null}">
                                 <small id="replyToThis${commentList.getCommentID()}"
                                        style="display: inline-block;">Reply
                                 </small>
@@ -218,7 +218,7 @@
                                         </h5>
                                         <p>${children.getContent()}</p>
 
-                                        <c:if test="${personLoggedIn !=null}">
+                                        <c:if test="${sessionScope.personLoggedIn !=null}">
                                             <small id="replyToThis${children.getCommentID()}"
                                                    style="display: inline-block;">Reply
                                             </small>
@@ -243,7 +243,7 @@
                                                 </form>
                                             </div>
                                         </c:if>
-                                        <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                                        <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
                                             <form method="post" action="/OneArticle">
                                                 <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
@@ -266,7 +266,7 @@
                         <br>
                     </c:if>
                 </c:forEach>
-                <c:if test="${personLoggedIn !=null}">
+                <c:if test="${sessionScope.personLoggedIn !=null}">
                     <form method="post" action="/OneArticle">
                         <div class="form-group">
                             <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
