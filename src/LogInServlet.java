@@ -58,7 +58,7 @@ public class LogInServlet extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
-            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
+            sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
 
             // Mr Meads generates a long random key for csrfToken
