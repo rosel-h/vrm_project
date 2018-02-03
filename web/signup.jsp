@@ -48,7 +48,7 @@
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
-
+    <%--javascript for AJAX to check username and password validation--%>
     <script type="text/javascript">
         window.onload = function () {
             document.getElementById("username").onblur = function () {
@@ -294,8 +294,7 @@
                                     <div class="col-md-12">
                                         <label for="description" style="float: left;">Description</label>
                                         <textarea id="description" class="form-control" name="description" rows="4"
-                                                  columns="40">
-                        </textarea>
+                                                  columns="40"></textarea>
                                     </div>
                                 </div>
 
@@ -328,61 +327,27 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="form-group">
-
-                                    <input type="file" name="img[]" class="file"
-                                           style="visibility: hidden; position: absolute;">
-
-                                    <div class="input-group col-md-12">
-                                        <label for="dob" style="float: left">Upload Photo</label>&nbsp;
-                                        <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-picture"></i></span>
-                                        <input type="text" class="form-control input" name="uploadAvatar" disabled
-                                               placeholder="Upload Image">
-                                        <span class="input-group-btn">
-                            <button class="browse btn btn-default input" type="button">
-                                <i class="glyphicon glyphicon-search"></i> Browse</button>
-                        </span>
-                                    </div>
-                                </div>--%>
-<%--                                <script>
-                                    $(document).on('click', '.browse', function () {
-                                        var file = $(this).parent().parent().parent().find('.file');
-                                        file.trigger('click');
-                                    });
-                                    $(document).on('change', '.file', function () {
-                                        $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-                                    });
-                                </script>--%>
                             </div>
 
+
+                            <%--//this is for local host--%>
                             <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            <%--//this is for sporadic--%>
+                            <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk"></div>--%>
+
                             <br/>
-                            <input type="submit" value="Submit">
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-success">
+
+                                <span style="margin-left:20px; margin-right: 20px;">or</span>
+                                <button id="btn-fbsignup" type="button"
+                                        onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
+                                        class="btn btn-primary"><i class="icon-facebook"></i>
+                                    Connect via Facebook
+                                </button>
+                            </div>
 
 
-                            <%--                            <div class="form-group">
-                                                            <div class="g-recaptcha form-group"
-                                                                 data-sitekey="6LdzZkIUAAAAANwDR88UIllyBhP9hRKPpNusMmX6"
-                                                                 style="margin-left: 40px">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <!-- Button -->
-                                                            <div class="col-md-12">
-                                                                <button id="btn-signup" type="submit" class="btn btn-success g-recaptcha"
-                                                                        data-sitekey="6LfeHx4UAAAAAAKUx5rO5nfKMtc9-syDTdFLftnm"
-                                                                        data-callback="onSubmit">Sign Up
-                                                                </button>
-                                                                <span style="margin-left:20px; margin-right: 20px;">or</span>
-                                                                <button id="btn-fbsignup" type="button"
-                                                                        onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
-                                                                        class="btn btn-primary"><i class="icon-facebook"></i>
-                                                                    Connect via Facebook
-                                                                </button>
-                                                            </div>
-                                                        </div>--%>
                         </form>
                     </div>
                 </div>
