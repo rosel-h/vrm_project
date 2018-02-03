@@ -162,7 +162,7 @@
                             <%--delete comment if user is logged in--%>
                         <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                             <form method="post" action="OneArticle">
-                                <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
+                                <button type="submit" class="btn btn-xs btn-danger">delete comment</button>
                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                 <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                 <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
@@ -185,7 +185,7 @@
                                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                         <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
                                         <button style="float: right" type="submit"
-                                                class="btn btn-xs btn-outline-success">Reply
+                                                class="btn btn-xs btn-success">Reply
                                         </button>
                                     </div>
                                 </form>
@@ -232,7 +232,7 @@
                                                     <input type="hidden" name="fatherComment"
                                                            value="${children.getParentCommentID()}">
                                                     <button style="float: right" type="submit"
-                                                            class="btn btn-sm btn-outline-success">Reply
+                                                            class="btn btn-sm btn-success">Reply
                                                     </button>
                                                 </div>
                                             </form>
@@ -240,7 +240,7 @@
                                     </c:if>
                                     <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
                                         <form method="post" action="OneArticle">
-                                            <button type="submit" class="btn btn-xs btn-outline-danger">delete comment
+                                            <button type="submit" class="btn btn-xs btn-danger">delete comment
                                             </button>
                                             <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                             <input type="hidden" name="articleID"
