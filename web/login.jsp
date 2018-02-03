@@ -7,9 +7,9 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
@@ -76,7 +76,8 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
                     <div class="panel-title"><h3>Sign In</h3></div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a style="color: white;"href="javascript:alert('Dont forget your password! Contact us to reset', 'Reset Password');">Forgot
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a style="color: white;"
+                                                                                               href="javascript:alert('Dont forget your password! Bad Luck! Contact us.', 'Reset Password');">Forgot
                         password?</a>
                     </div>
                     <div style="padding-top:30px" class="panel-body">
@@ -96,8 +97,11 @@
                             <div style="color:red">${errorMessage}</div>
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
-                                    <button id="btn-fblogin" class="btn btn-primary" type="button"
+                                    <button style="margin: 1%; padding: 2%" id="btn-login" class="btn btn-success"
+                                            type="submit">Sign in
+                                    </button>
+                                    <button style="margin: 1%; padding: 2%" id="btn-fblogin" class="btn btn-primary"
+                                            type="button"
                                             onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
                                         Connect via Facebook
                                     </button>
