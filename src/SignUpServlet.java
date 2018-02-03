@@ -258,7 +258,13 @@ public class SignUpServlet extends HttpServlet {
 //                }
 //
 //
-                boolean signupSuccess = userDAO.addUser(username, password, fname, lname, dob, country, description, avatar, "active", "");
+//                boolean signupSuccess = userDAO.addUser(username, password, fname, lname, dob, country, description, avatar, "active", "");
+
+
+
+                String password_hashed = SiteSecurity.hashString(password);
+                boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
+                System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
                 //print log to file
                 Map<String, String> map = new HashMap<>();
                 map.put("username",username);
@@ -276,11 +282,6 @@ public class SignUpServlet extends HttpServlet {
                 logWriter.init(getServletContext().getRealPath("/log"));
                 logWriter.write(logType,map);
                 //end of logging code
-
-
-                String password_hashed = SiteSecurity.hashString(password);
-                boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
-                System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
 
 
 //                Map<String, String[]> maps = req.getParameterMap();
