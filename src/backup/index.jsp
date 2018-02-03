@@ -59,11 +59,10 @@
                         <a href="login.jsp">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
+                                        style="background-color: white; opacity: 0.8"
                                         data-toggle="modal" data-target="#loginBtn"
                                         data-backdrop="static" data-keyboard="false">
-                                    <span class="glyphicon glyphicon-circle-arrow-right"
-                                          aria-hidden="true">&nbsp;Log in</span>
+                                    Log in
                                 </button>
                             </div>
                         </a>
@@ -71,9 +70,9 @@
                         <a href="signup.jsp">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6"
+                                        style="background-color: white; opacity: 0.8"
                                         data-toggle="modal" data-target="#signupBtn">
-                                    <span class="glyphicon glyphicon-send" aria-hidden="true">&nbsp;Sign up</span>
+                                    Sign up
                                 </button>
                             </div>
                         </a>
@@ -81,8 +80,8 @@
                         <a href="Articles">
                             <div class="btn-group" role="group" style="padding: 2%">
                                 <button type="button" class="btn btn-default"
-                                        style="background-color: white; opacity: 0.6">
-                                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;Explore</span>
+                                        style="background-color: white; opacity: 0.8">
+                                    Explore
                                 </button>
                             </div>
                         </a>

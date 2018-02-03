@@ -203,7 +203,7 @@
                         </div>
                         <div style="padding: 2%;margin: 2%">
                             <a href="NewArticle" class="btn btn-danger"
-                               style=" color: white;opacity: 0.8">
+                               style=" color: white;opacity: 0.6">
                                 New Article
                             </a>
                         </div>
