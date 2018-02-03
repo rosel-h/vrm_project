@@ -33,5 +33,7 @@
     <orderEntry type="library" exported="" name="javax.json-1.0" level="project" />
     <orderEntry type="library" name="owasp-java-html-sanitizer-20160413.1-javadoc" level="project" />
     <orderEntry type="library" name="owasp-java-html-sanitizer-20171016.1" level="project" />
+    <orderEntry type="library" name="lib (2)" level="project" />
+    <orderEntry type="library" name="lib (3)" level="project" />
   </component>
 </module>

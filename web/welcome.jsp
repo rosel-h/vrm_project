@@ -192,20 +192,19 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Community</span>
+                                Community
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                                New Article
                             </a>
                         </div>
                     </div>

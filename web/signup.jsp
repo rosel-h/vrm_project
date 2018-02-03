@@ -209,7 +209,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a href = "#mainNav" class="navbar-brand"> VRM Travel Blog</a>
+        <a  class="navbar-brand"> VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -295,7 +295,7 @@
                                 <div class="form-group">
 
                                     <div class="col-md-12">
-                                        <label for="dob" style="float: left;">Date of Birth</label>
+                                        <label for="dob" style="float: left">Date of Birth</label>
                                         <input type="date" id="dob" class="form-control" name="dob"
                                                placeholder="date of birth">
                                     </div>
@@ -358,14 +358,13 @@
 
 
                             <%--//this is for local host--%>
-                            <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            <div class="container">
+                                <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            </div>
                             <%--//this is for sporadic--%>
                             <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk"></div>--%>
-
-                            <br/>
-                            <div class="form-group">
+                            <div style="padding-top: 2%; margin-top: 10%" class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-success">
-
                                 <span style="margin-left:20px; margin-right: 20px;">or</span>
                                 <button id="btn-fbsignup" type="button"
                                         onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
@@ -373,8 +372,6 @@
                                     Connect via Facebook
                                 </button>
                             </div>
-
-
                         </form>
                     </div>
                 </div>

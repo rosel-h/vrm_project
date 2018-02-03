@@ -186,7 +186,7 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">

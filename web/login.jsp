@@ -94,14 +94,6 @@
                                        placeholder="Password">
                             </div>
                             <div style="color:red">${errorMessage}</div>
-                            <%--<div class="input-group">--%>
-                                <%--<div class="checkbox">--%>
-                                    <%--<label>--%>
-                                        <%--<input id="login-remember" type="checkbox" name="remember" value="1"> Remember--%>
-                                        <%--me--%>
-                                    <%--</label>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
                                     <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>

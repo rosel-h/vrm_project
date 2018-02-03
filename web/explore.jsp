@@ -148,7 +148,7 @@
                                 <div style="padding: 1%;margin: 1%">
                                     <a href="myArticles" class="btn btn-default"
                                        style=" background-color: white; opacity: 0.6">
-                                        <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                                        My Articles
                                     </a>
                                 </div>
                                 <div style="padding: 1%;margin: 1%">
@@ -247,7 +247,7 @@
                         <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
-                            <button type="submit" class="btn">Full Article</button>
+                            <button type="submit" style="opacity: 0.8" class="btn">Full Article</button>
                         </form>
                     </td>
                 </tr>
