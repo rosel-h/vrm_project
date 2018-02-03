@@ -26,16 +26,17 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println(SiteSecurity.hashString("1234"));
+
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
+        System.out.println("the hashed pw is " + pass);
         String duration = request.getParameter("remember");
-
         HttpSession sess = request.getSession(true);
 
         if (checkUser(username, pass)) {
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", username);
-
             String jsonText = JSONValue.toJSONString(jsonMap);
             System.out.println("LoginServlet json text - " + jsonText);
             String sessiont_id = sess.getId();
@@ -91,12 +92,13 @@ public class LogInServlet extends HttpServlet {
             user = dao.getUserStandard(username, pass);
 
             if (user == null) {
+                System.out.println("User login has failed");
                 errorMessage = "Invalid Username or Password";
                 return false;
             }
 
             if (user.getStatus().equals("inactive")) {
-                errorMessage = "User account has been inactivated, please contact us to reactivate.";
+                errorMessage = "User account has been deleted, please contact us to reactivate.";
                 return false;
             }
 

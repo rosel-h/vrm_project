@@ -56,3 +56,5 @@ ALTER TABLE vrm_users Modify COLUMN avatar_icon VARCHAR(500) NOT NULL;
 ALTER TABLE vrm_comments_on_articles ADD parent_comment_id INT;
 
 Alter TABLE vrm_articles MODIFY COLUMN content LONGTEXT;
+
+ALTER TABLE vrm_users MODIFY COLUMN psw_hash varchar(500) not null;

@@ -7,9 +7,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
     <c:redirect url="Welcome"/>
@@ -355,10 +357,15 @@
                                     });
                                 </script>--%>
                             </div>
-
-                            <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
                             <br/>
-                            <input type="submit" value="Submit">
+                            <div class="g-recaptcha" style="padding: 4%" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            <div class="col-sm-12 controls" style="padding-bottom: 4%;">
+                                <button id="btn-login" class="btn btn-success" type="submit">Submit</button>
+                                <button id="btn-fblogin" class="btn btn-primary" type="button"
+                                        onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
+                                    Connect via Facebook
+                                </button>
+                            </div>
 
 
                             <%--                            <div class="form-group">

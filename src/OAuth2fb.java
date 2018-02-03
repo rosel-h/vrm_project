@@ -197,7 +197,7 @@ public class OAuth2fb extends HttpServlet {
             }
 
             if (user.getStatus().equals("inactive")) {
-                errorMessage = "User account has been inactivated, please contact us to reactivate.";
+                errorMessage = "User account has been deleted, please contact us to reactivate.";
                 return true;
             }
 

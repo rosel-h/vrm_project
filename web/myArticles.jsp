@@ -14,7 +14,7 @@
 
 <html>
 <head>
-    <title>${personLoggedIn} Articles</title>
+    <title>${sessionScope.personLoggedIn} Articles</title>
     <%--<!-- Latest compiled and minified CSS -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
           <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
@@ -111,7 +111,10 @@
 
 </head>
 <body>
-
+<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma","no-cache"); //HTTP 1.0
+    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+%>
 <%--<c:choose>--%>
     <%--<c:when test="${personLoggedIn !=null}">--%>
         <%--<%@include file="navigation.jsp" %>--%>
@@ -123,7 +126,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -225,10 +228,10 @@
 </header>
 
 <div class="container">
-    <h1 class="post-title">All Articles by ${personLoggedIn}</h1>
+    <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
+            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>
