@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Mengjie
@@ -40,6 +43,20 @@ public class DeleteServlet extends HttpServlet {
                 boolean deleteSuccess = userDAO.deleteUser(username);
                 if (deleteSuccess) {
                     System.out.println("DeleteServlet enter line 43: delete success");
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("username",username);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "DeleteUser";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
+
                     session.invalidate();
                     req.getRequestDispatcher("Main").forward(req, resp);
                 }

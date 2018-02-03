@@ -358,21 +358,26 @@
 
 
                             <%--//this is for local host--%>
-                            <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                                <span style="margin-left:20px; margin-right: 20px;"></span>
+                                <input type="submit" value="Submit" class="btn btn-success">
+                            </div>
                             <%--//this is for sporadic--%>
                             <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk"></div>--%>
 
                             <br/>
-                            <div class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-success">
+                            <br/>
+                            <%--<div class="form-group">--%>
+                                <%--<input type="submit" value="Submit" class="btn btn-success">--%>
 
-                                <span style="margin-left:20px; margin-right: 20px;">or</span>
-                                <button id="btn-fbsignup" type="button"
-                                        onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
-                                        class="btn btn-primary"><i class="icon-facebook"></i>
-                                    Connect via Facebook
-                                </button>
-                            </div>
+                                <%--<span style="margin-left:20px; margin-right: 20px;">or</span>--%>
+                                <%--<button id="btn-fbsignup" type="button"--%>
+                                        <%--onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"--%>
+                                        <%--class="btn btn-primary"><i class="icon-facebook"></i>--%>
+                                    <%--Connect via Facebook--%>
+                                <%--</button>--%>
+                            <%--</div>--%>
 
 
                         </form>

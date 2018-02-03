@@ -211,6 +211,8 @@ public class BlogDAO implements AutoCloseable {
             stmt.setString(4, content);
             stmt.executeUpdate();
 
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

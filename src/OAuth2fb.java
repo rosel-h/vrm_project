@@ -85,6 +85,20 @@ public class OAuth2fb extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
+            //print log to file
+            Map<String, String> map = new HashMap<>();
+            map.put("username",user.getUsername());
+
+            String ipAddress =  request.getRemoteAddr();
+            map.put("ip", ipAddress);
+
+            String logType = "Login";
+            LogWriter logWriter = new LogWriter(logType);
+            logWriter.init(getServletContext().getRealPath("/log"));
+            logWriter.write(logType,map);
+            //end of logging code
+
+
             sess.setMaxInactiveInterval(3600 * 24 * 21); // log out after a month of inactivity i.e. long log in
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("personLoggedIn", user.getUsername());
@@ -192,6 +206,31 @@ public class OAuth2fb extends HttpServlet {
             if (user == null) {
                 System.out.println("user is null");
                 dao.addUserFB(firstName, lastName, email);
+
+                //print log to file
+                Map<String, String> map = new HashMap<>();
+                map.put("username",firstName + "_" + lastName);
+                map.put("fname",firstName);
+                map.put("lname",lastName);
+
+                String dob = "1900-11-11";
+                String country = "New Zealand";
+                String description = "New facebook user";
+                String avatar = "avatar_01.png";
+                String status = "facebook";
+
+                map.put("dob",dob);
+                map.put("country",country);
+                map.put("description",description);
+                map.put("avatar",avatar);
+                map.put("status",status);
+                map.put("email",email);
+
+                String logType = "SignUp";
+                LogWriter logWriter = new LogWriter(logType);
+                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.write(logType,map);
+                //end of logging code
                 return false;
             }
 
