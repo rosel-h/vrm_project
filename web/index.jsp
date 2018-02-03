@@ -99,20 +99,20 @@
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group">
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Signin" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Login</span>
                             </a>
                         </div>
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Signuppage" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span> &nbsp;Sign Up</span>
                             </a>
                         </div>
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Articles" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right"

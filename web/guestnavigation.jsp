@@ -67,13 +67,13 @@
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Signin" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 Log in
                             </a>
                         </div>
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Signuppage" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 Sign Up

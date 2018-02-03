@@ -231,7 +231,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 2; padding: 10% 0 0 0;">
                     <div class="panel-title"><h3>Sign up</h3></div>
                     <div style="float:right; font-size: 85%; position: relative; top:-1%;">
                         <a style="color: red" id="signinlink" href="/Signin">

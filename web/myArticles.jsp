@@ -183,20 +183,20 @@
                     <h5>Explore the community or create a new blog entry</h5>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="myArticles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 My Articles
                             </a>
                         </div>
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="Articles" class="btn btn-default"
                                style=" background-color: white; opacity: 0.6">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Community</span>
                             </a>
                         </div>
-                        <div style="padding: 1%;margin: 1%">
+                        <div style="padding: 2%;margin: 2%">
                             <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
