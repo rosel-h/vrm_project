@@ -134,7 +134,7 @@
                                 States
                             </option>
                             <option value="other" <c:if test="${user.getCountry() eq 'other'}">selected</c:if>>
-                                other
+                                Other
                             </option>
                         </select>
                     </div>
@@ -146,8 +146,7 @@
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
-                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">
-                            ${user.getDescription()}
+                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">${user.getDescription()}
                         </textarea>
                     </div>
                 </div>
