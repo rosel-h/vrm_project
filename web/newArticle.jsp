@@ -103,7 +103,8 @@
                     ['height', ['height']],
                     ['insert',['picture']]
 
-                ]
+                ],
+                height: 500
 //                popover: {
 //                    image: [
 //                        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
