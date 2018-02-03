@@ -110,10 +110,10 @@
     </script>
 </head>
 <body>
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
-%>
+<%--<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
+    <%--response.setHeader("Pragma","no-cache"); //HTTP 1.0--%>
+    <%--response.setDateHeader ("Expires", 0); //prevents caching at the proxy server--%>
+<%--%>--%>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
@@ -128,18 +128,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myArticles">My Articles</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                <%--</li>--%>
             </ul>
         </div>
     </div>

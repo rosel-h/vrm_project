@@ -108,7 +108,7 @@
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
+                    <a class="nav-link" href="Articles">Community</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="myArticles">My Articles</a>

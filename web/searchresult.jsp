@@ -89,10 +89,10 @@
 </head>
 <body>
 
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
-%>
+<%--<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
+    <%--response.setHeader("Pragma","no-cache"); //HTTP 1.0--%>
+    <%--response.setDateHeader ("Expires", 0); //prevents caching at the proxy server--%>
+<%--%>--%>
 <%@include file="navigation.jsp" %>
 <div class="container">
     <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
@@ -104,18 +104,18 @@
             <div class="row">
                 <div class="form-group" style="padding: 1%">
                     <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
-                           style="opacity: 0.6"
+                           style="opacity: 0.8"
                            id="searchkeyword">
                 </div>
                 <div class="form-group" style="padding: 1%">
-                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.6">
+                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
                         <option value="title">Title</option>
                         <option value="username">Username</option>
                         <option value="date">Date</option>
                     </select>
                 </div>
                 <div class="form-group" style="padding: 1%">
-                    <button type="submit" class="form-control" style="opacity: 0.6">Search</button>
+                    <button type="submit" class="form-control" style="opacity: 0.8">Search</button>
                 </div>
             </div>
         </form>

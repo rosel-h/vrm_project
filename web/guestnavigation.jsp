@@ -62,20 +62,20 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
                     <h5>Get started by logging in or signing up</h5>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Signin" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 Log in
                             </a>
                         </div>
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Signuppage" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 Sign Up
                             </a>
                         </div>

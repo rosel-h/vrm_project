@@ -364,11 +364,11 @@
                             <%--//this is for sporadic--%>
                             <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk"></div>--%>
                             <div style="padding-top: 2%; margin-top: 10%" class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-success">
-                                <span style="margin-left:20px; margin-right: 20px;">or</span>
-                                <button id="btn-fbsignup" type="button"
+                                <input style="opacity: 0.8" type="submit" value="Submit" class="btn btn-success">
+                                <span style="margin-left:1%; margin-right: 1%;">or</span>
+                                <button  style="opacity: 0.8"  id="btn-fbsignup" type="button"
                                         onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
-                                        class="btn btn-primary"><i class="icon-facebook"></i>
+                                        class="btn btn-primary">
                                     Connect via Facebook
                                 </button>
                             </div>

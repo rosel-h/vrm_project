@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>
+<%--<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1--%>
+    <%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
+    <%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>--%>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
     <c:redirect url="Welcome"/>
@@ -99,20 +99,20 @@
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group">
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Signin" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Login</span>
                             </a>
                         </div>
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Signuppage" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 <span> &nbsp;Sign Up</span>
                             </a>
                         </div>
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right"

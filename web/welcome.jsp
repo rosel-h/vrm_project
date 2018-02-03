@@ -110,7 +110,7 @@
             margin-left: 5px;
             padding: 3px 6px 3px 6px;
             background-color: black;
-            opacity: 0.6;
+            opacity: 0.8;
             cursor: pointer;
         }
 
@@ -153,18 +153,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myArticles">My Articles</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <li class="nav-item" style="padding: auto">
-                    <a class="nav-link" href="about">About</a>
-                </li>
+                <%--<li class="nav-item" style="padding: auto">--%>
+                    <%--<a class="nav-link" href="about">About</a>--%>
+                <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
@@ -180,7 +180,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
                     <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                              class="img-circle img-fluid">
@@ -189,21 +189,21 @@
                     <h5>Explore the community or create a new blog entry</h5>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 My Articles
                             </a>
                         </div>
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 Community
                             </a>
                         </div>
-                        <div style="padding: 2%;margin: 2%">
+                        <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger"
-                               style=" color: white;opacity: 0.6">
+                               style=" color: white;opacity: 0.8">
                                 New Article
                             </a>
                         </div>
