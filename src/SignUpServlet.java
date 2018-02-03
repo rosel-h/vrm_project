@@ -30,8 +30,10 @@ import java.util.List;
  * Created by mshe666 on 23/01/2018.
  */
 public class SignUpServlet extends HttpServlet {
-
+    //this is for local host
     private static final String SECRET_KEY = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
+    //this is for sporadic
+//    private static final String SECRET_KEY = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
     private static final String SECRET_PARAM = "secret";
     private static final String RESPONSE_PARAM = "response";
     private static final String G_RECAPTCHA_RESPONSE = "g-recaptcha-response";
@@ -255,9 +257,31 @@ public class SignUpServlet extends HttpServlet {
 //                    }
 //                }
 //
+//
+//                boolean signupSuccess = userDAO.addUser(username, password, fname, lname, dob, country, description, avatar, "active", "");
+
+
+
                 String password_hashed = SiteSecurity.hashString(password);
                 boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
                 System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
+                //print log to file
+                Map<String, String> map = new HashMap<>();
+                map.put("username",username);
+                map.put("fname",fname);
+                map.put("lname",lname);
+                map.put("dob",dob);
+                map.put("country",country);
+                map.put("description",description);
+                map.put("avatar",avatar);
+                map.put("status","active");
+                map.put("email",email);
+
+                String logType = "SignUp";
+                LogWriter logWriter = new LogWriter(logType);
+                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.write(logType,map);
+                //end of logging code
 
 
 //                Map<String, String[]> maps = req.getParameterMap();
