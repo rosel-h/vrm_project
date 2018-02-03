@@ -272,6 +272,7 @@
                         <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                         <input type="hidden" name="operation" value="commentOnArticle">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                         <button style="float: right;margin: 1%; padding: 1%" type="submit" class="btn btn-sm btn-primary"> Post a comment
                         </button>
                     </div>

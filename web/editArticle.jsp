@@ -196,6 +196,7 @@
 
                 <input type="hidden" name="operation" value="delete">
                 <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+                <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                 <button style="float: right" type="submit" class="btn btn-danger pull-right">
                     Delete
                 </button>
@@ -222,7 +223,7 @@
                     <input type="hidden" name="operation" value="userHasEditedArticle">
                     <input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">
                     <%--<input type="hidden" name="dateInDatabse" value="${article}">--%>
-
+                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                     <button type="submit" class="btn btn-primary float-right">Done</button>
                 </div>
 

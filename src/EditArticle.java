@@ -30,6 +30,18 @@ public class EditArticle extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
+        String csrfToken = req.getParameter("csrfToken");
+
+        if (!csrfSessionToken.equals(csrfToken)){
+            System.out.println("csrfTokens not verified");
+            resp.sendError(666);
+            return;
+        }
+
+        System.out.println("csrfTokens verified");
+
         System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("WEB-INF/mysql.properties");

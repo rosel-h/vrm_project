@@ -267,6 +267,7 @@
                     <form action="OneArticle" method="post">
                         <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
                         <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                         <button type="submit" class="btn">Full Article</button>
                     </form>
                 </td>
