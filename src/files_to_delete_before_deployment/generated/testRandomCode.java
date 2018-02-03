@@ -1,4 +1,4 @@
-package blah.generated;
+package files_to_delete_before_deployment.generated;
 
 import DAO_setup.*;
 

@@ -192,7 +192,7 @@
 
         <div class="">
             <h3 class="post-title">Edit Article
-            <form class="form-inline" action="OneArticles" method="POST" style="display: inline-block; float: right;">
+            <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
 
                 <input type="hidden" name="operation" value="delete">
                 <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
