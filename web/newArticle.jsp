@@ -175,7 +175,6 @@
                     <input type="hidden" name="operation" value="add">
                     <button type="submit" class="btn btn-primary float-right">Post</button>
                 </div>
-
             </form>
         </div>
     </div>
