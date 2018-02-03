@@ -47,34 +47,7 @@
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
-
-    <script type="text/javascript">
-        var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
-        ];
-
-        function loadRandomImage() {
-            var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
-            console.log(imageCollection[numImage]);
-        }
-
-        $(document).ready(function () {
-            loadRandomImage();
-        });
-
-    </script>
+c
 
     <style type="text/css">
         .clear {
@@ -204,7 +177,7 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                New Article
+                                New Entry
                             </a>
                         </div>
                     </div>

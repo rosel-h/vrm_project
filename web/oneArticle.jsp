@@ -118,7 +118,7 @@
 
 </nav>
 
-    <header class="masthead" >
+<header id="backgroundImage" class="masthead">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
