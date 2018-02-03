@@ -36,7 +36,7 @@ public class UserDAO implements AutoCloseable {
                     System.out.println("The pw to be checked is " + pass);
 
                     if (!BCrypt.checkpw(pass, hashed_PW)) {
-                        System.out.println("password check is returning fail");
+                        System.out.println("password check is returning fail    ");
                         user = null;
                     }
                 }
@@ -99,8 +99,8 @@ public class UserDAO implements AutoCloseable {
             stmt.setString(6, country);
             stmt.setString(7, description);
             stmt.setString(8, avatar);
-            stmt.setString(9, status);
-            stmt.setString(10, email);
+            stmt.setString(9, email);
+            stmt.setString(10, status);
 
             stmt.executeUpdate();
 

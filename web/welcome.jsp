@@ -75,7 +75,6 @@
             loadRandomImage();
         });
 
-
     </script>
 
     <style type="text/css">
@@ -240,11 +239,6 @@
                         </form>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>

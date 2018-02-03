@@ -53,9 +53,8 @@
         $(document).ready(function() {
             loadRandomImage();
         });
-
-
     </script>
+
 </head>
 <body>
 <% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
@@ -97,7 +96,7 @@
 </nav>
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('img/background02.jpg')">
+<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
