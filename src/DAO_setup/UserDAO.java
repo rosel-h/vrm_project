@@ -33,7 +33,10 @@ public class UserDAO implements AutoCloseable {
                     //check the password is matching
                     String hashed_PW = user.getPassword();
                     System.out.println("The Hashed PW is " + hashed_PW);
+                    System.out.println("The pw to be checked is " + pass);
+
                     if (!BCrypt.checkpw(pass, hashed_PW)) {
+                        System.out.println("password check is returning fail");
                         user = null;
                     }
                 }

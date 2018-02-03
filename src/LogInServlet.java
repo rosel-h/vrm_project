@@ -92,6 +92,7 @@ public class LogInServlet extends HttpServlet {
             user = dao.getUserStandard(username, pass);
 
             if (user == null) {
+                System.out.println("User login has failed");
                 errorMessage = "Invalid Username or Password";
                 return false;
             }
