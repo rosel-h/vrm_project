@@ -230,13 +230,13 @@
 <div class="container">
     <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
     <div style="float: right">
-        <c:if test="${personLoggedIn !=null}">
+        <c:if test="${sessionScope.personLoggedIn !=null}">
             <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>
         </c:if>
-        <c:if test="${personLoggedIn ==null}">
+        <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>

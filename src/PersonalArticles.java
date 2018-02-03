@@ -48,7 +48,7 @@ public class PersonalArticles extends HttpServlet {
                 System.out.println("session doesnt exist");
             }
             String icon = dao.getIcon(user);
-            System.out.println("Personal Articles"+icon + " " + user);
+            System.out.println("Personal Articles user datails = "+icon + " " + user);
             if (user != null) {
                 req.setAttribute("personLoggedIn", user);
                 String iconPath = getServletContext().getRealPath("avatars");

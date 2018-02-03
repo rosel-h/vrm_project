@@ -139,7 +139,7 @@ public class Article {
             if (indexOfFirstParagraph < 4) {
                 return "<br>"+content.substring(0, 50) + "...";
             } else {
-                System.out.println("Article class: " + title + " content preview: " + content.substring(0, indexOfFirstParagraph) + "..."+indexOfFirstParagraph);
+                System.out.println("Article class: " + title + " (author "+username+"  )content preview: " + content.substring(0, indexOfFirstParagraph) + "..."+indexOfFirstParagraph);
                 preview = content.substring(0, indexOfFirstParagraph);
             }
 

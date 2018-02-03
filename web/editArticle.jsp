@@ -199,7 +199,7 @@
 
         <div class="">
             <h3 class="post-title">Edit Article
-            <form class="form-inline" action="/OneArticles" method="POST" style="display: inline-block; float: right;">
+            <form class="form-inline" action="OneArticles" method="POST" style="display: inline-block; float: right;">
 
                 <input type="hidden" name="operation" value="delete">
                 <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
@@ -210,7 +210,7 @@
             </h3>
         </div>
         <div class="">
-            <form action="/editArticles" method="POST" style="float: right">
+            <form action="editArticles" method="POST" style="float: right">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" value="${articleToEdit.getTitle()}"

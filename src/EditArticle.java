@@ -81,7 +81,7 @@ public class EditArticle extends HttpServlet {
                 if (articleHasBeenEdited) {
                     System.out.println("EditArticle Servlet: Article added to database");
                 }
-                req.getRequestDispatcher("/myArticles").forward(req, resp);
+                req.getRequestDispatcher("myArticles").forward(req, resp);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (Exception e) {
