@@ -149,15 +149,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
-                <li class="nav-item">
-                    <i class="glyphicon glyphicon-search" style="color: white;"
-                       data-toggle="modal" data-target="#searchbar"></i>
-                </li>
             </ul>
         </div>
-
     </div>
-
 </nav>
 
 <header id="backgroundImage" class="masthead" style="background-image: url('img/starry-night-sky.jpg');">
