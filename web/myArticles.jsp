@@ -174,10 +174,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
-                    <div class="col-md-4 offset-4">
-                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="width: 100%; border-radius: 50%"
-                             class="img-circle">
+                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                    <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                             class="img-circle img-fluid">
                     </div>
                     <br>
                     <h5>Explore the community or create a new blog entry</h5>
