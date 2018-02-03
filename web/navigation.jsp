@@ -71,7 +71,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
-        <a href = "#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a  class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -107,9 +107,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
-                    <div class="col-lg-8 col-md-10 mx-auto" style="margin-top: 5%">
-                        <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="width: 50%; border-radius: 50%"
+                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                    <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                              class="img-circle img-fluid">
                     </div>
                     <br>
