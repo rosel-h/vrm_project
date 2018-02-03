@@ -125,6 +125,11 @@
         <location>/error666.jsp</location>
     </error-page>
 
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+
     <servlet>
         <servlet-name>MyArticles</servlet-name>
         <servlet-class>PersonalArticles</servlet-class>

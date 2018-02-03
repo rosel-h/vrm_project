@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mx-auto">
                 <div class="site-heading">
-                    <p>There was a server error! Please try again but if the error persists please contact us on vrm@vrm.com</p>
+                    <p>There was an internal server error! Please try again but if the error persists please contact us on vrm@vrm.com</p>
                     <p>Return to the <a href="javascript:window.history.back()" style="color: bisque">Previous Page</a> or go back to our <a href="welcome.jsp" style="color: bisque">Homepage</a>.</p>
                 </div>
             </div>

@@ -29,7 +29,6 @@ public class DeleteServlet extends HttpServlet {
         if (!csrfSessionToken.equals(reqCsrfToken)) {
             System.out.println("Session Error");
             resp.sendError(666);
-            return;
 
         } else {
             String username = (String) session.getAttribute("personLoggedIn");
