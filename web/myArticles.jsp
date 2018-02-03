@@ -130,7 +130,7 @@
 %>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <
+    
     <div id="top" class="container">
         <a href="#top" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
