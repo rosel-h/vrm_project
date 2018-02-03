@@ -79,6 +79,8 @@
 
         $(document).ready(function() {
             loadRandomImage();
+
+            document.getElementById('futureDate').valueAsDate = new Date();
         });
 
 

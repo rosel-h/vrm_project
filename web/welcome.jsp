@@ -186,7 +186,7 @@
                              class="img-circle img-fluid">
                     </div>
                     <br>
-                    <h5>Explore the community or create a new blog entry</h5>
+                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">

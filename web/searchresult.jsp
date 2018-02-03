@@ -165,7 +165,7 @@
                         <td>${articleList.getDate()}</td>
                         <td>
                             <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                                    data-target="#a${articleList.getArticleID()}">Full Article
+                                    data-target="#a${articleList.getArticleID()}">Read More...
                             </button>
                         </td>
                     </tr>

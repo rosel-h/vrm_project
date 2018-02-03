@@ -140,7 +140,7 @@
                                      class="img-circle img-fluid">
                             </div>
                             <br>
-                            <h5>Explore the community or create a new blog entry</h5>
+                            <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                             <div class="btn-group btn-group-justified col-xs-10" role="group"
                                  style="padding: 1%">
                                 <div style="padding: 1%;margin: 1%">
@@ -204,12 +204,12 @@
     </div>
 
     <div style="float: right">
-        <c:if test="${sessionScope.personLoggedIn !=null}">
-            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
-                                                                            style="height: 30px"
-                                                                            alt="avatar"/></a>
-            </div>
-        </c:if>
+        <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
+            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
+                                                                            <%--style="height: 30px"--%>
+                                                                            <%--alt="avatar"/></a>--%>
+            <%--</div>--%>
+        <%--</c:if>--%>
         <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
@@ -245,7 +245,7 @@
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                             <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button type="submit" style="background: transparent" class="btn">Full Article</button>
+                            <button type="submit" style="background: transparent" class="btn">Read More...</button>
                         </form>
                     </td>
                 </tr>
