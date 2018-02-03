@@ -43,7 +43,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -141,7 +141,7 @@
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
 
                         <input type="hidden" name="operation" value="goToEditPage">
-                        <input type="hidden" name="author" value="${personLoggedIn}">
+                        <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
                         <button style="float: right" id="editorButton" type="submit"
                                 class="btn btn-primary pull-right">Edit
                         </button>
@@ -180,10 +180,10 @@
                                     <form method="post" action="/OneArticle">
                                         <div class="form-group">
                                             <label for="summernote" style="font-size: x-small">Comment
-                                                as ${personLoggedIn}:</label>
+                                                as ${sessionScope.personLoggedIn}:</label>
                                             <textarea name="newComment" class="form-control" rows="3"
                                                       required></textarea>
-                                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                            <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                                             <input type="hidden" name="operation" value="replyToAComment">
                                             <input type="hidden" name="articleID"
                                                    value="${articleToLoad.getArticleID()}">
@@ -226,11 +226,11 @@
                                                 <form method="post" action="/OneArticle">
                                                     <div class="form-group">
                                                         <label for="summernote" style="font-size: x-small">Comment
-                                                            as ${personLoggedIn}:</label>
+                                                            as ${sessionScope.personLoggedIn}:</label>
                                                         <textarea name="newComment" class="form-control" rows="3"
                                                                   required></textarea>
                                                         <input type="hidden" name="userWhoCommented"
-                                                               value="${personLoggedIn}">
+                                                               value="${sessionScope.personLoggedIn}">
                                                         <input type="hidden" name="operation" value="replyToAComment">
                                                         <input type="hidden" name="articleID"
                                                                value="${articleToLoad.getArticleID()}">
@@ -269,10 +269,10 @@
                 <c:if test="${personLoggedIn !=null}">
                     <form method="post" action="/OneArticle">
                         <div class="form-group">
-                            <label for="summernote">Comment as ${personLoggedIn}:</label>
+                            <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
                             <textarea id="summernote" name="newComment" class="form-control" rows="10"
                                       required></textarea>
-                            <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                            <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                             <input type="hidden" name="operation" value="commentOnArticle">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <button style="float: right" type="submit" class="btn btn-sm btn-transparent">Post a comment

@@ -122,7 +122,7 @@
     </div>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px"
+            <div>Logged in as ${sessionScope.personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px"
                                                      alt="avatar"/>
             </div>
         </c:if>
@@ -275,7 +275,7 @@
                                     <c:if test="${personLoggedIn !=null}">
                                         <form method="post" action="/Articles">
                                             <div class="form-group">
-                                                <label for="summernote">Comment as ${personLoggedIn}:</label>
+                                                <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
                                                     <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
                                                     <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
                                                     <%--<div class="form-group">--%>
@@ -283,7 +283,7 @@
                                                 <textarea id="summernote" name="newComment" class="form-control" rows="10"
                                                           required></textarea>
                                                     <%--</div>--%>
-                                                <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
+                                                <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                                                 <input type="hidden" name="operation" value="commentOnArticle">
                                                 <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                                                 <button style="float: right" type="submit" class="btn btn-sm">Post a comment

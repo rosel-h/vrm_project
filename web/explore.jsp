@@ -122,7 +122,7 @@
     <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
@@ -266,7 +266,7 @@
 
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
+            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
                                                                             style="height: 30px"
                                                                             alt="avatar"/></a>
             </div>
