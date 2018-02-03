@@ -193,7 +193,6 @@
         <div class="">
             <h3 class="post-title">Edit Article
             <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
-
                 <input type="hidden" name="operation" value="delete">
                 <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
                 <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">

@@ -125,6 +125,7 @@
                         <form class="form-inline" action="OneArticle" method="POST">
                             <input type="hidden" name="operation" value="delete">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" type="submit" class="btn btn-danger pull-right">
                                 Delete
                             </button>
@@ -136,6 +137,7 @@
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <input type="hidden" name="operation" value="goToEditPage">
                             <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
+                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" id="editorButton" type="submit"
                                     class="btn btn-primary pull-right">Edit
                             </button>
@@ -166,6 +168,7 @@
                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                 <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                 <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                                <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             </form>
                         </c:if>
                         <c:if test="${sessionScope.personLoggedIn !=null}">
@@ -184,6 +187,7 @@
                                         <input type="hidden" name="operation" value="replyToAComment">
                                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                         <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
+                                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                         <button style="float: right" type="submit"
                                                 class="btn btn-xs btn-success">Reply
                                         </button>
@@ -231,6 +235,7 @@
                                                            value="${articleToLoad.getArticleID()}">
                                                     <input type="hidden" name="fatherComment"
                                                            value="${children.getParentCommentID()}">
+                                                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                                     <button style="float: right" type="submit"
                                                             class="btn btn-sm btn-success">Reply
                                                     </button>
@@ -246,6 +251,7 @@
                                             <input type="hidden" name="articleID"
                                                    value="${articleToLoad.getArticleID()}">
                                             <input type="hidden" name="commentID" value="${children.getCommentID()}">
+                                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                         </form>
                                     </c:if>
                                 </div>
