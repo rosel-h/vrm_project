@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 /**
  * Created by Mengjie
  * Date : 2018/1/31
@@ -21,18 +23,19 @@ public class UserDAO implements AutoCloseable {
     }
 
     public User getUserStandard(String username, String pass) {
-        User user = new User();
+        User user = null;
 
-        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=? and binary psw_hash=?")) {
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=?")) {
             ps.setString(1, username);
-            ps.setString(2, pass);
-
             try (ResultSet rs = ps.executeQuery()) {
-                // will be an empty set if login in correct
                 if (rs.next()) {
                     user = dataFromResultSet(rs, new User());
-                } else {
-                    user = null;
+                    //check the password is matching
+                    String hashed_PW = user.getPassword();
+                    System.out.println("The Hashed PW is " + hashed_PW);
+                    if (!BCrypt.checkpw(pass, hashed_PW)) {
+                        user = null;
+                    }
                 }
             }
 
