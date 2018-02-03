@@ -162,9 +162,9 @@
                                 <%--delete comment if user is logged in--%>
                             <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                 <form method="post" action="/OneArticle">
-                                    <button type="submit" class="btn btn-xs btn-transparent">delete comment</button>
+                                    <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                     <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                    <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                                    <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                     <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
                                 </form>
                             </c:if>
@@ -186,7 +186,7 @@
                                             <input type="hidden" name="fatherComment"
                                                    value="${commentList.getCommentID()}">
                                             <button style="float: right" type="submit"
-                                                    class="btn btn-sm btn-transparent">Reply
+                                                    class="btn btn-xs btn-outline-success">Reply
                                             </button>
                                         </div>
                                     </form>
@@ -233,7 +233,7 @@
                                                         <input type="hidden" name="fatherComment"
                                                                value="${children.getParentCommentID()}">
                                                         <button style="float: right" type="submit"
-                                                                class="btn btn-sm btn-transparent">Reply
+                                                                class="btn btn-sm btn-outline-success">Reply
                                                         </button>
                                                     </div>
                                                 </form>
@@ -241,9 +241,9 @@
                                         </c:if>
                                         <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                                             <form method="post" action="/OneArticle">
-                                                <button type="submit" class="btn btn-xs btn-transparent">delete comment</button>
+                                                <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                                <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                                                <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                                 <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
                                             </form>
                                         </c:if>
@@ -271,7 +271,7 @@
                             <input type="hidden" name="userWhoCommented" value="${personLoggedIn}">
                             <input type="hidden" name="operation" value="commentOnArticle">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                            <button style="float: right" type="submit" class="btn btn-sm btn-transparent">Post a comment
+                            <button style="float: right" type="submit" class="btn btn-sm btn-outline-success">Post a comment
                             </button>
                         </div>
                     </form>

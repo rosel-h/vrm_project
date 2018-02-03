@@ -225,7 +225,7 @@
 </header>
 
 <div class="container">
-    <h1>All Articles by ${personLoggedIn}</h1>
+    <h1 class="post-title">All Articles by ${personLoggedIn}</h1>
     <div style="float: right">
         <c:if test="${personLoggedIn !=null}">
             <div>Logged in as ${personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"
@@ -238,7 +238,7 @@
         </c:if>
     </div>
 
-    <table class="table table-striped sorttable" id="articletable">
+    <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">

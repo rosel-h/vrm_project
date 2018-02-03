@@ -272,7 +272,7 @@
             <div>Logged in as Guest</div>
         </c:if>
     </div>
-    <table class="table table-striped sorttable" id="articletable">
+    <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1">
@@ -295,7 +295,7 @@
             %>
             <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                 <tr>
-                    <td><h2 class="post-title">${articleList.getTitle()}</h2></td>
+                    <td><h3 class="post-title">${articleList.getTitle()}</h3></td>
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>

@@ -194,7 +194,7 @@
     <div class="">
 
         <div class="">
-            <h3 class="">Edit Article
+            <h3 class="post-title">Edit Article
             <form class="form-inline" action="/OneArticles" method="POST" style="display: inline-block; float: right;">
 
                 <input type="hidden" name="operation" value="delete">
