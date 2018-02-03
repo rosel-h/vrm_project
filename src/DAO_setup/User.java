@@ -13,18 +13,19 @@ import java.io.IOException;
  * Created by rher490 on 24/01/2018.
  */
 public class User {
-    String username;
-    String password; //edit later
-    String fname;
-    String lname;
-    String dateOfBirth;
-    String country;
-    String avatar_icon;
-    String status;
-    String email;
-    String description;
+    private String username;
+    private String password; //edit later
+    private String fname;
+    private String lname;
+    private String dateOfBirth;
+    private String country;
+    private String avatar_icon;
+    private String status;
+    private String email;
+    private String description;
 
-    public User() {
+    public User(){
+
     }
 
     public User(String username, String password, String fname, String lname, String dateOfBirth, String country, String avatar_icon, String status, String email) {

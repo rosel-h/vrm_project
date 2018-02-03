@@ -8,9 +8,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
@@ -175,13 +175,41 @@
         }
     </script>
 
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+
+    </script>
+
 </head>
 <body>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome </a>
+        <a href = "#mainNav" class="navbar-brand"> VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -191,9 +219,6 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
                 </li>
             </ul>
         </div>
@@ -296,8 +321,7 @@
                                     <div class="col-md-12">
                                         <label for="description" style="float: left;">Description</label>
                                         <textarea id="description" class="form-control" name="description" rows="4"
-                                                  columns="40">
-                        </textarea>
+                                                  columns="40"></textarea>
                                     </div>
                                 </div>
 
@@ -330,35 +354,36 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="form-group">
+                                <%--                                <div class="form-group">
 
-                                    <input type="file" name="img[]" class="file"
-                                           style="visibility: hidden; position: absolute;">
+                                                                    <input type="file" name="img[]" class="file"
+                                                                           style="visibility: hidden; position: absolute;">
 
-                                    <div class="input-group col-md-12">
-                                        <label for="dob" style="float: left">Upload Photo</label>&nbsp;
-                                        <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-picture"></i></span>
-                                        <input type="text" class="form-control input" name="uploadAvatar" disabled
-                                               placeholder="Upload Image">
-                                        <span class="input-group-btn">
-                            <button class="browse btn btn-default input" type="button">
-                                <i class="glyphicon glyphicon-search"></i> Browse</button>
-                        </span>
-                                    </div>
-                                </div>--%>
-<%--                                <script>
-                                    $(document).on('click', '.browse', function () {
-                                        var file = $(this).parent().parent().parent().find('.file');
-                                        file.trigger('click');
-                                    });
-                                    $(document).on('change', '.file', function () {
-                                        $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-                                    });
-                                </script>--%>
+                                                                    <div class="input-group col-md-12">
+                                                                        <label for="dob" style="float: left">Upload Photo</label>&nbsp;
+                                                                        <span class="input-group-addon"><i
+                                                                                class="glyphicon glyphicon-picture"></i></span>
+                                                                        <input type="text" class="form-control input" name="uploadAvatar" disabled
+                                                                               placeholder="Upload Image">
+                                                                        <span class="input-group-btn">
+                                                            <button class="browse btn btn-default input" type="button">
+                                                                <i class="glyphicon glyphicon-search"></i> Browse</button>
+                                                        </span>
+                                                                    </div>
+                                                                </div>--%>
+                                <%--                                <script>
+                                                                    $(document).on('click', '.browse', function () {
+                                                                        var file = $(this).parent().parent().parent().find('.file');
+                                                                        file.trigger('click');
+                                                                    });
+                                                                    $(document).on('change', '.file', function () {
+                                                                        $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+                                                                    });
+                                                                </script>--%>
                             </div>
                             <br/>
-                            <div class="g-recaptcha" style="padding: 4%" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
+                            <div class="g-recaptcha" style="padding: 4%"
+                                 data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
                             <div class="col-sm-12 controls" style="padding-bottom: 4%;">
                                 <button id="btn-login" class="btn btn-success" type="submit">Submit</button>
                                 <button id="btn-fblogin" class="btn btn-primary" type="button"

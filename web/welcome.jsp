@@ -1,4 +1,3 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: vwen239
@@ -10,9 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
@@ -71,10 +70,9 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
-
 
     </script>
 
@@ -136,15 +134,15 @@
 </head>
 <body>
 
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a href="#mainNav" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -152,7 +150,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
@@ -165,7 +162,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" style="padding: auto">
                     <a class="nav-link" href="about">About</a>
                 </li>
                 <li class="nav-item">
@@ -217,17 +214,20 @@
 
                     </div>
 
-                    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%; display: none">
+                    <div class="btn-group btn-group-justified col-xs-10" role="group"
+                         style="padding: 1%; display: none">
                         <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
 
                             <div class="row">
                                 <div class="form-group" style="padding: 1%">
-                                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                                    <input type="text" class="form-control" name="keywords"
+                                           placeholder="Title/Username/Date"
                                            style="opacity: 0.6"
                                            id="searchkeyword">
                                 </div>
                                 <div class="form-group" style="padding: 1%">
-                                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.6">
+                                    <select class="form-control" name="searchType" id="searchselect"
+                                            style="opacity: 0.6">
                                         <option value="title">Title</option>
                                         <option value="username">Username</option>
                                         <option value="date">Date</option>
@@ -240,11 +240,6 @@
                         </form>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>

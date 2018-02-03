@@ -10,33 +10,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<%@ page import ="DAO_setup" %>--%>
 <html>
 <head>
     <title>Explore Community</title>
-    <%--<!-- Latest compiled and minified CSS -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
-          <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
-
-    <%--<!-- Optional theme -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
-          <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
-
-    <%--<!-- Latest compiled and minified JavaScript -->--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
-            <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
-            <%--crossorigin="anonymous"></script>--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
-    <%--&lt;%&ndash;<%@include file="RoseTests/allTheThingsInTheHead.jsp" %>&ndash;%&gt;--%>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <%--<title>Welcome to the Community</title>--%>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -56,23 +37,6 @@
     <script src="vendor/jquery/jquery-ui.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
-    <%--<script>--%>
-        <%--$(document).ready(function () {--%>
-            <%--$('#summernote').summernote({--%>
-                <%--toolbar: [--%>
-                    <%--// [groupName, [list of button]]--%>
-                    <%--['style', ['bold', 'italic', 'underline', 'clear']],--%>
-                    <%--['font', ['strikethrough', 'superscript', 'subscript']],--%>
-                    <%--['fontsize', ['fontsize']],--%>
-                    <%--['color', ['color']],--%>
-                    <%--['para', ['ul', 'ol', 'paragraph']],--%>
-                    <%--['height', ['height']]--%>
-                <%--]--%>
-            <%--});--%>
-        <%--});--%>
-    <%--</script>--%>
-
-    <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {
             var table = $(this).parents('table').eq(0);
@@ -93,8 +57,7 @@
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
-    </script>
-    <script type="text/javascript">
+
         var imageCollection = [
             "background01.jpg",
             "background02.jpg",
@@ -120,21 +83,22 @@
             loadRandomImage();
         });
 
-
     </script>
 
 </head>
 <body>
+
 <% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
+
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
     <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
+                <a href = "#mainNav" class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
@@ -156,9 +120,6 @@
                             <a class="nav-link" href="editprofile">My Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about">About</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                         </li>
                         <li class="nav-item">
@@ -167,9 +128,7 @@
                         </li>
                     </ul>
                 </div>
-
             </div>
-
         </nav>
 
         <!-- Page Header -->
@@ -208,17 +167,10 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </header>
-
-
-
-
-
-
 
     </c:when>
     <c:otherwise>
@@ -236,7 +188,7 @@
 
                 <div class="row">
                     <div class="form-group" style="padding: 1%">
-                        <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
+                        <input type="text" required class="form-control" name="keywords" placeholder="Title/Username/Date"
                                style="opacity: 0.6"
                                id="searchkeyword">
                     </div>
@@ -293,10 +245,6 @@
                     <td><i>${articleList.getUsername()}</i></td>
                     <td>${articleList.getDate()}</td>
                     <td>
-                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                                <%--data-target="#a${articleList.getArticleID()}">Full Article--%>
-                        <%--</button>--%>
-
                         <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
@@ -309,6 +257,5 @@
         </tbody>
     </table>
 </div>
-
 </body>
 </html>

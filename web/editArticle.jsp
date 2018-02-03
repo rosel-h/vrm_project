@@ -95,7 +95,7 @@
 <%--%>--%>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a href = "#mainNav" class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -117,14 +117,7 @@
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
-                </li>
-                <li class="nav-item">
-                    <i class="glyphicon glyphicon-search" style="color: white;"
-                       data-toggle="modal" data-target="#searchbar"></i>
                 </li>
             </ul>
         </div>

@@ -98,7 +98,14 @@
             "background02.jpg",
             "background03.jpg",
             "background04.jpg",
-            "background05.jpg"
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background12.jpg"
         ];
 
         function loadRandomImage() {
@@ -106,6 +113,10 @@
             $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
 
     </script>
 
@@ -115,18 +126,10 @@
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
-<%--<c:choose>--%>
-    <%--<c:when test="${personLoggedIn !=null}">--%>
-        <%--<%@include file="navigation.jsp" %>--%>
-    <%--</c:when>--%>
-    <%--<c:otherwise>--%>
-        <%--<%@include file="guestnavigation.jsp" %>--%>
-    <%--</c:otherwise>--%>
-<%--</c:choose>--%>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
+        <a href = "#mainNav" class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -146,9 +149,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
