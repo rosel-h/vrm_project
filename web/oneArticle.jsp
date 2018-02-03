@@ -126,7 +126,7 @@
 
             </div>
             <div class="row" style="float: right;">
-                <c:if test="${sessionScope.personLoggedIn == articleToLoad.getUsername()}">
+                <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
                     <form class="form-inline" action="OneArticle" method="POST">
 
                         <input type="hidden" name="operation" value="delete">
@@ -164,8 +164,8 @@
                             </h5>
                             <p>${commentList.getContent()}</p>
                                 <%--delete comment if user is logged in--%>
-                            <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
-                                <form method="post" action="/OneArticle">
+                            <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                                <form method="post" action="OneArticle">
                                     <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                     <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                     <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
@@ -177,7 +177,7 @@
                                        style="display: inline-block;">Reply
                                 </small>
                                 <div id="replyBox${commentList.getCommentID()}" style="display: none">
-                                    <form method="post" action="/OneArticle">
+                                    <form method="post" action="OneArticle">
                                         <div class="form-group">
                                             <label for="summernote" style="font-size: x-small">Comment
                                                 as ${sessionScope.personLoggedIn}:</label>
@@ -185,10 +185,8 @@
                                                       required></textarea>
                                             <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                                             <input type="hidden" name="operation" value="replyToAComment">
-                                            <input type="hidden" name="articleID"
-                                                   value="${articleToLoad.getArticleID()}">
-                                            <input type="hidden" name="fatherComment"
-                                                   value="${commentList.getCommentID()}">
+                                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                                            <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
                                             <button style="float: right" type="submit"
                                                     class="btn btn-xs btn-outline-success">Reply
                                             </button>
@@ -223,7 +221,7 @@
                                                    style="display: inline-block;">Reply
                                             </small>
                                             <div id="replyBox${children.getCommentID()}" style="display: none">
-                                                <form method="post" action="/OneArticle">
+                                                <form method="post" action="OneArticle">
                                                     <div class="form-group">
                                                         <label for="summernote" style="font-size: x-small">Comment
                                                             as ${sessionScope.personLoggedIn}:</label>
@@ -243,12 +241,12 @@
                                                 </form>
                                             </div>
                                         </c:if>
-                                        <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
-                                            <form method="post" action="/OneArticle">
+                                        <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
+                                            <form method="post" action="OneArticle">
                                                 <button type="submit" class="btn btn-xs btn-outline-danger">delete comment</button>
                                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                                 <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                                                <input type="hidden" name="commentID" value="${children.getCommentID()}">
                                             </form>
                                         </c:if>
                                     </div>
@@ -267,7 +265,7 @@
                     </c:if>
                 </c:forEach>
                 <c:if test="${sessionScope.personLoggedIn !=null}">
-                    <form method="post" action="/OneArticle">
+                    <form method="post" action="OneArticle">
                         <div class="form-group">
                             <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
                             <textarea id="summernote" name="newComment" class="form-control" rows="10"

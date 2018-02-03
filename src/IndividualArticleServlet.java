@@ -34,7 +34,7 @@ public class IndividualArticleServlet extends HttpServlet {
         String fileName = sessionFilePath + "\\" + sessionID + ".json";
         JSONObject userJson;
         File sessionFile = new File(fileName);
-        String user = null;
+        String user = String.valueOf(session.getAttribute("personLoggedIn"));
         String op = req.getParameter("operation");
         System.out.println("in do post again");
         String checkIfTheresArticle= req.getParameter("articleID");
@@ -112,7 +112,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     System.out.println("IndividualArticleServlet: delete button pressed");
                     String commentIDToBeDeleted = req.getParameter("commentID");
                     System.out.println();
-                    System.out.println("LAS: id - " + commentIDToBeDeleted);
+                    System.out.println("IAS: id - " + commentIDToBeDeleted);
                     dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
                 } else if ("replyToAComment".equals(op)) {
                     System.out.println("IndividualArticleServlet replying to comment button pressed");

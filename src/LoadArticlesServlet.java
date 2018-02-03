@@ -1,9 +1,4 @@
 import DAO_setup.*;
-import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
 import org.jooq.tools.json.JSONObject;
 
 import javax.servlet.ServletContext;
@@ -13,21 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Properties;
-
-import static blah.generated.Tables.VRM_COMMENTS_ON_ARTICLES;
-import static blah.generated.Tables.*;
-import static blah.generated.tables.VrmArticles.VRM_ARTICLES;
 
 
 /**
