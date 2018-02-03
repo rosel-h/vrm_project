@@ -8,9 +8,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<c:if test="${sessionScope.personLoggedIn == null}">--%>
-    <%--<c:redirect url="Index"/>--%>
-<%--</c:if>--%>
+<c:if test="${sessionScope.personLoggedIn == null}">
+    <c:redirect url="Index"/>
+</c:if>
 
 <html>
 <head>
@@ -122,7 +122,7 @@
             <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse float-right" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
+            <ul style="float: right" class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="operation" value="add">
-                    <button type="submit" class="btn btn-sm btn-primary float-right">Post</button>
+                    <button type="submit" class="btn btn-danger float-right">Post</button>
                 </div>
             </form>
         </div>
