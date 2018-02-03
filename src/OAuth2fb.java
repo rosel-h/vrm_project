@@ -87,9 +87,8 @@ public class OAuth2fb extends HttpServlet {
 
             sess.setMaxInactiveInterval(3600 * 24 * 21); // log out after a month of inactivity i.e. long log in
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
-            sess.setAttribute("personLoggedIn", user.getUsername());
+            sess.setAttribute("personLoggedIn", jsonMap.get("username"));
             sess.setAttribute("user", user);
-
             String url = "Welcome";
             response.sendRedirect(url);
 
