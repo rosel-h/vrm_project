@@ -171,6 +171,7 @@
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title" class="form-control" required>
+                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                 </div>
                 <div class="form-group">
                     <label for="summernote">Content</label>
@@ -180,7 +181,7 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" name="operation" value="add">
-                    <button type="submit" class="btn btn-danger float-right">Post</button>
+                    <button type="submit" class="btn-lg btn-primary float-right">Post</button>
                 </div>
             </form>
         </div>

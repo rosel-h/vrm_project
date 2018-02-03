@@ -28,6 +28,17 @@ public class IndividualArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
+
+        String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
+        String csrfToken = req.getParameter("csrfToken");
+
+        if (!csrfSessionToken.equals(csrfToken)){
+            System.out.println("csrfTokens not verified");
+            resp.sendError(666);
+            return;
+        }
+
+        System.out.println("csrfTokens verified");
         ServletContext servletContext = getServletContext();
         String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
