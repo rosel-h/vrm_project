@@ -40,7 +40,7 @@ public class EditArticle extends HttpServlet {
             return;
         }
 
-        System.out.println("csrfTokens verified");
+        System.out.println("token verified");
 
         System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
