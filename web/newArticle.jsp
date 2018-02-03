@@ -27,13 +27,6 @@
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery-ui.min.js"></script>
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-          type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-
     <!-- Custom styles for this template -->
     <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Custom scripts for this template -->
@@ -54,6 +47,14 @@
     <!-- include summernote css/js -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+
     <script type="text/javascript">
         var imageCollection = [
             "background01.jpg",
@@ -114,8 +115,8 @@
 %>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a href="#mainNav" class="navbar-brand">Welcome ${personLoggedIn}</a>
+    <div id="top" class="container">
+        <a href="#top" class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -148,10 +149,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="post-heading">
+                <div class="post-heading" style="margin: 10% 0 0 0; padding: 10%;">
                     <h1>Tell us your journey. </h1>
-                    <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
-                    <span class="meta" style="font-size: 90%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
+                    <span class="meta" style="font-size: 100%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
                 </div>
             </div>
         </div>
