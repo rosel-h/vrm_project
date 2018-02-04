@@ -5,7 +5,7 @@
       <paths name="vrm_mshe666">
         <serverdata>
           <mappings>
-            <mapping deploy="/opt/tomcat/webapps" local="$PROJECT_DIR$/out/artifacts/vrm_mshe666" web="/vrm_mshe666" />
+            <mapping deploy="/opt/tomcat/webapps" local="$PROJECT_DIR$/out/artifacts/vrmblog" web="/vrm_mshe666" />
           </mappings>
         </serverdata>
       </paths>

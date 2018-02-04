@@ -39,5 +39,8 @@
     <orderEntry type="library" name="com.google.collections" level="project" />
     <orderEntry type="library" name="guava-19.0" level="project" />
     <orderEntry type="library" name="lib (4)" level="project" />
+    <orderEntry type="library" name="jsoup-1.11.2" level="project" />
+    <orderEntry type="library" name="lib (5)" level="project" />
+    <orderEntry type="library" name="lib (6)" level="project" />
   </component>
 </module>

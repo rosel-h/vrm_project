@@ -1,7 +1,11 @@
 package DAO_setup;
 
+import org.jsoup.Jsoup;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  * Created by rher490 on 24/01/2018.
@@ -13,13 +17,14 @@ public class Article {
     private String date;
     private String title;
 
+
     public Article() {
     }
 
     public Article(String username, int articleID, String content, String date, String title) {
         this.username = username;
         this.articleID = articleID;
-        this.content = content;
+        this.content = Jsoup.clean(content, Whitelist.basicWithImages());
         this.date = date;
         this.title = title;
     }
@@ -41,6 +46,7 @@ public class Article {
     }
 
     public String getContent() {
+
         return content;
     }
 
