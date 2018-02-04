@@ -61,7 +61,7 @@
 
     </script>
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 

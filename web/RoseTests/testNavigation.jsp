@@ -11,7 +11,7 @@
     <title>Title</title>
     <%@include file="allTheThingsInTheHead.jsp" %>
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 <%@include file="navbar_only.jsp" %>
 
 

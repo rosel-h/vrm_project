@@ -107,7 +107,7 @@
     </script>
 
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma", "no-cache"); //HTTP 1.0
     response.setDateHeader("Expires", 0); //prevents caching at the proxy server
@@ -194,7 +194,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
             <div style="float: right">
                 <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
@@ -212,14 +212,14 @@
             <table class="table table-hover sorttable" id="articletable">
                 <thead>
                 <tr>
-                    <th class="sort-alpha" style="color: #0085a1; max-width: 65%">
+                    <th class="sort-alpha" style="color: #0085a1; width:55%">
                         <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
                     </th>
                     <th class="sort-alpha" style="color: #0085a1">
                         <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
                     </th>
                     <th class="sort-alpha" style="color: #0085a1">
-                        <ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                        <ins>Date<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
                     </th>
                     <th></th>
                 </tr>
@@ -235,8 +235,8 @@
                 <c:forEach var="myArticles" items="${myArticles}">
                     <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
                     <tr>
-                        <td><h4 class="post-title">${myArticles.getTitle()}</h4>
-                            <div style="font-size: small; max-width: 300px">${myArticles.getContentPreview()}</div>
+                        <td style=" width:55%"><h4 class="post-title">${myArticles.getTitle()}</h4>
+                            <div style="font-size: small;">${myArticles.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
