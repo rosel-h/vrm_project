@@ -76,7 +76,7 @@ public class UserDAO implements AutoCloseable {
 
     public void addUserFB(String fName, String lName, String email) {
         String username = fName + "_" + lName;
-        String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
+        String password = BCrypt.hashpw(String.valueOf(100000000 + (int) (Math.random() * 1000000000)), BCrypt.gensalt(15));
         String fname = fName;
         String lname = lName;
         String dob = "1900-11-11";
@@ -85,7 +85,7 @@ public class UserDAO implements AutoCloseable {
         String avatar = "avatar_01.png";
         String status = "facebook";
 
-        addUser(username, password, fname, lname, dob, country, description, avatar, email, status);
+        addUser(username, password, fname, lname, dob, country, description, avatar, status,  email);
     }
 
     public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email) {

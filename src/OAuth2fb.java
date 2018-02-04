@@ -98,8 +98,6 @@ public class OAuth2fb extends HttpServlet {
             logWriter.write(logType,map);
             //end of logging code
 
-
-            sess.setMaxInactiveInterval(3600 * 24 * 21); // log out after a month of inactivity i.e. long log in
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("logintimestamp", new Date().getTime());
             sess.setAttribute("username",username);
@@ -203,7 +201,6 @@ public class OAuth2fb extends HttpServlet {
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoginServlet connection successful");
             user = dao.getUserFacebook(email);
-
 
             if (user == null) {
                 System.out.println("user is null");
