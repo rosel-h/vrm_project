@@ -198,7 +198,7 @@
                             <option value="date">Date</option>
                         </select>
                     </div>
-                    <div class="form-group" style="padding: 1%">
+                    <div class="form-group" style="padding: 2%">
                         <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search</button>
                     </div>
                 </div>
@@ -217,7 +217,6 @@
         </c:if>
     </div>
     <br>
-
 
     <table class="table table-hover sorttable" id="articletable">
         <thead>

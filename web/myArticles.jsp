@@ -212,7 +212,7 @@
             <table class="table table-hover sorttable" id="articletable">
                 <thead>
                 <tr>
-                    <th class="sort-alpha" style="color: #0085a1; max-width: 65%">
+                    <th class="sort-alpha" style="color: #0085a1; width: 65%">
                         <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
                     </th>
                     <th class="sort-alpha" style="color: #0085a1">
