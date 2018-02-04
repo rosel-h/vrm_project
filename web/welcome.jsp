@@ -239,14 +239,14 @@
                 <li>
                     <div id="banner-3">
                         <a href="OneArticle?articleID=3">
-                            <img src="img/banner12.jpg" class="img-responsive" id="bannerimg-3"
+                            <img src="img/banner09.jpg" class="img-responsive" id="bannerimg-3"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-4">
                         <a href="OneArticle?articleID=4">
-                            <img src="img/banner10.jpg" class="img-responsive" id="bannerimg-4"
+                            <img src="img/banner12.jpg" class="img-responsive" id="bannerimg-4"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>

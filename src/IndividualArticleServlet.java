@@ -158,7 +158,8 @@ public class IndividualArticleServlet extends HttpServlet {
                         return;
                     }
                     String userWhoCommented = req.getParameter("userWhoCommented");
-                    String comment = req.getParameter("newComment");
+//                    String comment = req.getParameter("newComment");
+                    String comment = Jsoup.clean(req.getParameter("newComment"),Whitelist.basicWithImages());
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
@@ -238,7 +239,8 @@ public class IndividualArticleServlet extends HttpServlet {
                     System.out.println("IndividualArticleServlet replying to comment button pressed");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     String userWhoCommented = req.getParameter("userWhoCommented");
-                    String comment = req.getParameter("newComment");
+//                    String comment = req.getParameter("newComment");
+                    String comment = Jsoup.clean(req.getParameter("newComment"),Whitelist.basicWithImages());
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
                     dao.addCommentToAnotherComment(articleID, userWhoCommented, sqlDate, comment, parentComment);
@@ -263,9 +265,9 @@ public class IndividualArticleServlet extends HttpServlet {
                 int articleID = Integer.parseInt(req.getParameter("articleID"));
                 Article articleToLoad = dao.getOneArticle(articleID);
                 System.out.println("IndividualArticleServlet - articletitle: " + articleToLoad.getTitle());
-                List<CommentOnArticles> list = dao.getAllCommentOfArticle(articleID);
+                List<CommentOnArticles > list = dao.getAllCommentOfArticle(articleID);
                 System.out.println("IndividualArticleServlet - commentList: " + list.size());
-                List<CommentOnArticles> commentsWithChildren = CommentOnArticles.pairCommentsRelationship(list);
+                List<CommentOnArticles > commentsWithChildren = CommentOnArticles.pairCommentsRelationship(list);
                 System.out.println("IndividualArticleServlet - commentListCompressed: " + commentsWithChildren.size());
                 req.setAttribute("articleToLoad", articleToLoad);
                 req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
