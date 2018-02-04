@@ -76,7 +76,7 @@ public class EditArticle extends HttpServlet {
 
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
                 if (newDate.length() < 5) {
-                    newContent = newContent + "<p> Edited on:" + sqlDate + "<p>";
+                    newContent = newContent + "<p> Edited on: " + sqlDate + "<p>";
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
                     System.out.println("EditArticle Servlet: Article added to database without date");
