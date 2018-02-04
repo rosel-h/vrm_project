@@ -54,13 +54,8 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
-    <%--<script>--%>
-    <%--$(document).ready(function () {--%>
-    <%--$('#summernote').summernote();--%>
-    <%--});--%>
 
-    <%--$('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();--%>
-    <%--</script>--%>
+
     <script>
         $(document).ready(function () {
             $('#summernote').summernote({
@@ -73,8 +68,28 @@
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
                     ['insert', ['picture']]
-                ]
+                ],
+                maximumImageFileSize: 2097152,
+                height: 600,
+                popover: {
+                    image: [],
+                    link: [],
+                    air: []
+                },
+                prettifyHtml: true
             });
+            $('#summernote').summernote('insertImage', url, filename);
+        });
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+
+            document.getElementById('futureDate').valueAsDate = new Date();
         });
     </script>
 </head>
@@ -83,102 +98,49 @@
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
-<%--<%--%>
-<%--String id = request.getParameter("articleID");--%>
-<%--String articleStory = request.getParameter("articleContent");--%>
-<%--String author= request.getParameter("author");--%>
-<%--String articleTitle= request.getParameter("articleTitle");--%>
-<%--System.out.println("editArticle jsp: "+ author);--%>
-<%--System.out.println("editArticle jsp: "+ articleTitle);--%>
-<%--System.out.println("editArticle jsp: "+ articleStory);--%>
 
-<%--%>--%>
+
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
-        <a  class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
             <i class="fa fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-
+        <div class="collapse navbar-collapse float-right" id="navbarResponsive">
+            <ul style="float: right" class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="Welcome">Home</a>
+                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
+                    <a class="nav-link" href="javascript:window.history.back()">back</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Articles">Community</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myArticles">My Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="editprofile">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                <%--</li>--%>
             </ul>
         </div>
-
     </div>
-
 </nav>
+
 <header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="post-heading">
+                <div class="post-heading" style="margin: 10% 0 0 0; padding: 15%;">
                     <h1>${articleToEdit.getUsername()}, edit your article below</h1>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
                     <span class="meta">Originally posted on ${articleToEdit.getDate()}</span>
                 </div>
-                <%--<div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">--%>
-                    <%--<div class="panel-title"><h3>Hello, ${articleToEdit.getUsername()}. Edit your article below</h3>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--&lt;%&ndash;<div>Hello, ${articleToEdit.getUsername()}. Edit your article below</div>&ndash;%&gt;--%>
-                <%--<!--  A form letting users add new articles. -->--%>
-                <%--<div class="page-item">--%>
-                    <%--<div class="panel-body">--%>
-                        <%--<form action="/editArticles" method="POST">--%>
-                            <%--<div class="form-group">--%>
-                                <%--<label for="title" style="color: white">Title</label>--%>
-                                <%--<input type="text" id="title" name="title" class="form-control"--%>
-                                       <%--value="${articleToEdit.getTitle()}" required>--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                                <%--<label for="summernote" style="color: white">Content</label>--%>
-                                <%--<textarea id="summernote" name="content" class="form-control" rows="10"--%>
-                                          <%--required>${articleToEdit.getContent()}</textarea>--%>
-                                <%--<label for="futureDate" style="color: white">Change date published (optional)</label>--%>
-                                <%--<input type="date" id="futureDate" name="futureDate" value="new Date()">--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                                <%--<input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">--%>
-                                <%--<input type="hidden" name="author" value="${articleToEdit.getUsername()}">--%>
-                                <%--<input type="hidden" name="operation" value="userHasEditedArticle">--%>
-                                <%--<input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">--%>
-                                <%--&lt;%&ndash;<input type="hidden" name="dateInDatabse" value="${article}">&ndash;%&gt;--%>
-
-                                <%--<button type="submit" class="btn btn-primary">Done</button>--%>
-                            <%--</div>--%>
-
-
-                        <%--</form>--%>
-                        <%--<form class="form-inline" action="/OneArticles" method="POST">--%>
-
-                            <%--<input type="hidden" name="operation" value="delete">--%>
-                            <%--<input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">--%>
-                            <%--<button style="float: right" type="submit" class="btn btn-danger pull-right">--%>
-                                <%--Delete--%>
-                            <%--</button>--%>
-                        <%--</form>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
             </div>
         </div>
     </div>
@@ -186,7 +148,6 @@
 
 <article>
 <div class="container">
-    <%--<div>Hello, ${articleToEdit.getUsername()}. Edit your article below</div>--%>
     <!--  A form letting users add new articles. -->
     <div class="">
 
@@ -194,7 +155,7 @@
             <h3 class="post-title">Edit Article
             <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
                 <input type="hidden" name="operation" value="delete">
-                <input type="hidden" name="articleId" value="${articleToEdit.getArticleID()}">
+                <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
                 <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                 <button style="float: right" type="submit" class="btn btn-danger pull-right">
                     Delete
@@ -233,6 +194,8 @@
     </div>
 </div>
 </article>
+<br>
+<%@include file="footer.jsp" %>
 </body>
 </html>
 
