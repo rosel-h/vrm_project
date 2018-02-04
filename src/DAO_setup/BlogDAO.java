@@ -39,6 +39,7 @@ public class BlogDAO implements AutoCloseable {
     }
 
     public List<Article> getTenArticles(String order, int number, boolean isAscending) throws SQLException {
+        number = 1*10;
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by ? ? limit 10 offset ?;")) {
             stmt.setString(1,order);
             String upOrDown = (isAscending) ? "asc" : "desc";
