@@ -54,22 +54,6 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#summernote').summernote({
-                toolbar: [
-                    // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['insert', ['picture']]
-                ]
-            });
-        });
-    </script>
     <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {
@@ -107,12 +91,12 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
@@ -132,7 +116,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
     <div id="top" class="container">
-        <a  class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -145,20 +129,20 @@
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--<a class="nav-link" href="Articles">Community</a>--%>
                 <%--</li>--%>
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
                 <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
                 <%--</li>--%>
                 <%--<li class="nav-item">--%>
-                    <%--<i class="glyphicon glyphicon-search" style="color: white;"--%>
-                       <%--data-toggle="modal" data-target="#searchbar"></i>--%>
+                <%--<i class="glyphicon glyphicon-search" style="color: white;"--%>
+                <%--data-toggle="modal" data-target="#searchbar"></i>--%>
                 <%--</li>--%>
             </ul>
         </div>
@@ -209,73 +193,78 @@
 </header>
 
 <div class="container">
-    <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
-    <div style="float: right">
-        <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
-            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img--%>
-                    <%--src="avatars/${user.getAvatar_icon()}"--%>
-                    <%--style="height: 30px"--%>
-                    <%--alt="avatar"/></a>--%>
-            <%--</div>--%>
-        <%--</c:if>--%>
-        <c:if test="${sessionScope.personLoggedIn ==null}">
-            <div>Logged in as Guest</div>
-        </c:if>
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
+            <div style="float: right">
+                <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
+                <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img--%>
+                <%--src="avatars/${user.getAvatar_icon()}"--%>
+                <%--style="height: 30px"--%>
+                <%--alt="avatar"/></a>--%>
+                <%--</div>--%>
+                <%--</c:if>--%>
+                <c:if test="${sessionScope.personLoggedIn ==null}">
+                    <div>Logged in as Guest</div>
+                </c:if>
+            </div>
+
+            <table class="table table-hover sorttable" id="articletable">
+                <thead>
+                <tr>
+                    <th class="sort-alpha" style="color: #0085a1; max-width: 65%">
+                        <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                    </th>
+                    <th class="sort-alpha" style="color: #0085a1">
+                        <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                    </th>
+                    <th class="sort-alpha" style="color: #0085a1">
+                        <ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <%
+                    System.out.println("myArticles jsp: inside table body");
+                    java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+                    request.setAttribute("sqlDateToday", sqlDateToday);
+                %>
+
+                <c:forEach var="myArticles" items="${myArticles}">
+                    <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
+                    <tr>
+                        <td><h4 class="post-title">${myArticles.getTitle()}</h4>
+                            <div style="font-size: small; max-width: 300px">${myArticles.getContentPreview()}</div>
+                            <form action="OneArticle" method="post">
+                                <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                                <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                                <input type="hidden" id="csrfToken" name="csrfToken"
+                                       value="${sessionScope.get("csrfSessionToken")}">
+                                <button type="submit" style="font-weight: lighter; background-color: transparent"
+                                        class="btn">Read More...
+                                </button>
+                            </form>
+                        </td>
+                        <td>by <i>${myArticles.getUsername()}</i></td>
+                        <td>${myArticles.getDate()}
+                            <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
+                                (not yet published)
+                            </c:if>
+                        </td>
+                        <td>
+                                <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
+                                <%--data-target="#a${myArticles.getArticleID()}">Read More...--%>
+                                <%--</button>--%>
+
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <table class="table table-hover sorttable" id="articletable">
-        <thead>
-        <tr>
-            <th class="sort-alpha" style="color: #0085a1; width: 65%">
-                <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th class="sort-alpha" style="color: #0085a1">
-                <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th class="sort-alpha" style="color: #0085a1">
-                <ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <%
-            System.out.println("myArticles jsp: inside table body");
-            java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
-            request.setAttribute("sqlDateToday", sqlDateToday);
-        %>
-
-        <c:forEach var="myArticles" items="${myArticles}">
-            <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
-            <tr>
-                <td><h4 class="post-title">${myArticles.getTitle()}</h4>
-                    <div style="font-size: small">${myArticles.getContentPreview()}</div>
-                    <form action="OneArticle" method="post">
-                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
-                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                        <button type="submit" style="font-weight: lighter; background-color: transparent" class="btn">Read More...</button>
-                    </form>
-                </td>
-                <td>by <i>${myArticles.getUsername()}</i></td>
-                <td>${myArticles.getDate()}
-                    <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
-                        (not yet published)
-                    </c:if>
-                </td>
-                <td>
-                        <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                        <%--data-target="#a${myArticles.getArticleID()}">Read More...--%>
-                        <%--</button>--%>
-
-                </td>
-            </tr>
-
-        </c:forEach>
-        </tbody>
-    </table>
-
 </div>
 <%@include file="footer.jsp" %>
 </body>

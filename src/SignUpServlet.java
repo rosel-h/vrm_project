@@ -197,6 +197,10 @@ public class SignUpServlet extends HttpServlet {
                     System.out.println("SignUpServlet enter line 149: username exists");
                     req.setAttribute("usernameError", "username already exists");
                     req.getRequestDispatcher("signup.jsp").forward(req, resp);
+                }else if (username.length() < 4) {
+                    System.out.println("SignUpServlet enter line 201: username too short");
+                    req.setAttribute("usernameError", "username at least contains 4 characters!");
+                    req.getRequestDispatcher("signup.jsp").forward(req, resp);
                 }
 
                 boolean hasUppercase = false;
