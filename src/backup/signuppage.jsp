@@ -63,7 +63,7 @@
                     success: function (msg) {
                         if (msg != "Username already exists") {
                             document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Username is valid";
-                            document.getElementById("usernameCheck").style.color = "green";
+                            document.getElementById("usernameCheck").style.color = validcolor;
                         } else {
                             document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
                         }
@@ -82,9 +82,9 @@
                         if (msg == "000") {
                             var out = "Password is valid";
                             document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordFormatCheck").style.color = "green";
+                            document.getElementById("passwordFormatCheck").style.color = validcolor;
                             document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordCheck").style.color = "green";
+                            document.getElementById("passwordCheck").style.color = validcolor;
                         } else {
                             var out = "";
 
@@ -104,23 +104,23 @@
 
                             if (out != "") {
                                 document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordFormatCheck").style.color = "red";
+                                document.getElementById("passwordFormatCheck").style.color = invalidcolor;
                                 if (msg.charAt(2) == "0") {
                                     out = "Two passwords are different!";
                                     document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                    document.getElementById("passwordCheck").style.color = "red";
+                                    document.getElementById("passwordCheck").style.color = invalidcolor;
                                 }
                             }
 
                             if (msg.charAt(0) == "0") {
                                 var out = "Password is valid";
                                 document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordFormatCheck").style.color = "green";
+                                document.getElementById("passwordFormatCheck").style.color = validcolor;
 
                                 if (msg == "0004") {
                                     out = "Two passwords are different!";
                                     document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                    document.getElementById("passwordCheck").style.color = "red";
+                                    document.getElementById("passwordCheck").style.color = invalidcolor;
                                 }
                             }
 
@@ -141,9 +141,9 @@
                         if (msg == "000") {
                             var out = "Password is valid";
                             document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordFormatCheck").style.color = "green";
+                            document.getElementById("passwordFormatCheck").style.color = validcolor;
                             document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordCheck").style.color = "green";
+                            document.getElementById("passwordCheck").style.color = validcolor;
                         } else {
                             var out = "";
 
@@ -167,7 +167,7 @@
 
                             if (out != "") {
                                 document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordCheck").style.color = "red";
+                                document.getElementById("passwordCheck").style.color = invalidcolor;
                             }
                         }
                     }

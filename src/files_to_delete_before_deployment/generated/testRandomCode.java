@@ -2,20 +2,52 @@ package files_to_delete_before_deployment.generated;
 
 import DAO_setup.*;
 
+import javax.servlet.ServletContext;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class testRandomCode {
 
-    public static void main(String[] args) {
-        new testRandomCode().start();
+    public static void main(String[] args) throws IOException, SQLException {
+//        new testRandomCode().start();
 //        new testRandomCode().testDates();
 //        new testRandomCode().testNest();
+        try {
+            new testRandomCode().daoTesting();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void daoTesting() throws Exception {
+
+        String orderOfArticles = "date";
+        int numberOfArticlesToLoad = 10;
+        List<Article> artic = new ArrayList<>();
+        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase("F:\\PGCert InfoTech\\Project\\vrm_projectFeb4\\web\\WEB-INF\\mysql.properties"))) {
+            artic = dao.getTenArticles(orderOfArticles,numberOfArticlesToLoad,false);
+        }
+        for (Article a :artic) {
+            System.out.println(("ID: "+a.getArticleID() + " Article: "+ a.getTitle()));
+
+        }
+    }
+
+    private Article dataFromResultSet(ResultSet rs, Article a) throws SQLException {
+        String user = rs.getString("username");
+        int aID = rs.getInt("article_id");
+        String story = rs.getString("content");
+        String date = rs.getString("date");
+        String title = rs.getString("title");
+        return new Article(user, aID, story, date, title);
     }
 
     private void start() {
@@ -27,21 +59,21 @@ public class testRandomCode {
             System.out.println(preview.lastIndexOf("</p>"));
 //            System.out.println(hello.substring(0, 50));
 
-            boolean openingPTagIsLessThan50 = preview.indexOf(">")<50;
-            int startOfPreview =preview.indexOf(">");
-            int contentpreview=(preview.indexOf(">")+50);
+            boolean openingPTagIsLessThan50 = preview.indexOf(">") < 50;
+            int startOfPreview = preview.indexOf(">");
+            int contentpreview = (preview.indexOf(">") + 50);
             int firstClosingTag = preview.indexOf("</p>");
 
 //            System.out.println(hello.substring(0,hello.indexOf("</p>")+4));
 //            System.out.println(hello.substring(0,hello.indexOf(">")+50));
 
-            int indexOfFirstParagraph = preview.indexOf("</p>")+4;
-            int indexOfIntendedContextPreview = preview.indexOf(">")+50/*+4*/;
+            int indexOfFirstParagraph = preview.indexOf("</p>") + 4;
+            int indexOfIntendedContextPreview = preview.indexOf(">") + 50/*+4*/;
 
-            if(indexOfFirstParagraph<indexOfIntendedContextPreview){
-                System.out.println(preview.substring(0,indexOfFirstParagraph)+"...");
-            }else{
-                System.out.println(preview.substring(0,indexOfIntendedContextPreview)+"...</p>");
+            if (indexOfFirstParagraph < indexOfIntendedContextPreview) {
+                System.out.println(preview.substring(0, indexOfFirstParagraph) + "...");
+            } else {
+                System.out.println(preview.substring(0, indexOfIntendedContextPreview) + "...</p>");
             }
 
         } catch (StringIndexOutOfBoundsException e) {
