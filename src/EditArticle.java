@@ -40,6 +40,7 @@ public class EditArticle extends HttpServlet {
 
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
+
         if (!csrfSessionToken.equals(csrfToken)){
             System.out.println("csrfTokens not verified");
             resp.sendError(666);

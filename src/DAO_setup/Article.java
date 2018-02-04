@@ -24,7 +24,7 @@ public class Article {
     public Article(String username, int articleID, String content, String date, String title) {
         this.username = username;
         this.articleID = articleID;
-        this.content = content;
+        this.content = Jsoup.clean(content, Whitelist.basicWithImages());
         this.date = date;
         this.title = title;
     }
@@ -47,7 +47,7 @@ public class Article {
 
     public String getContent() {
 
-        return Jsoup.clean(content,Whitelist.basic());
+        return content;
     }
 
     public void setContent(String content) {
