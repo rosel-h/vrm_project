@@ -159,7 +159,7 @@
                                 <div style="padding: 1%;margin: 1%">
                                     <a href="NewArticle" class="btn btn-danger"
                                        style=" color: white;opacity: 0.8">
-                                        New Entry
+                                        New Article
                                     </a>
                                 </div>
                             </div>
@@ -182,25 +182,25 @@
                 <h1>All Articles &nbsp;</h1>
             </div>
 
-            <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-                <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+            <div class="btn-group col-xs-10" role="group">
+                <form class="navbar-form navbar-right" action="searcharticle">
 
                     <div class="row">
-                        <div class="form-group" style="padding: 1%">
+                        <div class="form-group" style="padding: 0.5%">
                             <input size="60" type="text" required class="form-control" name="keywords"
                                    placeholder="Title/Username/Date"
                                    style="opacity: 0.8"
                                    id="searchkeyword">
                         </div>
-                        <div class="form-group" style="padding: 1%">
+                        <div class="form-group" style="padding: 0.5%">
                             <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
                                 <option value="title">Title</option>
                                 <option value="username">Username</option>
                                 <option value="date">Date</option>
                             </select>
                         </div>
-                        <div class="form-group" style="padding: 2%">
-                            <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search
+                        <div class="form-group" style="padding: 0.5%">
+                            <button type="submit" class="form-control" style="opacity: 0.8; width: 100%;">Search
                             </button>
                         </div>
                     </div>
