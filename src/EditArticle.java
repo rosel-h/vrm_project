@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -66,6 +68,9 @@ public class EditArticle extends HttpServlet {
                 e.printStackTrace();
             }
         } else if ("userHasEditedArticle".equals(op)) {
+
+
+
             System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
             String newTitle = req.getParameter("title");
@@ -81,6 +86,7 @@ public class EditArticle extends HttpServlet {
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
                     System.out.println("EditArticle Servlet: Article added to database without date");
+
                 } else {
                     String origPublishDate =req.getParameter("publishedDate");
                     newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
@@ -92,6 +98,23 @@ public class EditArticle extends HttpServlet {
                 }
                 if (articleHasBeenEdited) {
                     System.out.println("EditArticle Servlet: Article added to database");
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("articleID",String.valueOf(articleID));
+                    map.put("newTitle", newTitle);
+                    map.put("newContent",newContent);
+                    map.put("submittedDate", String.valueOf(sqlDate));
+                    map.put("operation",op);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "EditArticle";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
                 }
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } catch (SQLException e) {

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,6 +61,22 @@ public class LogInServlet extends HttpServlet {
 
             sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
+
+            //print log to file
+            Map<String, String> map = new HashMap<>();
+            map.put("username",username);
+
+            String ipAddress =  request.getRemoteAddr();
+            map.put("ip", ipAddress);
+
+            String logType = "Login";
+            LogWriter logWriter = new LogWriter(logType);
+            logWriter.init(getServletContext().getRealPath("/log"));
+            logWriter.write(logType,map);
+            //end of logging code
+            sess.setAttribute("logintimestamp", new Date().getTime());
+            sess.setAttribute("username",username);
+
 
             // Mr Meads generates a long random key for csrfToken
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));

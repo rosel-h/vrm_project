@@ -18,8 +18,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mengjie
@@ -62,6 +64,22 @@ public class EditProfileServlet extends HttpServlet {
                     //get user object from database
                     User user = userDAO.getUserByUsername(username);
 
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("username",username);
+                    map.put("fname_before",user.getFname());
+                    map.put("lname_before",user.getLname());
+                    map.put("dob_before",user.getDateOfBirth());
+                    map.put("country_before",user.getCountry());
+                    map.put("description_before",user.getDescription());
+                    map.put("avatar_before",user.getAvatar_icon());
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    //end of logging code
+
+
                     //set attributes of user object
                     user.setFname(fname);
                     user.setLname(lname);
@@ -76,6 +94,22 @@ public class EditProfileServlet extends HttpServlet {
                     //if update success, redirect to welcome.jsp
                     if (updateSuccess) {
                         System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
+
+                        //print log to file
+                        map.put("fname",fname);
+                        map.put("lname",lname);
+                        map.put("dob",dob);
+                        map.put("country",country);
+                        map.put("description",description);
+                        map.put("avatar",avatar);
+
+                        String logType = "EditProfile";
+                        LogWriter logWriter = new LogWriter(logType);
+                        logWriter.init(getServletContext().getRealPath("/log"));
+                        logWriter.write(logType,map);
+                        //end of logging code
+
+
                         req.setAttribute("successMessage", "Save profile successfully");
                         req.setAttribute("user",user);
                         session.setAttribute("user", user);

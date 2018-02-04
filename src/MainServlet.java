@@ -14,6 +14,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Mengjie
@@ -40,7 +43,27 @@ public class MainServlet extends HttpServlet {
         }
 
         String logout = req.getParameter("logout_button");
+        System.out.println("MainServlet enter line 46: " + logout);
         if (logout != null && logout.equals("Logout")) {
+            System.out.println("MainServlet enter line 48: ");
+
+            //print log to file
+            long logintimestamp = (long) sess.getAttribute("logintimestamp");
+            String username = (String) sess.getAttribute("username");
+            Map<String, String> map = new HashMap<>();
+            map.put("username",username);
+
+            String ipAddress =  req.getRemoteAddr();
+            map.put("ip", ipAddress);
+            long online = new Date().getTime() - logintimestamp;
+            map.put("online", String.valueOf(online));
+
+            String logType = "Logout";
+            LogWriter logWriter = new LogWriter(logType);
+            logWriter.init(getServletContext().getRealPath("/log"));
+            logWriter.write(logType,map);
+            //end of logging code
+
             sess.invalidate();
             System.out.println("MainServlet enter line 45: session is invalidated");
             resp.sendRedirect("Index");

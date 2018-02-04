@@ -47,6 +47,20 @@ public class SignUpServlet extends HttpServlet {
         System.out.println("g-recaptcha-response=" + gRecaptchaResponse);
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
 
+        //print log to file
+        Map<String, String> map = new HashMap<>();
+        map.put("recaptcha",gRecaptchaResponse);
+
+        String ipAddress =  req.getRemoteAddr();
+        map.put("ip", ipAddress);
+        map.put("result",String.valueOf(verify));
+
+        String logType = "reCAPTCHAVerification";
+        LogWriter logWriter = new LogWriter(logType);
+        logWriter.init(getServletContext().getRealPath("/log"));
+        logWriter.write(logType,map);
+        //end of logging code
+
         System.out.println("SignUpServlet enter line 57: verify=" + verify);
 
         if (!verify) {
@@ -265,23 +279,8 @@ public class SignUpServlet extends HttpServlet {
                 String password_hashed = SiteSecurity.hashString(password);
                 boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
                 System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
-                //print log to file
-                Map<String, String> map = new HashMap<>();
-                map.put("username",username);
-                map.put("fname",fname);
-                map.put("lname",lname);
-                map.put("dob",dob);
-                map.put("country",country);
-                map.put("description",description);
-                map.put("avatar",avatar);
-                map.put("status","active");
-                map.put("email",email);
 
-                String logType = "SignUp";
-                LogWriter logWriter = new LogWriter(logType);
-                logWriter.init(getServletContext().getRealPath("/log"));
-                logWriter.write(logType,map);
-                //end of logging code
+
 
 
 //                Map<String, String[]> maps = req.getParameterMap();

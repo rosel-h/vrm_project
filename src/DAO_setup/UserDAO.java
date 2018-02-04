@@ -79,7 +79,7 @@ public class UserDAO implements AutoCloseable {
         String password = String.valueOf(100000000 + (int) (Math.random() * 1000000000));
         String fname = fName;
         String lname = lName;
-        String dob = "1900/11/11";
+        String dob = "1900-11-11";
         String country = "New Zealand";
         String description = "New facebook user";
         String avatar = "avatar_01.png";
@@ -106,6 +106,8 @@ public class UserDAO implements AutoCloseable {
 
             System.out.println("Creation Successful");
             success = true;
+
+
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

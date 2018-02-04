@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rher490 on 2/02/2018.
@@ -93,6 +95,25 @@ public class IndividualArticleServlet extends HttpServlet {
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("IndividualArticleServlet: new article made");
                 System.out.println("transfer to new article");
+
+
+                //print log to file
+                Map<String, String> map = new HashMap<>();
+                map.put("user",user);
+                map.put("title", title);
+                map.put("content",content);
+                map.put("submittedDate", String.valueOf(sqlDate));
+                map.put("operation",op);
+
+                String ipAddress =  req.getRemoteAddr();
+                map.put("ip", ipAddress);
+
+                String logType = "AddArticle";
+                LogWriter logWriter = new LogWriter(logType);
+                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.write(logType,map);
+                //end of logging code
+
 //                adding articles goes to my articles
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } else if ("delete".equals(op)) {
@@ -104,6 +125,24 @@ public class IndividualArticleServlet extends HttpServlet {
                 System.out.println(req.getParameter("articleID"));
                 int id = Integer.parseInt(req.getParameter("articleID"));
                 dao.deleteArticle(id);
+
+                //print log to file
+                Map<String, String> map = new HashMap<>();
+                map.put("user", user);
+                map.put("articleID", String.valueOf(id));
+
+                map.put("operation", op);
+
+                String ipAddress = req.getRemoteAddr();
+                map.put("ip", ipAddress);
+
+                String logType = "DeleteArticle";
+                LogWriter logWriter = new LogWriter(logType);
+                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.write(logType, map);
+                //end of logging code
+
+
                 //deleting articles goes to my articles as well
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } else {
@@ -116,9 +155,26 @@ public class IndividualArticleServlet extends HttpServlet {
                     }
                     String userWhoCommented = req.getParameter("userWhoCommented");
                     String comment = req.getParameter("newComment");
-                int articleID = Integer.parseInt(req.getParameter("articleID"));
+                    int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("articleID",String.valueOf(articleID));
+                    map.put("userWhoCommented", userWhoCommented);
+                    map.put("comment",comment);
+                    map.put("operation",op);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "CommentOnArticle";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
+
                 } else if ("editarticle".equals(op)) {
                     if(!passTokenCheck(csrfToken, csrfSessionToken)){
                         resp.sendError(666);
@@ -129,6 +185,22 @@ public class IndividualArticleServlet extends HttpServlet {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addArticle(title, content, user, sqlDate);
                     System.out.println("IndividualArticleServlet: new article made");
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("title",title);
+                    map.put("content", content);
+                    map.put("operation",op);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "EditArticleIndividual";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
+
                 } else if ("deleteCommentOnArticle".equals(op)) {
                     if(!passTokenCheck(csrfToken, csrfSessionToken)){
                         resp.sendError(666);
@@ -139,6 +211,21 @@ public class IndividualArticleServlet extends HttpServlet {
                     System.out.println();
                     System.out.println("IAS: id - " + commentIDToBeDeleted);
                     dao.deleteCommentOnArticle(Integer.parseInt(commentIDToBeDeleted));
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("commentIDToBeDeleted",commentIDToBeDeleted);
+                    map.put("operation",op);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "DeleteCommentOnArticle";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
+
                 } else if ("replyToAComment".equals(op)) {
                     if(!passTokenCheck(csrfToken, csrfSessionToken)){
                         resp.sendError(666);
@@ -148,9 +235,26 @@ public class IndividualArticleServlet extends HttpServlet {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     String userWhoCommented = req.getParameter("userWhoCommented");
                     String comment = req.getParameter("newComment");
-                int articleID = Integer.parseInt(req.getParameter("articleID"));
+                    int articleID = Integer.parseInt(req.getParameter("articleID"));
                     int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
                     dao.addCommentToAnotherComment(articleID, userWhoCommented, sqlDate, comment, parentComment);
+
+                    //print log to file
+                    Map<String, String> map = new HashMap<>();
+                    map.put("articleID", String.valueOf(articleID));
+                    map.put("parentCommentID", String.valueOf(parentComment));
+                    map.put("userWhoCommented",userWhoCommented);
+                    map.put("comment",comment);
+                    map.put("operation",op);
+
+                    String ipAddress =  req.getRemoteAddr();
+                    map.put("ip", ipAddress);
+
+                    String logType = "ReplyToAComment";
+                    LogWriter logWriter = new LogWriter(logType);
+                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.write(logType,map);
+                    //end of logging code
                 }
                 int articleID = Integer.parseInt(req.getParameter("articleID"));
                 Article articleToLoad = dao.getOneArticle(articleID);
