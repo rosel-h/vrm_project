@@ -104,7 +104,7 @@
 
     </script>
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

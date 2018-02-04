@@ -91,7 +91,7 @@
     </script>
 
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">

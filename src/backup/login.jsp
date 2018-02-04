@@ -46,7 +46,7 @@
     <script src="vendor/js/featured.js"></script>
 
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
