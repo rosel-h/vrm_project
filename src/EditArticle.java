@@ -33,6 +33,7 @@ public class EditArticle extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
+        req.setCharacterEncoding("UTF-8");
 
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
