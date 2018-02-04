@@ -58,8 +58,8 @@ SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_com
 
 -- orders the article date
 -- SELECT * FROM vrm_articles ORDER BY date Limit 10;
-SELECT * FROM vrm_articles ORDER by date limit 10 offset 0 -- works
-SELECT * FROM vrm_articles ORDER BY date LIMIT 10 offset 0; -- works
+SELECT * FROM vrm_articles ORDER by date DESC limit 10 offset 0 -- works
+SELECT * FROM vrm_articles ORDER BY date ASC LIMIT 10 offset 0; -- works
 SELECT * FROM vrm_articles ORDER BY date LIMIT 10 OFFSET 10; -- works
 SELECT * FROM vrm_articles ORDER BY date LIMIT 10 OFFSET 20; -- works
 SELECT * FROM vrm_articles ORDER BY date LIMIT 10 OFFSET 10 FETCH NEXT 10 ROWS; -- doesnt work
@@ -68,3 +68,5 @@ select * FROM
 DECLARE page CURSOR FOR
  SELECT title FROM vrm_articles ORDER BY date LIMIT 10 OFFSET 10; -- works
 FETCH vrm_articles limit 10;
+
+SELECT COUNT(*) FROM vrm_articles;
