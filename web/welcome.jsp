@@ -107,7 +107,6 @@
         #headingID > form {
             width: 100%;
         }
-
     </style>
 
     <script type="text/javascript">
@@ -135,7 +134,6 @@
         $(document).ready(function () {
             loadRandomImage();
         });
-
 
     </script>
 </head>
@@ -188,20 +186,17 @@
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default btn-responsive"
-                               style=" background-color: white; opacity: 0.8">
-                                My Articles
+                               style=" background-color: white; opacity: 0.8"> My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-default btn-responsive"
-                               style=" background-color: white; opacity: 0.8">
-                                Community
+                               style=" background-color: white; opacity: 0.8"> Community
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger btn-responsive"
-                               style=" color: white;opacity: 0.8">
-                                New Article
+                               style=" color: white;opacity: 0.8; padding: 1px"> New Article
                             </a>
                         </div>
                     </div>

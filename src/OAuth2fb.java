@@ -58,17 +58,13 @@ public class OAuth2fb extends HttpServlet {
                 return;
             }
 
-            System.out.println("Facebook User Exists in Database");
             HttpSession sess = request.getSession(true);
 
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", user.getUsername());
-            System.out.println("jsonmap string" + jsonMap.toString());
 
             String jsonText = JSONValue.toJSONString(jsonMap);
-            System.out.println("LoginServlet json text - " + jsonText);
             String sessiont_id = sess.getId();
-            System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("WEB-INF/Sessions");
             File sessionFolder = new File(filePath);
@@ -78,7 +74,6 @@ public class OAuth2fb extends HttpServlet {
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("LoginServlet enter line 53: " + fileName);
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
@@ -112,7 +107,6 @@ public class OAuth2fb extends HttpServlet {
             request.setAttribute("directErrorMessage", "true");
             request.setAttribute("success", true);
             request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
-            System.out.println("Success = " + true);
         }
 //        }
     }
@@ -123,7 +117,6 @@ public class OAuth2fb extends HttpServlet {
             String rid = request.getParameter("request_ids");
             // Get special code
             String code = request.getParameter("code");
-            System.out.println(code);
 
             if (code != null) {
                 // Format parameters
@@ -138,25 +131,19 @@ public class OAuth2fb extends HttpServlet {
                 conn.setRequestMethod("GET");
                 String line, outputString = "";
 
-                System.out.println("start reader");
-
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
                     while ((line = reader.readLine()) != null) {
                         outputString += line;
                     }
                 }
 
-                System.out.println(outputString);
-
                 // extract access token from response
                 String accessToken = outputString.substring(outputString.indexOf(":\"") + 2, outputString.indexOf("\","));
-                System.out.println(accessToken);
 
                 // request for user info
                 url = new URL("https://graph.facebook.com/me?fields=email,first_name,last_name&access_token="
                         + accessToken);
 
-                System.out.println(url);
                 URLConnection conn1 = url.openConnection();
                 outputString = "";
 
@@ -177,9 +164,6 @@ public class OAuth2fb extends HttpServlet {
                 //get facebook last name
                 fbLastName = outputString.substring(outputString.indexOf("\"last_name\":\"") + 13, outputString.indexOf("\",\"id\""));
 
-                System.out.println("Facebook email is " + fbUserEmail);
-                System.out.println("Facebook fname is " + fbFirstName);
-                System.out.println("Facebook lname is " + fbLastName);
             }
 
         } catch (Exception e) {
@@ -196,14 +180,11 @@ public class OAuth2fb extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("LoginServlet Connection attempt...");
-
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
-            System.out.println("LoginServlet connection successful");
+
             user = dao.getUserFacebook(email);
 
             if (user == null) {
-                System.out.println("user is null");
                 dao.addUserFB(firstName, lastName, email);
 
                 //print log to file

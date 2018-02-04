@@ -26,12 +26,8 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println(SiteSecurity.hashString("1234"));
-
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
-        System.out.println("the hashed pw is " + pass);
         String duration = request.getParameter("remember");
         HttpSession sess = request.getSession(true);
 
@@ -39,12 +35,9 @@ public class LogInServlet extends HttpServlet {
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", username);
             String jsonText = JSONValue.toJSONString(jsonMap);
-            System.out.println("LoginServlet json text - " + jsonText);
             String sessiont_id = sess.getId();
-            System.out.println("LoginServlet: " + sessiont_id);
             ServletContext servletContext = getServletContext();
             String filePath = servletContext.getRealPath("WEB-INF/Sessions");
-            System.out.println("LoginServlet enter line 55: filePath= " + filePath);
             File sessionFolder = new File(filePath);
 
             if (!sessionFolder.exists()) {
@@ -52,7 +45,6 @@ public class LogInServlet extends HttpServlet {
             }
 
             String fileName = filePath + "\\" + sessiont_id + ".json";
-            System.out.println("LoginServlet enter line 53: " + fileName);
             File sessionFile = new File(fileName);
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(sessionFile))) {
@@ -96,14 +88,10 @@ public class LogInServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        System.out.println("LoginServlet Connection attempt...");
-
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
-            System.out.println("LoginServlet connection successful");
             user = dao.getUserStandard(username, pass);
 
             if (user == null) {
-                System.out.println("User login has failed");
                 errorMessage = "Invalid Username or Password";
                 return false;
             }

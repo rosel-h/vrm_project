@@ -17,8 +17,6 @@ public class CheckPasswordServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("CheckPasswordServlet enter sign up servlet");
-
         //get password and confirm password
         String password = req.getParameter("password");
         String cPassword = req.getParameter("cPassword");

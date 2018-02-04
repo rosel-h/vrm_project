@@ -31,6 +31,8 @@ public class IndividualArticleServlet extends HttpServlet {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
 
+        req.setCharacterEncoding("UTF-8");
+
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
 
@@ -79,6 +81,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
+
                 user = String.valueOf( session.getAttribute("personLoggedIn"));
                 //check if date is to be published today or not
                 String submittedDate = req.getParameter("futureDate");
@@ -92,6 +95,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     LocalDate submittedDateReformatted = LocalDate.parse(submittedDate, formatter);
                     sqlDate = java.sql.Date.valueOf(submittedDateReformatted);
                 }
+
                 dao.addArticle(title, content, user, sqlDate);
                 System.out.println("IndividualArticleServlet: new article made");
                 System.out.println("transfer to new article");
