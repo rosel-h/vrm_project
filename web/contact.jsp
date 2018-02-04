@@ -66,7 +66,6 @@
             loadRandomImage();
         });
 
-
     </script>
 </head>
 <body style="background-color: #e6e6e6">
