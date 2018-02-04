@@ -140,7 +140,7 @@
                             <div class="col-md-12 control">
                                 <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
                                     Don't have an account?
-                                    <a href="/Signuppage" style="color: red">
+                                    <a href="Signuppage" style="color: red">
                                         Sign Up Here
                                     </a>
                                 </div>
