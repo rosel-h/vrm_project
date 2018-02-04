@@ -329,7 +329,7 @@
         <c:if test="${sessionScope.personLoggedIn !=null}">
             <form method="post" action="OneArticle">
                 <div class="form-group">
-                    <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
+                    <label for="summernote" style="font-size: 14px">Comment as ${sessionScope.personLoggedIn}:</label>
                     <textarea id="summernote" name="newComment" class="form-control" rows="10"
                               required></textarea>
                     <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
