@@ -122,8 +122,8 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="post-heading" style="margin: 10%; padding: 5%;">
+            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
                     <h1>${articleToLoad.getTitle()}</h1>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
                     <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
