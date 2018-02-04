@@ -110,14 +110,6 @@
 
     </style>
 
-    <style>
-        @media (max-width: 991px) {
-            .btn-group{
-                display: block;
-            }
-        }
-    </style>
-
     <script type="text/javascript">
         var imageCollection = [
             "background01.jpg",

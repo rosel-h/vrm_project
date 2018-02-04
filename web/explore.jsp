@@ -37,15 +37,6 @@
     <script src="vendor/jquery/jquery-ui.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
-
-    <style>
-        @media (max-width: 991px) {
-            .btn-group{
-                display: block;
-            }
-        }
-    </style>
-
     <script>
         $(document).on('click', 'th', function () {
             var table = $(this).parents('table').eq(0);

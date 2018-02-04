@@ -105,13 +105,7 @@
         });
 
     </script>
-    <style>
-        @media (max-width: 991px) {
-            .btn-group{
-                display: block;
-            }
-        }
-    </style>
+
 </head>
 <body style="background-color: #e6e6e6">
 <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
