@@ -16,7 +16,6 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/src/files_to_delete_before_deployment/generated" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -36,5 +35,6 @@
     <orderEntry type="library" name="owasp-java-html-sanitizer-20171016.1" level="project" />
     <orderEntry type="library" name="lib (2)" level="project" />
     <orderEntry type="library" name="lib (3)" level="project" />
+    <orderEntry type="library" name="com.google.collections" level="project" />
   </component>
 </module>

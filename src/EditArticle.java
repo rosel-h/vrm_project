@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
 
@@ -76,11 +77,12 @@ public class EditArticle extends HttpServlet {
             String newContent = req.getParameter("content");
 
             //sanitize
-            System.out.println("Edit Article Servlet sanitize");
-//            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
-//            PolicyFactory policyDefinition = Sanitizers
-//                    .FORMATTING
-//                    .and(Sanitizers.LINKS);
+            System.out.println("Edit Article Servlet sanitize attempt..");
+            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
+
+////            PolicyFactory policyDefinition = Sanitizers
+////                    .FORMATTING
+////                    .and(Sanitizers.LINKS);
 //
 //            System.out.println("Edit Article Servlet sanitize before: "+newTitle);
 //            newTitle=policyDefinition.sanitize(newTitle);

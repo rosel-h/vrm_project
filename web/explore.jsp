@@ -100,7 +100,7 @@
         <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
-                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
@@ -248,8 +248,7 @@
                         <form action="OneArticle" method="post">
                             <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                             <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
-                            <input type="hidden" id="csrfToken" name="csrfToken"
-                                   value="${sessionScope.get("csrfSessionToken")}">
+                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
                         </form>
                     </td>
@@ -258,8 +257,15 @@
                 </tr>
             </c:if>
         </c:forEach>
-        </tbody>`
+        </tbody>
     </table>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-primary">1</button>
+        <button type="button" class="btn btn-primary">2</button>
+        <button type="button" class="btn btn-primary">3</button>
+    </div>
+
 </div>
 <%@include file="footer.jsp" %>
 </body>
