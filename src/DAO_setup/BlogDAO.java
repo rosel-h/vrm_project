@@ -38,6 +38,22 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
+    public List<Article> getTenArticles(String order, int number, boolean isAscending) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by ? ? limit 10 offset ?;")) {
+            stmt.setString(1,order);
+            String upOrDown = (isAscending) ? "asc" : "desc";
+            stmt.setString(2,upOrDown);
+            stmt.setInt(3,number);
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<Article> artic = new ArrayList<>();
+                while (rs.next()) {
+                    artic.add(dataFromResultSet(rs, new Article()));
+                }
+                return artic;
+            }
+        }
+    }
+
     public List<Article> getArticleByTitle(String[] keywords) throws SQLException {
         List<Article> artic = new ArrayList<>();
 
@@ -395,6 +411,10 @@ public class BlogDAO implements AutoCloseable {
         }
         return false;
     }
+
+    /*gets all every 10 pages*/
+
+
 
     /**
      * Closes the connection to the database. Implements {@link AutoCloseable} to support try-with-resources.

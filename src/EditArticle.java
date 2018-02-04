@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;
 import org.owasp.html.Sanitizers;
 
@@ -76,11 +77,20 @@ public class EditArticle extends HttpServlet {
             String newContent = req.getParameter("content");
 
             //sanitize
-            System.out.println("Edit Article Servlet sanitize");
-//            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
-//            PolicyFactory policyDefinition = Sanitizers
-//                    .FORMATTING
-//                    .and(Sanitizers.LINKS);
+            System.out.println("Edit Article Servlet sanitize attempt..");
+////            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
+//            PolicyFactory policyDefinition = new HtmlPolicyBuilder().allowElements(
+//                    "a", "label", "noscript", "h1", "h2", "h3", "h4", "h5", "h6",
+//                    "p", "i", "b", "u", "strong", "em", "small", "big", "pre", "code",
+//                    "cite", "samp", "sub", "sup", "strike", "center", "blockquote",
+//                    "hr", "br", "col", "font", "map", "span", "div", "img",
+//                    "ul", "ol", "li", "dd", "dt", "dl", "tbody", "thead", "tfoot",
+//                    "table", "td", "th", "tr", "colgroup", "fieldset", "legend")
+//                    .allowElements("quote", "ecode")
+//                    .toFactory();
+////            PolicyFactory policyDefinition = Sanitizers
+////                    .FORMATTING
+////                    .and(Sanitizers.LINKS);
 //
 //            System.out.println("Edit Article Servlet sanitize before: "+newTitle);
 //            newTitle=policyDefinition.sanitize(newTitle);
