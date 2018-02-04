@@ -198,14 +198,13 @@
                             <option value="date">Date</option>
                         </select>
                     </div>
-                    <div class="form-group" style="padding: 1%">
+                    <div class="form-group" style="padding: 2%">
                         <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <br>
     <div style="float: right">
         <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
         <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
@@ -218,7 +217,6 @@
         </c:if>
     </div>
     <br>
-
 
     <table class="table table-hover sorttable" id="articletable">
         <thead>

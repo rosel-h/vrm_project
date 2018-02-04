@@ -212,7 +212,7 @@
             <table class="table table-hover sorttable" id="articletable">
                 <thead>
                 <tr>
-                    <th class="sort-alpha" style="color: #0085a1; max-width: 65%">
+                    <th class="sort-alpha" style="color: #0085a1; width: 65%">
                         <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
                     </th>
                     <th class="sort-alpha" style="color: #0085a1">
@@ -236,7 +236,7 @@
                     <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
                     <tr>
                         <td><h4 class="post-title">${myArticles.getTitle()}</h4>
-                            <div style="font-size: small; max-width: 300px">${myArticles.getContentPreview()}</div>
+                            <div style="font-size: small; width: 65%">${myArticles.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
