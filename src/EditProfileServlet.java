@@ -51,6 +51,7 @@ public class EditProfileServlet extends HttpServlet {
 
         if (session == null) {
             req.getRequestDispatcher("login.jsp").forward(req, resp);
+            return;
 
         } else {
             String username = (String) session.getAttribute("personLoggedIn");
@@ -110,6 +111,7 @@ public class EditProfileServlet extends HttpServlet {
                         req.setAttribute("user", user);
                         session.setAttribute("user", user);
                         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
+                        return;
                     }
 
                 } else {
@@ -162,9 +164,8 @@ public class EditProfileServlet extends HttpServlet {
                     System.out.println("EditProfileServlet loadNewProfile enter line 159: fieldName: " + fieldName + "," + fileItem.getString());
                     if (fieldName.equals("csrfToken")) {
                         csrfToken = fileItem.getString();
-                        if (!csrfSessionToken.equals(csrfToken + "asdasd")) {
+                        if (!csrfSessionToken.equals(csrfToken)) {
                             System.out.println("csrfToken failed");
-                            resp.sendError(666);
                             return;
                         }
                     } else if (fieldName.equals("username")) {
