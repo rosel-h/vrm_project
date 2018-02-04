@@ -63,7 +63,7 @@ public class LogInServlet extends HttpServlet {
 
             String logType = "Login";
             LogWriter logWriter = new LogWriter(logType);
-            logWriter.init(getServletContext().getRealPath("/log"));
+            logWriter.init(getServletContext().getRealPath("log"));
             logWriter.write(logType,map);
             //end of logging code
             sess.setAttribute("logintimestamp", new Date().getTime());

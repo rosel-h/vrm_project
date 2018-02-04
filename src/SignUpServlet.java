@@ -57,7 +57,7 @@ public class SignUpServlet extends HttpServlet {
 
         String logType = "reCAPTCHAVerification";
         LogWriter logWriter = new LogWriter(logType);
-        logWriter.init(getServletContext().getRealPath("/log"));
+        logWriter.init(getServletContext().getRealPath("log"));
         logWriter.write(logType,map);
         //end of logging code
 
@@ -102,7 +102,7 @@ public class SignUpServlet extends HttpServlet {
 //            final int maxFileSize = 50 * 1024 * 1024;
 //
 //            ServletContext servletContext = getServletContext();
-//            String filePath = servletContext.getRealPath("/avatars");
+//            String filePath = servletContext.getRealPath("avatars");
 //
 //            DiskFileItemFactory factory = new DiskFileItemFactory();
 //            factory.setSizeThreshold(maxMemSize);

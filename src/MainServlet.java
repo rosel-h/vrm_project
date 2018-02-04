@@ -63,7 +63,7 @@ public class MainServlet extends HttpServlet {
 
             String logType = "Logout";
             LogWriter logWriter = new LogWriter(logType);
-            logWriter.init(getServletContext().getRealPath("/log"));
+            logWriter.init(getServletContext().getRealPath("log"));
             logWriter.write(logType,map);
             //end of logging code
 

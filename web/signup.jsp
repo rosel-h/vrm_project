@@ -256,7 +256,7 @@
                     <div class="panel-title"><h3>Sign up</h3></div>
 
                     <div style="float:right; font-size: 70%; position: relative; top:-1%; margin-right: 3%">
-                        <a style="color: white;" id="signinlink" href="/Signin">
+                        <a style="color: white;" id="signinlink" href="Signin">
                             Already registered?
                             <ins>Sign in</ins>
                             now!
