@@ -139,7 +139,7 @@
 
     <article>
         <div class="container">
-            <div class="row" style="border-color: black; border-style: solid">
+            <div class="row" style="border-color: grey; border-style: solid; border-width: 1px; margin: 1%">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     ${articleToLoad.getContent()}
                 </div>
@@ -160,7 +160,7 @@
                     </div>
                     <div style="padding: 1%; margin: 1%">
                             <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                        <form class="form-inline" action="editArticles" method="post">
+                        <form  class="form-inline" action="editArticles" method="post">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <input type="hidden" name="operation" value="goToEditPage">
                             <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">

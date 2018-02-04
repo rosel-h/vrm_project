@@ -204,7 +204,6 @@
             </form>
         </div>
     </div>
-    <br>
     <div style="float: right">
         <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
         <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
