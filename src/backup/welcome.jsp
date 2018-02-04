@@ -69,7 +69,7 @@
 </a>
 
 <form action="newArticle.jsp">
-    <button type="submit">New Entry</button>
+    <button type="submit">New Article</button>
 </form>
 
 <a href="editprofile">

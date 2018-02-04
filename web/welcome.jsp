@@ -111,6 +111,14 @@
 
     </style>
 
+    <style>
+        @media (max-width: 991px) {
+            .btn-group{
+                display: block;
+            }
+        }
+    </style>
+
     <script type="text/javascript">
         var imageCollection = [
             "background01.jpg",
@@ -181,7 +189,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
                     <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                              class="img-fluid">
@@ -205,7 +213,7 @@
                         <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger btn-responsive"
                                style=" color: white;opacity: 0.8">
-                                New Entry
+                                New Article
                             </a>
                         </div>
                     </div>
