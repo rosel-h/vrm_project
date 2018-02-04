@@ -171,10 +171,10 @@
             </h3>
         </div>
         <div class="">
-            <form action="editArticles" method="POST" style="float: right">
+            <form action="editArticles" method="POST">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" value="${articleToEdit.getTitle()}"
+                    <input type="text" id="title" name="title" class="form-control" maxlength="50" value="${articleToEdit.getTitle()}"
                            required>
                 </div>
                 <div class="form-group">

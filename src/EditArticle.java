@@ -78,7 +78,7 @@ public class EditArticle extends HttpServlet {
 
             //sanitize
             System.out.println("Edit Article Servlet sanitize attempt..");
-            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
+//            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
 
 ////            PolicyFactory policyDefinition = Sanitizers
 ////                    .FORMATTING

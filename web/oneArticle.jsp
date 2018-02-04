@@ -45,7 +45,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -62,13 +62,13 @@
 </head>
 <body style="background-color: #e6e6e6">
 <%--<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
-    <%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
-    <%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server--%>
+<%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
+<%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server--%>
 <%--%>--%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
-        <a  class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -77,38 +77,38 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
+                <%--<a class="nav-link" href="Welcome">Home</a>--%>
                 <%--</li>--%>
-                    <li class="nav-item">
-                        <%--<a class="nav-link" href="Welcome">Home</a>--%>
-                        <a  class="nav-link" href="javascript:window.history.back()">back</a>
-                    </li>
+                <li class="nav-item">
+                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
+                    <a class="nav-link" href="javascript:window.history.back()">back</a>
+                </li>
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--<a class="nav-link" href="Articles">Community</a>--%>
                 <%--</li>--%>
                 <c:if test="${sessionScope.personLoggedIn !=null}">
                     <%--<li class="nav-item">--%>
-                        <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
                     <%--</li>--%>
                     <%--<li class="nav-item">--%>
-                        <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
+                    <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
                     <%--</li>--%>
                 </c:if>
                 <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="about">About</a>--%>
+                <%--<a class="nav-link" href="about">About</a>--%>
                 <%--</li>--%>
                 <c:choose>
                     <c:when test="${sessionScope.personLoggedIn !=null}">
                         <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                        <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
                         <%--</li>--%>
                     </c:when>
                     <c:otherwise>
                         <%--<li class="nav-item">--%>
-                            <%--<a href="Signin" class="btn btn-default">--%>
-                                <%--<span class="glyphicon glyphicon-circle-arrow-right"--%>
-                                      <%--aria-hidden="true"> &nbsp;Login</span>--%>
-                            <%--</a>--%>
+                        <%--<a href="Signin" class="btn btn-default">--%>
+                        <%--<span class="glyphicon glyphicon-circle-arrow-right"--%>
+                        <%--aria-hidden="true"> &nbsp;Login</span>--%>
+                        <%--</a>--%>
                         <%--</li>--%>
                     </c:otherwise>
                 </c:choose>
@@ -119,203 +119,235 @@
 </nav>
 
 <header id="backgroundImage" class="masthead">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="post-heading" style="margin: 10%; padding: 5%;">
-                        <h1>${articleToLoad.getTitle()}</h1>
-                        <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
-                        <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
-                    </div>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading" style="margin: 10%; padding: 5%;">
+                    <h1>${articleToLoad.getTitle()}</h1>
+                    <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
+                    <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <%--<h1 class="post-title">${articleToLoad.getTitle()}</h1>--%>
-    <%--<div>Posted by ${articleToLoad.getUsername()}</div>--%>
-    <%--<div>Published on ${articleToLoad.getDate()}</div>--%>
+<%--<h1 class="post-title">${articleToLoad.getTitle()}</h1>--%>
+<%--<div>Posted by ${articleToLoad.getUsername()}</div>--%>
+<%--<div>Published on ${articleToLoad.getDate()}</div>--%>
 
-    <article>
-        <div class="container">
-            <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    ${articleToLoad.getContent()}
-                </div>
-
+<article>
+    <div class="container">
+        <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                ${articleToLoad.getContent()}
             </div>
-            <div class="row" style="float: right;">
-                <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
-                <div class="btn-group btn-group-justified col-xs-10" role="group">
-                    <div style="padding: 1%; margin: 1%">
-                        <form class="form-inline" action="OneArticle" method="POST">
-                            <input type="hidden" name="operation" value="delete">
-                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                            <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                                Delete
-                            </button>
-                        </form>
-                    </div>
-                    <div style="padding: 1%; margin: 1%">
-                            <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                        <form class="form-inline" action="editArticles" method="post">
-                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                            <input type="hidden" name="operation" value="goToEditPage">
-                            <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
-                            <input type="hidden" id="csrfToken2" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button style="float: right" id="editorButton" type="submit"
-                                    class="btn btn-primary pull-right">Edit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </c:if>
+
         </div>
-        <br>
+        <div class="row" style="float: right;">
+            <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
+            <div class="btn-group btn-group-justified col-xs-10" role="group">
+                <div style="padding: 1%; margin: 1%">
+                    <form class="form-inline" action="OneArticle" method="POST">
+                        <input type="hidden" name="operation" value="delete">
+                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                        <input type="hidden" id="csrfToken1" name="csrfToken"
+                               value="${sessionScope.get("csrfSessionToken")}">
+                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+                <div style="padding: 1%; margin: 1%">
+                        <%--<form class="form-inline" action="/Articles" method="POST">--%>
+                    <form class="form-inline" action="editArticles" method="post">
+                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                        <input type="hidden" name="operation" value="goToEditPage">
+                        <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
+                        <input type="hidden" id="csrfToken2" name="csrfToken"
+                               value="${sessionScope.get("csrfSessionToken")}">
+                        <button style="float: right" id="editorButton" type="submit"
+                                class="btn btn-primary pull-right">Edit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </c:if>
+    </div>
+    <br>
 
-        <div class="container">
-            <p>Comments</p>
-            <%--first comments--%>
-            <c:forEach var="commentList" items="${commentList}">
-                <c:if test="${articleToLoad.getArticleID()==commentList.getArticleID() }">
-                    <div class="">
+    <div class="container">
+        <p style="font-weight: bold">Comments</p>
+        <%--first comments--%>
+        <c:forEach var="commentList" items="${commentList}">
+            <c:if test="${articleToLoad.getArticleID()==commentList.getArticleID() }">
+                <div class="">
+                    <hr>
+                    <div class="row">
                         <img src="avatars/${commentList.getAvatarIcon()}" class=""
-                             style="width:30px; display: inline-block">
-                        <h5 class="" style="display: inline-block">${commentList.getCommentAuthor()}
+                             style="height: 30px; width:30px; display: inline-block">
+                        <h5 class="" style="display: inline-block">&nbsp;${commentList.getCommentAuthor()}
                             <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                         </h5>
-                        <p>${commentList.getContent()}</p>
-                            <%--delete comment if user is logged in--%>
-                        <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
-                            <form method="post" action="OneArticle">
-                                <button type="submit" class="btn btn-xs btn-danger">delete comment</button>
-                                <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                                <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
-                                <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            </form>
-                        </c:if>
+
                         <c:if test="${sessionScope.personLoggedIn !=null}">
                             <small id="replyToThis${commentList.getCommentID()}"
-                                   style="display: inline-block;">Reply
+                                   style="display: inline-block;">&nbsp;<ins style="cursor: pointer;"><strong>Reply >></strong></ins>
                             </small>
-                            <div id="replyBox${commentList.getCommentID()}" style="display: none">
-                                <form method="post" action="OneArticle">
-                                    <div class="form-group">
-                                        <label for="summernote" style="font-size: x-small">Comment
-                                            as ${sessionScope.personLoggedIn}:</label>
-                                        <textarea name="newComment" class="form-control" rows="3"
-                                                  required></textarea>
-                                        <input type="hidden" name="userWhoCommented"
-                                               value="${sessionScope.personLoggedIn}">
-                                        <input type="hidden" name="operation" value="replyToAComment">
-                                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                                        <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
-                                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                                        <button style="float: right" type="submit"
-                                                class="btn btn-xs btn-success">Reply
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+
                         </c:if>
-                        <script>
-                            $(document).ready(function () {
-                                $("#replyToThis${commentList.getCommentID()}").click(function () {
-                                    $("#replyBox${commentList.getCommentID()}").toggle();
-                                });
+                    </div>
+
+                    <p>${commentList.getContent()}</p>
+                        <%--delete comment if user is logged in--%>
+                    <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                        <form method="post" action="OneArticle">
+                            <button type="submit" class="btn btn-xs btn-danger">delete comment</button>
+                            <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                            <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                            <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                            <input type="hidden" id="csrfToken3" name="csrfToken"
+                                   value="${sessionScope.get("csrfSessionToken")}">
+                        </form>
+                    </c:if>
+
+                    <c:if test="${sessionScope.personLoggedIn !=null}">
+
+                        <%--<small id="replyToThis${commentList.getCommentID()}"--%>
+                               <%--style="display: inline-block;">--%>
+                            <%--<button class="btn btn-xs btn-default">Reply</button>--%>
+                        <%--</small>--%>
+
+                        <div id="replyBox${commentList.getCommentID()}" style="display: none">
+                            <form method="post" action="OneArticle">
+                                <div class="form-group">
+                                    <label for="summernote" style="font-size: x-small">Comment
+                                        as ${sessionScope.personLoggedIn}:</label>
+                                    <textarea name="newComment" class="form-control" rows="3"
+                                              required></textarea>
+                                    <input type="hidden" name="userWhoCommented"
+                                           value="${sessionScope.personLoggedIn}">
+                                    <input type="hidden" name="operation" value="replyToAComment">
+                                    <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                                    <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
+                                    <input type="hidden" id="csrfToken4" name="csrfToken"
+                                           value="${sessionScope.get("csrfSessionToken")}">
+                                    <button style="float: right" type="submit"
+                                            class="btn btn-xs btn-success">Reply
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </c:if>
+                    <script>
+                        $(document).ready(function () {
+                            $("#replyToThis${commentList.getCommentID()}").click(function () {
+                                $("#replyBox${commentList.getCommentID()}").toggle();
                             });
-                        </script>
-                            <%--nested comment second degree--%>
-                        <c:if test="${commentList.hasChildren()}">
+                        });
+                    </script>
+                        <%--nested comment second degree--%>
+                    <c:if test="${commentList.hasChildren()}">
 
-                            <%--<% System.out.println("in children");%>--%>
+                        <%--<% System.out.println("in children");%>--%>
 
-                            <c:forEach var="children" items="${commentList.getChildren()}">
-                                <%--<%System.out.println("in for loop");%>--%>
-                                <div class="nested" style="padding-left: 10%">
-                                    <img src="avatars/${children.getAvatarIcon()}" class=""
-                                         style="width:30px; display: inline-block">
-                                    <h5 class="" style="display: inline-block">${children.getCommentAuthor()}
-                                        <small><i>Posted on ${children.getDatePublished()}</i></small>
-                                    </h5>
-                                    <p>${children.getContent()}</p>
-
+                        <c:forEach var="children" items="${commentList.getChildren()}">
+                            <%--<%System.out.println("in for loop");%>--%>
+                            <div class="nested" style="padding-left: 10%">
+                                <hr>
+                                <div class="row">
+                                <img src="avatars/${children.getAvatarIcon()}" class=""
+                                     style="height: 30px; width:30px; display: inline-block">
+                                <h5 class="" style="display: inline-block">&nbsp;${children.getCommentAuthor()}
+                                    <small><i>Posted on ${children.getDatePublished()}</i></small>
+                                </h5>
                                     <c:if test="${sessionScope.personLoggedIn !=null}">
                                         <small id="replyToThis${children.getCommentID()}"
-                                               style="display: inline-block;">Reply
+                                               style="display: inline-block;">&nbsp;<ins style="cursor: pointer;"><strong>Reply >></strong></ins>
                                         </small>
-                                        <div id="replyBox${children.getCommentID()}" style="display: none">
-                                            <form method="post" action="OneArticle">
-                                                <div class="form-group">
-                                                    <label for="summernote" style="font-size: x-small">Comment
-                                                        as ${sessionScope.personLoggedIn}:</label>
-                                                    <textarea name="newComment" class="form-control" rows="3"
-                                                              required></textarea>
-                                                    <input type="hidden" name="userWhoCommented"
-                                                           value="${sessionScope.personLoggedIn}">
-                                                    <input type="hidden" name="operation" value="replyToAComment">
-                                                    <input type="hidden" name="articleID"
-                                                           value="${articleToLoad.getArticleID()}">
-                                                    <input type="hidden" name="fatherComment"
-                                                           value="${children.getParentCommentID()}">
-                                                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                                                    <button style="float: right" type="submit"
-                                                            class="btn btn-sm btn-success">Reply
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
-                                        <form method="post" action="OneArticle">
-                                            <button type="submit" class="btn btn-xs btn-danger">delete comment
-                                            </button>
-                                            <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                            <input type="hidden" name="articleID"
-                                                   value="${articleToLoad.getArticleID()}">
-                                            <input type="hidden" name="commentID" value="${children.getCommentID()}">
-                                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                                        </form>
+
                                     </c:if>
                                 </div>
-                                <script>
-                                    $(document).ready(function () {
-                                        $("#replyToThis${children.getCommentID()}").click(function () {
-                                            $("#replyBox${children.getCommentID()}").toggle();
-                                        });
+                                <p>${children.getContent()}</p>
+
+                                <c:if test="${sessionScope.personLoggedIn !=null}">
+<%--                                    <small id="replyToThis${children.getCommentID()}"
+                                           style="display: inline-block;">Reply
+                                    </small>--%>
+                                    <div id="replyBox${children.getCommentID()}" style="display: none">
+                                        <form method="post" action="OneArticle">
+                                            <div class="form-group">
+                                                <label for="summernote" style="font-size: x-small">Comment
+                                                    as ${sessionScope.personLoggedIn}:</label>
+                                                <textarea name="newComment" class="form-control" rows="3"
+                                                          required></textarea>
+                                                <input type="hidden" name="userWhoCommented"
+                                                       value="${sessionScope.personLoggedIn}">
+                                                <input type="hidden" name="operation" value="replyToAComment">
+                                                <input type="hidden" name="articleID"
+                                                       value="${articleToLoad.getArticleID()}">
+                                                <input type="hidden" name="fatherComment"
+                                                       value="${children.getParentCommentID()}">
+                                                <input type="hidden" id="csrfToken5" name="csrfToken"
+                                                       value="${sessionScope.get("csrfSessionToken")}">
+                                                <button style="float: right" type="submit"
+                                                        class="btn btn-sm btn-success">Reply
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </c:if>
+                                <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
+                                    <form method="post" action="OneArticle">
+                                        <button type="submit" class="btn btn-xs btn-danger">delete comment
+                                        </button>
+                                        <input type="hidden" name="operation" value="deleteCommentOnArticle">
+                                        <input type="hidden" name="articleID"
+                                               value="${articleToLoad.getArticleID()}">
+                                        <input type="hidden" name="commentID" value="${children.getCommentID()}">
+                                        <input type="hidden" id="csrfToken6" name="csrfToken"
+                                               value="${sessionScope.get("csrfSessionToken")}">
+                                    </form>
+                                </c:if>
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $("#replyToThis${children.getCommentID()}").click(function () {
+                                        $("#replyBox${children.getCommentID()}").toggle();
                                     });
-                                </script>
-                            </c:forEach>
-                        </c:if>
+                                });
+                            </script>
+                        </c:forEach>
+                    </c:if>
 
-                    </div>
-                    <br>
-                </c:if>
-            </c:forEach>
-            <c:if test="${sessionScope.personLoggedIn !=null}">
-                <form method="post" action="OneArticle">
-                    <div class="form-group">
-                        <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
-                        <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                  required></textarea>
-                        <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
-                        <input type="hidden" name="operation" value="commentOnArticle">
-                        <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                        <button style="float: right;margin: 1%; padding: 1%" type="submit" class="btn btn-sm btn-primary"> Post a comment
-                        </button>
-                    </div>
-                </form>
+                </div>
+                <br>
             </c:if>
-        </div>
+        </c:forEach>
+        <c:if test="${sessionScope.personLoggedIn !=null}">
+            <form method="post" action="OneArticle">
+                <div class="form-group">
+                    <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
+                    <textarea id="summernote" name="newComment" class="form-control" rows="10"
+                              required></textarea>
+                    <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
+                    <input type="hidden" name="operation" value="commentOnArticle">
+                    <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                    <input type="hidden" id="csrfToken" name="csrfToken"
+                           value="${sessionScope.get("csrfSessionToken")}">
+                    <button style="float: right;margin: 1%; padding: 1%" type="submit" class="btn btn-sm btn-primary">
+                        Post a comment
+                    </button>
+                </div>
+            </form>
+        </c:if>
+    </div>
 
-    </article>
+</article>
 
-    <br>
-    <%@include file="footer.jsp" %>
+<br>
+<%@include file="footer.jsp" %>
 </body>
 </html>
