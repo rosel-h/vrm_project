@@ -51,7 +51,6 @@ public class EditProfileServlet extends HttpServlet {
 
         if (session == null) {
             req.getRequestDispatcher("login.jsp").forward(req, resp);
-            return;
 
         } else {
             String username = (String) session.getAttribute("personLoggedIn");
@@ -111,7 +110,6 @@ public class EditProfileServlet extends HttpServlet {
                         req.setAttribute("user", user);
                         session.setAttribute("user", user);
                         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
-                        return;
                     }
 
                 } else {

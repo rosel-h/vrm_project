@@ -102,7 +102,6 @@
             width: 100%;
         }
 
-
     </style>
     <style type="text/css">
         #headingID > form {
@@ -182,14 +181,12 @@
     </div>
 </nav>
 
-
 <!-- Page Header -->
 <header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
+    <div class="container"><div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
                              class="img-fluid">
