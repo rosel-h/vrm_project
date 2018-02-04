@@ -103,7 +103,7 @@ public class EditProfileServlet extends HttpServlet {
                         map.put("avatar", avatar);
                         String logType = "EditProfile";
                         LogWriter logWriter = new LogWriter(logType);
-                        logWriter.init(getServletContext().getRealPath("/log"));
+                        logWriter.init(getServletContext().getRealPath("log"));
                         logWriter.write(logType, map);
                         //end of logging code
                         req.setAttribute("successMessage", "Save profile successfully");
@@ -142,10 +142,19 @@ public class EditProfileServlet extends HttpServlet {
         //get the path of directory which stores all avatar images
         ServletContext servletContext = getServletContext();
         String filePath = servletContext.getRealPath("avatars");
+        File avatarFile = new File(filePath);
+        if (!avatarFile.exists()) {
+            avatarFile.mkdir();
+        }
         System.out.println("EditProfileServlet loadNewProfile enter line 116: filePath = " + filePath);
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(maxMemSize);
-        factory.setRepository(new File("c:\\temp"));
+        File tempFile = new File(filePath + "/temp");
+        if (!tempFile.exists()) {
+            tempFile.mkdir();
+        }
+        factory.setRepository(tempFile);
+
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setSizeMax(maxFileSize);
 
@@ -204,11 +213,11 @@ public class EditProfileServlet extends HttpServlet {
                     // Write the file
                     System.out.println("EditProfileServlet loadNewProfile enter line 144: " + filePath);
 
-                    if (fileName.lastIndexOf("\\") >= 0) {
-                        fileName = fileName.substring(fileName.lastIndexOf("\\"));
-                    } else {
-                        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-                    }
+//                    if (fileName.lastIndexOf("\\") >= 0) {
+//                        fileName = fileName.substring(fileName.lastIndexOf("\\"));
+//                    } else {
+//                        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+//                    }
 
                     uploadFileName = fileName;
                     doUpload = fileItem;
@@ -227,7 +236,7 @@ public class EditProfileServlet extends HttpServlet {
             } else {
 //                avatar = username + "_" + uploadFileName;
                 avatar = username + "_" + uploadFileName;
-                file = new File(filePath + "\\" + avatar);
+                file = new File(filePath + "/" + avatar);
                 System.out.println("EditProfileServlet loadNewProfile enter line 194: " + avatar);
                 System.out.println("EditProfileServlet loadNewProfile enter line 195: " + file.getAbsolutePath());
                 doUpload.write(file);
@@ -239,7 +248,7 @@ public class EditProfileServlet extends HttpServlet {
                     String thumbFileName = avatar.replace(avatar.substring(avatar.lastIndexOf(".")), "_thumbnail.png");
                     avatar = thumbFileName;
                     System.out.println("EditProfileServlet loadNewProfileenter line 204: " + thumbFileName);
-                    File thumbFile = new File(filePath + "\\" + thumbFileName);
+                    File thumbFile = new File(filePath + "/" + thumbFileName);
                     System.out.println("EditProfileServlet enter line 205: " + thumbFile.getAbsolutePath());
 
                     if (img.getHeight() < 20 && img.getWidth() < 20) {

@@ -38,7 +38,7 @@ public class LogWriter{
         }
         System.out.println("LogWriter enter line 40: filePath=" + path);
 
-        String logPath = path + "\\" + this.logType;
+        String logPath = path + "/" + this.logType;
         File logFolder = new File(logPath);
         if (!logFolder.exists()) {
             logFolder.mkdir();
@@ -46,7 +46,7 @@ public class LogWriter{
         System.out.println("LogWriter enter line 46: logPath=" + logPath);
 
         SimpleDateFormat filetime=new SimpleDateFormat("yyyyMMdd");
-        String filename = logPath + "\\" + this.logType + "_" + filetime.format(new Date()) + ".log";
+        String filename = logPath + "/" + this.logType + "_" + filetime.format(new Date()) + ".log";
         logFile = new File(filename);
         System.out.println("LogWriter enter line 51: filename=" + filename);
 

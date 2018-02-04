@@ -53,7 +53,7 @@ public class DeleteServlet extends HttpServlet {
 
                     String logType = "DeleteUser";
                     LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.init(getServletContext().getRealPath("log"));
                     logWriter.write(logType,map);
                     //end of logging code
 

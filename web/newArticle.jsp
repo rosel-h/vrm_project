@@ -15,6 +15,7 @@
 <html>
 <head>
     <title>Create Article</title>
+
     <meta charset="UTF-8">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
@@ -190,8 +191,7 @@
                     </div>
                     <div class="form-group">
                         <label for="summernote">Content</label>
-                        <div id="summernote" name ="content" class="form-control" rows="40"></div>
-                        <%--<textarea id="summernote" name="content" class="form-control" rows="40" required></textarea>--%>
+                        <textarea id="summernote" name="content" class="form-control" rows="40" required></textarea>
                         <label style="padding: 1%; margin: 1%" for="futureDate">Date Published (optional)</label>
                         <input type="date" id="futureDate" name="futureDate" value="new Date()">
                     </div>

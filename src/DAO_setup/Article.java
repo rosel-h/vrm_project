@@ -17,14 +17,13 @@ public class Article {
     private String date;
     private String title;
 
-
     public Article() {
     }
 
     public Article(String username, int articleID, String content, String date, String title) {
         this.username = username;
         this.articleID = articleID;
-        this.content = Jsoup.clean(content, Whitelist.basicWithImages());
+        this.content = content;
         this.date = date;
         this.title = title;
     }
