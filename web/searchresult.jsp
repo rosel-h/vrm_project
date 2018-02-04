@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
-    <c:redirect url="Index"/>
+    <c:redirect url="/Signin"/>
 </c:if>
 
 <html>

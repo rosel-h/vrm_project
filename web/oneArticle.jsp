@@ -139,7 +139,7 @@
 
     <article>
         <div class="container">
-            <div class="row">
+            <div class="row" style="border-color: black; border-style: solid">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     ${articleToLoad.getContent()}
                 </div>

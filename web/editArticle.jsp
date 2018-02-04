@@ -54,10 +54,30 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
 
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+        ];
 
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
 
-    <script>
         $(document).ready(function () {
+            loadRandomImage();
             $('#summernote').summernote({
                 toolbar: [
                     // [groupName, [list of button]]
@@ -71,6 +91,7 @@
                 ],
                 maximumImageFileSize: 2097152,
                 height: 600,
+                maxWidth: 300,
                 popover: {
                     image: [],
                     link: [],
@@ -80,24 +101,10 @@
             });
             $('#summernote').summernote('insertImage', url, filename);
         });
-        function loadRandomImage() {
-            var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
-            console.log(imageCollection[numImage]);
-        }
 
-        $(document).ready(function () {
-            loadRandomImage();
-
-            document.getElementById('futureDate').valueAsDate = new Date();
-        });
     </script>
 </head>
 <body>
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
-%>
 
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -147,16 +154,16 @@
 </header>
 
 <article>
-<div class="container">
-    <!--  A form letting users add new articles. -->
-    <div class="">
-
+    <div class="container">
+        <!--  A form letting users add new articles. -->
         <div class="">
+
+            <div class="">
             <h3 class="post-title">Edit Article
             <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
+                <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                 <input type="hidden" name="operation" value="delete">
                 <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
-                <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                 <button style="float: right" type="submit" class="btn btn-danger pull-right">
                     Delete
                 </button>
@@ -186,8 +193,6 @@
                     <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                     <button type="submit" class="btn btn-primary float-right">Done</button>
                 </div>
-
-
             </form>
            
         </div>
