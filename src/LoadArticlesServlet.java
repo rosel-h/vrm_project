@@ -23,12 +23,12 @@ public class LoadArticlesServlet extends HttpServlet {
         System.out.println("Load article servlet: param - "+number +"curentPage "+pageNumber);
         try{
             pageNumber = Integer.parseInt(number);
+            wentThroughGetMethod=true;
         }catch (NumberFormatException e){
 
             System.out.println("LoadArticleServlet: Someone tried to cheat the pages get method");
         }
         System.out.print("do get");
-        wentThroughGetMethod=true;
         doPost(req, resp);
 
     }
@@ -62,10 +62,11 @@ public class LoadArticlesServlet extends HttpServlet {
 
             req.getRequestDispatcher("explore.jsp").forward(req, resp);
             System.out.println("LoadArticlesServlet request has been dispatched");
-
+            wentThroughGetMethod=false;
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 

@@ -245,6 +245,7 @@
                 <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                     <tr>
                         <td style=" width:55%"><h4 class="post-title">${articleList.getTitle()}</h4>
+                            <div style="font-size: small;">${articleList.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
