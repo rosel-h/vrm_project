@@ -15,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  * Created by rher490 on 2/02/2018.
@@ -80,7 +82,7 @@ public class IndividualArticleServlet extends HttpServlet {
                 }
 
                 String title = req.getParameter("title");
-                String content = req.getParameter("content");
+                String content = Jsoup.clean(req.getParameter("content"),Whitelist.basicWithImages());
 
                 user = String.valueOf( session.getAttribute("personLoggedIn"));
                 //check if date is to be published today or not
