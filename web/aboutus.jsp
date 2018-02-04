@@ -53,7 +53,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -91,7 +91,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/about-bg.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -99,7 +99,7 @@
                 <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
                     <br>
                     <h5>About Us</h5>
-                    <p>By the Travellers, For the Travellers.</p>
+                    <p>By the travellers, for the travellers. Make every heartbeat count..</p>
                     <p>VRM is a travel lifestyle blog that connects you to
                         millions of other like minded individuals. Whether you're a thrill seeker or a gentle explorer,
                         this site will give let you share your stories, tips on how to travel better and reviews of

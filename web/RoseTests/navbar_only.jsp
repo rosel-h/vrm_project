@@ -20,7 +20,7 @@
                     <a class="nav-link" href="Main">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
+                    <a class="nav-link" href="Articles">Community</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="myArticles">My Articles</a>
@@ -37,7 +37,7 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('../img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -48,18 +48,18 @@
                              class="img-circle img-fluid">
                     </div>
                     <br>
-                    <h5>Explore the community or create a new blog entry</h5>
+                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                               style=" background-color: white; opacity: 0.8">
+                                My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
+                               style=" background-color: white; opacity: 0.8">
                                 <span class="glyphicon glyphicon-circle-arrow-right"
                                       aria-hidden="true"> &nbsp;Community</span>
                             </a>

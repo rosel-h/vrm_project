@@ -107,7 +107,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -144,22 +144,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myArticles">My Articles</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
-                </li>
-                <li class="nav-item">
-                    <i class="glyphicon glyphicon-search" style="color: white;"
-                       data-toggle="modal" data-target="#searchbar"></i>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                <%--</li>--%>
+                <%--<li class="nav-item">--%>
+                    <%--<i class="glyphicon glyphicon-search" style="color: white;"--%>
+                       <%--data-toggle="modal" data-target="#searchbar"></i>--%>
+                <%--</li>--%>
             </ul>
         </div>
 
@@ -169,37 +169,36 @@
 
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
                     <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                              class="img-circle img-fluid">
                     </div>
                     <br>
-                    <h5>Explore the community or create a new blog entry</h5>
+                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
                             <a href="myArticles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;My Articles</span>
+                               style=" background-color: white; opacity: 0.8">
+                                My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="Articles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.6">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Community</span>
+                               style=" background-color: white; opacity: 0.8">
+                                Community
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
                             <a href="NewArticle" class="btn btn-danger"
                                style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"> &nbsp;New Article</span>
+                                New Entry
                             </a>
                         </div>
                     </div>
@@ -212,13 +211,13 @@
 <div class="container">
     <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
     <div style="float: right">
-        <c:if test="${sessionScope.personLoggedIn !=null}">
-            <div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img
-                    src="avatars/${user.getAvatar_icon()}"
-                    style="height: 30px"
-                    alt="avatar"/></a>
-            </div>
-        </c:if>
+        <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
+            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img--%>
+                    <%--src="avatars/${user.getAvatar_icon()}"--%>
+                    <%--style="height: 30px"--%>
+                    <%--alt="avatar"/></a>--%>
+            <%--</div>--%>
+        <%--</c:if>--%>
         <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
@@ -227,7 +226,7 @@
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1">
+            <th class="sort-alpha" style="color: #0085a1; width: 65%">
                 <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
             </th>
             <th class="sort-alpha" style="color: #0085a1">
@@ -246,15 +245,20 @@
             java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
             request.setAttribute("sqlDateToday", sqlDateToday);
         %>
+
         <c:forEach var="myArticles" items="${myArticles}">
             <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
-
             <tr>
-                <td><b>${myArticles.getTitle()}</b>
-                        <%--<br>--%>
+                <td><h4 class="post-title">${myArticles.getTitle()}</h4>
                     <div style="font-size: small">${myArticles.getContentPreview()}</div>
+                    <form action="OneArticle" method="post">
+                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
+                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                        <button type="submit" style="font-weight: lighter; background-color: transparent" class="btn">Read More...</button>
+                    </form>
                 </td>
-                <td><i>${myArticles.getUsername()}</i></td>
+                <td>by <i>${myArticles.getUsername()}</i></td>
                 <td>${myArticles.getDate()}
                     <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
                         (not yet published)
@@ -262,13 +266,9 @@
                 </td>
                 <td>
                         <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                        <%--data-target="#a${myArticles.getArticleID()}">Full Article--%>
+                        <%--data-target="#a${myArticles.getArticleID()}">Read More...--%>
                         <%--</button>--%>
-                    <form action="OneArticle" method="post">
-                        <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
-                        <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
-                        <button type="submit" class="btn">Full Article</button>
-                    </form>
+
                 </td>
             </tr>
 
@@ -277,6 +277,6 @@
     </table>
 
 </div>
-
+<%@include file="footer.jsp" %>
 </body>
 </html>

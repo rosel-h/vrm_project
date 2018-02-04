@@ -7,9 +7,9 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
@@ -46,6 +46,32 @@
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+    </script>
 </head>
 <body>
 
@@ -76,7 +102,8 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
                     <div class="panel-title"><h3>Sign In</h3></div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a style="color: white;"href="javascript:alert('Dont forget your password! Contact us to reset', 'Reset Password');">Forgot
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a style="color: white;"
+                                                                                               href="javascript:alert('Dont forget your password! Bad Luck! Contact us.');">Forgot
                         password?</a>
                     </div>
                     <div style="padding-top:30px" class="panel-body">
@@ -94,18 +121,15 @@
                                        placeholder="Password">
                             </div>
                             <div style="color:red">${errorMessage}</div>
-                            <%--<div class="input-group">--%>
-                                <%--<div class="checkbox">--%>
-                                    <%--<label>--%>
-                                        <%--<input id="login-remember" type="checkbox" name="remember" value="1"> Remember--%>
-                                        <%--me--%>
-                                    <%--</label>--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
                             <div style="margin-top:10px" class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
-                                    <button id="btn-fblogin" class="btn btn-primary" type="button"
+                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8" id="btn-login"
+                                            class="btn btn-success"
+                                            type="submit">Sign in
+                                    </button>
+                                    <button style="color:white; margin: 1%; padding: 1%;opacity: 0.8" id="btn-fblogin"
+                                            class="btn btn-primary"
+                                            type="button"
                                             onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
                                         Connect via Facebook
                                     </button>

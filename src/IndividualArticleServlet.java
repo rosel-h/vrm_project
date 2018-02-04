@@ -30,6 +30,10 @@ public class IndividualArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
+
+        String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
+        String csrfToken = req.getParameter("csrfToken");
+
         ServletContext servletContext = getServletContext();
         String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
         String sessionID = session.getId();
@@ -68,6 +72,11 @@ public class IndividualArticleServlet extends HttpServlet {
 
             //add articles
             if ("add".equals(op)) {
+                if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                    resp.sendError(666);
+                    return;
+                }
+
                 String title = req.getParameter("title");
                 String content = req.getParameter("content");
                 user = String.valueOf( session.getAttribute("personLoggedIn"));
@@ -108,6 +117,10 @@ public class IndividualArticleServlet extends HttpServlet {
 //                adding articles goes to my articles
                 req.getRequestDispatcher("myArticles").forward(req, resp);
             } else if ("delete".equals(op)) {
+                if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                    resp.sendError(666);
+                    return;
+                }
                 System.out.println("IndividualArticleServlet: Delete option");
                 System.out.println(req.getParameter("articleID"));
                 int id = Integer.parseInt(req.getParameter("articleID"));
@@ -136,6 +149,10 @@ public class IndividualArticleServlet extends HttpServlet {
                 System.out.println("IndividualArticleServlet: Else Statement");
                 //deals with article manipulation
                 if ("commentOnArticle".equals(op)) {
+                    if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                        resp.sendError(666);
+                        return;
+                    }
                     String userWhoCommented = req.getParameter("userWhoCommented");
                     String comment = req.getParameter("newComment");
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
@@ -159,6 +176,10 @@ public class IndividualArticleServlet extends HttpServlet {
                     //end of logging code
 
                 } else if ("editarticle".equals(op)) {
+                    if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                        resp.sendError(666);
+                        return;
+                    }
                     String title = req.getParameter("title");
                     String content = req.getParameter("content");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
@@ -181,6 +202,10 @@ public class IndividualArticleServlet extends HttpServlet {
                     //end of logging code
 
                 } else if ("deleteCommentOnArticle".equals(op)) {
+                    if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                        resp.sendError(666);
+                        return;
+                    }
                     System.out.println("IndividualArticleServlet: delete button pressed");
                     String commentIDToBeDeleted = req.getParameter("commentID");
                     System.out.println();
@@ -202,6 +227,10 @@ public class IndividualArticleServlet extends HttpServlet {
                     //end of logging code
 
                 } else if ("replyToAComment".equals(op)) {
+                    if(!passTokenCheck(csrfToken, csrfSessionToken)){
+                        resp.sendError(666);
+                        return;
+                    }
                     System.out.println("IndividualArticleServlet replying to comment button pressed");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     String userWhoCommented = req.getParameter("userWhoCommented");
@@ -247,5 +276,15 @@ public class IndividualArticleServlet extends HttpServlet {
         }
 
         }
+    }
+
+    private boolean passTokenCheck(String token, String sessionToken){
+        if (!sessionToken.equals(token)) {
+            System.out.println("csrfTokens not verified");
+            return false;
+        }
+
+        System.out.println("token verification passed!");
+        return true;
     }
 }

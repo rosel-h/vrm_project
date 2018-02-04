@@ -188,7 +188,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background12.jpg"
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -209,7 +209,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a href = "#mainNav" class="navbar-brand"> VRM Travel Blog</a>
+        <a  class="navbar-brand"> VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -226,12 +226,12 @@
 </nav>
 
 <!-- Page Header -->
-<header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+<header id="backgroundImage" class="masthead">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 0; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 2; padding: 10% 0 0 0;">
                     <div class="panel-title"><h3>Sign up</h3></div>
                     <div style="float:right; font-size: 85%; position: relative; top:-1%;">
                         <a style="color: red" id="signinlink" href="/Signin">
@@ -295,7 +295,7 @@
                                 <div class="form-group">
 
                                     <div class="col-md-12">
-                                        <label for="dob" style="float: left;">Date of Birth</label>
+                                        <label for="dob" style="float: left">Date of Birth</label>
                                         <input type="date" id="dob" class="form-control" name="dob"
                                                placeholder="date of birth">
                                     </div>

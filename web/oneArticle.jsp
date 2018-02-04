@@ -32,14 +32,39 @@
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
+    <script type="text/javascript">
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+        ];
 
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+    </script>
 
 </head>
 <body>
-<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
-%>
+<%--<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
+    <%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
+    <%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server--%>
+<%--%>--%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
@@ -51,37 +76,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
-                <li class="nav-item">
-                    <a class="nav-link" href="Welcome">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Articles">Explore</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
+                <%--</li>--%>
+                    <li class="nav-item">
+                        <%--<a class="nav-link" href="Welcome">Home</a>--%>
+                        <a  class="nav-link" href="javascript:window.history.back()">back</a>
+                    </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="Articles">Community</a>--%>
+                <%--</li>--%>
                 <c:if test="${sessionScope.personLoggedIn !=null}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="myArticles">My Articles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="editprofile">My Profile</a>
-                    </li>
+                    <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                    <%--</li>--%>
+                    <%--<li class="nav-item">--%>
+                        <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
+                    <%--</li>--%>
                 </c:if>
-                <li class="nav-item">
-                    <a class="nav-link" href="about">About</a>
-                </li>
+                <%--<li class="nav-item">--%>
+                    <%--<a class="nav-link" href="about">About</a>--%>
+                <%--</li>--%>
                 <c:choose>
                     <c:when test="${sessionScope.personLoggedIn !=null}">
-                        <li class="nav-item">
-                            <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
-                        </li>
+                        <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                        <%--</li>--%>
                     </c:when>
                     <c:otherwise>
-                        <li class="nav-item">
-                            <a href="Signin" class="btn btn-default">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Login</span>
-                            </a>
-                        </li>
+                        <%--<li class="nav-item">--%>
+                            <%--<a href="Signin" class="btn btn-default">--%>
+                                <%--<span class="glyphicon glyphicon-circle-arrow-right"--%>
+                                      <%--aria-hidden="true"> &nbsp;Login</span>--%>
+                            <%--</a>--%>
+                        <%--</li>--%>
                     </c:otherwise>
                 </c:choose>
             </ul>
@@ -90,13 +118,12 @@
 
 </nav>
 
-<div <%--class="container"--%>>
-    <header class="masthead" style="background-image: url('img/background03.jpg')">
+<header id="backgroundImage" class="masthead">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="post-heading">
+                    <div class="post-heading" style="margin: 10%; padding: 5%;">
                         <h1>${articleToLoad.getTitle()}</h1>
                         <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
                         <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
@@ -125,6 +152,7 @@
                         <form class="form-inline" action="OneArticle" method="POST">
                             <input type="hidden" name="operation" value="delete">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" type="submit" class="btn btn-danger pull-right">
                                 Delete
                             </button>
@@ -136,6 +164,7 @@
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <input type="hidden" name="operation" value="goToEditPage">
                             <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
+                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" id="editorButton" type="submit"
                                     class="btn btn-primary pull-right">Edit
                             </button>
@@ -166,6 +195,7 @@
                                 <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                 <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                 <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
+                                <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             </form>
                         </c:if>
                         <c:if test="${sessionScope.personLoggedIn !=null}">
@@ -184,6 +214,7 @@
                                         <input type="hidden" name="operation" value="replyToAComment">
                                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                         <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
+                                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                         <button style="float: right" type="submit"
                                                 class="btn btn-xs btn-success">Reply
                                         </button>
@@ -231,6 +262,7 @@
                                                            value="${articleToLoad.getArticleID()}">
                                                     <input type="hidden" name="fatherComment"
                                                            value="${children.getParentCommentID()}">
+                                                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                                     <button style="float: right" type="submit"
                                                             class="btn btn-sm btn-success">Reply
                                                     </button>
@@ -246,6 +278,7 @@
                                             <input type="hidden" name="articleID"
                                                    value="${articleToLoad.getArticleID()}">
                                             <input type="hidden" name="commentID" value="${children.getCommentID()}">
+                                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                         </form>
                                     </c:if>
                                 </div>
@@ -272,6 +305,7 @@
                         <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                         <input type="hidden" name="operation" value="commentOnArticle">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                        <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                         <button style="float: right;margin: 1%; padding: 1%" type="submit" class="btn btn-sm btn-primary"> Post a comment
                         </button>
                     </div>
