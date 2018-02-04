@@ -182,7 +182,7 @@
                 <form action="OneArticle" method="POST">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" id="title" name="title" class="form-control" required>
+                        <input type="text" id="title" name="title" class="form-control" maxlength="50" required>
                         <input type="hidden" id="csrfToken" name="csrfToken"
                                value="${sessionScope.get("csrfSessionToken")}">
                     </div>
