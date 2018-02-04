@@ -72,7 +72,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -177,93 +177,98 @@
 <%--Load articles --%>
 <div class="container">
     <div class="row" style="vertical-align: middle">
-        <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-            <h1>All Articles &nbsp;</h1>
+        <div class="col-md-12">
+            <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
+                <h1>All Articles &nbsp;</h1>
+            </div>
+
+            <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
+                <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+                    <div class="row">
+                        <div class="form-group" style="padding: 1%">
+                            <input size="60" type="text" required class="form-control" name="keywords"
+                                   placeholder="Title/Username/Date"
+                                   style="opacity: 0.8"
+                                   id="searchkeyword">
+                        </div>
+                        <div class="form-group" style="padding: 1%">
+                            <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
+                                <option value="title">Title</option>
+                                <option value="username">Username</option>
+                                <option value="date">Date</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="padding: 2%">
+                            <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-            <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
-
-                <div class="row">
-                    <div class="form-group" style="padding: 1%">
-                        <input size="60" type="text" required class="form-control" name="keywords"
-                               placeholder="Title/Username/Date"
-                               style="opacity: 0.8"
-                               id="searchkeyword">
-                    </div>
-                    <div class="form-group" style="padding: 1%">
-                        <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
-                            <option value="title">Title</option>
-                            <option value="username">Username</option>
-                            <option value="date">Date</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="padding: 2%">
-                        <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div style="float: right">
-        <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
-        <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
-        <%--style="height: 30px"--%>
-        <%--alt="avatar"/></a>--%>
-        <%--</div>--%>
-        <%--</c:if>--%>
-        <c:if test="${sessionScope.personLoggedIn ==null}">
-            <div>Logged in as Guest</div>
-        </c:if>
-    </div>
-    <br>
-
-    <table class="table table-hover sorttable" id="articletable">
-        <thead>
-        <tr>
-            <th class="sort-alpha" style="color: #0085a1; width: 65%">
-                <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th class="sort-alpha" style="color: #0085a1">
-                <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th class="sort-alpha" style="color: #0085a1">
-                <ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <c:forEach var="articleList" items="${articleList}">
-            <%
-                java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
-                request.setAttribute("sqlDateToday", sqlDateToday);
-            %>
-            <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
-                <tr>
-                    <td><h4 class="post-title">${articleList.getTitle()}</h4>
-                        <form action="OneArticle" method="post">
-                            <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                            <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
-                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                            <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
-                        </form>
-                    </td>
-                    <td>by <i>${articleList.getUsername()}</i></td>
-                    <td>${articleList.getDate()}</td>
-                </tr>
+        <div style="float: right">
+            <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
+            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
+            <%--style="height: 30px"--%>
+            <%--alt="avatar"/></a>--%>
+            <%--</div>--%>
+            <%--</c:if>--%>
+            <c:if test="${sessionScope.personLoggedIn ==null}">
+                <div>Logged in as Guest</div>
             </c:if>
-        </c:forEach>
-        </tbody>
-    </table>
+        </div>
+        <br>
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-primary">1</button>
-        <button type="button" class="btn btn-primary">2</button>
-        <button type="button" class="btn btn-primary">3</button>
+        <table class="table table-hover sorttable" id="articletable">
+            <thead>
+            <tr>
+                <th class="sort-alpha" style="color: #0085a1; width:55%">
+                    <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                </th>
+                <th class="sort-alpha" style="color: #0085a1">
+                    <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                </th>
+                <th class="sort-alpha" style="color: #0085a1">
+                    <ins>Date<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <c:forEach var="articleList" items="${articleList}">
+                <%
+                    java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+                    request.setAttribute("sqlDateToday", sqlDateToday);
+                %>
+                <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
+                    <tr>
+                        <td style=" width:55%"><h4 class="post-title">${articleList.getTitle()}</h4>
+                            <form action="OneArticle" method="post">
+                                <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
+                                <input type="hidden" id="csrfToken" name="csrfToken"
+                                       value="${sessionScope.get("csrfSessionToken")}">
+                                <button type="submit" style="font-weight: lighter; background: transparent" class="btn">
+                                    Read More...
+                                </button>
+                            </form>
+                        </td>
+                        <td>by <i>${articleList.getUsername()}</i></td>
+                        <td>${articleList.getDate()}</td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+            </tbody>
+        </table>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">1</button>
+            <button type="button" class="btn btn-primary">2</button>
+            <button type="button" class="btn btn-primary">3</button>
+        </div>
     </div>
-
 </div>
 <%@include file="footer.jsp" %>
 </body>
