@@ -40,7 +40,7 @@ public class LoadArticlesServlet extends HttpServlet {
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
 
-            
+
 
             List<Article> articles = dao.getAllArticles();
             req.setAttribute("articleList", articles);
