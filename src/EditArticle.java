@@ -18,11 +18,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
+
 
 /**
  * Created by rher490 on 25/01/2018.
  */
 public class EditArticle extends HttpServlet {
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,13 +39,11 @@ public class EditArticle extends HttpServlet {
         HttpSession session = req.getSession(false);
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
-
         if (!csrfSessionToken.equals(csrfToken)){
             System.out.println("csrfTokens not verified");
             resp.sendError(666);
             return;
         }
-
         System.out.println("token verified");
 
         System.out.println("in Edit ArticleServlet");
@@ -68,13 +70,25 @@ public class EditArticle extends HttpServlet {
                 e.printStackTrace();
             }
         } else if ("userHasEditedArticle".equals(op)) {
-
-
-
             System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
             String newTitle = req.getParameter("title");
             String newContent = req.getParameter("content");
+
+            //sanitize
+            System.out.println("Edit Article Servlet sanitize");
+//            PolicyFactory policyDefinition = TravelSanitizerPolicy.POLICY_DEFINITION;
+//            PolicyFactory policyDefinition = Sanitizers
+//                    .FORMATTING
+//                    .and(Sanitizers.LINKS);
+//
+//            System.out.println("Edit Article Servlet sanitize before: "+newTitle);
+//            newTitle=policyDefinition.sanitize(newTitle);
+//            System.out.println("Edit Article Servlet sanitize after: "+newTitle);
+//            newContent = policyDefinition.sanitize(newContent);
+
+
+
             String newDate = req.getParameter("futureDate");
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 //        add date updated

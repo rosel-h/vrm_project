@@ -107,6 +107,7 @@
                 ],
                 maximumImageFileSize: 2097152,
                 height: 600,
+                maxWidth: 500,
                 popover: {
                     image: [],
                     link: [],

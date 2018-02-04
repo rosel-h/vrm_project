@@ -28,9 +28,7 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("MainServlet enter main servlet");
-
         HttpSession sess = req.getSession(true);
-
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("WEB-INF/mysql.properties");
         try {
@@ -44,19 +42,24 @@ public class MainServlet extends HttpServlet {
 
         String logout = req.getParameter("logout_button");
         System.out.println("MainServlet enter line 46: " + logout);
+
         if (logout != null && logout.equals("Logout")) {
             System.out.println("MainServlet enter line 48: ");
 
+
             //print log to file
             long logintimestamp = (long) sess.getAttribute("logintimestamp");
+
             String username = (String) sess.getAttribute("username");
+
             Map<String, String> map = new HashMap<>();
             map.put("username",username);
-
             String ipAddress =  req.getRemoteAddr();
             map.put("ip", ipAddress);
             long online = new Date().getTime() - logintimestamp;
             map.put("online", String.valueOf(online));
+
+            System.out.println("print this line");
 
             String logType = "Logout";
             LogWriter logWriter = new LogWriter(logType);
