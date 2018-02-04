@@ -236,7 +236,7 @@
                                     <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
                                     <input type="hidden" id="csrfToken4" name="csrfToken"
                                            value="${sessionScope.get("csrfSessionToken")}">
-                                    <button style="float: right" type="submit"
+                                    <button style="float: right; margin: 1%" type="submit"
                                             class="btn btn-xs btn-success">Reply
                                     </button>
                                 </div>
@@ -294,7 +294,7 @@
                                                        value="${children.getParentCommentID()}">
                                                 <input type="hidden" id="csrfToken5" name="csrfToken"
                                                        value="${sessionScope.get("csrfSessionToken")}">
-                                                <button style="float: right" type="submit"
+                                                <button style="float: right; margin: 1%" type="submit"
                                                         class="btn btn-sm btn-success">Reply
                                                 </button>
                                             </div>
