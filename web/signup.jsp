@@ -217,6 +217,11 @@
         }
 
     </script>
+    <style>
+        label {
+            font-size: 12px;
+        }
+    </style>
 
 </head>
 <body style="background-color: #e6e6e6">
@@ -245,7 +250,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-xs-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
 
                     <div class="panel-title"><h3>Sign up</h3></div>
@@ -264,7 +269,7 @@
                             <div id="form_content1">
 
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${usernameError}</span>
 
                                         <input type="text" id="username" class="form-control" name="username"
@@ -275,9 +280,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="password" style="float: left;"> Password</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordFormatCheck"></span>
-                                        <label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>
+                                        <%--<label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>--%>
                                         <input type="password" id="password" class="form-control" name="password"
                                                placeholder="Enter Password 4~20 characters">
 
@@ -287,7 +292,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${passwordError}</div>
                                         <input type="password" id="cPassword" class="form-control" name="cPassword"
                                                placeholder="Confirm Password">
@@ -307,7 +312,7 @@
                             <div id="form-content2" style="display: none;">
 
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="fname" style="float: left;">First Name</label>
                                         <input type="text" id="fname" class="form-control" name="fname"
                                                placeholder="Enter First Name">
@@ -315,7 +320,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="lname" style="float: left;">Last Name</label>
                                         <input type="text" id="lname" class="form-control" name="lname"
                                                placeholder="Enter Last Name">
@@ -324,7 +329,7 @@
 
                                 <div class="form-group">
 
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="dob" style="float: left">Date of Birth</label>
                                         <input type="date" id="dob" class="form-control" name="dob"
                                                placeholder="date of birth">
@@ -333,7 +338,7 @@
 
                                 <div class="form-group">
 
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="country" style="float: left;">Country</label>
                                         <select name="country" id="country" class="form-control">
                                             <option value="nz" selected>New Zealand</option>
@@ -348,7 +353,7 @@
 
                                 <div class="form-group">
 
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="description" style="float: left;">Description</label>
                                         <textarea id="description" class="form-control" name="description" rows="4"
                                                   columns="40"></textarea>
@@ -357,7 +362,7 @@
 
                                 <div class="form-group" style="float: left;">
 
-                                    <div class="col-md-12">
+                                    <div class="col-xs-12">
                                         <label for="dob">Profile Photo</label>
 
                                         <input type="radio" id="avatar01" name="avatar" value="avatar_01.png">
@@ -388,13 +393,13 @@
 
                             <div class="form-group">
 
-                                <div class=" row col-md-12">
+                                <div class=" row col-xs-12">
                                     <%--//this is for sporadic--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>
 
 
                                     <%--//this is for local host--%>
-                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>--%>
                                     <span>&nbsp;&nbsp;</span>
                                     <%--<input type="submit" value="Submit" class="btn btn-login">--%>
                                     <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8; height: 70%" id="btn-login"

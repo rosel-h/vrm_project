@@ -141,7 +141,7 @@ public class EditProfileServlet extends HttpServlet {
 
         //get the path of directory which stores all avatar images
         ServletContext servletContext = getServletContext();
-        String filePath = servletContext.getRealPath("/avatars");
+        String filePath = servletContext.getRealPath("avatars");
         System.out.println("EditProfileServlet loadNewProfile enter line 116: filePath = " + filePath);
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(maxMemSize);
@@ -225,6 +225,7 @@ public class EditProfileServlet extends HttpServlet {
                     }
                 }
             } else {
+//                avatar = username + "_" + uploadFileName;
                 avatar = username + "_" + uploadFileName;
                 file = new File(filePath + "\\" + avatar);
                 System.out.println("EditProfileServlet loadNewProfile enter line 194: " + avatar);

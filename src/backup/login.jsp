@@ -107,7 +107,7 @@
                                 <div class="col-sm-12 controls">
                                     <button id="btn-login" class="btn btn-success" type="submit">Sign in</button>
                                     <button id="btn-fblogin" class="btn btn-primary" type="button"
-                                            onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'">
+                                            onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=https://sporadic.nz/vrm_mshe666/oauth2fb&scope=email'">
                                         Connect via Facebook
                                     </button>
                                 </div>

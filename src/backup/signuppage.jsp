@@ -371,7 +371,7 @@
                                     </button>
                                     <span style="margin-left:20px; margin-right: 20px;">or</span>
                                     <button id="btn-fbsignup" type="button"
-                                            onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"
+                                            onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=https://sporadic.nz/vrm_mshe666/oauth2fb&scope=email'"
                                             class="btn btn-primary"><i class="icon-facebook"></i>  
                                         Connect via Facebook
                                     </button>

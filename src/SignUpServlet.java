@@ -31,9 +31,9 @@ import java.util.List;
  */
 public class SignUpServlet extends HttpServlet {
     //this is for local host
-    private static final String SECRET_KEY = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
+//    private static final String SECRET_KEY = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
     //this is for sporadic
-//    private static final String SECRET_KEY = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
+    private static final String SECRET_KEY = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
     private static final String SECRET_PARAM = "secret";
     private static final String RESPONSE_PARAM = "response";
     private static final String G_RECAPTCHA_RESPONSE = "g-recaptcha-response";
