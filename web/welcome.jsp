@@ -9,9 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
@@ -27,6 +27,7 @@
     <meta name="author" content="">
 
     <title>Welcome to VRM Blog</title>
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -57,7 +58,7 @@
         }
 
         .imgbox {
-            width: 900px;
+            width: 100%;
             margin: 0 auto;
             text-align: center;
         }
@@ -96,11 +97,18 @@
             margin: -30px 30px;
             position: relative;
         }
+
+        .imgbox > ul, .imgbox > .imgnum {
+            width: 100%;
+        }
+
+
     </style>
     <style type="text/css">
         #headingID > form {
             width: 100%;
         }
+
     </style>
 
     <script type="text/javascript">
@@ -116,7 +124,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -125,7 +133,7 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
 
@@ -142,7 +150,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a  class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -153,18 +161,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
+
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <%--<li class="nav-item" style="padding: auto">--%>
-                    <%--<a class="nav-link" href="about">About</a>--%>
-                <%--</li>--%>
+
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
@@ -190,19 +191,19 @@
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
                          style="padding: 1%">
                         <div style="padding: 1%;margin: 1%">
-                            <a href="myArticles" class="btn btn-default"
+                            <a href="myArticles" class="btn btn-default btn-responsive"
                                style=" background-color: white; opacity: 0.8">
                                 My Articles
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="Articles" class="btn btn-default"
+                            <a href="Articles" class="btn btn-default btn-responsive"
                                style=" background-color: white; opacity: 0.8">
                                 Community
                             </a>
                         </div>
                         <div style="padding: 1%;margin: 1%">
-                            <a href="NewArticle" class="btn btn-danger"
+                            <a href="NewArticle" class="btn btn-danger btn-responsive"
                                style=" color: white;opacity: 0.8">
                                 New Entry
                             </a>
@@ -217,13 +218,9 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="row">
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="page-heading">
-                        <h1>Featured Articles</h1>
-                        <br>
-                    </div>
-                </div>
+            <div class="page-heading">
+                <h1>Featured Articles</h1>
+                <br>
             </div>
         </div>
     </div>
@@ -232,44 +229,56 @@
 <%--this is code for fade in fade out effect of featured articles--%>
 <div class="container">
     <div class="row">
-    <div class="imgbox">
-        <ul id="banner_img">
-            <li>
-                <div id="banner-1">
-                    <a href="OneArticle?articleID=56"><img src="img/banner01.jpg" width="900" height="240" id="bannerimg-1"/></a>
-                </div>
-            </li>
-            <li>
-                <div id="banner-2">
-                    <a href="OneArticle?articleID=57"><img src="img/banner02.jpg" width="900" height="240" id="bannerimg-2"/></a>
-                </div>
-            </li>
-            <li>
-                <div id="banner-3">
-                    <a href="OneArticle?articleID=58"><img src="img/banner03.jpg" width="900" height="240" id="bannerimg-3"/></a>
-                </div>
-            </li>
-            <li>
-                <div id="banner-4">
-                    <a href="OneArticle?articleID=59"><img src="img/banner04.jpg" width="900" height="240" id="bannerimg-4"/></a>
-                </div>
-            </li>
-            <li>
-                <div id="banner-5">
-                    <a href="OneArticle?articleID=60"><img src="img/banner05.jpg" width="900" height="240" id="bannerimg-5"/></a>
-                </div>
-            </li>
-        </ul>
-        <div class="clear"></div>
-        <div class="imgnum">
-            <span class="onselect">1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
+        <div class="imgbox col-lg-8 col-md-10 col-xs-12 mx-auto">
+            <ul id="banner_img" style="max-width: 100%; float: left;">
+                <li>
+                    <div id="banner-1">
+                        <a href="OneArticle?articleID=56">
+                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-1"
+                                 style="display: block; max-width: 100%; height: auto"/></a>
+                    </div>
+                </li>
+                <li>
+                    <div id="banner-2">
+                        <a href="OneArticle?articleID=57">
+                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-2"
+                                 style="display: block; max-width: 100%; height: auto"/></a>
+                    </div>
+                </li>
+                <li>
+                    <div id="banner-3">
+                        <a href="OneArticle?articleID=58">
+                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-3"
+                                 style="display: block; max-width: 100%; height: auto"/></a>
+                    </div>
+                </li>
+                <li>
+                    <div id="banner-4">
+                        <a href="OneArticle?articleID=59">
+                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-4"
+                                 style="display: block; max-width: 100%; height: auto"/></a>
+                    </div>
+                </li>
+                <li>
+                    <div id="banner-5">
+                        <a href="OneArticle?articleID=60">
+                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-5"
+                                 style="display: block; max-width: 100%; height: auto"/></a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="clear"></div>
+
+            <div class="imgnum" style="max-width: 100%; float: right">
+                <span class="onselect">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <%@include file="footer.jsp" %>
