@@ -17,7 +17,6 @@ public class Article {
     private String date;
     private String title;
 
-
     public Article() {
     }
 
