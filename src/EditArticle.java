@@ -80,14 +80,14 @@ public class EditArticle extends HttpServlet {
 
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
                 if (newDate.length() < 5) {
-                    newContent = newContent + "<p> Edited on: " + sqlDate + "<p>";
+//                    newContent = newContent + "<p> Edited on: " + sqlDate + "</p>";
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
                     System.out.println("EditArticle Servlet: Article added to database without date");
 
                 } else {
                     String origPublishDate =req.getParameter("publishedDate");
-                    newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
+//                    newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate submittedDateReformatted = LocalDate.parse(newDate, formatter);
                     java.sql.Date anotherSqlDate = java.sql.Date.valueOf(submittedDateReformatted);
