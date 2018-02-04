@@ -200,7 +200,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8 col-lg-12 col-sm-1">
             <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
             <div style="float: right">
                 <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
@@ -214,7 +214,6 @@
                     <div>Logged in as Guest</div>
                 </c:if>
             </div>
-
             <table class="table table-hover sorttable" id="articletable">
                 <thead>
                 <tr>
@@ -230,6 +229,7 @@
                     <th></th>
                 </tr>
                 </thead>
+
                 <tbody>
 
                 <%

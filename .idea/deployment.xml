@@ -9,6 +9,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="vrmblog">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$/out/artifacts/vrmblog" web="/vrmblog" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>
