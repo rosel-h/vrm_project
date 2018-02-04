@@ -194,7 +194,7 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="operation" value="add">
-                        <button type="submit" class="btn-lg btn-primary float-right">Post</button>
+                        <button type="submit" class="btn-lg btn-primary float-right">Submit</button>
                     </div>
                 </form>
             </div>
