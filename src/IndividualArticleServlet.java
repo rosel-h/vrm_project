@@ -49,7 +49,7 @@ public class IndividualArticleServlet extends HttpServlet {
         System.out.println("IndividualArticleServlet - article  " + checkIfTheresArticle+ " operation "+op);
         if(checkIfTheresArticle==null&&op==null){
             System.out.println("IAS: this is being redirected to allarticles");
-            req.getRequestDispatcher("/Articles").forward(req,resp);
+            req.getRequestDispatcher("Articles").forward(req,resp);
         }else{
 //            int articleID = Integer.parseInt(req.getParameter("articleID"));
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
@@ -114,7 +114,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                 String logType = "AddArticle";
                 LogWriter logWriter = new LogWriter(logType);
-                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.init(getServletContext().getRealPath("log"));
                 logWriter.write(logType,map);
                 //end of logging code
 
@@ -142,7 +142,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                 String logType = "DeleteArticle";
                 LogWriter logWriter = new LogWriter(logType);
-                logWriter.init(getServletContext().getRealPath("/log"));
+                logWriter.init(getServletContext().getRealPath("log"));
                 logWriter.write(logType, map);
                 //end of logging code
 
@@ -175,7 +175,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                     String logType = "CommentOnArticle";
                     LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.init(getServletContext().getRealPath("log"));
                     logWriter.write(logType,map);
                     //end of logging code
 
@@ -201,7 +201,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                     String logType = "EditArticleIndividual";
                     LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.init(getServletContext().getRealPath("log"));
                     logWriter.write(logType,map);
                     //end of logging code
 
@@ -226,7 +226,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                     String logType = "DeleteCommentOnArticle";
                     LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.init(getServletContext().getRealPath("log"));
                     logWriter.write(logType,map);
                     //end of logging code
 
@@ -256,7 +256,7 @@ public class IndividualArticleServlet extends HttpServlet {
 
                     String logType = "ReplyToAComment";
                     LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("/log"));
+                    logWriter.init(getServletContext().getRealPath("log"));
                     logWriter.write(logType,map);
                     //end of logging code
                 }

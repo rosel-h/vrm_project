@@ -15,6 +15,7 @@
 <html>
 <head>
     <title>Create Article</title>
+
     <meta charset="UTF-8">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->

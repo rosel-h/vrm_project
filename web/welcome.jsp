@@ -224,37 +224,37 @@
             <ul id="banner_img" style="max-width: 100%; float: left;">
                 <li>
                     <div id="banner-1">
-                        <a href="OneArticle?articleID=56">
-                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-1"
-                                 style="display: block; max-width: 100%; height: auto"/></a>
+                        <a href="OneArticle?articleID=1">
+                            <img src="img/banner07.png" class="img-responsive" id="bannerimg-1"
+                                 style="display: block; max-width: 100%; max-height: 100%;"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-2">
-                        <a href="OneArticle?articleID=57">
-                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-2"
-                                 style="display: block; max-width: 100%; height: auto"/></a>
+                        <a href="OneArticle?articleID=2">
+                            <img src="img/banner08.png" class="img-responsive" id="bannerimg-2"
+                                 style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-3">
-                        <a href="OneArticle?articleID=58">
-                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-3"
-                                 style="display: block; max-width: 100%; height: auto"/></a>
+                        <a href="OneArticle?articleID=3">
+                            <img src="img/banner12.jpg" class="img-responsive" id="bannerimg-3"
+                                 style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-4">
-                        <a href="OneArticle?articleID=59">
-                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-4"
-                                 style="display: block; max-width: 100%; height: auto"/></a>
+                        <a href="OneArticle?articleID=4">
+                            <img src="img/banner10.jpg" class="img-responsive" id="bannerimg-4"
+                                 style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-5">
-                        <a href="OneArticle?articleID=60">
-                            <img src="img/banner01.jpg" class="img-responsive" id="bannerimg-5"
-                                 style="display: block; max-width: 100%; height: auto"/></a>
+                        <a href="OneArticle?articleID=5">
+                            <img src="img/banner13.jpg" class="img-responsive" id="bannerimg-5"
+                                 style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
             </ul>
