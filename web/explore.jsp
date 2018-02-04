@@ -262,7 +262,6 @@
             </c:forEach>
             </tbody>
         </table>
-
         <div class="btn-group">
             <button type="button" class="btn btn-primary">1</button>
             <button type="button" class="btn btn-primary">2</button>
