@@ -39,12 +39,14 @@ public class EditProfileServlet extends HttpServlet {
     private String country = "";
     private String description = "";
     private String avatar = "";
+    private String csrfSessionToken = "";
+    private String csrfToken = "";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("EditProfileServlet enter edit profile servlet");
-
         HttpSession session = req.getSession(false);
+        csrfSessionToken = (String) session.getAttribute("csrfSessionToken");
         System.out.println("EditProfileServlet enter line 39: session id = " + session.getId());
 
         if (session == null) {
@@ -59,26 +61,24 @@ public class EditProfileServlet extends HttpServlet {
                 if (ServletFileUpload.isMultipartContent(req)) {
                     //if enter servlet from edit form(which means save new profile)
                     //load new profile info from form
-                    loadNewProfile(req, username, userDAO);
+                    loadNewProfile(req, resp, username, userDAO);
 
                     //get user object from database
                     User user = userDAO.getUserByUsername(username);
 
                     //print log to file
                     Map<String, String> map = new HashMap<>();
-                    map.put("username",username);
-                    map.put("fname_before",user.getFname());
-                    map.put("lname_before",user.getLname());
-                    map.put("dob_before",user.getDateOfBirth());
-                    map.put("country_before",user.getCountry());
-                    map.put("description_before",user.getDescription());
-                    map.put("avatar_before",user.getAvatar_icon());
+                    map.put("username", username);
+                    map.put("fname_before", user.getFname());
+                    map.put("lname_before", user.getLname());
+                    map.put("dob_before", user.getDateOfBirth());
+                    map.put("country_before", user.getCountry());
+                    map.put("description_before", user.getDescription());
+                    map.put("avatar_before", user.getAvatar_icon());
 
-                    String ipAddress =  req.getRemoteAddr();
+                    String ipAddress = req.getRemoteAddr();
                     map.put("ip", ipAddress);
-
                     //end of logging code
-
 
                     //set attributes of user object
                     user.setFname(fname);
@@ -94,29 +94,25 @@ public class EditProfileServlet extends HttpServlet {
                     //if update success, redirect to welcome.jsp
                     if (updateSuccess) {
                         System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
-
                         //print log to file
-                        map.put("fname",fname);
-                        map.put("lname",lname);
-                        map.put("dob",dob);
-                        map.put("country",country);
-                        map.put("description",description);
-                        map.put("avatar",avatar);
-
+                        map.put("fname", fname);
+                        map.put("lname", lname);
+                        map.put("dob", dob);
+                        map.put("country", country);
+                        map.put("description", description);
+                        map.put("avatar", avatar);
                         String logType = "EditProfile";
                         LogWriter logWriter = new LogWriter(logType);
                         logWriter.init(getServletContext().getRealPath("/log"));
-                        logWriter.write(logType,map);
+                        logWriter.write(logType, map);
                         //end of logging code
-
-
                         req.setAttribute("successMessage", "Save profile successfully");
-                        req.setAttribute("user",user);
+                        req.setAttribute("user", user);
                         session.setAttribute("user", user);
                         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
                     }
 
-                }else {
+                } else {
                     //if enter servlet from welcome page
                     //load profile of user from database
                     User user = userDAO.getUserByUsername(username);
@@ -135,7 +131,7 @@ public class EditProfileServlet extends HttpServlet {
 
     }
 
-    private void loadNewProfile(HttpServletRequest req, String username, UserDAO userDAO) throws Exception {
+    private void loadNewProfile(HttpServletRequest req, HttpServletResponse resp, String username, UserDAO userDAO) throws Exception {
 
         User user = userDAO.getUserByUsername(username);
         System.out.println("EditProfileServlet enter line 53: multipartcontent");
@@ -160,37 +156,18 @@ public class EditProfileServlet extends HttpServlet {
             //loop through all the file items in signup form
             while (i.hasNext()) {
                 FileItem fileItem = (FileItem) i.next();
-
                 //logic for uploading an image
-                if (!fileItem.isFormField()) {
-                    String fieldName = fileItem.getFieldName();
-                    String fileName = fileItem.getName();
-                    System.out.println("EditProfileServlet loadNewProfile enter line 135: fileName = " + fieldName);
-                    String contentType = fileItem.getContentType();
-                    boolean isInMemory = fileItem.isInMemory();
-                    long sizeInBytes = fileItem.getSize();
-
-                    //uploading image field is empty
-                    if (fileName == null | fileName == "") { break; }
-
-                    // Write the file
-                    System.out.println("EditProfileServlet loadNewProfile enter line 144: " + filePath);
-
-                    if (fileName.lastIndexOf("\\") >= 0) {
-                        fileName = fileName.substring(fileName.lastIndexOf("\\"));
-                    } else {
-                        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-                    }
-
-                    uploadFileName = fileName;
-                    doUpload = fileItem;
-                    hasUpload = true;
-
-                } else {
-
+                if (fileItem.isFormField()) {
                     String fieldName = fileItem.getFieldName();
                     System.out.println("EditProfileServlet loadNewProfile enter line 159: fieldName: " + fieldName + "," + fileItem.getString());
-                    if (fieldName.equals("username")) {
+                    if (fieldName.equals("csrfToken")) {
+                        csrfToken = fileItem.getString();
+                        if (!csrfSessionToken.equals(csrfToken + "asdasd")) {
+                            System.out.println("csrfToken failed");
+                            resp.sendError(666);
+                            return;
+                        }
+                    } else if (fieldName.equals("username")) {
                         username = fileItem.getString();
                     } else if (fieldName.equals("fname")) {
                         fname = fileItem.getString();
@@ -210,6 +187,33 @@ public class EditProfileServlet extends HttpServlet {
                     } else if (fieldName.equals("avatar")) {
                         avatar = fileItem.getString();
                     }
+
+                } else {
+
+                    String fieldName = fileItem.getFieldName();
+                    String fileName = fileItem.getName();
+                    System.out.println("EditProfileServlet loadNewProfile enter line 135: fileName = " + fieldName);
+                    String contentType = fileItem.getContentType();
+                    boolean isInMemory = fileItem.isInMemory();
+                    long sizeInBytes = fileItem.getSize();
+
+                    //uploading image field is empty
+                    if (fileName == null | fileName == "") {
+                        break;
+                    }
+
+                    // Write the file
+                    System.out.println("EditProfileServlet loadNewProfile enter line 144: " + filePath);
+
+                    if (fileName.lastIndexOf("\\") >= 0) {
+                        fileName = fileName.substring(fileName.lastIndexOf("\\"));
+                    } else {
+                        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+                    }
+
+                    uploadFileName = fileName;
+                    doUpload = fileItem;
+                    hasUpload = true;
                 }
             }
 
