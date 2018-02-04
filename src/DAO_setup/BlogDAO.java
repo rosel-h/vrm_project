@@ -15,7 +15,6 @@ import java.util.List;
 public class BlogDAO implements AutoCloseable {
     private final Connection conn;
     private final Database db;
-
     /**
      * Creates a new UniDAO and establishes a connection to the given database.
      */
@@ -23,6 +22,7 @@ public class BlogDAO implements AutoCloseable {
     public BlogDAO(Database db) throws IOException, SQLException {
         this.db = db;
         this.conn = db.getConnection();
+
     }
 
     /*Gets all the articles from database*/
@@ -39,12 +39,14 @@ public class BlogDAO implements AutoCloseable {
     }
 
     public List<Article> getTenArticles(String order, int number, boolean isAscending) throws SQLException {
-        number = 1*10;
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by ? ? limit 10 offset ?;")) {
-            stmt.setString(1,order);
-            String upOrDown = (isAscending) ? "asc" : "desc";
-            stmt.setString(2,upOrDown);
-            stmt.setInt(3,number);
+        order = "date";
+        number = (number-1)*10;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by date DESC limit 10 offset ?;")) {
+//            stmt.setString(1,order);
+//            String upOrDown = (isAscending) ? "asc" : "desc";
+//            stmt.setString(2,upOrDown);
+//            stmt.setInt(3,number);
+            stmt.setInt(1,number);
             try (ResultSet rs = stmt.executeQuery()) {
                 List<Article> artic = new ArrayList<>();
                 while (rs.next()) {
@@ -114,7 +116,22 @@ public class BlogDAO implements AutoCloseable {
         }
         return artic;
     }
+ public int getTotalArticles() throws SQLException{
+        int n = 0;
+     try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles;")) {
 
+         try (ResultSet rs = stmt.executeQuery()) {
+             System.out.println("BlogDAO: getTotalArticles ");
+             while (rs.next()) {
+                  n = rs.getInt(1);
+                 System.out.println(n);
+                 return n;
+
+             }
+         }
+     }
+     return n;
+ }
     public List<Article> getMyArticles(String username) throws SQLException {
         System.out.println("BlogDAO: getMyArticles username - " + username);
         List<Article> a = new ArrayList<>();

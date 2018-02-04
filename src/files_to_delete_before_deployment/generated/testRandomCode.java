@@ -30,13 +30,13 @@ public class testRandomCode {
     private void daoTesting() throws Exception {
 
         String orderOfArticles = "date";
-        int numberOfArticlesToLoad = 10;
+        int numberOfArticlesToLoad = 0;
         List<Article> artic = new ArrayList<>();
         try (BlogDAO dao = new BlogDAO(new MYSQLDatabase("F:\\PGCert InfoTech\\Project\\vrm_projectFeb4\\web\\WEB-INF\\mysql.properties"))) {
             artic = dao.getTenArticles(orderOfArticles,numberOfArticlesToLoad,false);
         }
         for (Article a :artic) {
-            System.out.println(("ID: "+a.getArticleID() + " Article: "+ a.getTitle()));
+            System.out.println(("ID: "+a.getArticleID() + " Article: "+ a.getTitle()) + " Date: "+a.getDate());
 
         }
     }
