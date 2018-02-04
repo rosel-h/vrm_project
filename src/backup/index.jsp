@@ -37,7 +37,7 @@
     </script>
 
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:if test="${signUpStatus == true}">

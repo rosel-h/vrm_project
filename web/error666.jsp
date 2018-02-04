@@ -30,7 +30,7 @@
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 <header class="masthead" style="background-image: url('img/Edge-Of-World.jpg')">
     <div class="overlay"></div>
     <div class="container">

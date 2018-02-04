@@ -39,7 +39,7 @@
 
 
 </head>
-<body>
+<body style="background-color: #e6e6e6">
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
