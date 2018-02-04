@@ -15,7 +15,13 @@
 <html>
 <head>
     <title>${sessionScope.personLoggedIn} Articles</title>
-    <%--<!-- Latest compiled and minified CSS -->--%>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<%--<!-- Latest compiled and minified CSS -->--%>
     <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
     <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
 
@@ -116,7 +122,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
     <div id="top" class="container">
-        <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -263,6 +269,16 @@
                 </c:forEach>
                 </tbody>
             </table>
+            <div class="btn-group mx-auto">
+                <c:if test="${currentPage>=2}">
+                    <a href="myArticles?_p=${currentPage-1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">PREV</button></a>
+                </c:if>
+                <button type="button" style="font-weight: bold;" class="btn btn-primary" disabled>${currentPage}</button>
+
+                <c:if test="${currentPage<=lastPage-1}">
+                    <a href="myArticles?_p=${currentPage+1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">NEXT</button></a>
+                </c:if>
+            </div>
         </div>
     </div>
 </div>

@@ -15,17 +15,20 @@ import java.util.List;
  */
 public class LoadArticlesServlet extends HttpServlet {
     private int pageNumber = 1;
+    private boolean wentThroughGetMethod = false;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String number = req.getParameter("_p");
-        System.out.println("Load article servlet: "+number);
+        System.out.println("Load article servlet: param - "+number +"curentPage "+pageNumber);
         try{
             pageNumber = Integer.parseInt(number);
         }catch (NumberFormatException e){
+
             System.out.println("LoadArticleServlet: Someone tried to cheat the pages get method");
         }
         System.out.print("do get");
+        wentThroughGetMethod=true;
         doPost(req, resp);
 
     }
@@ -36,19 +39,21 @@ public class LoadArticlesServlet extends HttpServlet {
 
         HttpSession session = req.getSession(false);
 
-        ServletContext servletContext = getServletContext();
-
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
             int totalArticlesSoFar = dao.getTotalArticles();
-            int totalPages = totalArticlesSoFar/10;
+            int totalPages = totalArticlesSoFar/10+1;
             if(pageNumber >totalPages){
                 pageNumber =totalPages;
             }else if(pageNumber<1){
                 pageNumber=1;
             }
 //            List<Article> articles = dao.getAllArticles();
+
             int checkNumber = this.pageNumber;
+            if(!wentThroughGetMethod){
+                checkNumber=1;
+            }
             List<Article> articles = dao.getTenArticles("date",checkNumber,true);
             req.setAttribute("lastPage",totalPages);
             req.setAttribute("currentPage",checkNumber);

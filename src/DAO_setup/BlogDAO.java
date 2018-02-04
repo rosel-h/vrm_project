@@ -57,6 +57,7 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
+
     public List<Article> getArticleByTitle(String[] keywords) throws SQLException {
         List<Article> artic = new ArrayList<>();
 
@@ -118,20 +119,36 @@ public class BlogDAO implements AutoCloseable {
     }
  public int getTotalArticles() throws SQLException{
         int n = 0;
-     try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles;")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles;")) {
 
-         try (ResultSet rs = stmt.executeQuery()) {
-             System.out.println("BlogDAO: getTotalArticles ");
-             while (rs.next()) {
-                  n = rs.getInt(1);
-                 System.out.println(n);
-                 return n;
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("BlogDAO: getTotalArticles ");
+                while (rs.next()) {
+                    n = rs.getInt(1);
+                    System.out.println(n);
+                    return n;
 
-             }
-         }
-     }
-     return n;
- }
+                }
+            }
+        }
+        return n;
+    }
+    public int getTotalArticles(String username) throws SQLException{
+        int n = 0;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles WHERE username=? ;")) {
+            stmt.setString(1,username);
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println("BlogDAO: getTotalArticles ");
+                while (rs.next()) {
+                    n = rs.getInt(1);
+                    System.out.println(n);
+                    return n;
+
+                }
+            }
+        }
+        return n;
+    }
     public List<Article> getMyArticles(String username) throws SQLException {
         System.out.println("BlogDAO: getMyArticles username - " + username);
         List<Article> a = new ArrayList<>();
@@ -144,6 +161,25 @@ public class BlogDAO implements AutoCloseable {
                     a.add(dataFromResultSet(rs, new Article()));
                 }
                 return a;
+            }
+        }
+    }
+    public List<Article> getTenOfMyArticles(String username,String order, int number, boolean isAscending) throws SQLException {
+        order = "date";
+        number = (number-1)*10;
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =? ORDER by date DESC limit 10 offset ?;")) {
+//            stmt.setString(1,order);
+//            String upOrDown = (isAscending) ? "asc" : "desc";
+//            stmt.setString(2,upOrDown);
+//            stmt.setInt(3,number);
+            stmt.setString(1, username);
+            stmt.setInt(2,number);
+            try (ResultSet rs = stmt.executeQuery()) {
+                List<Article> artic = new ArrayList<>();
+                while (rs.next()) {
+                    artic.add(dataFromResultSet(rs, new Article()));
+                }
+                return artic;
             }
         }
     }
