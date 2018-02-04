@@ -121,7 +121,7 @@
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
@@ -236,27 +236,27 @@
         <ul id="banner_img">
             <li>
                 <div id="banner-1">
-                    <img src="img/banner01.jpg" width="900" height="240" id="bannerimg-1"/>
+                    <a href="OneArticle?articleID=56"><img src="img/banner01.jpg" width="900" height="240" id="bannerimg-1"/></a>
                 </div>
             </li>
             <li>
                 <div id="banner-2">
-                    <img src="img/banner02.jpg" width="900" height="240" id="bannerimg-2"/>
+                    <a href="OneArticle?articleID=57"><img src="img/banner02.jpg" width="900" height="240" id="bannerimg-2"/></a>
                 </div>
             </li>
             <li>
                 <div id="banner-3">
-                    <img src="img/banner03.jpg" width="900" height="240" id="bannerimg-3"/>
+                    <a href="OneArticle?articleID=58"><img src="img/banner03.jpg" width="900" height="240" id="bannerimg-3"/></a>
                 </div>
             </li>
             <li>
                 <div id="banner-4">
-                    <img src="img/banner04.jpg" width="900" height="240" id="bannerimg-4"/>
+                    <a href="OneArticle?articleID=59"><img src="img/banner04.jpg" width="900" height="240" id="bannerimg-4"/></a>
                 </div>
             </li>
             <li>
                 <div id="banner-5">
-                    <img src="img/banner05.jpg" width="900" height="240" id="bannerimg-5"/>
+                    <a href="OneArticle?articleID=60"><img src="img/banner05.jpg" width="900" height="240" id="bannerimg-5"/></a>
                 </div>
             </li>
         </ul>

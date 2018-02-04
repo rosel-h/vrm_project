@@ -139,7 +139,7 @@
 
     <article>
         <div class="container">
-            <div class="row">
+            <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     ${articleToLoad.getContent()}
                 </div>
@@ -152,7 +152,7 @@
                         <form class="form-inline" action="OneArticle" method="POST">
                             <input type="hidden" name="operation" value="delete">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
-                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                            <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" type="submit" class="btn btn-danger pull-right">
                                 Delete
                             </button>
@@ -164,7 +164,7 @@
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <input type="hidden" name="operation" value="goToEditPage">
                             <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
-                            <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                            <input type="hidden" id="csrfToken2" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                             <button style="float: right" id="editorButton" type="submit"
                                     class="btn btn-primary pull-right">Edit
                             </button>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDate" %><%--
   Created by IntelliJ IDEA.
   User: Mengjie
   Date: 2018/1/27
@@ -9,12 +9,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
-    <c:redirect url="Index"/>
+    <c:redirect url="Login"/>
 </c:if>
 
 <html>
 <head>
     <title>Search Result | VRM Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -23,7 +28,6 @@
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
-
     <!-- Custom styles for this template -->
     <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -35,35 +39,6 @@
     <script src="vendor/jquery/jquery-ui.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
-    <!-- include summernote css/js -->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-
-<%--    <script>
-        $(document).ready(function () {
-            $('#summernote').summernote({
-                toolbar: [
-                    // [groupName, [list of button]]
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                ]
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('#wOther').summernote({
-                minHeight: 20
-            });
-        });
-
-        //        $('.note-toolbar .note-fontsize, .note-toolbar .note-color, .note-toolbar .note-para .dropdown-menu li:first, .note-icon-link , .note-toolbar .note-line-height ').remove();
-    </script>--%>
-    <!-- include sorting by title, username, date -->
     <script>
         $(document).on('click', 'th', function () {
             var table = $(this).parents('table').eq(0);
@@ -74,6 +49,7 @@
             }
             table.children('tbody').empty().html(rows);
         });
+
         function comparer(index) {
             return function (a, b) {
                 var valA = getCellValue(a, index), valB = getCellValue(b, index);
@@ -81,57 +57,164 @@
                     valA - valB : valA.localeCompare(valB);
             };
         }
+
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
+
+        var imageCollection = [
+            "background01.jpg",
+            "background02.jpg",
+            "background03.jpg",
+            "background04.jpg",
+            "background05.jpg",
+            "background06.jpg",
+            "background07.jpg",
+            "background08.jpg",
+            "background09.jpg",
+            "background10.jpg",
+            "background11.jpg",
+            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+        ];
+
+        function loadRandomImage() {
+            var numImage = Math.floor(Math.random() * (imageCollection.length));
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
+            console.log(imageCollection[numImage]);
+        }
+
+        $(document).ready(function () {
+            loadRandomImage();
+        });
+
     </script>
 
 </head>
 <body>
 
-<%--<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
-    <%--response.setHeader("Pragma","no-cache"); //HTTP 1.0--%>
-    <%--response.setDateHeader ("Expires", 0); //prevents caching at the proxy server--%>
-<%--%>--%>
-<%@include file="navigation.jsp" %>
-<div class="container">
-    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-    <h1>Search Results</h1>
-    </div>
-    <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-        <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+<c:choose>
+    <c:when test="${sessionScope.personLoggedIn !=null}">
+        <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+        %>
+        <%--<%@include file="navigation.jsp" %>--%>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div id="top" class="container">
+                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">Menu
+                    <i class="fa fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
 
-            <div class="row">
-                <div class="form-group" style="padding: 1%">
-                    <input type="text" class="form-control" name="keywords" placeholder="Title/Username/Date"
-                           style="opacity: 0.8"
-                           id="searchkeyword">
-                </div>
-                <div class="form-group" style="padding: 1%">
-                    <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
-                        <option value="title">Title</option>
-                        <option value="username">Username</option>
-                        <option value="date">Date</option>
-                    </select>
-                </div>
-                <div class="form-group" style="padding: 1%">
-                    <button type="submit" class="form-control" style="opacity: 0.8">Search</button>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Welcome">Home</a>
+                        </li>
+                            <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="Articles">Community</a>--%>
+                            <%--</li>--%>
+                            <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
+                            <%--</li>--%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="editprofile">My Profile</a>
+                        </li>
+                            <%--<li class="nav-item">--%>
+                            <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
+                            <%--</li>--%>
+                    </ul>
                 </div>
             </div>
-        </form>
+        </nav>
+
+        <!-- Page Header -->
+        <header id="backgroundImage" class="masthead" style="background-image: url('img/background02.jpg');">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                        <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
+                            <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                                     class="img-circle img-fluid">
+                            </div>
+                            <br>
+                            <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
+                            <div class="btn-group btn-group-justified col-xs-10" role="group"
+                                 style="padding: 1%">
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="myArticles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.8">
+                                        My Articles
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="Articles" class="btn btn-default"
+                                       style=" background-color: white; opacity: 0.8">
+                                        Community
+                                    </a>
+                                </div>
+                                <div style="padding: 1%;margin: 1%">
+                                    <a href="NewArticle" class="btn btn-danger"
+                                       style=" color: white;opacity: 0.8">
+                                        New Entry
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    </c:when>
+    <c:otherwise>
+        <%@include file="guestnavigation.jsp" %>
+    </c:otherwise>
+</c:choose>
+
+<div class="container">
+    <div class="row" style="vertical-align: middle">
+        <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
+            <h1>Search Results &nbsp;</h1>
+        </div>
+
+        <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
+            <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
+
+                <div class="row">
+                    <div class="form-group" style="padding: 1%">
+                        <input size="60" type="text" required class="form-control" name="keywords"
+                               placeholder="Title/Username/Date"
+                               style="opacity: 0.8"
+                               id="searchkeyword">
+                    </div>
+                    <div class="form-group" style="padding: 1%">
+                        <select class="form-control" name="searchType" id="searchselect" style="opacity: 0.8">
+                            <option value="title">Title</option>
+                            <option value="username">Username</option>
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="padding: 1%">
+                        <button type="submit" class="form-control" style="opacity: 0.8; width: 120%">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+    <br>
     <div style="float: right">
-        <c:if test="${personLoggedIn !=null}">
-            <div>Logged in as ${sessionScope.personLoggedIn} <img src="avatars/${personAvatarIcon}" style="height: 30px"
-                                                     alt="avatar"/>
-            </div>
-        </c:if>
-        <c:if test="${personLoggedIn ==null}">
+        <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
+    <br>
 
-    <table class="table table-striped">
+    <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
             <th class="sort-alpha" style="color: #0085a1"><ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
@@ -140,6 +223,7 @@
             <th></th>
         </tr>
         </thead>
+
         <tbody>
         <c:if test="${personLoggedIn == null}">
             <tr>
@@ -156,149 +240,29 @@
 
         </c:if>
 
+
         <c:if test="${personLoggedIn != null}">
             <c:if test="${articleList.size() > 0}">
                 <c:forEach var="articleList" items="${articleList}">
-                    <tr>
-                        <td><b>${articleList.getTitle()}</b></td>
-                        <td><i>${articleList.getUsername()}</i></td>
-                        <td>${articleList.getDate()}</td>
-                        <td>
-                            <button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"
-                                    data-target="#a${articleList.getArticleID()}">Read More...
-                            </button>
-                        </td>
-                    </tr>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="a${articleList.getArticleID()}" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">${articleList.getTitle()}</h4>
-                                    <div>Written by ${articleList.getUsername()}, published
-                                        on ${articleList.getDate()}</div>
-                                    <c:if test="${personLoggedIn == articleList.getUsername()}">
-                                        <form class="form-inline" action="/Articles" method="POST">
-                                            <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                                                Delete
-                                            </button>
-                                            <input type="hidden" name="operation" value="delete">
-                                            <input type="hidden" name="articleId" value="${articleList.getArticleID()}">
-                                        </form>
-                                        <%--<form class="form-inline" action="/Articles" method="POST">--%>
-                                        <button style="float: right" id="editorButton" type="button"
-                                                class="btn btn-primary pull-right">Edit
-                                        </button>
-
-                                        <script>
-                                            $(document).ready(function(){
-                                                $("#editorButton").click(function(){
-                                                    $("#editorDiv").toggle();
-                                                });
-                                            });
-                                        </script>
-                                        <%--to hide--%>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <div id="editorDiv" style="display: none">
-
-                                            <form  method="post" action="/CreateArticles">
-
-                                <textarea id="wOther" rows ="20" name="editordata">
-                                    test obe
-                                </textarea>
-                                                <input type="submit">
-                                            </form>
-                                        </div>
-                                        <%----%>
-                                        <%--</form>--%>
-                                    </c:if>
-
-                                </div>
-                                <div class="modal-body">
-
-                                    <div>${articleList.getContent()}</div>
-                                </div>
-
-                                <div class="media panel-footer">
-
-                                    <div class=""><p>Comments</p></div>
-                                        <%--first comments--%>
-                                    <c:forEach var="commentList" items="${commentList}">
-                                        <c:if test="${articleList.getArticleID()==commentList.getArticleID()}">
-                                            <%--avatar icon--%>
-                                            <div class="media-left">
-                                                <img src="avatars/${commentList.getAvatarIcon()}" class="media-object"
-                                                     style="width:30px">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">${commentList.getCommentAuthor()}
-                                                    <small><i>Posted on ${commentList.getDatePublished()}</i></small>
-                                                </h5>
-                                                <p>${commentList.getContent()}</p>
-                                                    <%--second nest comments--%>
-                                                <c:forEach var="nestedList" items="${nestedList}">
-                                                    <c:if test="${nestedList.getParentID()==commentList.getCommentID()}">
-                                                        <div class="media-left">
-                                                            <img src="avatars/${nestedList.getAvatarIcon()}"
-                                                                 class="media-object"
-                                                                 style="width:30px">
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <h5 class="media-heading">${nestedList.getCommentAuthor()}
-                                                                <small><i>Posted on ${nestedList.getDatePublished()}</i></small>
-                                                            </h5>
-                                                            <p>${nestedList.getContent()}</p>
-                                                        </div>
-                                                        <br>
-                                                    </c:if>
-                                                </c:forEach>
-                                                    <%-- checks wether user logged in with author of post and user logged in--%>
-                                                <c:if test="${(articleList.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
-                                                    <form method="post" action="/Articles">
-                                                        <button type="submit" class="btn btn-xs">delete comment</button>
-                                                        <input type="hidden" name="operation" value="deleteCommentOnArticle">
-                                                        <input type="hidden" name="commentID"
-                                                               value="${commentList.getCommentID()}">
-
-                                                    </form>
-                                                </c:if>
-                                            </div>
-                                            <br>
-                                        </c:if>
-
-                                    </c:forEach>
-                                    <c:if test="${personLoggedIn !=null}">
-                                        <form method="post" action="/Articles">
-                                            <div class="form-group">
-                                                <label for="summernote">Comment as ${sessionScope.personLoggedIn}:</label>
-                                                    <%--<textarea class="form-control" rows="3" name="newComment" id="newComment"--%>
-                                                    <%--style="max-width: 100%; min-width: 100%;" required></textarea>--%>
-                                                    <%--<div class="form-group">--%>
-                                                <label for="summernote">Content</label>
-                                                <textarea id="summernote" name="newComment" class="form-control" rows="10"
-                                                          required></textarea>
-                                                    <%--</div>--%>
-                                                <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
-                                                <input type="hidden" name="operation" value="commentOnArticle">
-                                                <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
-                                                <button style="float: right" type="submit" class="btn btn-sm">Post a comment
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </c:if>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <%
+                        java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
+                        request.setAttribute("sqlDateToday", sqlDateToday);
+                    %>
+                    <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
+                        <tr>
+                            <td><h4 class="post-title">${articleList.getTitle()}</h4>
+                                <form action="OneArticle" method="post">
+                                    <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
+                                    <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
+                                    <input type="hidden" id="csrfToken" name="csrfToken"
+                                           value="${sessionScope.get("csrfSessionToken")}">
+                                    <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
+                                </form>
+                            </td>
+                            <td>by <i>${articleList.getUsername()}</i></td>
+                            <td>${articleList.getDate()}</td>
+                        </tr>
+                    </c:if>
                 </c:forEach>
 
             </c:if>
@@ -311,11 +275,8 @@
         </tbody>
     </table>
 
-
-
-
 </div>
 
-
+<%@include file="footer.jsp" %>
 </body>
 </html>

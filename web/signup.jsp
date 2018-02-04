@@ -26,6 +26,7 @@
     <meta name="author" content="">
 
     <title>Welcome to VRM Blog</title>
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -47,12 +48,13 @@
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
 
-
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <%--javascript for AJAX to check username and password validation--%>
     <script type="text/javascript">
         window.onload = function () {
+            var validcolor = "#00ff00";
+            var invalidcolor = "#ff0000";
             document.getElementById("username").onblur = function () {
                 var username = document.getElementById("username").value;
                 $.ajax({
@@ -62,7 +64,7 @@
                     success: function (msg) {
                         if (msg != "Username already exists") {
                             document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + "Username is valid";
-                            document.getElementById("usernameCheck").style.color = "green";
+                            document.getElementById("usernameCheck").style.color = validcolor;
                         } else {
                             document.getElementById("usernameCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + msg;
                         }
@@ -81,9 +83,9 @@
                         if (msg == "000") {
                             var out = "Password is valid";
                             document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordFormatCheck").style.color = "green";
+                            document.getElementById("passwordFormatCheck").style.color = validcolor;
                             document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordCheck").style.color = "green";
+                            document.getElementById("passwordCheck").style.color = validcolor;
                         } else {
                             var out = "";
 
@@ -103,23 +105,23 @@
 
                             if (out != "") {
                                 document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordFormatCheck").style.color = "red";
+                                document.getElementById("passwordFormatCheck").style.color = invalidcolor;
                                 if (msg.charAt(2) == "0") {
                                     out = "Two passwords are different!";
                                     document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                    document.getElementById("passwordCheck").style.color = "red";
+                                    document.getElementById("passwordCheck").style.color = invalidcolor;
                                 }
                             }
 
                             if (msg.charAt(0) == "0") {
                                 var out = "Password is valid";
                                 document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordFormatCheck").style.color = "green";
+                                document.getElementById("passwordFormatCheck").style.color = validcolor;
 
                                 if (msg == "0004") {
                                     out = "Two passwords are different!";
                                     document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                    document.getElementById("passwordCheck").style.color = "red";
+                                    document.getElementById("passwordCheck").style.color = invalidcolor;
                                 }
                             }
 
@@ -140,9 +142,9 @@
                         if (msg == "000") {
                             var out = "Password is valid";
                             document.getElementById("passwordFormatCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordFormatCheck").style.color = "green";
+                            document.getElementById("passwordFormatCheck").style.color = validcolor;
                             document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-ok'></span>" + "&nbsp;" + out;
-                            document.getElementById("passwordCheck").style.color = "green";
+                            document.getElementById("passwordCheck").style.color = validcolor;
                         } else {
                             var out = "";
 
@@ -166,7 +168,7 @@
 
                             if (out != "") {
                                 document.getElementById("passwordCheck").innerHTML = "<span class='glyphicon glyphicon-remove'></span>" + "&nbsp;" + out;
-                                document.getElementById("passwordCheck").style.color = "red";
+                                document.getElementById("passwordCheck").style.color = invalidcolor;
                             }
                         }
                     }
@@ -188,18 +190,31 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
         $(document).ready(function () {
             loadRandomImage();
         });
+
+    </script>
+    <script type="text/javascript">
+        function showtoggle() {
+            var x = document.getElementById("form-content2");
+            var y = document.getElementById("toggletext");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.innerHTML = "";
+            } else {
+                x.style.display = "none";
+            }
+        }
 
     </script>
 
@@ -209,7 +224,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a  class="navbar-brand"> VRM Travel Blog</a>
+        <a class="navbar-brand"> VRM Travel Blog</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -231,51 +246,67 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 2; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+
                     <div class="panel-title"><h3>Sign up</h3></div>
-                    <div style="float:right; font-size: 85%; position: relative; top:-1%;">
-                        <a style="color: red" id="signinlink" href="/Signin">
-                            Already registered? Sign in now!
+
+                    <div style="float:right; font-size: 70%; position: relative; top:-1%; margin-right: 3%">
+                        <a style="color: white;" id="signinlink" href="/Signin">
+                            Already registered?
+                            <ins>Sign in</ins>
+                            now!
                         </a>
                     </div>
+
                     <div style="padding-top:30px" class="panel-body">
+
                         <form id="signupform" class="form-horizontal" role="form" method="post" action="SignUp">
-                            <div id="form_content">
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
+                            <div id="form_content1">
+
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label for="username" style="float: left;">Username</label>
+                                        <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${usernameError}</span>
+
                                         <input type="text" id="username" class="form-control" name="username"
                                                placeholder="Enter Username 4~20 characters">
-                                        <div style="color:red" id="usernameCheck">${usernameError}</div>
+
+
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-
                                     <div class="col-md-12">
-                                        <label for="password" style="float: left;"> Password</label>
+                                        <label for="password" style="float: left;"> Password</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordFormatCheck"></span>
+                                        <label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>
                                         <input type="password" id="password" class="form-control" name="password"
                                                placeholder="Enter Password 4~20 characters">
-                                        <div style="color:red" id="passwordFormatCheck"></div>
+
+
                                     </div>
+
                                 </div>
 
                                 <div class="form-group">
-
                                     <div class="col-md-12">
-                                        <label for="cPassword" style="float: left;"> Confirm Password</label>
+                                        <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${passwordError}</div>
                                         <input type="password" id="cPassword" class="form-control" name="cPassword"
                                                placeholder="Confirm Password">
-                                        <div style="color:red" id="passwordCheck">${passwordError}</div>
+
+
                                     </div>
+
                                 </div>
 
-                                <div class="form-group">
+                                <div id="togglebtn" style="font-size: 85%; float: right; margin-right: 3%"
+                                     onclick="showtoggle()">
+                                    <ins id="toggletext">show more</ins>
+                                </div>
 
+                            </div>
+
+                            <div id="form-content2" style="display: none;">
+
+                                <div class="form-group">
                                     <div class="col-md-12">
                                         <label for="fname" style="float: left;">First Name</label>
                                         <input type="text" id="fname" class="form-control" name="fname"
@@ -284,7 +315,6 @@
                                 </div>
 
                                 <div class="form-group">
-
                                     <div class="col-md-12">
                                         <label for="lname" style="float: left;">Last Name</label>
                                         <input type="text" id="lname" class="form-control" name="lname"
@@ -356,35 +386,29 @@
 
                             </div>
 
-
-                            <%--//this is for local host--%>
                             <div class="form-group">
-                                <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"></div>
-                                <span style="margin-left:20px; margin-right: 20px;"></span>
-                                <input type="submit" value="Submit" class="btn btn-success">
+
+                                <div class=" row col-md-12">
+                                    <%--//this is for sporadic--%>
+                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>--%>
+
+
+                                    <%--//this is for local host--%>
+                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>
+                                    <span>&nbsp;&nbsp;</span>
+                                    <%--<input type="submit" value="Submit" class="btn btn-login">--%>
+                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8; height: 70%" id="btn-login"
+                                    class="btn btn-success"
+                                    type="submit" value="Submit">Sign up
+                                    </button>
+                                </div>
+
                             </div>
-                            <%--//this is for sporadic--%>
-                            <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk"></div>--%>
-
-                            <br/>
-                            <br/>
-                            <%--<div class="form-group">--%>
-                                <%--<input type="submit" value="Submit" class="btn btn-success">--%>
-
-                                <%--<span style="margin-left:20px; margin-right: 20px;">or</span>--%>
-                                <%--<button id="btn-fbsignup" type="button"--%>
-                                        <%--onclick="window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=http://localhost:8181/oauth2fb&scope=email'"--%>
-                                        <%--class="btn btn-primary"><i class="icon-facebook"></i>--%>
-                                    <%--Connect via Facebook--%>
-                                <%--</button>--%>
-                            <%--</div>--%>
-
-
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </header>
 

@@ -77,7 +77,7 @@
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
@@ -180,6 +180,7 @@
         <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
             <h1>All Articles &nbsp;</h1>
         </div>
+
         <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
             <form class="navbar-form navbar-right" action="searcharticle" style="margin: auto;">
 
@@ -198,7 +199,7 @@
                         </select>
                     </div>
                     <div class="form-group" style="padding: 1%">
-                        <button type="submit" class="form-control" style="opacity: 0.8">Search</button>
+                        <button type="submit" class="form-control" style="opacity: 0.8; width: 120%;">Search</button>
                     </div>
                 </div>
             </form>
@@ -217,6 +218,8 @@
         </c:if>
     </div>
     <br>
+
+
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
@@ -232,6 +235,7 @@
             <th></th>
         </tr>
         </thead>
+
         <tbody>
         <c:forEach var="articleList" items="${articleList}">
             <%
