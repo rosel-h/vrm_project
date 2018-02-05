@@ -24,7 +24,7 @@ public class OAuth2fb extends HttpServlet {
     // Facebook WebApp authentication
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
-    private static final String redirectURI = "https://sporadic.nz/vrm_mshe666/oauth2fb";
+    private static final String redirectURI = "https://sporadic.nz/vrmblog/oauth2fb";
     private static final String scope = "email";
     private String stateParam;
     User user;
@@ -42,7 +42,7 @@ public class OAuth2fb extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //            String url = "https://www.facebook.com/dialog/oauth?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope;
 //            response.sendRedirect(url);
-        //        window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=https://sporadic.nz/vrm_mshe666/oauth2fb&scope=email'
+        //        window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=https://sporadic.nz/vrmblog/oauth2fb&scope=email'
     }
 
     //setup get request to listen for FBServer contact - this is used for the actual token creation
@@ -183,8 +183,10 @@ public class OAuth2fb extends HttpServlet {
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
 
             user = dao.getUserFacebook(email);
+            System.out.println(user.getUsername() + " is " + user.getStatus());
 
             if (user == null) {
+                System.out.println("user is null");
                 dao.addUserFB(firstName, lastName, email);
 
                 //print log to file
@@ -216,7 +218,7 @@ public class OAuth2fb extends HttpServlet {
 
             if (user.getStatus().equals("inactive")) {
                 errorMessage = "User account has been deleted, please contact us to reactivate.";
-                return true;
+                return false;
             }
 
 

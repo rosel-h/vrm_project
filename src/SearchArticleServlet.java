@@ -33,6 +33,7 @@ public class SearchArticleServlet extends HttpServlet {
         System.out.println("EditProfileServlet enter line 39: session id = " + session.getId());
 
         if (session == null) {
+            req.setAttribute("errorMessage", "Please log in to continue");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
 
         } else {
@@ -41,7 +42,7 @@ public class SearchArticleServlet extends HttpServlet {
                 System.out.println("SearchArticleServlet enter line 50: ");
 
                 String icon = dao.getIcon(username);
-                System.out.println(icon + " "+ username);
+                System.out.println(icon + " " + username);
                 if (username != null) {
                     req.setAttribute("personLoggedIn", username);
                     String iconPath = getServletContext().getRealPath("avatars");
@@ -62,16 +63,15 @@ public class SearchArticleServlet extends HttpServlet {
                 if (searchType.equals("title")) {
                     System.out.println("SearchArticleServlet enter line 78: search by title");
                     articles = dao.getArticleByTitle(keywords);
-                }else if (searchType.equals("username")) {
+                } else if (searchType.equals("username")) {
                     System.out.println("SearchArticleServlet enter line 82: search by username");
                     articles = dao.getArticleByUsername(keywords);
-                }else if (searchType.equals("date")) {
+                } else if (searchType.equals("date")) {
                     System.out.println("SearchArticleServlet enter line 86: search by date");
                     articles = dao.getArticleByDate(keywords);
                 }
 
                 req.setAttribute("articleList", articles);
-
                 req.getRequestDispatcher("searchresult.jsp").forward(req, resp);
                 System.out.println("SearchArticleServlet request has been dispatched");
 

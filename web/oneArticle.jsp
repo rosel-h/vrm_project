@@ -144,12 +144,12 @@
 
 <article>
     <div class="container">
-        <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%; margin: 1%">
+        <div class="row" style="color: white; border: solid; border-width: 1px; border-color: grey; border-radius: 3%; margin: 1%">
             <div class="col-lg-8 col-md-10 mx-auto">
                 ${articleToLoad.getContent()}
             </div>
 
-        </div>
+        </div>`
         <div class="row" style="float: right;">
             <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-xs-10" role="group">
