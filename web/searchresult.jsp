@@ -275,7 +275,16 @@
 
         </tbody>
     </table>
+    <div class="btn-group mx-auto">
+        <c:if test="${currentPage>=2}">
+            <a href="Articles?_p=${currentPage-1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">PREV</button></a>
+        </c:if>
+        <button type="button" style="font-weight: bold;" class="btn btn-primary" disabled>${currentPage}</button>
 
+        <c:if test="${currentPage<=lastPage-1}">
+            <a href="Articles?_p=${currentPage+1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">NEXT</button></a>
+        </c:if>
+    </div>
 </div>
 
 <%@include file="footer.jsp" %>

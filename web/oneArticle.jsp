@@ -60,7 +60,11 @@
             loadRandomImage();
         });
     </script>
-
+    <style>
+        img{
+            width: 100%;
+        }
+    </style>
 </head>
 <body style="background-color: #e6e6e6">
 <%--<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
@@ -144,12 +148,16 @@
 
 <article>
     <div class="container">
-        <div class="row" style="color: white; border: solid; border-width: 1px; border-color: grey; border-radius: 3%; margin: 1%">
+        <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%; margin: 1%">
+
             <div class="col-lg-8 col-md-10 mx-auto">
+                <c:if test="${articleToLoad.userIsInactive()}">
+                    <p><i>The user who wrote this article is <b><u>inactive</u></b></i></p>
+                </c:if>
                 ${articleToLoad.getContent()}
             </div>
 
-        </div>`
+        </div>
         <div class="row" style="float: right;">
             <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-xs-10" role="group">
@@ -191,9 +199,19 @@
                 <div class="">
                     <hr>
                     <div class="row">
-                        <img src="avatars/${commentList.getAvatarIcon()}" class=""
-                             style="height: 30px; width:30px; display: inline-block">
-                        <h5 class="" style="display: inline-block">&nbsp;${commentList.getCommentAuthor()}
+                        <img src="avatars/${commentList.getAvatarIcon()}" class="img-circle img-fluid"
+                             style="height: 30px; width:30px; border-radius: 50%; display: inline-block">
+                        <h5 class="" style="display: inline-block">&nbsp;
+                        <%--${commentList.getCommentAuthor()}--%>
+
+                            <c:choose>
+                                <c:when test="${commentList.userIsInactive()}">
+                                    <span style="color: lightsteelblue" data-toggle="tooltip" title="inactive user">${commentList.getCommentAuthor()}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    ${commentList.getCommentAuthor()}
+                                </c:otherwise>
+                            </c:choose>
                             <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                         </h5>
 
@@ -265,7 +283,18 @@
                                 <div class="row">
                                 <img src="avatars/${children.getAvatarIcon()}" class=""
                                      style="height: 30px; width:30px; display: inline-block">
-                                <h5 class="" style="display: inline-block">&nbsp;${children.getCommentAuthor()}
+                                <h5 class="" style="display: inline-block">&nbsp;
+                                <%--${children.getCommentAuthor()}--%>
+                                    <c:choose>
+                                        <c:when test="${children.userIsInactive()}">
+                                            <span style="color: lightsteelblue" data-toggle="tooltip" title="inactive user">${children.getCommentAuthor()}</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${children.getCommentAuthor()}
+                                        </c:otherwise>
+                                    </c:choose>
+
+
                                     <small><i>Posted on ${children.getDatePublished()}</i></small>
                                 </h5>
                                     <c:if test="${sessionScope.personLoggedIn !=null}">

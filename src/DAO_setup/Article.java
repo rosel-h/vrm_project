@@ -16,16 +16,25 @@ public class Article {
     private String content;
     private String date;
     private String title;
+    private String userStatus;
 
     public Article() {
     }
 
-    public Article(String username, int articleID, String content, String date, String title) {
+    public Article(String username, int articleID, String content, String date, String title,String userStatus) {
         this.username = username;
         this.articleID = articleID;
         this.content = content;
         this.date = date;
         this.title = title;
+        this.userStatus =userStatus;
+    }
+    public boolean userIsInactive(){
+        if(userStatus.toLowerCase().equals("inactive")){
+            System.out.println("article class: user "+username+" is inactive?"+userStatus.toLowerCase().equals("inactive"));
+            return true;
+        }
+        return false;
     }
 
     public String getUsername() {

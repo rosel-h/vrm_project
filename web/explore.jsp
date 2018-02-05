@@ -137,7 +137,8 @@
                     <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
                             <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" class="img-circle img-fluid"
+                                     style="height: 30px; width:30px; border-radius: 50%; display: inline-block"
                                      class="img-circle img-fluid">
                             </div>
                             <br>
@@ -249,14 +250,23 @@
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
-                                <input type="hidden" id="csrfToken" name="csrfToken"
-                                       value="${sessionScope.get("csrfSessionToken")}">
+                                <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                                 <button type="submit" style="font-weight: lighter; background: transparent" class="btn">
                                     Read More...
                                 </button>
                             </form>
                         </td>
-                        <td>by <i>${articleList.getUsername()}</i></td>
+                        <td>by <%--<i>${articleList.getUsername()}</i>--%>
+                            <%--<c:if test="${articleList.userIsInactive()}">(inactive user)</c:if></td>--%>
+                        <c:choose>
+                            <c:when test="${articleList.userIsInactive()}">
+                                <i style="color: lightsteelblue" data-toggle="tooltip" title="inactive user">${articleList.getUsername()}</i>
+                            </c:when>
+                            <c:otherwise>
+                            <i>${articleList.getUsername()}</i>
+                            </c:otherwise>
+                        </c:choose>
+
                         <td>${articleList.getDate()}</td>
                     </tr>
                 </c:if>
