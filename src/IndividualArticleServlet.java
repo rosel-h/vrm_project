@@ -1,7 +1,9 @@
 import DAO_setup.*;
 import org.jooq.tools.json.JSONObject;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,6 +19,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 
 /**
@@ -33,6 +37,10 @@ public class IndividualArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
+
+        String uncleanContent = req.getParameter("content");
+        String content = Jsoup.clean(uncleanContent, Whitelist.relaxed());
+        System.out.println(content);
 
         req.setCharacterEncoding("UTF-8");
 
@@ -83,7 +91,6 @@ public class IndividualArticleServlet extends HttpServlet {
                 }
 
                 String title = req.getParameter("title");
-                String content = req.getParameter("content");
                 user = String.valueOf( session.getAttribute("personLoggedIn"));
                 //check if date is to be published today or not
                 String submittedDate = req.getParameter("futureDate");
@@ -161,7 +168,9 @@ public class IndividualArticleServlet extends HttpServlet {
                     }
                     String userWhoCommented = req.getParameter("userWhoCommented");
 //                    String comment = req.getParameter("newComment");
+
                     String comment = Jsoup.clean(req.getParameter("newComment"), Whitelist.basicWithImages());
+
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);
@@ -188,7 +197,6 @@ public class IndividualArticleServlet extends HttpServlet {
                         return;
                     }
                     String title = req.getParameter("title");
-                    String content = req.getParameter("content");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addArticle(title, content, user, sqlDate);
                     System.out.println("IndividualArticleServlet: new article made");
