@@ -18,15 +18,16 @@ import java.util.List;
 public class PersonalArticles extends HttpServlet {
     private int pageNumber = 1;
     private boolean wentThroughGetMethod = false;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Personal Articles: do get");
         String number = req.getParameter("_p");
-        System.out.println("Personal Articles: "+number);
-        try{
+        System.out.println("Personal Articles: " + number);
+        try {
             pageNumber = Integer.parseInt(number);
-            wentThroughGetMethod=true;
-        }catch (NumberFormatException e){
+            wentThroughGetMethod = true;
+        } catch (NumberFormatException e) {
             System.out.println("Personal Articles: Someone tried to cheat the pages get method");
         }
         doPost(req, resp);
@@ -43,11 +44,11 @@ public class PersonalArticles extends HttpServlet {
         try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("Personal Articles Signup done");
             int totalArticlesSoFar = dao.getTotalArticles(user);
-            int totalPages = totalArticlesSoFar/10+1;
-            if(pageNumber >totalPages){
-                pageNumber =totalPages;
-            }else if(pageNumber<1){
-                pageNumber=1;
+            int totalPages = totalArticlesSoFar / 10 + 1;
+            if (pageNumber > totalPages) {
+                pageNumber = totalPages;
+            } else if (pageNumber < 1) {
+                pageNumber = 1;
             }
 
 //            String icon = dao.getIcon(user);
@@ -59,18 +60,18 @@ public class PersonalArticles extends HttpServlet {
 //            }
 
             int checkNumber = this.pageNumber;
-            if(!wentThroughGetMethod){
-                checkNumber=1;
+            if (!wentThroughGetMethod) {
+                checkNumber = 1;
             }
 //            List<Article> myArticles = dao.getMyArticles(user);
-            List<Article> myArticles = dao.getTenOfMyArticles(user,"date",checkNumber,true);
+            List<Article> myArticles = dao.getTenOfMyArticles(user, "date", checkNumber, true);
             System.out.println(myArticles.size());
-            System.out.println("Personal Articles: Articles added (size: "+myArticles.size()+")");
-            req.setAttribute("lastPage",totalPages);
-            req.setAttribute("currentPage",checkNumber);
-            req.setAttribute("myArticles",myArticles);
+            System.out.println("Personal Articles: Articles added (size: " + myArticles.size() + ")");
+            req.setAttribute("lastPage", totalPages);
+            req.setAttribute("currentPage", checkNumber);
+            req.setAttribute("myArticles", myArticles);
             req.getRequestDispatcher("myArticles.jsp").forward(req, resp);
-            wentThroughGetMethod=false;
+            wentThroughGetMethod = false;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

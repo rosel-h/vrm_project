@@ -33,6 +33,10 @@ public class IndividualArticleServlet extends HttpServlet {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
 
+        String uncleanContent = req.getParameter("content");
+        String content = Jsoup.clean(uncleanContent, Whitelist.relaxed());
+        System.out.println(content);
+
         req.setCharacterEncoding("UTF-8");
 
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
@@ -82,7 +86,6 @@ public class IndividualArticleServlet extends HttpServlet {
                 }
 
                 String title = req.getParameter("title");
-                String content = req.getParameter("content");
                 user = String.valueOf( session.getAttribute("personLoggedIn"));
                 //check if date is to be published today or not
                 String submittedDate = req.getParameter("futureDate");
@@ -187,7 +190,6 @@ public class IndividualArticleServlet extends HttpServlet {
                         return;
                     }
                     String title = req.getParameter("title");
-                    String content = req.getParameter("content");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addArticle(title, content, user, sqlDate);
                     System.out.println("IndividualArticleServlet: new article made");
