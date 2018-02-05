@@ -179,7 +179,7 @@
             <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
-                             class="img-fluid">
+                             class="img-circle img-fluid">
                     </div>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
@@ -224,35 +224,35 @@
             <ul id="banner_img" style="max-width: 100%; float: left;">
                 <li>
                     <div id="banner-1">
-                        <a href="OneArticle?articleID=1">
+                        <a href="OneArticle?articleID=23">
                             <img src="img/banner07.png" class="img-responsive" id="bannerimg-1"
                                  style="display: block; max-width: 100%; max-height: 100%;"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-2">
-                        <a href="OneArticle?articleID=2">
+                        <a href="OneArticle?articleID=1">
                             <img src="img/banner08.png" class="img-responsive" id="bannerimg-2"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-3">
-                        <a href="OneArticle?articleID=3">
+                        <a href="OneArticle?articleID=2">
                             <img src="img/banner09.jpg" class="img-responsive" id="bannerimg-3"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-4">
-                        <a href="OneArticle?articleID=4">
+                        <a href="OneArticle?articleID=3">
                             <img src="img/banner12.jpg" class="img-responsive" id="bannerimg-4"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>
                 </li>
                 <li>
                     <div id="banner-5">
-                        <a href="OneArticle?articleID=5">
+                        <a href="OneArticle?articleID=4">
                             <img src="img/banner13.jpg" class="img-responsive" id="bannerimg-5"
                                  style="display: block; max-width: 100%; max-height: 100%"/></a>
                     </div>

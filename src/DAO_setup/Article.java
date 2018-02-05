@@ -1,11 +1,8 @@
 package DAO_setup;
 
-import org.jsoup.Jsoup;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+
 
 /**
  * Created by rher490 on 24/01/2018.

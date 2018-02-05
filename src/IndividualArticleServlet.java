@@ -1,5 +1,7 @@
 import DAO_setup.*;
 import org.jooq.tools.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -159,7 +161,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     }
                     String userWhoCommented = req.getParameter("userWhoCommented");
 //                    String comment = req.getParameter("newComment");
-                    String comment = Jsoup.clean(req.getParameter("newComment"),Whitelist.basicWithImages());
+                    String comment = Jsoup.clean(req.getParameter("newComment"), Whitelist.basicWithImages());
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addCommentToArticle(articleID, userWhoCommented, sqlDate, comment);

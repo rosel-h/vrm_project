@@ -248,7 +248,7 @@
                                 <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
                                 <input type="hidden" id="csrfToken" name="csrfToken"
                                        value="${sessionScope.get("csrfSessionToken")}">
-                                <button type="submit" style="font-weight: lighter; background-color: transparent"
+                                <button type="submit" style="font-weight: lighter; background-color: transparent; font-weight: bold; cursor: pointer"
                                         class="btn">Read More...
                                 </button>
                             </form>

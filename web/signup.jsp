@@ -393,7 +393,7 @@
 
                             <div class="form-group">
 
-                                <div class=" row col-xs-12">
+                                <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
                                     <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>
 

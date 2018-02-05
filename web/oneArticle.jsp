@@ -144,7 +144,7 @@
 
 <article>
     <div class="container">
-        <div class="row" style="border: solid; border-width: 1px; border-color: grey; border-radius: 3%; margin: 1%">
+        <div class="row" style="border: solid; border-width: 1px; border-color: grey; margin: 1%">
             <div class="col-lg-8 col-md-10 mx-auto">
                 ${articleToLoad.getContent()}
             </div>
