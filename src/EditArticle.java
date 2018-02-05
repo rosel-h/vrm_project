@@ -18,8 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 /**
  * Created by rher490 on 25/01/2018.
@@ -71,7 +69,7 @@ public class EditArticle extends HttpServlet {
             System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
             String newTitle = req.getParameter("title");
-            String newContent = Jsoup.clean(req.getParameter("content"), Whitelist.basicWithImages());
+            String newContent = req.getParameter("content");
             String newDate = req.getParameter("futureDate");
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
 //        add date updated
