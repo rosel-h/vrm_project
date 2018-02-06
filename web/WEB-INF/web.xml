@@ -226,9 +226,19 @@
         <jsp-file>/contact.jsp</jsp-file>
     </servlet>
 
+        <servlet-mapping>
+            <servlet-name>Contact</servlet-name>
+            <url-pattern>/contact</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>Forgot</servlet-name>
+            <jsp-file>/forgetPassword.jsp</jsp-file>
+        </servlet>
+
     <servlet-mapping>
-        <servlet-name>Contact</servlet-name>
-        <url-pattern>/contact</url-pattern>
+        <servlet-name>Forgot</servlet-name>
+        <url-pattern>/passwordreset</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -250,4 +260,14 @@
         <servlet-name>ResetPassword</servlet-name>
         <url-pattern>/resetpassword</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Reset</servlet-name>
+        <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Reset</servlet-name>
+        <jsp-file>/resetpassword.jsp</jsp-file>
+    </servlet>
 </web-app>

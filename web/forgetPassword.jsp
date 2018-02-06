@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
+
 <!DOCTYPE html><html>
 <head>
     <meta charset="utf-8">
@@ -84,7 +90,7 @@
                 <div class="page-heading" style="margin: 2%; padding: 10%">
 
                     <div class="panel-title"><h3>Password Reset - for Non-Facebook Users</h3></div>
-                    <div style="color: #ff0000; font-size: 70%">${dobError}</div>
+                    <div style="color: #ff0000; font-size: 70%">${Error}</div>
 
                     <div style="padding-top:30px" class="panel-body">
 
