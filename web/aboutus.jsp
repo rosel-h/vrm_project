@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-
     <title>About Us</title>
     <%--<!-- Bootstrap core CSS -->--%>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +49,7 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
     </script>
@@ -82,14 +81,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
-                    <br>
-                    <h5>About Us</h5>
-                    <p>By the travellers, for the travellers. Make every heartbeat count..</p>
+                <div class="page-heading" style="margin: 10% 0 0 0; padding: 1%;">
+                    <h3>About Us</h3>
+                    <p>By the travellers, for the travellers. Make every heartbeat count.</p>
                     <p>VRM is a travel lifestyle blog that connects you to
                         millions of other like minded individuals. Whether you're a thrill seeker or a gentle explorer,
                         this site will give let you share your stories, tips on how to travel better and reviews of
                         exotic locations. Join the community now and start exploring!</p>
+                    <p style="float:right"><strong>the VRM Team</strong></p>
                 </div>
             </div>
         </div>
