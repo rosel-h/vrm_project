@@ -24,6 +24,12 @@
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/jquery/jquery-ui.min.js"></script>
+
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -268,11 +274,30 @@
 
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
 
-                        <button id="btn-delete"
-                                onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'"
-                                type="button" class="btn btn-danger">  
-                            Delete
-                        </button>
+
+                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteProfile">Delete</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteProfile" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Are you sure you want to delete your profile?</h6>
+                                    </div>
+                                    <div class="modal-body">
+                                        Your articles and comments will still be accessible on the website, but you will never access them again.
+                                        Ever.
+                                    </div>
+                                    <div class="modal-body">
+                                        <button id="btn-delete" onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'" type="button" class="btn btn-danger">  
+                                            Delete
+                                        </button>
+                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -282,6 +307,7 @@
     </form>
 
 </div>
+
 
 <%@include file="footer.jsp" %>
 <%--<div class="container">
