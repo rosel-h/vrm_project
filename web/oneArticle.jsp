@@ -104,10 +104,10 @@
                 ${articleToLoad.getContent()}
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="float: right">
             <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-lg-12 col-md-12 float-right" role="group">
-                <div style="padding: 1%; margin: 1%; float:right">
+                <div style="padding: 1%; margin: 2%">
                     <form class="form-inline" action="OneArticle" method="POST">
                         <input type="hidden" name="operation" value="delete">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
@@ -118,7 +118,7 @@
                         </button>
                     </form>
                 </div>
-                <div style="padding: 1%; margin: 1%; float:right">
+                <div style="padding: 1%; margin: 2%">
                     <form class="form-inline" action="editArticles" method="post">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                         <input type="hidden" name="operation" value="goToEditPage">
