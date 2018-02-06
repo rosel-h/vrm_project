@@ -253,7 +253,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 col-xs-12 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 2%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 2%; padding: 10%">
 
                     <div class="panel-title"><h3>Sign up</h3></div>
 

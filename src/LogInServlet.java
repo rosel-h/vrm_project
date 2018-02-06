@@ -31,7 +31,6 @@ public class LogInServlet extends HttpServlet {
         String username = request.getParameter("username");
         String pass = request.getParameter("pass");
 
-
         if (checkUser(username, pass)) {
             //create new session if username is verified
             HttpSession sess = request.getSession(true);

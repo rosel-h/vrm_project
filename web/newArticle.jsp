@@ -6,6 +6,7 @@
   Time: 1:28 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
@@ -59,25 +60,7 @@
 
     <script type="text/javascript">
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg",
-            "background14.jpg",
-            "background15.jpg",
-            "background16.jpg",
-            "background17.jpg",
-            "background18.jpg",
-            "background19.jpg",
-            "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -90,12 +73,7 @@
             loadRandomImage();
 
             document.getElementById('futureDate').valueAsDate = new Date();
-        });
 
-
-    </script>
-    <script>
-        $(document).ready(function () {
             $('#summernote').summernote({
                 toolbar: [
                     // [groupName, [list of button]]
@@ -121,12 +99,9 @@
             $('#summernote').summernote('insertImage', url, filename);
         });
     </script>
+
 </head>
 <body style="background-color: #e6e6e6">
-<%--<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
-<%--response.setHeader("Pragma","no-cache"); //HTTP 1.0--%>
-<%--response.setDateHeader ("Expires", 0); //prevents caching at the proxy server--%>
-<%--%>--%>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
@@ -134,26 +109,12 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-
         </button>
         <div class="collapse navbar-collapse float-right" id="navbarResponsive">
             <ul style="float: right" class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
-                    <a class="nav-link" href="javascript:window.history.back()">back</a>
+                    <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                <%--</li>--%>
             </ul>
         </div>
     </div>
@@ -164,7 +125,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
+                <div class="page-heading" style="margin: 15%; padding: 1% 0 0 0;">
                     <h2>Tell us your journey. </h2>
                     <span class="meta" style="font-size: 100%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
                 </div>
@@ -176,32 +137,24 @@
 <article>
     <div class="container">
         <!--  A form letting users add new articles. -->
-        <div class="">
-
-            <div class="">
-                <%--<h3 class="panel-title">New Article</h3>--%>
+        <form action="OneArticle" method="POST">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" class="form-control" maxlength="50" required>
+                <input type="hidden" id="csrfToken" name="csrfToken"
+                       value="${sessionScope.get("csrfSessionToken")}">
             </div>
-            <div class="">
-                <form action="OneArticle" method="POST">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" id="title" name="title" class="form-control" maxlength="50" required>
-                        <input type="hidden" id="csrfToken" name="csrfToken"
-                               value="${sessionScope.get("csrfSessionToken")}">
-                    </div>
-                    <div class="form-group">
-                        <label for="summernote">Content</label>
-                        <textarea id="summernote" name="content" class="form-control" rows="40" required></textarea>
-                        <label style="padding: 1%; margin: 1%" for="futureDate">Date Published (optional)</label>
-                        <input type="date" id="futureDate" name="futureDate" value="new Date()">
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="operation" value="add">
-                        <button type="submit" class="btn-lg btn-primary float-right">Submit</button>
-                    </div>
-                </form>
+            <div class="form-group">
+                <label for="summernote">Content</label>
+                <textarea id="summernote" name="content" class="form-control" rows="40" required></textarea>
+                <label style="padding: 1%; margin: 1%" for="futureDate">Date Published (optional)</label>
+                <input type="date" id="futureDate" name="futureDate" value="new Date()">
             </div>
-        </div>
+            <div class="form-group">
+                <input type="hidden" name="operation" value="add">
+                <button style="padding: 1%" type="submit" class="btn btn-primary float-right">Submit</button>
+            </div>
+        </form>
     </div>
 </article>
 <br>

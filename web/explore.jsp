@@ -71,6 +71,11 @@
 
         $(document).ready(function () {
             loadRandomImage();
+            $(document).ready(function () {
+                loadRandomImage();
+                $('#previewContent img').css("width", "90%");
+                $('#previewContent img').css("height", "auto");
+            });
         });
 
     </script>
@@ -95,18 +100,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Welcome">Home</a>
                         </li>
-                            <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="Articles">Community</a>--%>
-                            <%--</li>--%>
-                            <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                            <%--</li>--%>
+
                         <li class="nav-item">
                             <a class="nav-link" href="editprofile">My Profile</a>
                         </li>
-                            <%--<li class="nav-item">--%>
-                            <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                            <%--</li>--%>
                     </ul>
                 </div>
             </div>
@@ -118,37 +115,33 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                        <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
-                            <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                        <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
+                            <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar"
+                                     style="border-radius: 50%;padding-top: 10%"
                                      class="img-circle img-fluid">
                             </div>
-                            <br>
                             <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                            <div class="btn-group btn-group-justified col-xs-10" role="group"
-                                 style="padding: 1%">
-                                <div style="padding: 1%;margin: 1%">
-                                    <a href="myArticles" class="btn btn-default"
-                                       style=" background-color: white; opacity: 0.8">
-                                        My Articles
-                                    </a>
-                                </div>
-                                <div style="padding: 1%;margin: 1%">
-                                    <a href="Articles" class="btn btn-default"
-                                       style=" background-color: white; opacity: 0.8">
-                                        Community
-                                    </a>
-                                </div>
-                                <div style="padding: 1%;margin: 1%">
-                                    <a href="NewArticle" class="btn btn-danger"
-                                       style=" color: white;opacity: 0.8">
-                                        New Article
-                                    </a>
+                            <div style="margin-top:1%" class="form-group">
+                                <div class="col-sm-12 col-md-12 controls">
+                                    <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                            class="btn btn-default btn-responsive"
+                                            type="button"><a style="color:black; " href="myArticles"> My Articles </a>
+                                    </button>
+                                    <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                            class="btn btn-default btn-responsive"
+                                            type="button"><a style="color:black; " href="Articles"> Community </a>
+                                    </button>
+                                    <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                            class="btn btn-danger btn-responsive"
+                                            type="button"><a style="color:white; " href="NewArticle"> New Article</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </header>
 
@@ -228,13 +221,15 @@
                 <c:if test="${!articleList.dateIsGreaterThan(sqlDateToday)}">
                     <tr>
                         <td style=" width:55%"><h4 class="post-title">${articleList.getTitle()}</h4>
-                            <div style="font-size: small;">${articleList.getContentPreview()}</div>
+                            <div id="previewContent" style="font-size: small;">${articleList.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${articleList.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                                 <input type="hidden" id="csrfToken" name="csrfToken"
                                        value="${sessionScope.get("csrfSessionToken")}">
-                                <button type="submit" style="font-weight: lighter; background: transparent; font-weight: bold; cursor: pointer" class="btn">
+                                <button type="submit"
+                                        style="font-weight: lighter; background: transparent; font-weight: bold; cursor: pointer"
+                                        class="btn">
                                     Read More...
                                 </button>
                             </form>
@@ -248,12 +243,20 @@
         </table>
         <div class="btn-group mx-auto">
             <c:if test="${currentPage>=2}">
-                <a href="Articles?_p=${currentPage-1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">PREV</button></a>
+                <a href="Articles?_p=${currentPage-1}">
+                    <button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">
+                        PREV
+                    </button>
+                </a>
             </c:if>
             <button type="button" style="font-weight: bold;" class="btn btn-primary" disabled>${currentPage}</button>
 
             <c:if test="${currentPage<=lastPage-1}">
-                <a href="Articles?_p=${currentPage+1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">NEXT</button></a>
+                <a href="Articles?_p=${currentPage+1}">
+                    <button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">
+                        NEXT
+                    </button>
+                </a>
             </c:if>
         </div>
     </div>

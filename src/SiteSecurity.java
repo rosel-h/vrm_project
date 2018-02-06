@@ -1,9 +1,7 @@
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.security.SecureRandom;
-import java.io.*;
 
-// Mr Meads is a static class with security related methods and logging to be used by servlets :D
+
 
 public class SiteSecurity {
 

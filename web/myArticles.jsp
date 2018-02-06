@@ -83,6 +83,8 @@
 
         $(document).ready(function () {
             loadRandomImage();
+            $('#previewContent img').css("width", "90%");
+            $('#previewContent img').css("height", "auto");
         });
 
     </script>
@@ -97,7 +99,6 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -112,9 +113,7 @@
 
             </ul>
         </div>
-
     </div>
-
 </nav>
 
 
@@ -124,35 +123,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
-                    <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
+                    <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
+                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
                              class="img-circle img-fluid">
                     </div>
-                    <br>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                    <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding: 1%">
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="myArticles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.8">
-                                My Articles
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Articles" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.8">
-                                Community
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="NewArticle" class="btn btn-danger"
-                               style=" color: white;opacity: 0.8">
-                                New Article
-                            </a>
+                    <div style="margin-top:1%" class="form-group">
+                        <div class="col-sm-12 col-md-12 controls">
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="myArticles"> My Articles </a>
+                            </button>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="Articles"> Community </a>
+                            </button>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-danger btn-responsive"
+                                    type="button"><a style="color:white; " href="NewArticle"> New Article</a>
+                            </button>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -160,7 +151,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-lg-12 col-sm-1">
+        <div class="col-md-12 col-lg-12">
             <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
             <div style="float: right">
                 <c:if test="${sessionScope.personLoggedIn ==null}">
@@ -194,7 +185,7 @@
                 <c:forEach var="myArticles" items="${myArticles}">
                     <tr>
                         <td style=" width:55%"><h4 class="post-title">${myArticles.getTitle()}</h4>
-                            <div style="font-size: small;">${myArticles.getContentPreview()}</div>
+                            <div id="previewContent" style="font-size: small;">${myArticles.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
                                 <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">

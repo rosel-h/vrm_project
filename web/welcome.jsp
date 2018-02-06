@@ -157,30 +157,25 @@
     <div class="overlay"></div>
     <div class="container"><div class="row">
         <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
-            <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
+            <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
                              class="img-circle img-fluid">
                     </div>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                    <div class="btn-group btn-group-justified col-xs-10" role="group"
-                         style="padding: 1%">
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="myArticles" class="btn btn-default btn-responsive"
-                               style=" background-color: white; opacity: 0.8"> My Articles
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Articles" class="btn btn-default btn-responsive"
-                               style=" background-color: white; opacity: 0.8"> Community
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="NewArticle" class="btn btn-danger btn-responsive"
-                               style=" color: white;opacity: 0.8;"> New Article
-                            </a>
-                        </div>
+                <div style="margin-top:1%" class="form-group">
+                    <div class="col-sm-12 col-md-12 controls">
+                        <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                type="button"><a style="color:black; " href="myArticles"> My Articles </a>
+                        </button>
+                        <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                type="button"><a style="color:black; " href="Articles"> Community </a>
+                        </button>
+                        <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-danger btn-responsive"
+                                type="button"><a style="color:white; " href="NewArticle"> New Article</a>
+                        </button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

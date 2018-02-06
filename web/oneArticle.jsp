@@ -47,6 +47,11 @@
 
         $(document).ready(function () {
             loadRandomImage();
+            $(document).ready(function () {
+                loadRandomImage();
+                $('#loadedContent img').css("max-width", "90%");
+                $('#loadedContent img').css("height", "auto");
+            });
         });
     </script>
 
@@ -82,7 +87,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
+                <div class="page-heading" style="margin: 10%; padding: 10%">
                     <h2>${articleToLoad.getTitle()}</h2>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
                     <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
@@ -94,35 +99,33 @@
 
 <article>
     <div class="container">
-        <div class="row" style="border: solid; border-width: 1px; border-color: grey; padding: 2%">
-            <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="row">
+            <div id="loadedContent" class="col-lg-12 col-md-12 form-control">
                 ${articleToLoad.getContent()}
             </div>
         </div>
-
-        <div class="row" style="float: right;">
+        <div class="row">
             <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
-            <div class="btn-group btn-group-justified col-xs-10" role="group">
-                <div style="padding: 1%; margin: 1%">
+            <div class="btn-group btn-group-justified col-lg-12 col-md-12 float-right" role="group">
+                <div style="padding: 1%; margin: 1%; float:right">
                     <form class="form-inline" action="OneArticle" method="POST">
                         <input type="hidden" name="operation" value="delete">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                         <input type="hidden" id="csrfToken1" name="csrfToken"
                                value="${sessionScope.get("csrfSessionToken")}">
-                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                        <button type="submit" class="btn btn-danger pull-right">
                             Delete
                         </button>
                     </form>
                 </div>
-                <div style="padding: 1%; margin: 1%">
-                        <%--<form class="form-inline" action="/Articles" method="POST">--%>
+                <div style="padding: 1%; margin: 1%; float:right">
                     <form class="form-inline" action="editArticles" method="post">
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                         <input type="hidden" name="operation" value="goToEditPage">
                         <input type="hidden" name="author" value="${sessionScope.personLoggedIn}">
                         <input type="hidden" id="csrfToken2" name="csrfToken"
                                value="${sessionScope.get("csrfSessionToken")}">
-                        <button style="float: right" id="editorButton" type="submit"
+                        <button id="editorButton" type="submit"
                                 class="btn btn-primary pull-right">Edit
                         </button>
                     </form>
@@ -130,6 +133,10 @@
             </div>
         </div>
         </c:if>
+        </div>
+
+
+
     </div>
     <br>
 
@@ -170,11 +177,6 @@
                     </c:if>
 
                     <c:if test="${sessionScope.personLoggedIn !=null}">
-
-                        <%--<small id="replyToThis${commentList.getCommentID()}"--%>
-                        <%--style="display: inline-block;">--%>
-                        <%--<button class="btn btn-xs btn-default">Reply</button>--%>
-                        <%--</small>--%>
 
                         <div id="replyBox${commentList.getCommentID()}" style="display: none">
                             <form method="post" action="OneArticle">

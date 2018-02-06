@@ -64,7 +64,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading" style="margin: 1%; padding: 10% 0 0 0;">
+                <div class="page-heading" style="margin: 1%; padding: 10%">
                     <h5>Get started by logging in or signing up</h5>
                     <br>
                     <div class="btn-group btn-group-justified col-xs-10" role="group"
