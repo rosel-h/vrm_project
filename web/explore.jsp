@@ -10,13 +10,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
+<!DOCTYPE html>
+<!DOCTYPE html><html>
 <head>
     <title>Explore Community</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,18 +60,7 @@
         }
 
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -90,13 +78,8 @@
 </head>
 <body style="background-color: #e6e6e6">
 
-
 <c:choose>
     <c:when test="${sessionScope.personLoggedIn !=null}">
-        <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-            response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-            response.setDateHeader("Expires", 0); //prevents caching at the proxy server
-        %>
         <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
@@ -104,7 +87,7 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
-                    <i class="fa fa-bars"></i>
+
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
@@ -179,7 +162,7 @@
     <div class="row" style="vertical-align: middle">
         <div class="col-md-12">
             <div class="btn-group btn-group-justified col-xs-10" role="group" style="padding: 1%">
-                <h1>All Articles &nbsp;</h1>
+                <h2>All Articles &nbsp;</h2>
             </div>
 
             <div class="btn-group col-xs-10" role="group">

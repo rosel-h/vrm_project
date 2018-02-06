@@ -12,7 +12,7 @@
     <c:redirect url="Index"/>
 </c:if>
 
-<html>
+<!DOCTYPE html><html>
 <head>
     <title>Create Article</title>
 
@@ -134,7 +134,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
+
         </button>
         <div class="collapse navbar-collapse float-right" id="navbarResponsive">
             <ul style="float: right" class="navbar-nav ml-auto">
@@ -165,7 +165,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
-                    <h1>Tell us your journey. </h1>
+                    <h2>Tell us your journey. </h2>
                     <span class="meta" style="font-size: 100%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
                 </div>
             </div>

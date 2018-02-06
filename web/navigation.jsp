@@ -5,8 +5,7 @@
   Time: 3:49 PM
   To change this template use File | Settings | File Templates.
 --%>
-
-<script>
+<script type="text/javascript">
     var searchselect = document.getElementById("searchselect");
     searchselect.addEventListener("change", myFc);
 
@@ -14,26 +13,11 @@
         var x = document.getElementById("searchkeyword");
         console.log(searchselect.value());
         if (searchselect.value().eq("date")) {
-
-        } else {
-
         }
     }
-</script>
-<script type="text/javascript">
+
     var imageCollection = [
-        "background01.jpg",
-        "background02.jpg",
-        "background03.jpg",
-        "background04.jpg",
-        "background05.jpg",
-        "background06.jpg",
-        "background07.jpg",
-        "background08.jpg",
-        "background09.jpg",
-        "background10.jpg",
-        "background11.jpg",
-        "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+        "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
     ];
 
     function loadRandomImage() {
@@ -45,28 +29,23 @@
     $(document).ready(function() {
         loadRandomImage();
     });
-
-
-</script>
-<script>
     $(function () {
         $("#datepicker").datepicker();
     });
+
 </script>
 
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
     response.setHeader("Pragma","no-cache"); //HTTP 1.0
     response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
 %>
+
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
 
-<head>
-
-</head>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -75,26 +54,15 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                <%--</li>--%>
             </ul>
         </div>
     </div>
@@ -133,9 +101,7 @@
                                 New Article
                             </a>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>

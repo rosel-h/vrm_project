@@ -28,26 +28,15 @@
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
           rel='stylesheet' type='text/css'>
-
     <!-- Custom styles for this template -->
     <link href="vendor/css/clean-blog.min.css" rel="stylesheet">
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
     <script src="vendor/js/featured.js"></script>
+
     <script type="text/javascript">
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -63,10 +52,6 @@
 
 </head>
 <body style="background-color: #e6e6e6">
-<%--<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1--%>
-<%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
-<%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server--%>
-<%--%>--%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
@@ -74,53 +59,22 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Welcome">Home</a>--%>
-                <%--</li>--%>
+                <li class="nav-item">
+
+                    <a class="nav-link" href="javascript:window.history.back()">back</a>
+                </li>
+                <c:if test="${sessionScope.personLoggedIn !=null}">
                     <li class="nav-item">
                         <a class="nav-link" href="Welcome">Home</a>
                     </li>
-                <li class="nav-item">
-                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
-                    <a class="nav-link" href="javascript:window.history.back()">back</a>
-                </li>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <c:if test="${sessionScope.personLoggedIn !=null}">
-                    <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                    <%--</li>--%>
-                    <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
-                    <%--</li>--%>
                 </c:if>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="about">About</a>--%>
-                <%--</li>--%>
-                <c:choose>
-                    <c:when test="${sessionScope.personLoggedIn !=null}">
-                        <%--<li class="nav-item">--%>
-                        <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                        <%--</li>--%>
-                    </c:when>
-                    <c:otherwise>
-                        <%--<li class="nav-item">--%>
-                        <%--<a href="Signin" class="btn btn-default">--%>
-                        <%--<span class="glyphicon glyphicon-circle-arrow-right"--%>
-                        <%--aria-hidden="true"> &nbsp;Login</span>--%>
-                        <%--</a>--%>
-                        <%--</li>--%>
-                    </c:otherwise>
-                </c:choose>
             </ul>
         </div>
     </div>
-
 </nav>
 
 <header id="backgroundImage" class="masthead">
@@ -129,7 +83,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
-                    <h1>${articleToLoad.getTitle()}</h1>
+                    <h2>${articleToLoad.getTitle()}</h2>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
                     <span class="meta">Posted by ${articleToLoad.getUsername()} on ${articleToLoad.getDate()}</span>
                 </div>
@@ -138,18 +92,14 @@
     </div>
 </header>
 
-<%--<h1 class="post-title">${articleToLoad.getTitle()}</h1>--%>
-<%--<div>Posted by ${articleToLoad.getUsername()}</div>--%>
-<%--<div>Published on ${articleToLoad.getDate()}</div>--%>
-
 <article>
     <div class="container">
-        <div class="row" style="border: solid; border-width: 1px; border-color: grey; margin: 1%">
+        <div class="row" style="border: solid; border-width: 1px; border-color: grey; padding: 2%">
             <div class="col-lg-8 col-md-10 mx-auto">
                 ${articleToLoad.getContent()}
             </div>
-
         </div>
+
         <div class="row" style="float: right;">
             <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-xs-10" role="group">
@@ -199,7 +149,8 @@
 
                         <c:if test="${sessionScope.personLoggedIn !=null}">
                             <small id="replyToThis${commentList.getCommentID()}"
-                                   style="display: inline-block;">&nbsp;<ins style="cursor: pointer;"><strong>Reply >></strong></ins>
+                                   style="display: inline-block;">&nbsp;<ins style="cursor: pointer;"><strong>Reply
+                                >></strong></ins>
                             </small>
 
                         </c:if>
@@ -221,8 +172,8 @@
                     <c:if test="${sessionScope.personLoggedIn !=null}">
 
                         <%--<small id="replyToThis${commentList.getCommentID()}"--%>
-                               <%--style="display: inline-block;">--%>
-                            <%--<button class="btn btn-xs btn-default">Reply</button>--%>
+                        <%--style="display: inline-block;">--%>
+                        <%--<button class="btn btn-xs btn-default">Reply</button>--%>
                         <%--</small>--%>
 
                         <div id="replyBox${commentList.getCommentID()}" style="display: none">
@@ -263,14 +214,15 @@
                             <div class="nested" style="padding-left: 10%">
                                 <hr>
                                 <div class="row">
-                                <img src="avatars/${children.getAvatarIcon()}" class=""
-                                     style="height: 30px; width:30px; display: inline-block">
-                                <h5 class="" style="display: inline-block">&nbsp;${children.getCommentAuthor()}
-                                    <small><i>Posted on ${children.getDatePublished()}</i></small>
-                                </h5>
+                                    <img src="avatars/${children.getAvatarIcon()}" class=""
+                                         style="height: 30px; width:30px; display: inline-block">
+                                    <h5 class="" style="display: inline-block">&nbsp;${children.getCommentAuthor()}
+                                        <small><i>Posted on ${children.getDatePublished()}</i></small>
+                                    </h5>
                                     <c:if test="${sessionScope.personLoggedIn !=null}">
                                         <small id="replyToThis${children.getCommentID()}"
-                                               style="display: inline-block;">&nbsp;<ins style="cursor: pointer;"><strong>Reply >></strong></ins>
+                                               style="display: inline-block;">&nbsp;<ins style="cursor: pointer;">
+                                            <strong>Reply >></strong></ins>
                                         </small>
 
                                     </c:if>
@@ -278,9 +230,9 @@
                                 <p>${children.getContent()}</p>
 
                                 <c:if test="${sessionScope.personLoggedIn !=null}">
-<%--                                    <small id="replyToThis${children.getCommentID()}"
-                                           style="display: inline-block;">Reply
-                                    </small>--%>
+                                    <%--                                    <small id="replyToThis${children.getCommentID()}"
+                                                                               style="display: inline-block;">Reply
+                                                                        </small>--%>
                                     <div id="replyBox${children.getCommentID()}" style="display: none">
                                         <form method="post" action="OneArticle">
                                             <div class="form-group">

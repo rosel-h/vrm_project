@@ -1,8 +1,6 @@
 import DAO_setup.Article;
 import DAO_setup.BlogDAO;
 import DAO_setup.MYSQLDatabase;
-import DAO_setup.User;
-import org.jooq.tools.json.JSONObject;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,12 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.sql.Date;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,9 +28,11 @@ public class EditArticle extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
+        //set up prerequisites
         req.setCharacterEncoding("UTF-8");
+        HttpSession session = req.getSession(false);
 
+        //csrfToken Logic
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
 
@@ -44,7 +41,6 @@ public class EditArticle extends HttpServlet {
             resp.sendError(666);
             return;
         }
-        System.out.println("token verified");
 
         System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
@@ -120,4 +116,3 @@ public class EditArticle extends HttpServlet {
     }
 
 }
-
