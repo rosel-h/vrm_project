@@ -11,6 +11,7 @@
     <c:redirect url="Index"/>
 </c:if>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Save profile successfully | VRM Blog</title>

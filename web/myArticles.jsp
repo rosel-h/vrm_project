@@ -12,30 +12,18 @@
     <c:redirect url="Index"/>
 </c:if>
 
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>${sessionScope.personLoggedIn} Articles</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-<%--<!-- Latest compiled and minified CSS -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"--%>
-    <%--integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--%>
-
-    <%--<!-- Optional theme -->--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"--%>
-    <%--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">--%>
-
-    <%--<!-- Latest compiled and minified JavaScript -->--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"--%>
-    <%--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"--%>
-    <%--crossorigin="anonymous"></script>--%>
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -83,23 +71,10 @@
         function getCellValue(row, index) {
             return $(row).children('td').eq(index).text();
         }
-    </script>
-    <script type="text/javascript">
-        var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
-        ];
 
+        var imageCollection = [
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+        ];
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
             $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
@@ -114,10 +89,6 @@
 
 </head>
 <body style="background-color: #e6e6e6">
-<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
-%>
 
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
 
@@ -126,7 +97,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -134,22 +105,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
+
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<i class="glyphicon glyphicon-search" style="color: white;"--%>
-                <%--data-toggle="modal" data-target="#searchbar"></i>--%>
-                <%--</li>--%>
+
             </ul>
         </div>
 
@@ -201,15 +161,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-lg-12 col-sm-1">
-            <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h1>
+            <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
             <div style="float: right">
-                <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
-                <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img--%>
-                <%--src="avatars/${user.getAvatar_icon()}"--%>
-                <%--style="height: 30px"--%>
-                <%--alt="avatar"/></a>--%>
-                <%--</div>--%>
-                <%--</c:if>--%>
                 <c:if test="${sessionScope.personLoggedIn ==null}">
                     <div>Logged in as Guest</div>
                 </c:if>
@@ -239,7 +192,6 @@
                 %>
 
                 <c:forEach var="myArticles" items="${myArticles}">
-                    <%--<c:if test="${personHasLoggedIn==articleList.getUsername()}">--%>
                     <tr>
                         <td style=" width:55%"><h4 class="post-title">${myArticles.getTitle()}</h4>
                             <div style="font-size: small;">${myArticles.getContentPreview()}</div>
@@ -258,12 +210,6 @@
                             <c:if test="${myArticles.dateIsGreaterThan(sqlDateToday)}">
                                 (not yet published)
                             </c:if>
-                        </td>
-                        <td>
-                                <%--<button style="float: right;" type="button" class="btn btn-sm" data-toggle="modal"--%>
-                                <%--data-target="#a${myArticles.getArticleID()}">Read More...--%>
-                                <%--</button>--%>
-
                         </td>
                     </tr>
                 </c:forEach>

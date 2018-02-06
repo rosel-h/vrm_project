@@ -1,20 +1,22 @@
-<%@ page import="DAO_setup.Article" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Rose
   Date: 29/01/2018
   Time: 10:22 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
 
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <title>Revising Article: ${articleToEdit.getTitle()}</title>
-
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -58,28 +60,17 @@
 
     <script type="text/javascript">
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
-            $('#backgroundImage').css('background-image', 'url(/img/' + imageCollection[numImage] + ')');
+            $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
             console.log(imageCollection[numImage]);
         }
 
         $(document).ready(function () {
-            loadRandomImage();
+            loadRandomImage()
             $('#summernote').summernote({
                 toolbar: [
                     // [groupName, [list of button]]
@@ -99,60 +90,53 @@
                     link: [],
                     air: []
                 },
-                prettifyHtml: true
+                prettifyHtml: true,
             });
             $('#summernote').summernote('insertImage', url, filename);
         });
-
     </script>
 </head>
+
 <body style="background-color: #e6e6e6">
-
-
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+
     <div id="top" class="container">
+
         <a class="navbar-brand">Welcome ${sessionScope.get("personLoggedIn")}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse float-right" id="navbarResponsive">
             <ul style="float: right" class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <%--<a class="nav-link" href="Welcome">Home</a>--%>
+
                     <a class="nav-link" href="javascript:window.history.back()">back</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                <%--</li>--%>
+                <li class="nav-item">
+                    <a class="nav-link" href="Welcome">Home</a>
+                </li>
             </ul>
         </div>
+
     </div>
 </nav>
 
 <header id="backgroundImage" class="masthead">
+
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 15% 0 5%; padding: 1% 0 0 0;">
-                    <h1>${articleToEdit.getUsername()}, edit your article below</h1>
-                    <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
+                    <h2>${articleToEdit.getUsername()}, edit your article below</h2>
                     <span class="meta">Originally posted on ${articleToEdit.getDate()}</span>
                 </div>
             </div>
         </div>
     </div>
+
 </header>
 
 <article>
@@ -161,45 +145,47 @@
         <div class="">
 
             <div class="">
-            <h3 class="post-title">Edit Article
-            <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
-                <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                <input type="hidden" name="operation" value="delete">
-                <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
-                <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                    Delete
-                </button>
-            </form>
-            </h3>
-        </div>
-        <div class="">
-            <form action="editArticles" method="POST">
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" class="form-control" maxlength="50" value="${articleToEdit.getTitle()}"
-                           required>
-                </div>
-                <div class="form-group">
-                    <label for="summernote">Content</label>
-                    <textarea id="summernote" name="content" class="form-control" rows="10"
-                              required>${articleToEdit.getContent()}</textarea>
-                    <label for="futureDate">Change date published (optional)</label>
-                    <input type="date" id="futureDate" name="futureDate" value="new Date()">
-                </div>
-                <div class="form-group">
-                    <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
-                    <input type="hidden" name="author" value="${articleToEdit.getUsername()}">
-                    <input type="hidden" name="operation" value="userHasEditedArticle">
-                    <input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">
-                    <%--<input type="hidden" name="dateInDatabse" value="${article}">--%>
-                    <input type="hidden" id="csrfToken" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
-                    <button type="submit" class="btn btn-primary float-right">Done</button>
-                </div>
-            </form>
-           
+                <h3 class="post-title">Edit Article
+                    <form class="form-inline" action="OneArticle" method="POST"
+                          style="display: inline-block; float: right;">
+                        <input type="hidden" id="csrfToken1" name="csrfToken"
+                               value="${sessionScope.get("csrfSessionToken")}">
+                        <input type="hidden" name="operation" value="delete">
+                        <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
+                            Delete
+                        </button>
+                    </form>
+                </h3>
+            </div>
+            <div class="">
+                <form action="editArticles" method="POST">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" class="form-control" maxlength="50"
+                               value="${articleToEdit.getTitle()}"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="summernote">Content</label>
+                        <textarea id="summernote" name="content" class="form-control" rows="10"
+                                  required>${articleToEdit.getContent()}</textarea>
+                        <label for="futureDate">Change date published (optional)</label>
+                        <input type="date" id="futureDate" name="futureDate" value="new Date()">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
+                        <input type="hidden" name="author" value="${articleToEdit.getUsername()}">
+                        <input type="hidden" name="operation" value="userHasEditedArticle">
+                        <input type="hidden" name="publishedDate" value="${articleToEdit.getDate()}">
+                        <input type="hidden" id="csrfToken" name="csrfToken"
+                               value="${sessionScope.get("csrfSessionToken")}">
+                        <button type="submit" class="btn btn-primary float-right">Done</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </article>
 <br>
 <%@include file="footer.jsp" %>

@@ -15,6 +15,7 @@
                     <hr>
                     <p class="copyright text-muted"><a href="privacy">Privacy Policy</a> | <a href="contact">Contact
                         Us</a></p>
+                    <p class="copyright text-muted">Main Developers: Vincent Wen, Rose Hernandez, Harper (Mengjie) Shen</p>
                     <p class="copyright text-muted">Copyright &copy; VRM 2018</p>
                 </div>
             </div>

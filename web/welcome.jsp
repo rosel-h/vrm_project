@@ -23,8 +23,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>Welcome to VRM Blog</title>
 
@@ -102,27 +100,15 @@
             width: 100%;
         }
 
-    </style>
-    <style type="text/css">
         #headingID > form {
             width: 100%;
         }
+
     </style>
 
     <script type="text/javascript">
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -136,13 +122,9 @@
         });
 
     </script>
+
 </head>
 <body style="background-color: #e6e6e6">
-
-<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
-%>
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -151,7 +133,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
+
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
@@ -162,7 +144,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="editprofile">My Profile</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="Main?logout_button=Logout">Log Out</a>
                 </li>
@@ -210,7 +191,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="page-heading">
-                <h1 style="text-align: center">Featured Articles</h1>
+                <h1 style="text-align: center">Featured Articles</h2>
                 <br>
             </div>
         </div>

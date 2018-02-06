@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
 
+import javax.json.Json;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,14 +36,10 @@ public class IndividualArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
-
         String content = req.getParameter("content");
-//        String content = Jsoup.clean(uncleanContent, Whitelist.relaxed());
-        System.out.println(content);
-
-        req.setCharacterEncoding("UTF-8");
 
         String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
@@ -134,6 +131,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     resp.sendError(666);
                     return;
                 }
+
                 System.out.println("IndividualArticleServlet: Delete option");
                 System.out.println(req.getParameter("articleID"));
                 int id = Integer.parseInt(req.getParameter("articleID"));
@@ -166,10 +164,11 @@ public class IndividualArticleServlet extends HttpServlet {
                         resp.sendError(666);
                         return;
                     }
-                    String userWhoCommented = req.getParameter("userWhoCommented");
-//                    String comment = req.getParameter("newComment");
 
-                    String comment = Jsoup.clean(req.getParameter("newComment"), Whitelist.basicWithImages());
+                    String userWhoCommented = req.getParameter("userWhoCommented");
+//
+                    // String comment = req.getParameter("newComment");
+                    String comment = Jsoup.clean(req.getParameter("newComment"), Whitelist.relaxed());
 
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
@@ -196,6 +195,9 @@ public class IndividualArticleServlet extends HttpServlet {
                         resp.sendError(666);
                         return;
                     }
+
+                    content = Jsoup.clean(content, Whitelist.relaxed());
+
                     String title = req.getParameter("title");
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     dao.addArticle(title, content, user, sqlDate);
@@ -250,7 +252,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     String userWhoCommented = req.getParameter("userWhoCommented");
 //                    String comment = req.getParameter("newComment");
-                    String comment = Jsoup.clean(req.getParameter("newComment"),Whitelist.basicWithImages());
+                    String comment = Jsoup.clean(req.getParameter("newComment"),Whitelist.relaxed());
                     int articleID = Integer.parseInt(req.getParameter("articleID"));
                     int parentComment = Integer.parseInt(req.getParameter("fatherComment"));
                     dao.addCommentToAnotherComment(articleID, userWhoCommented, sqlDate, comment, parentComment);

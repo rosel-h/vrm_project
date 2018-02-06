@@ -11,8 +11,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+
+
 
     <title>Welcome to VRM</title>
     <!-- Bootstrap core CSS -->
@@ -39,11 +39,12 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
         <a class="navbar-brand">Welcome Guest</a>
+
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
-            <i class="fa fa-bars"></i>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -54,6 +55,7 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
 
