@@ -41,6 +41,7 @@ public class ForgetPassword extends HttpServlet {
             }else {
                 System.out.println("ForgetPassword enter line 36: username and dob verification success");
                 req.setAttribute("username",username);
+                req.setAttribute("verify","success");
                 req.getRequestDispatcher("resetpassword.jsp").forward(req,resp);
             }
 
