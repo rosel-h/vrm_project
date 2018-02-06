@@ -59,6 +59,23 @@ public class User {
         }
     }
 
+    public User(String username, String password, String fname, String lname, String dateOfBirth, String country, String description, String avatar_icon, String status, String email, String security_q, String security_a) {
+        this.username = username;
+        this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.dateOfBirth = dateOfBirth;
+        this.country = country;
+        this.description = description;
+        this.avatar_icon = avatar_icon;
+        this.status = status;
+        if(!String.valueOf(email).equals("null")) {
+            this.email = email;
+        }
+        this.security_q = security_q;
+        this.security_a = security_a;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -164,6 +181,6 @@ public class User {
     }
 
     public String toString() {
-        return "username=" + username + ",fname=" + fname + ",lname=" + lname + ",dob=" + dateOfBirth + ",country=" + country + ",description=" + description + ",avatar=" + avatar_icon;
+        return "username=" + username + ",fname=" + fname + ",lname=" + lname + ",dob=" + dateOfBirth + ",country=" + country + ",description=" + description + ",avatar=" + avatar_icon + ",s_q=" + security_q + ",s_a=" + security_a;
     }
 }

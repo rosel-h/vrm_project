@@ -106,6 +106,7 @@ public class LogInServlet extends HttpServlet {
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
 
             user = dao.getUserStandard(username, pass);
+            System.out.println(user.toString());
 
             // if no user returned - return a wrong userpw msg and fail login
             if (user == null) {

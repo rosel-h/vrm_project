@@ -71,7 +71,7 @@ public class UserDAO implements AutoCloseable {
     }
 
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
-        return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"));
+        return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"), rs.getString("security_q"), rs.getString("security_a"));
     }
 
     public void addUserFB(String fName, String lName, String email) {
@@ -163,15 +163,21 @@ public class UserDAO implements AutoCloseable {
         boolean updateSuccess = false;
 
         try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
-                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ? WHERE username = ?;")) {
+                "SET fname = ?, lname = ?, dob = ?, country = ?, description = ?, avatar_icon = ?, security_q = ?, security_a = ? WHERE username = ?;")) {
 
+            System.out.println("userDao user=" + user.toString());
             ps.setString(1, user.getFname());
             ps.setString(2, user.getLname());
             ps.setString(3, user.getDateOfBirth());
             ps.setString(4, user.getCountry());
             ps.setString(5, user.getDescription());
             ps.setString(6, user.getAvatar_icon());
-            ps.setString(7, user.getUsername());
+
+            System.out.println("userDAO sq=" + user.getSecurity_q() + ",sq=" + user.getSecurity_a());
+            ps.setString(7, user.getSecurity_q());
+            ps.setString(8, user.getSecurity_a());
+            ps.setString(9, user.getUsername());
+
 
             ps.executeUpdate();
 
