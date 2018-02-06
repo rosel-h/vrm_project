@@ -184,7 +184,7 @@
 
                 <c:forEach var="myArticles" items="${myArticles}">
                     <tr>
-                        <td style=" width:55%"><h4 class="post-title">${myArticles.getTitle()}</h4>
+                        <td style=" width:55%"><h4>${myArticles.getTitle()}</h4>
                             <div id="previewContent" style="font-size: small;">${myArticles.getContentPreview()}</div>
                             <form action="OneArticle" method="post">
                                 <input type="hidden" name="articleID" value="${myArticles.getArticleID()}">
