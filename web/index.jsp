@@ -86,27 +86,17 @@
                 <div class="page-heading">
                     <h2>Welcome to VRM</h2>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                    <br>
-                    <div class="btn-group btn-group-justified col-xs-10" role="group">
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Signin" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Login</span>
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Signuppage" class="btn btn-default"
-                               style=" background-color: white; opacity: 0.8">
-                                <span> &nbsp;Sign Up</span>
-                            </a>
-                        </div>
-                        <div style="padding: 1%;margin: 1%">
-                            <a href="Articles" class="btn btn-danger"
-                               style=" color: white;opacity: 0.8">
-                                <span class="glyphicon glyphicon-circle-arrow-right"
-                                      aria-hidden="true"> &nbsp;Explore</span>
-                            </a>
+                    <div style="margin-top:1%" class="form-group">
+                        <div class="col-sm-12 col-md-12 controls">
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="myArticles"> My Articles </a>
+                            </button>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="Articles"> Community </a>
+                            </button>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-danger btn-responsive"
+                                    type="button"><a style="color:white; " href="NewArticle"> New Article</a>
+                            </button>
                         </div>
                     </div>
                 </div>

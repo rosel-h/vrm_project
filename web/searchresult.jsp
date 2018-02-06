@@ -99,7 +99,6 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0
             response.setDateHeader("Expires", 0); //prevents caching at the proxy server
         %>
-        <%--<%@include file="navigation.jsp" %>--%>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
                 <a class="navbar-brand">Welcome ${personLoggedIn}</a>
