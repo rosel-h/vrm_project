@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<% response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1--%>
-    <%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
-    <%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>--%>
+<%--response.setHeader("Pragma", "no-cache"); //HTTP 1.0--%>
+<%--response.setDateHeader("Expires", 0); //prevents caching at the proxy server %>--%>
 
 <c:if test="${sessionScope.personLoggedIn != null}">
     <c:redirect url="Welcome"/>
@@ -13,7 +13,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 
 
     <title>Welcome to VRM</title>
@@ -43,7 +42,7 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
 
@@ -51,9 +50,9 @@
     </script>
 </head>
 <body style="background-color: #e6e6e6">
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -84,24 +83,30 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
-                    <h2>Welcome to VRM</h2>
+                    <h1>Welcome to VRM</h1>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                    <div style="margin-top:1%" class="form-group">
-                        <div class="col-sm-12 col-md-12 controls">
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
-                                    type="button"><a style="color:black; " href="myArticles"> My Articles </a>
+                    <br>
+                    <div class="col-sm-12 col-md-12 controls">
+                        <div style="margin-top:1%" class="form-group">
+                            <button style="margin: 1%; padding-left: 4.5%; padding-right: 4.5%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="Signin"> Login</a>
                             </button>
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
-                                    type="button"><a style="color:black; " href="Articles"> Community </a>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-default btn-responsive"
+                                    type="button"><a style="color:black; " href="Signuppage"> Sign Up </a>
                             </button>
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-danger btn-responsive"
-                                    type="button"><a style="color:white; " href="NewArticle"> New Article</a>
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-danger btn-responsive"
+                                    type="button"><a style="color:white; " href="Articles"> Explore</a>
                             </button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </header>
 
