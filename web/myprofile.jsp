@@ -12,12 +12,18 @@
     <c:redirect url="Index"/>
 </c:if>
 
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>My Profile | VRM BLOG</title>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -40,21 +46,17 @@
             console.log(imageCollection[numImage]);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             loadRandomImage();
         });
     </script>
 
 </head>
 <body style="background-color: #e6e6e6">
-<% response.setHeader("Cache-Control","no-cache, no-store, must-revalidate"); //HTTP 1.1
-    response.setHeader("Pragma","no-cache"); //HTTP 1.0
-    response.setDateHeader ("Expires", 0); //prevents caching at the proxy server
-%>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div id="top" class="container">
-        <a  class="navbar-brand" href="Welcome">Welcome ${personLoggedIn}</a>
+        <a class="navbar-brand" href="Welcome">Welcome ${personLoggedIn}</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">Menu
@@ -145,16 +147,19 @@
                     <label for="security_q" class="control-label">Security Question</label>
                     <div class="col-md-9">
                         <select name="security_q" id="security_q" class="form-control" required>
-                            <option value="mom_fname" <c:if test="${user.getSecurity_q() eq 'mom_fname'}">selected</c:if>>
+                            <option value="mom_fname"
+                                    <c:if test="${user.getSecurity_q() eq 'mom_fname'}">selected</c:if>>
                                 What's your Mom's first name?
                             </option>
-                            <option value="dad_fname" <c:if test="${user.getSecurity_q() eq 'dad_fname'}">selected</c:if>>
+                            <option value="dad_fname"
+                                    <c:if test="${user.getSecurity_q() eq 'dad_fname'}">selected</c:if>>
                                 What's your Dad's first name?
                             </option>
                             <option value="pet_name" <c:if test="${user.getSecurity_q() eq 'pet_name'}">selected</c:if>>
                                 What's your first pet's name?
                             </option>
-                            <option value="bestf_fname" <c:if test="${user.getSecurity_q() eq 'bestf_fname'}">selected</c:if>>
+                            <option value="bestf_fname"
+                                    <c:if test="${user.getSecurity_q() eq 'bestf_fname'}">selected</c:if>>
                                 What's your best friend's first name?
                             </option>
                             <option value="hometown" <c:if test="${user.getSecurity_q() eq 'hometown'}">selected</c:if>>
@@ -165,9 +170,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="security_a" class="control-label" >Security Answer</label>
+                    <label for="security_a" class="control-label">Security Answer</label>
                     <div class="col-md-9">
-                        <input type="text" id="security_a" class="form-control" name="security_a" value="${user.getSecurity_a()}" required>
+                        <input type="text" id="security_a" class="form-control" name="security_a"
+                               value="${user.getSecurity_a()}" required>
                     </div>
                 </div>
 
@@ -177,7 +183,8 @@
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
-                        <textarea id="description" class="form-control" name="description" rows="4" columns="40">${user.getDescription()}
+                        <textarea id="description" class="form-control" name="description" rows="4"
+                                  columns="40">${user.getDescription()}
                         </textarea>
                     </div>
                 </div>
@@ -261,7 +268,9 @@
 
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
 
-                        <button id="btn-delete" onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'" type="button" class="btn btn-danger">  
+                        <button id="btn-delete"
+                                onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'"
+                                type="button" class="btn btn-danger">  
                             Delete
                         </button>
 

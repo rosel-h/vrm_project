@@ -32,11 +32,8 @@ public class UserDAO implements AutoCloseable {
                     user = dataFromResultSet(rs, new User());
                     //check the password is matching
                     String hashed_PW = user.getPassword();
-                    System.out.println("The Hashed PW is " + hashed_PW);
-                    System.out.println("The pw to be checked is " + pass);
 
                     if (!BCrypt.checkpw(pass, hashed_PW)) {
-                        System.out.println("password check is returning fail    ");
                         user = null;
                     }
                 }
@@ -123,7 +120,7 @@ public class UserDAO implements AutoCloseable {
     public User getUserByUsername(String username) {
         User user = new User();
 
-        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where username=?")) {
+        try (PreparedStatement ps = conn.prepareStatement("select * from vrm_users where binary username=?")) {
             ps.setString(1, username);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -180,7 +177,6 @@ public class UserDAO implements AutoCloseable {
 
 
             ps.executeUpdate();
-
             updateSuccess = true;
 
 

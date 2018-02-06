@@ -6,17 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
+
 <!DOCTYPE html><html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-
     <title>Forget Password | VRM Blog</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -85,8 +89,8 @@
             <div class="col-lg-8 col-md-10 col-xs-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 2%; padding: 10%">
 
-                    <div class="panel-title"><h3>Forget Password</h3></div>
-                    <div style="color: #ff0000; font-size: 70%">Unfortunately, this function is not available for Facebook user! :D</div>
+                    <div class="panel-title"><h3>Password Reset - for Non-Facebook Users</h3></div>
+                    <div style="color: #ff0000; font-size: 70%">${Error}</div>
 
                     <div style="padding-top:30px" class="panel-body">
 
@@ -94,23 +98,16 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="username" style="float: left;">Username</label><span
-                                        style="color:red; font-size: 70%; margin-left: 3%; float: right"
-                                        id="usernameCheck">${usernameError}</span>
-
+                                    <label for="username" style="float: left;">Username</label>
                                     <input type="text" id="username" class="form-control" name="username"
                                            placeholder="Enter Username 4~20 characters" required>
-
-
                                 </div>
                             </div>
 
                             <div class="form-group">
 
                                 <div class="col-xs-12">
-                                    <label for="dob" style="float: left">Date of Birth</label><span
-                                        style="color:red; font-size: 70%; margin-left: 3%; float: right"
-                                        id="dobCheck">${dobError}</span>
+                                    <label for="dob" style="float: left">Date of Birth</label>
                                     <input type="date" id="dob" class="form-control" name="dob"
                                            placeholder="date of birth" required>
                                 </div>
@@ -140,28 +137,20 @@
                             </div>
 
                             <div class="form-group">
-
                                 <div class="col-xs-12">
-                                    <label for="security_a" style="float: left;">Security Answer</label><span
-                                        style="color:red; font-size: 70%; margin-left: 3%; float: right"
-                                        id="securityCheck">${securityError}</span>
+                                    <label for="security_a" style="float: left;">Security Answer</label>
                                     <input type="text" id="security_a" class="form-control" name="security_a" value="" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
-
                                 <div class=" row col-xs-12" style="display: block">
                                     <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8;" id="btn-login"
                                             class="btn btn-success"
                                             type="submit" value="Submit">Verify
                                     </button>
                                 </div>
-
                             </div>
-
-
-
                         </form>
                     </div>
                 </div>
