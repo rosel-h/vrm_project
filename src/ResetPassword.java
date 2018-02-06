@@ -58,8 +58,6 @@ public class ResetPassword extends HttpServlet {
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
             }
 
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {

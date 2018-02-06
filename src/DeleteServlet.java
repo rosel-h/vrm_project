@@ -41,21 +41,11 @@ public class DeleteServlet extends HttpServlet {
                 System.out.println("DeleteServlet Connection Successful");
 
                 boolean deleteSuccess = userDAO.deleteUser(username);
+
                 if (deleteSuccess) {
                     System.out.println("DeleteServlet enter line 43: delete success");
 
-                    //print log to file
-                    Map<String, String> map = new HashMap<>();
-                    map.put("username",username);
-
-                    String ipAddress =  req.getRemoteAddr();
-                    map.put("ip", ipAddress);
-
-                    String logType = "DeleteUser";
-                    LogWriter logWriter = new LogWriter(logType);
-                    logWriter.init(getServletContext().getRealPath("log"));
-                    logWriter.write(logType,map);
-                    //end of logging code
+                    writeLog(req, username);
 
                     session.invalidate();
                     req.getRequestDispatcher("Main").forward(req, resp);
@@ -68,6 +58,21 @@ public class DeleteServlet extends HttpServlet {
             }
         }
 
+    }
+
+    private void writeLog(HttpServletRequest req, String username) throws IOException {
+        // print log to file
+        Map<String, String> map = new HashMap<>();
+        map.put("username",username);
+
+        String ipAddress =  req.getRemoteAddr();
+        map.put("ip", ipAddress);
+
+        String logType = "DeleteUser";
+        LogWriter logWriter = new LogWriter(logType);
+        logWriter.init(getServletContext().getRealPath("log"));
+        logWriter.write(logType,map);
+        // end of logging code
     }
 
     @Override

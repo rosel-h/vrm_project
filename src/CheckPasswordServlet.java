@@ -3,7 +3,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -24,6 +23,15 @@ public class CheckPasswordServlet extends HttpServlet {
         System.out.println("CheckPasswordServlet enter line 33: password=" + password + ", cPassword=" + cPassword);
 
         //generate error code for password check
+        String error = getErrorCode(password, cPassword);
+
+        //print out error code in console window and send error code to response
+        System.out.println("CheckPasswordServlet enter line 56: error=" + error);
+        resp.getWriter().write(error);
+
+    }
+
+    private String getErrorCode(String password, String cPassword) {
         String error = "";
         if (password.equals("")) {
             if (cPassword.equals("")) {
@@ -52,10 +60,8 @@ public class CheckPasswordServlet extends HttpServlet {
 
             }
         }
-        //print out error code in console window and send error code to response
-        System.out.println("CheckPasswordServlet enter line 56: error=" + error);
-        resp.getWriter().write(error);
 
+        return error;
     }
 
     //method to check single password and return error msg for single password
