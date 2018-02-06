@@ -66,20 +66,7 @@ public class EditProfileServlet extends HttpServlet {
 
                     //get user object from database
                     User user = userDAO.getUserByUsername(username);
-
-                    //print log to file
-                    Map<String, String> map = new HashMap<>();
-                    map.put("username", username);
-                    map.put("fname_before", user.getFname());
-                    map.put("lname_before", user.getLname());
-                    map.put("dob_before", user.getDateOfBirth());
-                    map.put("country_before", user.getCountry());
-                    map.put("description_before", user.getDescription().trim());
-                    map.put("avatar_before", user.getAvatar_icon());
-
-                    String ipAddress = req.getRemoteAddr();
-                    map.put("ip", ipAddress);
-                    //end of logging code
+                    Map<String, String> map = createLogMap(req, username, user);
 
                     //if enter servlet from edit form(which means save new profile)
                     //load new profile info from form
@@ -93,26 +80,15 @@ public class EditProfileServlet extends HttpServlet {
                     user.setDescription(description.trim());
                     user.setAvatar_icon(avatar);
 
-
-
                     //update user info in database
                     boolean updateSuccess = userDAO.updateUser(user);
 
                     //if update success, redirect to welcome.jsp
                     if (updateSuccess) {
                         System.out.println("EditProfileServlet enter line 200: updateSuccess=" + updateSuccess);
-                        //print log to file
-                        map.put("fname", fname);
-                        map.put("lname", lname);
-                        map.put("dob", dob);
-                        map.put("country", country);
-                        map.put("description", description.trim());
-                        map.put("avatar", avatar);
-                        String logType = "EditProfile";
-                        LogWriter logWriter = new LogWriter(logType);
-                        logWriter.init(getServletContext().getRealPath("log"));
-                        logWriter.write(logType, map);
-                        //end of logging code
+
+                        writeLog(map);
+
                         req.setAttribute("successMessage", "Save profile successfully");
                         req.setAttribute("user", user);
                         session.setAttribute("user", user);
@@ -136,6 +112,38 @@ public class EditProfileServlet extends HttpServlet {
             }
         }
 
+    }
+
+    private void writeLog(Map<String, String> map) throws IOException {
+        //print log to file
+        map.put("fname", fname);
+        map.put("lname", lname);
+        map.put("dob", dob);
+        map.put("country", country);
+        map.put("description", description.trim());
+        map.put("avatar", avatar);
+        String logType = "EditProfile";
+        LogWriter logWriter = new LogWriter(logType);
+        logWriter.init(getServletContext().getRealPath("log"));
+        logWriter.write(logType, map);
+        //end of logging code
+    }
+
+    private Map<String, String> createLogMap(HttpServletRequest req, String username, User user) {
+        //print log to file
+        Map<String, String> map = new HashMap<>();
+        map.put("username", username);
+        map.put("fname_before", user.getFname());
+        map.put("lname_before", user.getLname());
+        map.put("dob_before", user.getDateOfBirth());
+        map.put("country_before", user.getCountry());
+        map.put("description_before", user.getDescription().trim());
+        map.put("avatar_before", user.getAvatar_icon());
+
+        String ipAddress = req.getRemoteAddr();
+        map.put("ip", ipAddress);
+        //end of logging code
+        return map;
     }
 
     private void loadNewProfile(HttpServletRequest req, HttpServletResponse resp, String username, UserDAO userDAO) throws Exception {
@@ -204,8 +212,6 @@ public class EditProfileServlet extends HttpServlet {
                     }
 
 
-
-
                 } else {
 
                     String fieldName = fileItem.getFieldName();
@@ -223,12 +229,6 @@ public class EditProfileServlet extends HttpServlet {
 
                     // Write the file
                     System.out.println("EditProfileServlet loadNewProfile enter line 144: " + filePath);
-
-//                    if (fileName.lastIndexOf("\\") >= 0) {
-//                        fileName = fileName.substring(fileName.lastIndexOf("\\"));
-//                    } else {
-//                        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
-//                    }
 
                     uploadFileName = fileName;
                     doUpload = fileItem;
@@ -249,7 +249,6 @@ public class EditProfileServlet extends HttpServlet {
                     }
                 }
             } else {
-//                avatar = username + "_" + uploadFileName;
                 avatar = username + "_" + uploadFileName;
                 file = new File(filePath + "/" + avatar);
                 System.out.println("EditProfileServlet loadNewProfile enter line 194: " + avatar);

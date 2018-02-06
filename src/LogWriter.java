@@ -25,7 +25,7 @@ public class LogWriter{
 
     public LogWriter(String logType) throws IOException {
         Date nowTime=new Date();
-        SimpleDateFormat logtime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat logtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.logType = logType;
         this.datetime = logtime.format(nowTime);
 
