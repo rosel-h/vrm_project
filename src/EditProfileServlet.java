@@ -46,6 +46,7 @@ public class EditProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("EditProfileServlet enter edit profile servlet");
         HttpSession session = req.getSession(false);
+
         csrfSessionToken = (String) session.getAttribute("csrfSessionToken");
         System.out.println("EditProfileServlet enter line 39: session id = " + session.getId());
 

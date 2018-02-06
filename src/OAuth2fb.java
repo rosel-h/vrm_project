@@ -19,18 +19,17 @@ import java.util.*;
 //logic to communcate with FB
 
 public class OAuth2fb extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    // Facebook WebApp authentication
+    // Facebook WebApp authentication Information
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
-    private static final String redirectURI = "https://sporadic.nz/vrmblog/oauth2fb";
+    private static final String redirectURI = "http://localhost:8181/oauth2fb";
     private static final String scope = "email";
-    private String stateParam;
+
     User user;
 
-    private String username = "";
+    boolean signupSuccess = false;
     private String errorMessage = null;
+
 
     //used for authentication and account creation
     private String fbUserEmail = "";
@@ -40,26 +39,20 @@ public class OAuth2fb extends HttpServlet {
     @Override
     //listens to requests from out server
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//            String url = "https://www.facebook.com/dialog/oauth?client_id=" + clientID + "&redirect_uri=" + redirectURI + "&scope=" + scope;
-//            response.sendRedirect(url);
-        //        window.location.href='https://www.facebook.com/dialog/oauth?client_id=352195078594245&redirect_uri=https://sporadic.nz/vrmblog/oauth2fb&scope=email'
+        doGet(request, response);
     }
 
     //setup get request to listen for FBServer contact - this is used for the actual token creation
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //initiate connection with facebook
         connectFB(request, response);
+
+        // if login is a success
         if (checkFbUser(fbUserEmail, fbFirstName, fbLastName)) {
-
-            if (errorMessage != null) {
-                request.setAttribute("errorMessage", errorMessage);
-                RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
-                rs.forward(request, response);
-                return;
-            }
-
             HttpSession sess = request.getSession(true);
 
+            //create json object that writes username and session id to a file
             Map<String, String> jsonMap = new HashMap<>();
             jsonMap.put("username", user.getUsername());
 
@@ -80,43 +73,58 @@ public class OAuth2fb extends HttpServlet {
                 bufferedWriter.write(jsonText);
             }
 
+            // end create json object that writes username and session id to a file
+
             //print log to file
             Map<String, String> map = new HashMap<>();
-            map.put("username",user.getUsername());
+            map.put("username", user.getUsername());
 
-            String ipAddress =  request.getRemoteAddr();
+            String ipAddress = request.getRemoteAddr();
             map.put("ip", ipAddress);
 
             String logType = "Login";
             LogWriter logWriter = new LogWriter(logType);
             logWriter.init(getServletContext().getRealPath("log"));
-            logWriter.write(logType,map);
+            logWriter.write(logType, map);
             //end of logging code
 
+            //set session attributes
             sess.setAttribute("csrfSessionToken", SiteSecurity.randomString(60));
             sess.setAttribute("logintimestamp", new Date().getTime());
-            sess.setAttribute("username",username);
+            sess.setAttribute("username", user.getUsername());
             sess.setAttribute("personLoggedIn", user.getUsername());
             sess.setAttribute("user", user);
-            String url = "Welcome";
-            response.sendRedirect(url);
+            response.sendRedirect("Welcome");
 
         } else {
-            request.setAttribute("successMessage", "Sign up successfully!");
-            request.setAttribute("directMessage", "You will be directed to login page");
-            request.setAttribute("directErrorMessage", "true");
-            request.setAttribute("success", true);
-            request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
+
+            // if there was an error i.e. account deleted
+            if (errorMessage != null) {
+                request.setAttribute("errorMessage", errorMessage);
+                RequestDispatcher rs = request.getRequestDispatcher("login.jsp");
+                rs.forward(request, response);
+                return;
+            }
+
+            // if signup is a success
+            if (signupSuccess) {
+                request.setAttribute("successMessage", "Sign up successfully!");
+                request.setAttribute("directMessage", "You will be directed to login page");
+                request.setAttribute("directErrorMessage", "true");
+                request.setAttribute("success", true);
+                request.getRequestDispatcher("signupsuccess.jsp").forward(request, response);
+            }
         }
-//        }
     }
 
+    //connect to facebook
     private void connectFB(HttpServletRequest request, HttpServletResponse response) {
         try {
             //checks if request_id exists, this is used for games and should not show up for our requests
             String rid = request.getParameter("request_ids");
             // Get special code
             String code = request.getParameter("code");
+            System.out.println(code);
 
             if (code != null) {
                 // Format parameters
@@ -131,19 +139,25 @@ public class OAuth2fb extends HttpServlet {
                 conn.setRequestMethod("GET");
                 String line, outputString = "";
 
+                System.out.println("start reader");
+
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
                     while ((line = reader.readLine()) != null) {
                         outputString += line;
                     }
                 }
 
+                System.out.println(outputString);
+
                 // extract access token from response
                 String accessToken = outputString.substring(outputString.indexOf(":\"") + 2, outputString.indexOf("\","));
+                System.out.println(accessToken);
 
                 // request for user info
                 url = new URL("https://graph.facebook.com/me?fields=email,first_name,last_name&access_token="
                         + accessToken);
 
+                System.out.println(url);
                 URLConnection conn1 = url.openConnection();
                 outputString = "";
 
@@ -164,6 +178,9 @@ public class OAuth2fb extends HttpServlet {
                 //get facebook last name
                 fbLastName = outputString.substring(outputString.indexOf("\"last_name\":\"") + 13, outputString.indexOf("\",\"id\""));
 
+                System.out.println("Facebook email is " + fbUserEmail);
+                System.out.println("Facebook fname is " + fbFirstName);
+                System.out.println("Facebook lname is " + fbLastName);
             }
 
         } catch (Exception e) {
@@ -180,20 +197,21 @@ public class OAuth2fb extends HttpServlet {
             e.printStackTrace();
         }
 
+        //connect to our database using DAo
         try (UserDAO dao = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
-
             user = dao.getUserFacebook(email);
-            System.out.println(user.getUsername() + " is " + user.getStatus());
 
+            // if the user does not exist we add them to our database and set status as facebook user
+            //fail the login as user does not exist
             if (user == null) {
                 System.out.println("user is null");
                 dao.addUserFB(firstName, lastName, email);
 
                 //print log to file
                 Map<String, String> map = new HashMap<>();
-                map.put("username",firstName + "_" + lastName);
-                map.put("fname",firstName);
-                map.put("lname",lastName);
+                map.put("username", firstName + "_" + lastName);
+                map.put("fname", firstName);
+                map.put("lname", lastName);
 
                 String dob = "1900-11-11";
                 String country = "New Zealand";
@@ -201,31 +219,36 @@ public class OAuth2fb extends HttpServlet {
                 String avatar = "avatar_01.png";
                 String status = "facebook";
 
-                map.put("dob",dob);
-                map.put("country",country);
-                map.put("description",description);
-                map.put("avatar",avatar);
-                map.put("status",status);
-                map.put("email",email);
+                map.put("dob", dob);
+                map.put("country", country);
+                map.put("description", description);
+                map.put("avatar", avatar);
+                map.put("status", status);
+                map.put("email", email);
 
+                //logger code
                 String logType = "SignUp";
                 LogWriter logWriter = new LogWriter(logType);
                 logWriter.init(getServletContext().getRealPath("log"));
-                logWriter.write(logType,map);
+                logWriter.write(logType, map);
                 //end of logging code
+
+                //signup is a success but login failed
+                signupSuccess = true;
                 return false;
             }
 
+            // if the user account exists but their status is inactive then fail login
             if (user.getStatus().equals("inactive")) {
                 errorMessage = "User account has been deleted, please contact us to reactivate.";
                 return false;
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        //otherwise login is a success
         return true;
 
     }
