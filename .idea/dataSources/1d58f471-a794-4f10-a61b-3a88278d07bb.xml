@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="vwen239@db.sporadic.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
     <root id="1"/>
     <schema id="2" parent="1" name="vwen239">
       <Current>1</Current>
@@ -43,6 +43,7 @@
       <DataType>date|0</DataType>
     </column>
     <key id="16" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>article_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -77,6 +78,7 @@
       <DataType>int(11)|0</DataType>
     </column>
     <key id="23" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -107,6 +109,7 @@
       <NotNull>1</NotNull>
     </column>
     <key id="29" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>child_comment_id</ColNames>
       <Primary>1</Primary>
     </key>
@@ -159,7 +162,16 @@
       <Position>10</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <key id="40" parent="9" name="PRIMARY">
+    <column id="40" parent="9" name="security_q">
+      <Position>11</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="41" parent="9" name="security_a">
+      <Position>12</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="42" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
     </key>

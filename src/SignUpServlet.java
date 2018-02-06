@@ -97,6 +97,8 @@ public class SignUpServlet extends HttpServlet {
                 String description = (paraMaps.get("description")[0].equals("")) ? "" : paraMaps.get("description")[0];
                 String avatar = (paraMaps.get("avatar") == null) ? "avatar_01.png" : paraMaps.get("avatar")[0];
                 String email = "";
+                String security_q = (paraMaps.get("security_q")[0].equals("")) ? "" : paraMaps.get("security_q")[0];
+                String security_a= (paraMaps.get("security_a")[0].equals("")) ? "" : paraMaps.get("security_a")[0];
 
                 System.out.println("SignUpServlet enter line 147: " + username + "," + password + "," + cPassword + "," + fname + "," + lname + "," + dob + "," + country + "," + description + "," + avatar);
 
@@ -114,7 +116,7 @@ public class SignUpServlet extends HttpServlet {
                 // hash password
                 String password_hashed = SiteSecurity.hashString(password);
                 // add user into database, return true if success
-                boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "");
+                boolean signupSuccess = userDAO.addUser(username, password_hashed, fname, lname, dob, country, description, avatar, "active", "", security_q, security_a);
                 System.out.println("SignUpServlet enter line 231: success = " + signupSuccess);
 
                 // direct to sign up success page

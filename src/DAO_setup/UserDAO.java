@@ -84,13 +84,15 @@ public class UserDAO implements AutoCloseable {
         String description = "New facebook user";
         String avatar = "avatar_01.png";
         String status = "facebook";
+        String security_q = "";
+        String security_a = "";
 
-        addUser(username, password, fname, lname, dob, country, description, avatar, status,  email);
+        addUser(username, password, fname, lname, dob, country, description, avatar, status,  email, security_q, security_a);
     }
 
-    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email) {
+    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email, String security_q, String security_a) {
         Boolean success = false;
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
             stmt.setString(1, username);
             stmt.setString(2, password);
             stmt.setString(3, fname);
@@ -101,6 +103,8 @@ public class UserDAO implements AutoCloseable {
             stmt.setString(8, avatar);
             stmt.setString(9, status);
             stmt.setString(10, email);
+            stmt.setString(11, security_q);
+            stmt.setString(12, security_a);
 
             stmt.executeUpdate();
 

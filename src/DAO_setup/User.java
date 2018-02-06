@@ -23,6 +23,8 @@ public class User {
     private String status;
     private String email;
     private String description;
+    private String security_q;
+    private String security_a;
 
     public User(){
 
@@ -132,6 +134,14 @@ public class User {
     public String getDescription() { return description;}
 
     public void setDescription(String description) {this.description = description;}
+
+    public String getSecurity_q() { return security_q;}
+
+    public void setSecurity_q(String security_q) { this.security_q = security_q;}
+
+    public String getSecurity_a() { return security_a;}
+
+    public void setSecurity_a(String security_a) { this.security_a = security_a;}
 
     public static JSONObject readJSONFile(String fileName){
         JSONObject o = new JSONObject();

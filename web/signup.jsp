@@ -338,14 +338,14 @@
                                     </div>
                                 </div>
 
-<%--                                &lt;%&ndash;<div class="form-group">&ndash;%&gt;
+<%--                                <div class="form-group">
 
-                                    &lt;%&ndash;<div class="col-xs-12">&ndash;%&gt;
-                                        &lt;%&ndash;<label for="dob" style="float: left">Date of Birth</label>&ndash;%&gt;
-                                        &lt;%&ndash;<input type="date" id="dob" class="form-control" name="dob"&ndash;%&gt;
-                                               &lt;%&ndash;placeholder="date of birth">&ndash;%&gt;
-                                    &lt;%&ndash;</div>&ndash;%&gt;
-                                &lt;%&ndash;</div>--%>--%>
+                                    <div class="col-xs-12">
+                                        <label for="dob" style="float: left">Date of Birth</label>
+                                        <input type="date" id="dob" class="form-control" name="dob"
+                                               placeholder="date of birth">
+                                    </div>
+                                </div>--%>
 
                                 <div class="form-group">
 
@@ -359,6 +359,37 @@
                                             <option value="us">United States</option>
                                             <option value="other">Other</option>
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="security_q" style="float: left;">Security Question</label>
+                                        <select name="security_q" id="security_q" class="form-control">
+                                            <option value="mom_fname" selected >
+                                                What's your Mom's first name?
+                                            </option>
+                                            <option value="dad_fname" selected >
+                                                What's your Dad's first name?
+                                            </option>
+                                            <option value="pet_name" selected >
+                                                What's your first pet's name?
+                                            </option>
+                                            <option value="bestf_fname" selected >
+                                                What's your best friend's first name?
+                                            </option>
+                                            <option value="hometown" selected >
+                                                Where's your home town?
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="col-xs-12">
+                                        <label for="security_a" style="float: left;">Security Answer</label>
+                                        <input type="text" id="security_a" class="form-control" name="security_a" value="">
                                     </div>
                                 </div>
 

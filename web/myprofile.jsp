@@ -76,18 +76,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Welcome">Home</a>
                 </li>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Articles">Community</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="myArticles">My Articles</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="editprofile">My Profile</a>--%>
-                <%--</li>--%>
-                <%--<li class="nav-item">--%>
-                    <%--<a class="nav-link" href="Main?logout_button=Logout">Log Out</a>--%>
-                <%--</li>--%>
             </ul>
         </div>
     </div>
@@ -161,6 +149,36 @@
                                 Other
                             </option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="security_q" class="control-label">Security Question</label>
+                    <div class="col-md-9">
+                        <select name="security_q" id="security_q" class="form-control" required>
+                            <option value="mom_fname" <c:if test="${user.getSecurity_q() eq 'mom_fname'}">selected</c:if>>
+                                What's your Mom's first name?
+                            </option>
+                            <option value="dad_fname" <c:if test="${user.getSecurity_q() eq 'dad_fname'}">selected</c:if>>
+                                What's your Dad's first name?
+                            </option>
+                            <option value="pet_name" <c:if test="${user.getSecurity_q() eq 'pet_name'}">selected</c:if>>
+                                What's your first pet's name?
+                            </option>
+                            <option value="bestf_fname" <c:if test="${user.getSecurity_q() eq 'bestf_fname'}">selected</c:if>>
+                                What's your best friend's first name?
+                            </option>
+                            <option value="hometown" <c:if test="${user.getSecurity_q() eq 'hometown'}">selected</c:if>>
+                                Where's your home town?
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="security_a" class="control-label" >Security Answer</label>
+                    <div class="col-md-9">
+                        <input type="text" id="security_a" class="form-control" name="security_a" value="${user.getSecurity_a()}" required>
                     </div>
                 </div>
 
