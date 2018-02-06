@@ -166,10 +166,6 @@ public class User {
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))){
             String line = br.readLine();
             o = (JSONObject) parser.parse(line);
-//            String[] array = line.split("[^a-zA-Z0-9]+");
-//            for(int i = 0; i<array.length; i+=2){
-//                o.put(array[i],array[i+1]);
-//            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

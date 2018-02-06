@@ -13,7 +13,6 @@
 <head>
     <title>${articleToLoad.getTitle()}</title>
     <meta charset="UTF-8">
-
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript -->
@@ -105,7 +104,7 @@
             </div>
         </div>
         <div class="row" style="float: right">
-            <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
+            <c:if test="${sessionScope.personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-lg-12 col-md-12 float-right" role="group">
                 <div style="padding: 1%; margin: 2%">
                     <form class="form-inline" action="OneArticle" method="POST">
@@ -182,7 +181,7 @@
 
                     <p>${commentList.getContent()}</p>
                         <%--delete comment if user is logged in--%>
-                    <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                    <c:if test="${(articleToLoad.getUsername()==sessionScope) ||( sessionScope == commentList.getCommentAuthor())}">
                         <form method="post" action="OneArticle">
                             <%--<button type="submit" class="btn btn-xs btn-danger">delete comment</button>--%>
 
