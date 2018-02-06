@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="vrm_mshe666">
+  <component name="PublishConfigData" autoUpload="Always" serverName="vrmblog">
     <serverData>
       <paths name="vrm_mshe666">
         <serverdata>
@@ -12,7 +12,7 @@
       <paths name="vrmblog">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/opt/tomcat/webapps" local="$PROJECT_DIR$/out/artifacts/vrmblog" web="/vrmblog" />
           </mappings>
         </serverdata>
       </paths>
