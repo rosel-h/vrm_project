@@ -13,9 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <title>Welcome to VRM</title>
+    <title>VRM Blog</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -63,7 +63,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
-                <div class="page-heading" style="margin: 15%; padding: 2%;">
+                <div class="page-heading" style="margin-top: 25%; padding: 5%;">
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div style="margin-top:1%" class="form-group">
                         <div class="col-sm-12 col-md-12 controls">
