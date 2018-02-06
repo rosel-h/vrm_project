@@ -86,6 +86,7 @@
                 <div class="page-heading" style="margin: 2%; padding: 10%">
 
                     <div class="panel-title"><h3>Forget Password</h3></div>
+                    <div style="color: #ff0000; font-size: 70%">Unfortunately, this function is not available for Facebook user! :D</div>
 
                     <div style="padding-top:30px" class="panel-body">
 
@@ -116,6 +117,39 @@
                             </div>
 
                             <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="security_q" style="float: left;">Security Question</label>
+                                    <select name="security_q" id="security_q" class="form-control" required>
+                                        <option value="mom_fname" selected >
+                                            What's your Mom's first name?
+                                        </option>
+                                        <option value="dad_fname" selected >
+                                            What's your Dad's first name?
+                                        </option>
+                                        <option value="pet_name" selected >
+                                            What's your first pet's name?
+                                        </option>
+                                        <option value="bestf_fname" selected >
+                                            What's your best friend's first name?
+                                        </option>
+                                        <option value="hometown" selected >
+                                            Where's your home town?
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-12">
+                                    <label for="security_a" style="float: left;">Security Answer</label><span
+                                        style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                        id="securityCheck">${securityError}</span>
+                                    <input type="text" id="security_a" class="form-control" name="security_a" value="" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8;" id="btn-login"
@@ -125,6 +159,8 @@
                                 </div>
 
                             </div>
+
+
 
                         </form>
                     </div>

@@ -244,7 +244,7 @@
                                 <div class=" row col-xs-12" style="display: block">
                                     <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8;" id="btn-login"
                                             class="btn btn-success"
-                                            type="submit" value="Submit">Verify
+                                            type="submit" value="Submit">Confirm
                                     </button>
                                 </div>
 

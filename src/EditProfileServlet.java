@@ -39,6 +39,8 @@ public class EditProfileServlet extends HttpServlet {
     private String country = "";
     private String description = "";
     private String avatar = "";
+    private String security_q = "";
+    private String security_a = "";
     private String csrfSessionToken = "";
     private String csrfToken = "";
 
@@ -79,8 +81,11 @@ public class EditProfileServlet extends HttpServlet {
                     user.setCountry(country);
                     user.setDescription(description.trim());
                     user.setAvatar_icon(avatar);
+                    user.setSecurity_q(security_q);
+                    user.setSecurity_a(security_a);
 
                     //update user info in database
+                    System.out.println("EditProfileServlet enter line 88: user=" + user.toString());
                     boolean updateSuccess = userDAO.updateUser(user);
 
                     //if update success, redirect to welcome.jsp
@@ -92,6 +97,7 @@ public class EditProfileServlet extends HttpServlet {
                         req.setAttribute("successMessage", "Save profile successfully");
                         req.setAttribute("user", user);
                         session.setAttribute("user", user);
+                        System.out.println("EditProfileServlet enter line 99: user=" + user.toString());
                         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
                     }
 
@@ -209,6 +215,12 @@ public class EditProfileServlet extends HttpServlet {
                         user.setDescription(description);
                     } else if (fieldName.equals("avatar")) {
                         avatar = fileItem.getString();
+                    } else if (fieldName.equals("security_q")) {
+                        security_q = fileItem.getString().trim();
+                        user.setDescription(security_q);
+                    } else if (fieldName.equals("security_a")) {
+                        security_a = fileItem.getString();
+                        user.setSecurity_a(security_a);
                     }
 
 

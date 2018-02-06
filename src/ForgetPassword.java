@@ -19,7 +19,9 @@ public class ForgetPassword extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String dob = req.getParameter("dob");
-        System.out.println("ForgetPassword enter line 22: username=" + username + ",dob=" + dob);
+        String security_q = req.getParameter("security_q");
+        String security_a = req.getParameter("security_a");
+        System.out.println("ForgetPassword enter line 22: username=" + username + ",dob=" + dob + ",sq=" + security_q + ",sa=" + security_a);
 
         try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("ForgetPassword Connection Successful");
@@ -31,6 +33,10 @@ public class ForgetPassword extends HttpServlet {
             }else if (!userDAO.getUserByUsername(username).getDateOfBirth().equals(dob)) {
                 System.out.println("ForgetPassword enter line 149: date of birth is wrong");
                 req.setAttribute("dobError", "date of birth is wrong");
+                req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
+            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals(security_q) || !userDAO.getUserByUsername(username).getSecurity_a().equals(security_a) ){
+                System.out.println("ForgetPassword enter line 149: security question or answer is wrong");
+                req.setAttribute("securityError", "security question or answer is wrong");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
             }else {
                 System.out.println("ForgetPassword enter line 36: username and dob verification success");
