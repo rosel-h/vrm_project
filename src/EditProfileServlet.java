@@ -35,7 +35,7 @@ public class EditProfileServlet extends HttpServlet {
     private FileItem doUpload = null;
     private String fname = "";
     private String lname = "";
-    private String dob = "1900-01-01";//if user's dob field is empty, use 1970-01-01 as default
+    private String dob = "1970-01-01";//if user's dob field is empty, use 1970-01-01 as default
     private String country = "";
     private String description = "";
     private String avatar = "";
@@ -59,9 +59,9 @@ public class EditProfileServlet extends HttpServlet {
                 System.out.println("EditProfileServlet enter line 51: username=" + username);
 
                 if (ServletFileUpload.isMultipartContent(req)) {
-                    //if enter servlet from edit form(which means save new profile)
-                    //load new profile info from form
-                    loadNewProfile(req, resp, username, userDAO);
+
+                    uploadFileName = "";
+                    System.out.println("EditProfileServlet enter line 63: uploadFileName=" + uploadFileName);
 
                     //get user object from database
                     User user = userDAO.getUserByUsername(username);
@@ -73,20 +73,26 @@ public class EditProfileServlet extends HttpServlet {
                     map.put("lname_before", user.getLname());
                     map.put("dob_before", user.getDateOfBirth());
                     map.put("country_before", user.getCountry());
-                    map.put("description_before", user.getDescription());
+                    map.put("description_before", user.getDescription().trim());
                     map.put("avatar_before", user.getAvatar_icon());
 
                     String ipAddress = req.getRemoteAddr();
                     map.put("ip", ipAddress);
                     //end of logging code
 
+                    //if enter servlet from edit form(which means save new profile)
+                    //load new profile info from form
+                    loadNewProfile(req, resp, username, userDAO);
+
                     //set attributes of user object
                     user.setFname(fname);
                     user.setLname(lname);
                     user.setDateOfBirth(dob);
                     user.setCountry(country);
-                    user.setDescription(description);
+                    user.setDescription(description.trim());
                     user.setAvatar_icon(avatar);
+
+
 
                     //update user info in database
                     boolean updateSuccess = userDAO.updateUser(user);
@@ -99,7 +105,7 @@ public class EditProfileServlet extends HttpServlet {
                         map.put("lname", lname);
                         map.put("dob", dob);
                         map.put("country", country);
-                        map.put("description", description);
+                        map.put("description", description.trim());
                         map.put("avatar", avatar);
                         String logType = "EditProfile";
                         LogWriter logWriter = new LogWriter(logType);
@@ -168,7 +174,7 @@ public class EditProfileServlet extends HttpServlet {
                 //logic for uploading an image
                 if (fileItem.isFormField()) {
                     String fieldName = fileItem.getFieldName();
-                    System.out.println("EditProfileServlet loadNewProfile enter line 159: fieldName: " + fieldName + "," + fileItem.getString());
+                    System.out.println("EditProfileServlet loadNewProfile enter line 159: fieldName: " + fieldName + "," + fileItem.getString().trim());
                     if (fieldName.equals("csrfToken")) {
                         csrfToken = fileItem.getString();
                         if (!csrfSessionToken.equals(csrfToken)) {
@@ -190,23 +196,27 @@ public class EditProfileServlet extends HttpServlet {
                         country = fileItem.getString();
                         user.setCountry(country);
                     } else if (fieldName.equals("description")) {
-                        description = fileItem.getString();
+                        description = fileItem.getString().trim();
                         user.setDescription(description);
                     } else if (fieldName.equals("avatar")) {
                         avatar = fileItem.getString();
                     }
 
+
+
+
                 } else {
 
                     String fieldName = fileItem.getFieldName();
                     String fileName = fileItem.getName();
-                    System.out.println("EditProfileServlet loadNewProfile enter line 135: fileName = " + fieldName);
+                    System.out.println("EditProfileServlet loadNewProfile enter line 135: fileName = " + fileName);
                     String contentType = fileItem.getContentType();
                     boolean isInMemory = fileItem.isInMemory();
                     long sizeInBytes = fileItem.getSize();
 
                     //uploading image field is empty
-                    if (fileName == null | fileName == "") {
+                    if (fileName == null | fileName.equals("")) {
+                        System.out.println("EditProfileServlet loadNewProfile enter line 214: break");
                         break;
                     }
 
@@ -224,6 +234,10 @@ public class EditProfileServlet extends HttpServlet {
                     hasUpload = true;
                 }
             }
+
+            System.out.println("EditProfileServlet enter line 200: end of load new profile");
+            System.out.println("EditProfileServlet enter line 233: avatar=" + avatar + ",uploadFileName=" + uploadFileName);
+
 
             if (uploadFileName.equals("")) {
                 if (avatar.equals("")) {
