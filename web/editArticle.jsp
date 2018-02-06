@@ -7,7 +7,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
@@ -152,9 +152,26 @@
                                value="${sessionScope.get("csrfSessionToken")}">
                         <input type="hidden" name="operation" value="delete">
                         <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
-                        <button style="float: right" type="submit" class="btn btn-danger pull-right">
-                            Delete
-                        </button>
+                        <%--<button style="float: right" type="submit" class="btn btn-danger pull-right">Delete</button>--%>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#article${articleToEdit.getArticleID()}">Delete</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="article${articleToEdit.getArticleID()}" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Are you sure you want to delete the article?</h6>
+                                    </div>
+                                    <div class="modal-body">
+                                        <button type="submit" class="btn btn-danger float-left">Delete</button>
+                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </h3>
             </div>
