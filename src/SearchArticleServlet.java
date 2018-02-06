@@ -38,7 +38,7 @@ public class SearchArticleServlet extends HttpServlet {
 
         } else {
             String username = (String) session.getAttribute("personLoggedIn");
-            try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
+            try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
                 System.out.println("SearchArticleServlet enter line 50: ");
 
                 String icon = dao.getIcon(username);

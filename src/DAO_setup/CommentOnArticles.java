@@ -43,7 +43,7 @@ public class CommentOnArticles extends Comments{
     }
 
     /*Goes through all array list and adds the comments into their respective parents*/
-    public static List<CommentOnArticles> pairCommentsRelationship(List<CommentOnArticles> list){
+    public static List<CommentOnArticles> addChildrenToParentComments(List<CommentOnArticles> list){
         List<CommentOnArticles> parentList = new ArrayList<CommentOnArticles>();
         for (CommentOnArticles com : list) {
             if(com.getParentCommentID()==0){

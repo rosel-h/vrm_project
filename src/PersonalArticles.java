@@ -1,13 +1,12 @@
-import DAO_setup.*;
-import org.jooq.tools.json.JSONObject;
+import DAO_setup.Article;
+import DAO_setup.BlogDAO;
+import DAO_setup.MYSQLDatabase;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -51,19 +50,11 @@ public class PersonalArticles extends HttpServlet {
                 pageNumber = 1;
             }
 
-//            String icon = dao.getIcon(user);
-//            System.out.println("Personal Articles user datails = "+icon + " " + user);
-//            if (user != null) {
-//                req.setAttribute("personLoggedIn", user);
-//                String iconPath = getServletContext().getRealPath("avatars");
-//                req.setAttribute("personAvatarIcon", icon);
-//            }
-
             int checkNumber = this.pageNumber;
             if (!wentThroughGetMethod) {
                 checkNumber = 1;
             }
-//            List<Article> myArticles = dao.getMyArticles(user);
+
             List<Article> myArticles = dao.getTenOfMyArticles(user, "date", checkNumber, true);
             System.out.println(myArticles.size());
             System.out.println("Personal Articles: Articles added (size: " + myArticles.size() + ")");

@@ -33,10 +33,10 @@ public class EditArticle extends HttpServlet {
         HttpSession session = req.getSession(false);
 
         //csrfToken Logic
-        String csrfSessionToken = (String)session.getAttribute("csrfSessionToken");
+        String csrfSessionToken = (String) session.getAttribute("csrfSessionToken");
         String csrfToken = req.getParameter("csrfToken");
 
-        if (!csrfSessionToken.equals(csrfToken)){
+        if (!csrfSessionToken.equals(csrfToken)) {
             System.out.println("csrfTokens not verified");
             resp.sendError(666);
             return;
@@ -48,19 +48,19 @@ public class EditArticle extends HttpServlet {
 
         String op = req.getParameter("operation");
         String id = req.getParameter("articleID");
-        System.out.println("in Edit ArticleServlet: op "+ op+ "(id +" +id+")");
+        System.out.println("in Edit ArticleServlet: op " + op + "(id +" + id + ")");
         int articleID = Integer.parseInt(id);
 
         boolean articleHasBeenEdited;
         if ("goToEditPage".equals(op)) {
+            //landing page for edit article
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
                 Article articleToBeEdited = dao.getOneArticle(articleID);
                 req.setAttribute("articleToEdit", articleToBeEdited);
                 req.getRequestDispatcher("editArticle.jsp").forward(req, resp);
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         } else if ("userHasEditedArticle".equals(op)) {
             System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
@@ -68,24 +68,22 @@ public class EditArticle extends HttpServlet {
             String newContent = req.getParameter("content");
             String newDate = req.getParameter("futureDate");
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-//        add date updated
-            System.out.println("EditArticle Servlet: author " + author);
-            System.out.println("EditArticle Servlet: newTitle " + newTitle);
+
+            System.out.println("EditArticle Servlet: author " + author + "newTitle: " + newTitle);
 
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
+
                 if (newDate.length() < 5) {
-//                    newContent = newContent + "<p> Edited on: " + sqlDate + "</p>";
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
                     System.out.println("EditArticle Servlet: Article added to database without date");
 
                 } else {
-                    String origPublishDate =req.getParameter("publishedDate");
-//                    newContent+="<p>Originally published on "+ origPublishDate +",Edited on: " + sqlDate + " </p>";
+                    //if user has opted to change the publish date
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate submittedDateReformatted = LocalDate.parse(newDate, formatter);
                     java.sql.Date anotherSqlDate = java.sql.Date.valueOf(submittedDateReformatted);
-                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent,anotherSqlDate);
+                    articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent, anotherSqlDate);
                     System.out.println("EditArticle Servlet: Article added to database with date: " + newDate);
                 }
                 if (articleHasBeenEdited) {
@@ -93,23 +91,23 @@ public class EditArticle extends HttpServlet {
 
                     //print log to file
                     Map<String, String> map = new HashMap<>();
-                    map.put("articleID",String.valueOf(articleID));
+                    map.put("articleID", String.valueOf(articleID));
                     map.put("newTitle", newTitle);
-                    map.put("newContent",newContent);
+                    map.put("newContent", newContent);
                     map.put("submittedDate", String.valueOf(sqlDate));
-                    map.put("operation",op);
+                    map.put("operation", op);
 
-                    String ipAddress =  req.getRemoteAddr();
+                    String ipAddress = req.getRemoteAddr();
                     map.put("ip", ipAddress);
 
                     String logType = "EditArticle";
                     LogWriter logWriter = new LogWriter(logType);
                     logWriter.init(getServletContext().getRealPath("log"));
-                    logWriter.write(logType,map);
+                    logWriter.write(logType, map);
                     //end of logging code
                 }
                 req.getRequestDispatcher("myArticles").forward(req, resp);
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
