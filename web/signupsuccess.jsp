@@ -68,7 +68,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading">
 
                     <div class="panel-title"><h3>Sign up successfully!</h3></div>

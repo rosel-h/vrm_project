@@ -86,7 +86,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10%; padding: 10%">
                     <h2>${articleToLoad.getTitle()}</h2>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>

@@ -135,7 +135,7 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 10%; padding: 10%">
                             <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                                 <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"

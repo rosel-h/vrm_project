@@ -113,7 +113,7 @@
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+                    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                             <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                                 <img src="avatars/${user.getAvatar_icon()}" alt="avatar"
@@ -140,7 +140,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </header>
 

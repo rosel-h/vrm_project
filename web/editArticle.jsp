@@ -128,7 +128,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10%; padding: 10%">
                     <h2>${articleToEdit.getUsername()}, edit your article below</h2>
                     <span class="meta">Originally posted on ${articleToEdit.getDate()}</span>
