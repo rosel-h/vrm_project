@@ -204,6 +204,8 @@
         });
 
     </script>
+
+    <%--javascript for show more--%>
     <script type="text/javascript">
         function showtoggle() {
             var x = document.getElementById("form-content2");
@@ -273,7 +275,7 @@
                                         <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${usernameError}</span>
 
                                         <input type="text" id="username" class="form-control" name="username"
-                                               placeholder="Enter Username 4~20 characters">
+                                               placeholder="Enter Username 4~20 characters" required>
 
 
                                     </div>
@@ -284,7 +286,7 @@
                                         <label for="password" style="float: left;"> Password</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordFormatCheck"></span>
                                         <%--<label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>--%>
                                         <input type="password" id="password" class="form-control" name="password"
-                                               placeholder="Enter Password 4~20 characters">
+                                               placeholder="Enter Password 4~20 characters" required>
 
 
                                     </div>
@@ -295,11 +297,20 @@
                                     <div class="col-xs-12">
                                         <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${passwordError}</div>
                                         <input type="password" id="cPassword" class="form-control" name="cPassword"
-                                               placeholder="Confirm Password">
+                                               placeholder="Confirm Password" required>
 
 
                                     </div>
 
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="col-xs-12">
+                                        <label for="dob" style="float: left">Date of Birth</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="dobCheck">${dobError}</span>
+                                        <input type="date" id="dob" class="form-control" name="dob"
+                                               placeholder="date of birth" required>
+                                    </div>
                                 </div>
 
                                 <div id="togglebtn" style="font-size: 85%; float: right; margin-right: 3%"
@@ -327,14 +338,14 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+<%--                                &lt;%&ndash;<div class="form-group">&ndash;%&gt;
 
-                                    <div class="col-xs-12">
-                                        <label for="dob" style="float: left">Date of Birth</label>
-                                        <input type="date" id="dob" class="form-control" name="dob"
-                                               placeholder="date of birth">
-                                    </div>
-                                </div>
+                                    &lt;%&ndash;<div class="col-xs-12">&ndash;%&gt;
+                                        &lt;%&ndash;<label for="dob" style="float: left">Date of Birth</label>&ndash;%&gt;
+                                        &lt;%&ndash;<input type="date" id="dob" class="form-control" name="dob"&ndash;%&gt;
+                                               &lt;%&ndash;placeholder="date of birth">&ndash;%&gt;
+                                    &lt;%&ndash;</div>&ndash;%&gt;
+                                &lt;%&ndash;</div>--%>--%>
 
                                 <div class="form-group">
 
@@ -395,11 +406,11 @@
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
-                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin-left: 2%"></div>--%>
 
 
                                     <%--//this is for local host--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>
                                     <span>&nbsp;&nbsp;</span>
                                     <%--<input type="submit" value="Submit" class="btn btn-login">--%>
                                     <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8; height: 70%" id="btn-login"

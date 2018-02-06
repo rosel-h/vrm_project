@@ -18,8 +18,13 @@ import javax.net.ssl.HttpsURLConnection;
 public class VerifyRecaptcha {
 
     public static final String url = "https://www.google.com/recaptcha/api/siteverify";
-//    public static final String secret = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
-    public static final String secret = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
+
+    //this is for local host
+    public static final String secret = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
+
+    //this is for sporadic
+//    public static final String secret = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
+
     private final static String USER_AGENT = "Mozilla/5.0";
 
     public static boolean verify(String gRecaptchaResponse) throws IOException {
@@ -36,35 +41,33 @@ public class VerifyRecaptcha {
             connection.setRequestProperty("User-Agent", USER_AGENT);
             connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-            String postParams = "secret=" + secret + "&response="
-                    + gRecaptchaResponse;
+            String postParams = "secret=" + secret + "&response=" + gRecaptchaResponse;
 
             // Send post request
             connection.setDoOutput(true);
-            DataOutputStream output = new DataOutputStream(connection.getOutputStream());
-            output.writeBytes(postParams);
-            output.flush();
-            output.close();
+            DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream());
+            outputStream.writeBytes(postParams);
+            outputStream.flush();
+            outputStream.close();
 
             int responseCode = connection.getResponseCode();
             System.out.println("VerifyRecaptcha enter line 49 Sending 'POST' request to URL : " + url);
             System.out.println("VerifyRecaptcha enter line 50 Post parameters : " + postParams);
             System.out.println("VerifyRecaptcha enter line 51 Response Code : " + responseCode);
 
-            BufferedReader input = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
 
-            while ((inputLine = input.readLine()) != null) {
+            while ((inputLine = bufferedReader.readLine()) != null) {
                 response.append(inputLine);
             }
-            input.close();
+            bufferedReader.close();
 
             // print result
             System.out.println("VerifyRecaptcha enter line 64" + response.toString());
 
-            //parse JSON response and return 'success' value
+            // parse JSON response and return 'success' value
             JsonReader jsonReader = Json.createReader(new StringReader(response.toString()));
             JsonObject jsonObject = jsonReader.readObject();
             jsonReader.close();

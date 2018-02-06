@@ -68,8 +68,16 @@ public class BlogDAO implements AutoCloseable {
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
-                            artic.add(dataFromResultSet(rs, new Article()));
+                        Article newArticle = dataFromResultSet(rs, new Article());
+                        boolean hasThisArticle = false;
+                        for (Article article : artic) {
+                            if (article.getArticleID() == newArticle.getArticleID()) {
+                                hasThisArticle = true;
+                            }
+                        }
+                        if (!hasThisArticle) {
+                            System.out.println("BlogDAO enter line 73 search by title: newArticle title=" + newArticle.getTitle());
+                            artic.add(newArticle);
                         }
                     }
                 }
@@ -88,8 +96,16 @@ public class BlogDAO implements AutoCloseable {
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
-                            artic.add(dataFromResultSet(rs, new Article()));
+                        Article newArticle = dataFromResultSet(rs, new Article());
+                        boolean hasThisArticle = false;
+                        for (Article article : artic) {
+                            if (article.getArticleID() == newArticle.getArticleID()) {
+                                hasThisArticle = true;
+                            }
+                        }
+                        if (!hasThisArticle) {
+                            System.out.println("BlogDAO enter line 107 search by username: newArticle title=" + newArticle.getTitle());
+                            artic.add(newArticle);
                         }
                     }
                 }
@@ -108,8 +124,16 @@ public class BlogDAO implements AutoCloseable {
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        if (!artic.contains(dataFromResultSet(rs, new Article()))) {
-                            artic.add(dataFromResultSet(rs, new Article()));
+                        Article newArticle = dataFromResultSet(rs, new Article());
+                        boolean hasThisArticle = false;
+                        for (Article article : artic) {
+                            if (article.getArticleID() == newArticle.getArticleID()) {
+                                hasThisArticle = true;
+                            }
+                        }
+                        if (!hasThisArticle) {
+                            System.out.println("BlogDAO enter line 135 search by date: newArticle title=" + newArticle.getTitle());
+                            artic.add(newArticle);
                         }
                     }
                 }

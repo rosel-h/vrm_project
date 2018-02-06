@@ -181,6 +181,29 @@ public class UserDAO implements AutoCloseable {
         return updateSuccess;
     }
 
+    public boolean updatePassword(User user) {
+        boolean updateSuccess = false;
+
+        try (PreparedStatement ps = conn.prepareStatement("UPDATE vrm_users " +
+                "SET psw_hash = ? WHERE username = ?;")) {
+
+            ps.setString(1, user.getPassword());
+            ps.setString(2, user.getUsername());
+
+
+            ps.executeUpdate();
+
+            updateSuccess = true;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return updateSuccess;
+
+    }
+
     @Override
     public void close() throws Exception {
         System.out.println("logging out of UserDao connection");

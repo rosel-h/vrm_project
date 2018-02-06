@@ -102,9 +102,10 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
                     <div class="panel-title"><h3>Sign In</h3></div>
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a style="color: white;"
-                                                                                               href="javascript:alert('Dont forget your password! Bad Luck! Contact us.');">Forgot
-                        password?</a>
+                    <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                        <%--<a style="color: white;" href="javascript:alert('Dont forget your password! Bad Luck! Contact us.');">Forgot password?</a>--%>
+                            <a style="color: white;" href="forgetPassword.jsp">Forgot password?</a>
+
                     </div>
                     <div style="padding-top:30px" class="panel-body">
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>

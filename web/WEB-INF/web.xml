@@ -230,4 +230,24 @@
         <servlet-name>Contact</servlet-name>
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ForgetPassword</servlet-name>
+        <servlet-class>ForgetPassword</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ForgetPassword</servlet-name>
+        <url-pattern>/forgetpassword</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>ResetPassword</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetpassword</url-pattern>
+    </servlet-mapping>
 </web-app>

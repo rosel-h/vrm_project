@@ -38,8 +38,8 @@ public class IndividualArticleServlet extends HttpServlet {
         System.out.println("> do post");
         HttpSession session = req.getSession(false);
 
-        String uncleanContent = req.getParameter("content");
-        String content = Jsoup.clean(uncleanContent, Whitelist.relaxed());
+        String content = req.getParameter("content");
+//        String content = Jsoup.clean(uncleanContent, Whitelist.relaxed());
         System.out.println(content);
 
         req.setCharacterEncoding("UTF-8");
