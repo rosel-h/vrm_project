@@ -22,7 +22,7 @@ public class OAuth2fb extends HttpServlet {
     // Facebook WebApp authentication Information
     private static final String clientID = "352195078594245";
     private static final String clientSecret = "f1c2f612640b399bd0ef017ed83b68c4";
-    private static final String redirectURI = "http://localhost:8181/oauth2fb";
+    private static final String redirectURI = "https://sporadic.nz/vrmblog/oauth2fb";
     private static final String scope = "email";
 
     User user;
