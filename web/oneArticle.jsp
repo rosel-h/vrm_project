@@ -113,9 +113,26 @@
                         <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                         <input type="hidden" id="csrfToken1" name="csrfToken"
                                value="${sessionScope.get("csrfSessionToken")}">
-                        <button type="submit" class="btn btn-danger pull-right">
-                            Delete
-                        </button>
+                        <%--<button type="submit" class="btn btn-danger pull-right">Delete</button>--%>
+
+                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#article${articleToLoad.getArticleID()}">Delete</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="article${articleToLoad.getArticleID()}" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">Are you sure you want to delete the article?</h6>
+                                    </div>
+                                    <div class="modal-body">
+                                        <button type="submit" class="btn btn-danger float-left">Delete</button>
+                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
                 <div style="padding: 1%; margin: 2%">
@@ -167,12 +184,31 @@
                         <%--delete comment if user is logged in--%>
                     <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
                         <form method="post" action="OneArticle">
-                            <button type="submit" class="btn btn-xs btn-danger">delete comment</button>
+                            <%--<button type="submit" class="btn btn-xs btn-danger">delete comment</button>--%>
+
                             <input type="hidden" name="operation" value="deleteCommentOnArticle">
                             <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                             <input type="hidden" name="commentID" value="${commentList.getCommentID()}">
-                            <input type="hidden" id="csrfToken3" name="csrfToken"
-                                   value="${sessionScope.get("csrfSessionToken")}">
+                            <input type="hidden" id="csrfToken3" name="csrfToken"value="${sessionScope.get("csrfSessionToken")}">
+
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#comment${commentList.getCommentID()}">delete comment</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="comment${commentList.getCommentID()}" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title">Are you sure?</h6>
+                                            </div>
+                                            <div class="modal-body">
+                                                <button type="submit" class="btn btn-danger float-left">Delete</button>
+                                                <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                         </form>
                     </c:if>
 
@@ -181,12 +217,9 @@
                         <div id="replyBox${commentList.getCommentID()}" style="display: none">
                             <form method="post" action="OneArticle">
                                 <div class="form-group">
-                                    <label for="summernote" style="font-size: x-small">Comment
-                                        as ${sessionScope.personLoggedIn}:</label>
-                                    <textarea name="newComment" class="form-control" rows="3"
-                                              required></textarea>
-                                    <input type="hidden" name="userWhoCommented"
-                                           value="${sessionScope.personLoggedIn}">
+                                    <label for="summernote" style="font-size: x-small">Reply to comment as ${sessionScope.personLoggedIn}:</label>
+                                    <textarea name="newComment" class="form-control" rows="3" required></textarea>
+                                    <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                                     <input type="hidden" name="operation" value="replyToAComment">
                                     <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
                                     <input type="hidden" name="fatherComment" value="${commentList.getCommentID()}">
@@ -238,21 +271,15 @@
                                     <div id="replyBox${children.getCommentID()}" style="display: none">
                                         <form method="post" action="OneArticle">
                                             <div class="form-group">
-                                                <label for="summernote" style="font-size: x-small">Comment
-                                                    as ${sessionScope.personLoggedIn}:</label>
+                                                <label for="summernote" style="font-size: x-small">Reply to comment as ${sessionScope.personLoggedIn}:</label>
                                                 <textarea name="newComment" class="form-control" rows="3"
                                                           required></textarea>
-                                                <input type="hidden" name="userWhoCommented"
-                                                       value="${sessionScope.personLoggedIn}">
+                                                <input type="hidden" name="userWhoCommented" value="${sessionScope.personLoggedIn}">
                                                 <input type="hidden" name="operation" value="replyToAComment">
-                                                <input type="hidden" name="articleID"
-                                                       value="${articleToLoad.getArticleID()}">
-                                                <input type="hidden" name="fatherComment"
-                                                       value="${children.getParentCommentID()}">
-                                                <input type="hidden" id="csrfToken5" name="csrfToken"
-                                                       value="${sessionScope.get("csrfSessionToken")}">
-                                                <button style="float: right; margin: 1%" type="submit"
-                                                        class="btn btn-sm btn-success">Reply
+                                                <input type="hidden" name="articleID" value="${articleToLoad.getArticleID()}">
+                                                <input type="hidden" name="fatherComment" value="${children.getParentCommentID()}">
+                                                <input type="hidden" id="csrfToken5" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                                                <button style="float: right; margin: 1%" type="submit" class="btn btn-sm btn-success">Reply
                                                 </button>
                                             </div>
                                         </form>
@@ -260,14 +287,29 @@
                                 </c:if>
                                 <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == children.getCommentAuthor())}">
                                     <form method="post" action="OneArticle">
-                                        <button type="submit" class="btn btn-xs btn-danger">delete comment
-                                        </button>
                                         <input type="hidden" name="operation" value="deleteCommentOnArticle">
                                         <input type="hidden" name="articleID"
                                                value="${articleToLoad.getArticleID()}">
                                         <input type="hidden" name="commentID" value="${children.getCommentID()}">
-                                        <input type="hidden" id="csrfToken6" name="csrfToken"
-                                               value="${sessionScope.get("csrfSessionToken")}">
+                                        <input type="hidden" id="csrfToken6" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
+                                            <%--<button type="submit" class="btn btn-xs btn-danger">delete comment</button>--%>
+                                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#mychid${children.getCommentID()}">delete comment</button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="mychid${children.getCommentID()}" role="dialog">
+                                                <div class="modal-dialog modal-sm">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h6 class="modal-title">Are you sure?</h6>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <button type="submit" class="btn btn-danger float-left">Delete</button>
+                                                            <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </form>
                                 </c:if>
                             </div>
