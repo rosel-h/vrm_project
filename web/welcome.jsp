@@ -201,8 +201,8 @@
             <ul id="banner_img" style="max-width: 100%; float: left;">
                 <li>
                     <div id="banner-1">
-                        <a href="OneArticle?articleID=23">
-                            <img src="img/banner07.png" class="img-responsive" id="bannerimg-1"
+                        <a href="OneArticle?articleID=62">
+                            <img src="img/banner07.jpg" class="img-responsive" id="bannerimg-1"
                                  style="display: block; max-width: 100%; max-height: 100%;"/></a>
                     </div>
                 </li>
