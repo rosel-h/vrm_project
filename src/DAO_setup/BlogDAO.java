@@ -61,7 +61,7 @@ public class BlogDAO implements AutoCloseable {
         List<Article> artic = new ArrayList<>();
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE title LIKE ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username AND title LIKE ?")) {
                 stmt.setString(1, "%" + keyword + "%");
 
                 try (ResultSet rs = stmt.executeQuery()) {
@@ -81,6 +81,7 @@ public class BlogDAO implements AutoCloseable {
                 }
             }
         }
+        System.out.println("BlogDAO getarticles by username search size "+artic.size());
         return artic;
     }
 
@@ -88,7 +89,7 @@ public class BlogDAO implements AutoCloseable {
         List<Article> artic = new ArrayList<>();
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username LIKE ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username AND vrm_articles.username LIKE ?")) {
                 stmt.setString(1, "%" + keyword + "%");
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
@@ -115,7 +116,7 @@ public class BlogDAO implements AutoCloseable {
 
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE date = ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username AND date = ?")) {
                 stmt.setString(1, keyword);
 
                 try (ResultSet rs = stmt.executeQuery()) {
@@ -177,7 +178,7 @@ public class BlogDAO implements AutoCloseable {
     public List<Article> getMyArticles(String username) throws SQLException {
         System.out.println("BlogDAO: getMyArticles username - " + username);
         List<Article> a = new ArrayList<>();
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username AND username =?")) {
             stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("BlogDAO: rs executed in getMyArticles ");
@@ -193,7 +194,7 @@ public class BlogDAO implements AutoCloseable {
     public List<Article> getTenOfMyArticles(String username, String order, int number, boolean isAscending) throws SQLException {
         order = "date";
         number = (number - 1) * 10;
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =? ORDER by date DESC limit 10 offset ?;")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username AND vrm_articles.username =? ORDER by date DESC limit 10 offset ?;")) {
 
             stmt.setString(1, username);
             stmt.setInt(2, number);
@@ -218,7 +219,7 @@ public class BlogDAO implements AutoCloseable {
         String date = rs.getString("date");
         String title = rs.getString("title");
         String userStatus = rs.getString("status");
-        return new Article(user, aID, story,date , title, userStatus);
+        return new Article(user, aID, story, date, title, userStatus);
     }
 
     /**
@@ -236,11 +237,12 @@ public class BlogDAO implements AutoCloseable {
             return null;
         }
     }
+
     /**
      * Translates the current row of the given ResultSet into a Comment object depending on the Object type passed in.
      */
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
-        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"),rs.getInt("parent_comment_id"),rs.getString("status"));
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"), rs.getInt("parent_comment_id"), rs.getString("status"));
 
 
     }
@@ -350,15 +352,15 @@ public class BlogDAO implements AutoCloseable {
     /*delete comment*/
     public void deleteCommentOnArticle(int id) {
         //deletes any comments whose parent is on the id
-try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE parent_comment_id = ?")) {
-stmt.setInt(1, id);
-System.out.println("Blog Dao: Comment with id: "+id+" deleted");
-} catch (SQLException e) {
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE parent_comment_id = ?")) {
+            stmt.setInt(1, id);
+            System.out.println("Blog Dao: Comment with id: " + id + " deleted");
+        } catch (SQLException e) {
             System.out.println("Blog Dao: Comment was not deleted");
             e.printStackTrace();
-            }
+        }
 
-      //delete the actual comment
+        //delete the actual comment
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE comment_id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();

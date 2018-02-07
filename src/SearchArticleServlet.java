@@ -67,6 +67,7 @@ public class SearchArticleServlet extends HttpServlet {
                 if (searchType.equals("title")) {
                     System.out.println("SearchArticleServlet enter line 78: search by title");
                     articles = dao.getArticleByTitle(keywords);
+                    System.out.println("SearchArticleServlet "+articles.size());
                 } else if (searchType.equals("username")) {
                     System.out.println("SearchArticleServlet enter line 82: search by username");
                     articles = dao.getArticleByUsername(keywords);

@@ -19,9 +19,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -75,7 +75,7 @@
             "background09.jpg",
             "background10.jpg",
             "background11.jpg",
-            "background13.jpg","background14.jpg","background15.jpg","background16.jpg","background17.jpg","background18.jpg","background19.jpg","background20.jpg","background21.jpg","background22.jpg","background23.jpg","background24.jpg"
+            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
 
         function loadRandomImage() {
@@ -138,7 +138,8 @@
                     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 10%; padding: 10%">
                             <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                                <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar"
+                                     style="border-radius: 50%"
                                      class="img-circle img-fluid">
                             </div>
 
@@ -217,14 +218,21 @@
     <table class="table table-hover sorttable" id="articletable">
         <thead>
         <tr>
-            <th class="sort-alpha" style="color: #0085a1"><ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
-            <th class="sort-alpha" style="color: #0085a1"><ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
-            <th class="sort-alpha" style="color: #0085a1"><ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins></th>
+            <th class="sort-alpha" style="color: #0085a1">
+                <ins>Title<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+            </th>
+            <th class="sort-alpha" style="color: #0085a1">
+                <ins>Author<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+            </th>
+            <th class="sort-alpha" style="color: #0085a1">
+                <ins>Date Published<span class="glyphicon glyphicon-sort">&nbsp;</span></ins>
+            </th>
             <th></th>
         </tr>
         </thead>
 
         <tbody>
+
         <c:if test="${sessionScope.personLoggedIn == null}">
             <tr>
                 <td colspan="4">Please log in first!</td>
@@ -242,8 +250,8 @@
 
 
         <c:if test="${sessionScope.personLoggedIn != null}">
-            <c:if test="${sessionScope.articleList.size() > 0}">
-                <c:forEach var="articleList" items="${sessionScope.articleList}">
+            <c:if test="${articleList.size() > 0}">
+                <c:forEach var="articleList" items="${articleList}">
                     <%
                         java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
                         request.setAttribute("sqlDateToday", sqlDateToday);
@@ -256,10 +264,24 @@
                                     <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                                     <input type="hidden" id="csrfToken" name="csrfToken"
                                            value="${sessionScope.get("csrfSessionToken")}">
-                                    <button type="submit" style="font-weight: bold; background: transparent; cursor: pointer" class="btn">Read More...</button>
+                                    <button type="submit"
+                                            style="font-weight: bold; background: transparent; cursor: pointer"
+                                            class="btn">Read More...
+                                    </button>
                                 </form>
                             </td>
-                            <td>by <i>${articleList.getUsername()}</i></td>
+                            <td>by <c:choose>
+                                <c:when test="${articleList.userIsInactive()}">
+                                    <i style="color: lightsteelblue" data-toggle="tooltip"
+                                       title="inactive user">(${articleList.getUsername()})</i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i>${articleList.getUsername()}</i>
+                                </c:otherwise>
+                            </c:choose>
+                            </td>
+                            <td>${articleList.getDate()}</td>
+                            </td>
                             <td>${articleList.getDate()}</td>
                         </tr>
                     </c:if>
@@ -267,9 +289,6 @@
 
             </c:if>
         </c:if>
-
-
-
 
 
         </tbody>
