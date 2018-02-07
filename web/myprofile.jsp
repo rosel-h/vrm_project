@@ -275,7 +275,6 @@
 
 
                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteProfile">Delete</button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="deleteProfile" role="dialog">
                             <div class="modal-dialog modal-sm">
