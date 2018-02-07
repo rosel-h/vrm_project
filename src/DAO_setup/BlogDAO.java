@@ -15,6 +15,7 @@ import java.util.List;
 public class BlogDAO implements AutoCloseable {
     private final Connection conn;
     private final Database db;
+
     /**
      * Creates a new UniDAO and establishes a connection to the given database.
      */
@@ -38,15 +39,12 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
+    /*loads ten articles depending on the page in Articles*/
     public List<Article> getTenArticles(String order, int number, boolean isAscending) throws SQLException {
         order = "date";
-        number = (number-1)*10;
+        number = (number - 1) * 10;
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by date DESC limit 10 offset ?;")) {
-//            stmt.setString(1,order);
-//            String upOrDown = (isAscending) ? "asc" : "desc";
-//            stmt.setString(2,upOrDown);
-//            stmt.setInt(3,number);
-            stmt.setInt(1,number);
+            stmt.setInt(1, number);
             try (ResultSet rs = stmt.executeQuery()) {
                 List<Article> artic = new ArrayList<>();
                 while (rs.next()) {
@@ -60,7 +58,6 @@ public class BlogDAO implements AutoCloseable {
 
     public List<Article> getArticleByTitle(String[] keywords) throws SQLException {
         List<Article> artic = new ArrayList<>();
-
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE title LIKE ?")) {
@@ -88,12 +85,10 @@ public class BlogDAO implements AutoCloseable {
 
     public List<Article> getArticleByUsername(String[] keywords) throws SQLException {
         List<Article> artic = new ArrayList<>();
-
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username LIKE ?")) {
                 stmt.setString(1, "%" + keyword + "%");
-
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
                         Article newArticle = dataFromResultSet(rs, new Article());
@@ -141,7 +136,9 @@ public class BlogDAO implements AutoCloseable {
         }
         return artic;
     }
- public int getTotalArticles() throws SQLException{
+
+    /*returns total number of articles*/
+    public int getTotalArticles() throws SQLException {
         int n = 0;
         try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles;")) {
 
@@ -157,10 +154,12 @@ public class BlogDAO implements AutoCloseable {
         }
         return n;
     }
-    public int getTotalArticles(String username) throws SQLException{
+
+    /*returns total number of articles created by username*/
+    public int getTotalArticles(String username) throws SQLException {
         int n = 0;
         try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM vrm_articles WHERE username=? ;")) {
-            stmt.setString(1,username);
+            stmt.setString(1, username);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("BlogDAO: getTotalArticles ");
                 while (rs.next()) {
@@ -173,6 +172,7 @@ public class BlogDAO implements AutoCloseable {
         }
         return n;
     }
+
     public List<Article> getMyArticles(String username) throws SQLException {
         System.out.println("BlogDAO: getMyArticles username - " + username);
         List<Article> a = new ArrayList<>();
@@ -188,16 +188,14 @@ public class BlogDAO implements AutoCloseable {
             }
         }
     }
-    public List<Article> getTenOfMyArticles(String username,String order, int number, boolean isAscending) throws SQLException {
+
+    public List<Article> getTenOfMyArticles(String username, String order, int number, boolean isAscending) throws SQLException {
         order = "date";
-        number = (number-1)*10;
+        number = (number - 1) * 10;
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE username =? ORDER by date DESC limit 10 offset ?;")) {
-//            stmt.setString(1,order);
-//            String upOrDown = (isAscending) ? "asc" : "desc";
-//            stmt.setString(2,upOrDown);
-//            stmt.setInt(3,number);
+
             stmt.setString(1, username);
-            stmt.setInt(2,number);
+            stmt.setInt(2, number);
             try (ResultSet rs = stmt.executeQuery()) {
                 List<Article> artic = new ArrayList<>();
                 while (rs.next()) {
@@ -208,43 +206,6 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
-    /*Gets all the users from database*/
-    public List<User> getAllUsers() throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_users")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                List<User> user = new ArrayList<>();
-                while (rs.next()) {
-                    user.add(dataFromResultSet(rs, new User()));
-                }
-                return user;
-            }
-        }
-    }
-
-    /*Gets all the comments on articles from database*/
-    public List<CommentOnArticles> getAllFirstComments() throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                List<CommentOnArticles> comArt = new ArrayList<>();
-                while (rs.next()) {
-                    comArt.add(dataFromResultSet(rs, new CommentOnArticles()));
-                }
-                return comArt;
-            }
-        }
-    }
-
-    public List<CommentsOnComments> getAllNestedComments() throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_comments.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_comments WHERE  vwen239.vrm_comments_on_comments.username  = vwen239.vrm_users.username;")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                List<CommentsOnComments> comArt = new ArrayList<>();
-                while (rs.next()) {
-                    comArt.add(dataFromResultSet(rs, new CommentsOnComments()));
-                }
-                return comArt;
-            }
-        }
-    }
 
     /**
      * Translates the current row of the given ResultSet into a Article,User,Comment object depending on the Object type passed in.
@@ -254,10 +215,13 @@ public class BlogDAO implements AutoCloseable {
         int aID = rs.getInt("article_id");
         String story = rs.getString("content");
         String date = rs.getString("date");
-        String title =  rs.getString("title");
-        return new Article(user, aID, story,date , title);
+        String title = rs.getString("title");
+        return new Article(user, aID, story, date, title);
     }
 
+    /**
+     * Translates the current row of the given ResultSet into a User object depending on the Object type passed in.
+     */
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
         return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"));
     }
@@ -270,13 +234,11 @@ public class BlogDAO implements AutoCloseable {
             return null;
         }
     }
-
+    /**
+     * Translates the current row of the given ResultSet into a Comment object depending on the Object type passed in.
+     */
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
-        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"),rs.getInt("parent_comment_id"));
-    }
-
-    private CommentsOnComments dataFromResultSet(ResultSet rs, CommentsOnComments n) throws SQLException {
-        return new CommentsOnComments(rs.getInt("parent_comment_id"), rs.getInt("child_comment_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"));
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"), rs.getInt("parent_comment_id"));
     }
 
     public String getIcon(String username) {
@@ -304,10 +266,8 @@ public class BlogDAO implements AutoCloseable {
             stmt.setString(3, String.valueOf(now));
             stmt.setString(4, content);
             stmt.executeUpdate();
-
-
-
         } catch (SQLException e) {
+            System.out.println("BlogDAO: Article was not added due to SQL error");
             e.printStackTrace();
         }
 
@@ -323,7 +283,6 @@ public class BlogDAO implements AutoCloseable {
 
                 try (ResultSet r = stmt.executeQuery()) {
                     System.out.println("RS executed");
-//                    System.out.println("BlogDAO: user in RS = "+r.getString("username"));
                     u = dataFromResultSet(r, new User());
                     System.out.println(u.getUsername() + " " + u.getAvatar_icon());
                 }
@@ -370,7 +329,7 @@ public class BlogDAO implements AutoCloseable {
         }
     }
 
-    /*add a comment*/
+    /*add a parent comment to article*/
     public void addCommentToArticle(int articleID, String userWhoCommented, Date date, String comment) {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_comments_on_articles (article_id, username, date, content) VALUE (?,?,?,?)")) {
             stmt.setInt(1, articleID);
@@ -389,16 +348,15 @@ public class BlogDAO implements AutoCloseable {
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE comment_id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            System.out.println("Blog Dao: Comment with id: "+id+" deleted");
+            System.out.println("Blog Dao: Comment with id: " + id + " deleted");
         } catch (SQLException e) {
             System.out.println("Blog Dao: Comment was not deleted");
             e.printStackTrace();
         }
     }
 
-
-
-    public void addCommentToAnotherComment(int articleID, String userWhoCommented, Date date, String comment, int parentCommentID){
+    /*add a child comment to the article*/
+    public void addCommentToAnotherComment(int articleID, String userWhoCommented, Date date, String comment, int parentCommentID) {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_comments_on_articles (article_id, username, date, content,parent_comment_id) VALUE (?,?,?,?,?)")) {
             stmt.setInt(1, articleID);
             stmt.setString(2, userWhoCommented);
@@ -413,24 +371,16 @@ public class BlogDAO implements AutoCloseable {
 
     }
 
-
     /*get one article base on id*/
     public Article getOneArticle(int id) {
         Article a = null;
-
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE article_id = ?")) {
             stmt.setInt(1, id);
-
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("RS executed");
                 System.out.println(rs.next());
                 a = dataFromResultSet(rs, new Article());
-                System.out.println("BlogDAO getOneArticle executed for id: "+id);
-//                System.out.println(a.getArticleID());
-//                System.out.println(a.getContent());
-//                System.out.println(a.getDate());
-//                System.out.println(a.getTitle());
-//                System.out.println(a.getUsername());
+                System.out.println("BlogDAO getOneArticle executed for id: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Blog Dao: article was not taken");
@@ -439,21 +389,21 @@ public class BlogDAO implements AutoCloseable {
         return a;
     }
 
-    public List<CommentOnArticles> getAllCommentOfArticle(int id) throws SQLException{
+    public List<CommentOnArticles> getAllCommentOfArticle(int id) throws SQLException {
         ArrayList<CommentOnArticles> comments = new ArrayList<>();
         try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE vrm_comments_on_articles.article_id =  ? AND  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
             stmt.setInt(1, id);
             CommentOnArticles c;
             try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()){
-                    comments.add(dataFromResultSet(rs,new CommentOnArticles()));
+                while (rs.next()) {
+                    comments.add(dataFromResultSet(rs, new CommentOnArticles()));
                 }
             }
         }
         return comments;
     }
 
-    /*Edit article
+    /*Edit article - if a the publish date was changed
      * @param id of the article in database
      * @newTitle title of the edited article
      * @newContent content edited
@@ -474,7 +424,7 @@ public class BlogDAO implements AutoCloseable {
         return false;
     }
 
-    /*Edit article
+    /*Edit article - if a the publish date was wasn't changed
      * @param id of the article in database
      * @newTitle title of the edited article*/
     public boolean editArticle(int id, String newTitle, String newContent) {
@@ -489,10 +439,6 @@ public class BlogDAO implements AutoCloseable {
         }
         return false;
     }
-
-    /*gets all every 10 pages*/
-
-
 
     /**
      * Closes the connection to the database. Implements {@link AutoCloseable} to support try-with-resources.

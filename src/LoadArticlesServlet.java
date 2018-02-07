@@ -1,11 +1,11 @@
-import DAO_setup.*;
+import DAO_setup.Article;
+import DAO_setup.BlogDAO;
+import DAO_setup.MYSQLDatabase;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -37,18 +37,17 @@ public class LoadArticlesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("> now post");
 
-        HttpSession session = req.getSession(false);
-
-        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
+        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("LoadArticlesServlet Signup done");
+
             int totalArticlesSoFar = dao.getTotalArticles();
+            //max pages to be loaded
             int totalPages = totalArticlesSoFar/10+1;
             if(pageNumber >totalPages){
                 pageNumber =totalPages;
             }else if(pageNumber<1){
                 pageNumber=1;
             }
-//            List<Article> articles = dao.getAllArticles();
 
             int checkNumber = this.pageNumber;
             if(!wentThroughGetMethod){
@@ -66,9 +65,5 @@ public class LoadArticlesServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 }

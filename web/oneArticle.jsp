@@ -8,14 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.time.LocalDate" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>${articleToLoad.getTitle()}</title>
     <meta charset="UTF-8">
-
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -86,7 +86,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10%; padding: 10%">
                     <h2>${articleToLoad.getTitle()}</h2>
                     <%--<h2 class="subheading">Problems look mighty small from 150 miles up</h2>--%>
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div class="row" style="float: right">
-            <c:if test="${personLoggedIn == articleToLoad.getUsername()}">
+            <c:if test="${sessionScope.personLoggedIn == articleToLoad.getUsername()}">
             <div class="btn-group btn-group-justified col-lg-12 col-md-12 float-right" role="group">
                 <div style="padding: 1%; margin: 2%">
                     <form class="form-inline" action="OneArticle" method="POST">
@@ -182,7 +182,7 @@
 
                     <p>${commentList.getContent()}</p>
                         <%--delete comment if user is logged in--%>
-                    <c:if test="${(articleToLoad.getUsername()==personLoggedIn) ||( personLoggedIn == commentList.getCommentAuthor())}">
+                    <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
                         <form method="post" action="OneArticle">
                             <%--<button type="submit" class="btn btn-xs btn-danger">delete comment</button>--%>
 

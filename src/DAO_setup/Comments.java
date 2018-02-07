@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by rher490 on 24/01/2018.
- * This will show both comments on articles and on comments
+ * This will show both comments on articles
  */
 public class Comments {
     public int commentID;
@@ -84,6 +84,7 @@ public class Comments {
         return false;
     }
 
+    /*check if comments has children, used in my articles and all articles*/
     public boolean hasChildren(){
         if(comments.size()>=1){
             return true;

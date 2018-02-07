@@ -25,6 +25,7 @@ public class Article {
         this.title = title;
     }
 
+    /*returns username*/
     public String getUsername() {
         return username;
     }
@@ -33,6 +34,7 @@ public class Article {
         this.username = username;
     }
 
+    /*return article id*/
     public int getArticleID() {
         return articleID;
     }
@@ -41,8 +43,8 @@ public class Article {
         this.articleID = articleID;
     }
 
+    /*return all content*/
     public String getContent() {
-
         return content;
     }
 
@@ -50,59 +52,16 @@ public class Article {
         this.content = content;
     }
 
+    /*return date*/
     public String getDate() {
         return date;
-    }
-
-    public String getFormattedDate() {
-        String YMD = date.substring(9) + " ";
-        int month = Integer.parseInt(date.substring(5, 7));
-        switch (month) {
-            case 1:
-                YMD += "Jan ";
-                break;
-            case 2:
-                YMD += "Feb ";
-                break;
-            case 3:
-                YMD += "Mar ";
-                break;
-            case 4:
-                YMD += "Apr ";
-                break;
-            case 5:
-                YMD += "May ";
-                break;
-            case 6:
-                YMD += "Jun ";
-                break;
-            case 7:
-                YMD += "Jul ";
-                break;
-            case 8:
-                YMD += "Aug ";
-                break;
-            case 9:
-                YMD += "Sep ";
-                break;
-            case 10:
-                YMD += "Oct ";
-                break;
-            case 11:
-                YMD += "Nov ";
-                break;
-            case 12:
-                YMD += "Dec ";
-                break;
-        }
-
-        return YMD + date.substring(0, 4);
     }
 
     public void setDate(String date) {
         this.date = date;
     }
 
+    /*return title*/
     public String getTitle() {
         return title;
     }
@@ -111,6 +70,7 @@ public class Article {
         this.title = title;
     }
 
+    /*check if this date is in the future*/
     public boolean dateIsGreaterThan(String otherDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date1 = LocalDate.parse(this.date, formatter);
@@ -123,29 +83,18 @@ public class Article {
         return false;
     }
 
+    /*returns the first paragraph of an article*/
     public String getContentPreview() {
         String preview = "";
         System.out.println();
         try {
             int indexOfFirstParagraph = content.indexOf("</p>") + 4;
-            int indexOfIntendedContextPreview = content.indexOf(">") + 50/*+4*/;
-
-//            if(indexOfFirstParagraph<indexOfIntendedContextPreview){
-//                System.out.println("Article class: "+title+" content preview: "+content.substring(0,indexOfFirstParagraph)+"...");
-//                preview=content.substring(0,indexOfFirstParagraph)+"...";
-//            }else{
-//                System.out.println("Article class: content preview "+content.substring(0,indexOfIntendedContextPreview)+"...</p>");
-//                preview=content.substring(0,indexOfIntendedContextPreview)+"...</p>";
-//            }
-
             if (indexOfFirstParagraph < 4) {
                 return "<br>"+content.substring(0, 50) + "...";
             } else {
                 System.out.println("Article class: " + title + " (author "+username+"  )content preview: " + content.substring(0, indexOfFirstParagraph) + "..."+indexOfFirstParagraph);
                 preview = content.substring(0, indexOfFirstParagraph);
             }
-
-
             return preview;
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("StringIndexOutOfBounds error: array out of bound");

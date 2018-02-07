@@ -8,9 +8,15 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:if test="${sessionScope.personLoggedIn == null}">
     <c:redirect url="Index"/>
 </c:if>
+
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setDateHeader("Expires", 0); //prevents caching at the proxy server
+%>
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +25,7 @@
     <title>Revising Article: ${articleToEdit.getTitle()}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -128,7 +134,7 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto" id="headingID">
+            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10%; padding: 10%">
                     <h2>${articleToEdit.getUsername()}, edit your article below</h2>
                     <span class="meta">Originally posted on ${articleToEdit.getDate()}</span>
@@ -171,7 +177,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </h3>
             </div>

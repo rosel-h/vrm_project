@@ -35,20 +35,20 @@ CREATE TABLE IF NOT EXISTS vrm_comments_on_articles (
   PRIMARY KEY (comment_id)
 );
 
-CREATE TABLE IF NOT EXISTS vrm_comments_on_comments (
-  parent_comment_id INT NOT NULL,
-  child_comment_id INT NOT NULL,
-  username VARCHAR(20) NOT NULL,
-  date DATE NOT NULL,
-  content TEXT NOT NULL,
-  PRIMARY KEY (child_comment_id)
-);
+# CREATE TABLE IF NOT EXISTS vrm_comments_on_comments (
+#   parent_comment_id INT NOT NULL,
+#   child_comment_id INT NOT NULL,
+#   username VARCHAR(20) NOT NULL,
+#   date DATE NOT NULL,
+#   content TEXT NOT NULL,
+#   PRIMARY KEY (child_comment_id)
+# );
 
 ALTER TABLE vrm_users ADD email_address VARCHAR(50);
 
 ALTER TABLE vrm_articles MODIFY COLUMN article_id INT auto_increment;
 
-ALTER TABLE vrm_comments_on_comments Modify COLUMN child_comment_id INT auto_increment;
+# ALTER TABLE vrm_comments_on_comments Modify COLUMN child_comment_id INT auto_increment;
 ALTER TABLE vrm_comments_on_articles Modify COLUMN comment_id INT auto_increment;
 
 ALTER TABLE vrm_users Modify COLUMN avatar_icon VARCHAR(500) NOT NULL;
