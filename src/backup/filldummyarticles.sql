@@ -72,3 +72,4 @@ FETCH vrm_articles limit 10;
 SELECT COUNT(*) FROM vrm_articles;
 
 SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username ORDER by date DESC limit 10 offset 10;
+

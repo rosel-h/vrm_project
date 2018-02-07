@@ -43,7 +43,8 @@ public class BlogDAO implements AutoCloseable {
     public List<Article> getTenArticles(String order, int number, boolean isAscending) throws SQLException {
         order = "date";
         number = (number - 1) * 10;
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles ORDER by date DESC limit 10 offset ?;")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE vrm_articles.username = vrm_users.username ORDER by date DESC limit 10 offset ?;")) {
+
             stmt.setInt(1, number);
             try (ResultSet rs = stmt.executeQuery()) {
                 List<Article> artic = new ArrayList<>();
@@ -216,7 +217,8 @@ public class BlogDAO implements AutoCloseable {
         String story = rs.getString("content");
         String date = rs.getString("date");
         String title = rs.getString("title");
-        return new Article(user, aID, story, date, title);
+        String userStatus = rs.getString("status");
+        return new Article(user, aID, story,date , title, userStatus);
     }
 
     /**
@@ -238,7 +240,9 @@ public class BlogDAO implements AutoCloseable {
      * Translates the current row of the given ResultSet into a Comment object depending on the Object type passed in.
      */
     private CommentOnArticles dataFromResultSet(ResultSet rs, CommentOnArticles c) throws SQLException {
-        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"), rs.getInt("parent_comment_id"));
+        return new CommentOnArticles(rs.getInt("comment_id"), rs.getInt("article_id"), rs.getString("username"), rs.getString("date"), rs.getString("content"), rs.getString("avatar_icon"),rs.getInt("parent_comment_id"),rs.getString("status"));
+
+
     }
 
     public String getIcon(String username) {
@@ -345,6 +349,16 @@ public class BlogDAO implements AutoCloseable {
 
     /*delete comment*/
     public void deleteCommentOnArticle(int id) {
+        //deletes any comments whose parent is on the id
+try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE parent_comment_id = ?")) {
+stmt.setInt(1, id);
+System.out.println("Blog Dao: Comment with id: "+id+" deleted");
+} catch (SQLException e) {
+            System.out.println("Blog Dao: Comment was not deleted");
+            e.printStackTrace();
+            }
+
+      //delete the actual comment
         try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM vrm_comments_on_articles WHERE comment_id = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -374,7 +388,7 @@ public class BlogDAO implements AutoCloseable {
     /*get one article base on id*/
     public Article getOneArticle(int id) {
         Article a = null;
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM vrm_articles WHERE article_id = ?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_articles.*, vrm_users.status FROM vrm_articles, vrm_users WHERE article_id = ? AND vrm_articles.username=vrm_users.username;")) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("RS executed");
@@ -391,7 +405,7 @@ public class BlogDAO implements AutoCloseable {
 
     public List<CommentOnArticles> getAllCommentOfArticle(int id) throws SQLException {
         ArrayList<CommentOnArticles> comments = new ArrayList<>();
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon FROM vrm_users, vrm_comments_on_articles WHERE vrm_comments_on_articles.article_id =  ? AND  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT vrm_comments_on_articles.*, vrm_users.avatar_icon, vrm_users.status FROM vrm_users, vrm_comments_on_articles WHERE vrm_comments_on_articles.article_id =  ? AND  vwen239.vrm_comments_on_articles.username  = vwen239.vrm_users.username;")) {
             stmt.setInt(1, id);
             CommentOnArticles c;
             try (ResultSet rs = stmt.executeQuery()) {

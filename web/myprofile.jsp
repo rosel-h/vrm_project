@@ -273,7 +273,6 @@
 
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
 
-
                         <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteProfile">Delete</button>
                         <!-- Modal -->
                         <div class="modal fade" id="deleteProfile" role="dialog">
