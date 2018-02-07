@@ -32,7 +32,7 @@ public class CheckPasswordServlet extends HttpServlet {
     }
 
     private String getErrorCode(String password, String cPassword) {
-        String error = "";
+        String error;
         if (password.equals("")) {
             if (cPassword.equals("")) {
                 //password and confirm password both are empty
@@ -65,7 +65,7 @@ public class CheckPasswordServlet extends HttpServlet {
     }
 
     //method to check single password and return error msg for single password
-    public int checkPassword(String password) {
+    private int checkPassword(String password) {
 
         int msg = 0;
         boolean hasUpper = false;

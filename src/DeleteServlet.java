@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,7 +56,6 @@ public class DeleteServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void writeLog(HttpServletRequest req, String username) throws IOException {
