@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 10% 0 0 0; padding: 0;">
-                    <br>
+
                     <h2>Information we collect</h2>
                     <p>We collect information to provide better services to all of our users – from figuring out basic
                         stuff like which language you speak, to more complex things like which ads

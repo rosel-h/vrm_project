@@ -161,7 +161,7 @@
             <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
                         <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
-                             class="img-circle img-fluid">
+                             class="img-fluid">
                     </div>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                 <div style="margin-top:1%" class="form-group">
@@ -188,7 +188,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             <div class="page-heading">
                 <h1 style="text-align: center">Featured Articles</h2>
-                <br>
+
             </div>
         </div>
     </div>

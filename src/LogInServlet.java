@@ -19,6 +19,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
+
+
 public class LogInServlet extends HttpServlet {
 
     User user; // user object that will be stored in session
@@ -131,7 +135,7 @@ public class LogInServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //we do not want get access to get as password will be in URL
-        response.sendError(404);
+        response.sendRedirect("Signin");
     }
 
 }
