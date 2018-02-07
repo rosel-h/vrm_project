@@ -56,7 +56,6 @@ public class DeleteServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
     }
 
     private void writeLog(HttpServletRequest req, String username) throws IOException {
