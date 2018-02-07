@@ -17,10 +17,10 @@ import java.util.Map;
  **/
 public class ResetPassword extends HttpServlet {
 
-    boolean hasUppercase = false;
-    boolean hasLowercase = false;
-    boolean hasInteger = false;
-    boolean hasFour = false;
+    private boolean hasUppercase = false;
+    private boolean hasLowercase = false;
+    private boolean hasInteger = false;
+    private boolean hasFour = false;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,7 +55,7 @@ public class ResetPassword extends HttpServlet {
                 System.out.println("ResetPassword enter line 55: updateSuccess=" + updateSuccess);
                 req.setAttribute("successMessage", "Reset password successfully");
                 req.setAttribute("user", user);
-                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                req.getRequestDispatcher("Signin").forward(req, resp);
             }
 
         } catch (SQLException e) {
@@ -91,10 +91,10 @@ public class ResetPassword extends HttpServlet {
     private void confirmPasswordValidate(HttpServletRequest req, HttpServletResponse resp, String password, String cPassword) throws ServletException, IOException {
         if (!cPassword.equals(password)) {
             req.setAttribute("passwordError", "two passwords are different");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         } else if (!hasUppercase || !hasLowercase || !hasInteger || !hasFour) {
             req.setAttribute("passwordError", "Your password should contain at least 1 UPPERCASE character, 1 lowercase character, 1 digit number, and minimum length is 4!");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         }
     }
 

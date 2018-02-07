@@ -41,7 +41,7 @@ public class ForgetPassword extends HttpServlet {
                 req.setAttribute("Error", "There is something wrong with the information provided");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
 
-            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals("") || !userDAO.getUserByUsername(username).getSecurity_a().equals("") ){
+            }else if (userDAO.getUserByUsername(username).getSecurity_q().equals("") || userDAO.getUserByUsername(username).getSecurity_a().equals("") ){
                 System.out.println("ForgetPassword enter line 149: security question or answer is wrong");
                 req.setAttribute("Error", "You didn't set security question or answer. Please contact administrator.");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);

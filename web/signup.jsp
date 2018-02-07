@@ -437,9 +437,9 @@
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
-                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>--%>
                                     <%--//this is for local host--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>
                                     <span>&nbsp;&nbsp;</span>
                                     <%--<input type="submit" value="Submit" class="btn btn-login">--%>
                                     <button style="color:white; margin-right: 5%; padding: 1%; opacity: 0.8; height: 70%; float: right" id="btn-login"
