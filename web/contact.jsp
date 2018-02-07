@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
-                    <br>
+
                     <h5>Contact Us at <a style="color:lightblue;" href="mailto:vrm@vrm.com"> vrm@vrm.com</a></h5>
                 </div>
             </div>

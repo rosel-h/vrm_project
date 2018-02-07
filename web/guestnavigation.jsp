@@ -62,15 +62,15 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
-                <div class="page-heading" style="margin-top: 25%; padding: 5%;">
-                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
-                    <div style="margin-top:1%" class="form-group">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading" style="margin: 20% 0 5%; padding: 5%">
+                    <span class="subheading" >By the travellers, for the travellers. Make every heartbeat count.</span>
+                    <div style="margin: 5% 0 1% 0" class="form-group">
                         <div class="col-sm-12 col-md-12 controls">
-                            <div style="margin-top:1%" class="form-group">
-                                <button style="margin: 1%; padding-left: 4.5%; padding-right: 4.5%; opacity: 0.8; color: lightgrey"
+                            <div style="margin: 1%" class="form-group">
+                                <button style="margin: 1%; padding-left: 5%; padding-right: 5%; opacity: 0.8; color: lightgrey"
                                         class="btn btn-default btn-responsive"
-                                        type="button"><a style="color:black; " href="Signin"> Login</a>
+                                        type="button"><a style="color:black; padding: 0 1% 0 1% " href="Signin">Login</a>
                                 </button>
                                 <button style="margin: 1%; opacity: 0.8; color: lightgrey"
                                         class="btn btn-default btn-responsive"

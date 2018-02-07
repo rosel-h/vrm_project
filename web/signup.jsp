@@ -366,8 +366,8 @@
                                     <div class="col-xs-12">
                                         <label for="security_q" style="float: left;">Security Question</label>
                                         <select name="security_q" id="security_q" class="form-control">
-                                            <option value="mom_fname" selected >
-                                                What's your Mom's first name?
+                                            <option value="secret_key" selected >
+                                                Secret Key (Alphanumeric)
                                             </option>
                                             <option value="dad_fname" selected >
                                                 What's your Dad's first name?
