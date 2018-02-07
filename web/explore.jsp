@@ -221,7 +221,16 @@
                                 </button>
                             </form>
                         </td>
-                        <td>by <i>${articleList.getUsername()}</i></td>
+                        <td>by <%--<i>${articleList.getUsername()}</i></td>--%>
+                            <c:choose>
+                                <c:when test="${articleList.userIsInactive()}">
+                                    <i style="color: lightsteelblue" data-toggle="tooltip" title="inactive user">(${articleList.getUsername()})</i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i>${articleList.getUsername()}</i>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td>${articleList.getDate()}</td>
                     </tr>
                 </c:if>

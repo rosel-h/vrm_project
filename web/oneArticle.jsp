@@ -102,6 +102,9 @@
         <div class="row">
             <%--Article content--%>
             <div id="loadedContent" class="col-lg-12 col-md-12 form-control">
+                <c:if test="${articleToLoad.userIsInactive()}">
+                    <p><i>The user who wrote this article is <b><u>inactive</u></b></i></p>
+                </c:if>
                 ${articleToLoad.getContent()}
             </div>
         </div>
@@ -170,7 +173,16 @@
                     <div class="row">
                         <img src="avatars/${commentList.getAvatarIcon()}" class=""
                              style="height: 30px; width:30px; display: inline-block">
-                        <h5 class="" style="display: inline-block">&nbsp;${commentList.getCommentAuthor()}
+                        <h5 class="" style="display: inline-block">&nbsp;
+                            <c:choose>
+                                <c:when test="${commentList.userIsInactive()}">
+                                    <span style="color: lightsteelblue" data-toggle="tooltip"
+                                          title="inactive user">(${commentList.getCommentAuthor()})</span>
+                                </c:when>
+                                <c:otherwise>
+                                    ${commentList.getCommentAuthor()}
+                                </c:otherwise>
+                            </c:choose>
                             <small><i>Posted on ${commentList.getDatePublished()}</i></small>
                         </h5>
 
@@ -255,7 +267,16 @@
                                 <div class="row">
                                     <img src="avatars/${children.getAvatarIcon()}" class=""
                                          style="height: 30px; width:30px; display: inline-block">
-                                    <h5 class="" style="display: inline-block">&nbsp;${children.getCommentAuthor()}
+                                    <h5 class="" style="display: inline-block">&nbsp;
+                                        <c:choose>
+                                            <c:when test="${children.userIsInactive()}">
+                                                <span style="color: lightsteelblue" data-toggle="tooltip"
+                                                      title="inactive user">(${children.getCommentAuthor()})</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${children.getCommentAuthor()}
+                                            </c:otherwise>
+                                        </c:choose>
                                         <small><i>Posted on ${children.getDatePublished()}</i></small>
                                     </h5>
                                     <c:if test="${sessionScope.personLoggedIn !=null}">
