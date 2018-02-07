@@ -77,7 +77,7 @@
 
                     <div style="padding-top:30px" class="panel-body">
 
-                        <div class="control-label">${directMessage} in <span id="countdown">6</span> seconds</div>
+                        <div class="control-label">${sessionScope.directMessage} in <span id="countdown">6</span> seconds</div>
                         <script type="text/javascript">
 
                             // Total seconds to wait
@@ -101,7 +101,7 @@
 
                         </script>
 
-                        <c:if test="${directErrorMessage.equals('true')}">
+                        <c:if test="${sessionScope.directErrorMessage.equals('true')}">
                             <div class="control-label">Or click <ins><a href="login.jsp" style="color: yellow; font-weight: bold">here</a></ins> to login!</div>
                         </c:if>
                     </div>
@@ -110,46 +110,6 @@
         </div>
     </div>
 
-
-<%--    <div id="signupsuccess" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-info">
-
-            <div class="panel-heading">
-                <div class="panel-title">${successMessage}</div>
-            </div>
-
-            <div class="panel-body">
-                <div class="control-label">${directMessage} in <span id="countdown">6</span> seconds</div>
-                <script type="text/javascript">
-
-                    // Total seconds to wait
-                    var seconds = 3;
-
-                    function countdown() {
-                        seconds = seconds - 1;
-                        if (seconds < 0) {
-                            // Chnage your redirection link here
-                            window.location = "login.jsp";
-                        } else {
-                            // Update remaining seconds
-                            document.getElementById("countdown").innerHTML = seconds;
-                            // Count down using javascript
-                            window.setTimeout("countdown()", 1000);
-                        }
-                    }
-
-                    // Run countdown function
-                    countdown();
-
-                </script>
-
-                <c:if test="${directErrorMessage.equals('true')}">
-                    <div class="control-label">Or click <ins><a href="login.jsp">here</a></ins> to login!</div>
-                </c:if>
-            </div>
-        </div>
-
-    </div>--%>
 
 
 
