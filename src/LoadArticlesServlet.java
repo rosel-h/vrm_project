@@ -12,6 +12,8 @@ import java.util.List;
 
 /**
  * Created by rher490 on 22/01/2018.
+ * This java class deals with showing all the articles created so far.
+ * Only shows 10 pages at the time.
  */
 public class LoadArticlesServlet extends HttpServlet {
     private int pageNumber = 1;
@@ -25,7 +27,6 @@ public class LoadArticlesServlet extends HttpServlet {
             pageNumber = Integer.parseInt(number);
             wentThroughGetMethod=true;
         }catch (NumberFormatException e){
-
             System.out.println("LoadArticleServlet: Someone tried to cheat the pages get method");
         }
         System.out.print("do get");
@@ -61,6 +62,7 @@ public class LoadArticlesServlet extends HttpServlet {
 
             req.getRequestDispatcher("explore.jsp").forward(req, resp);
             System.out.println("LoadArticlesServlet request has been dispatched");
+            //ensures that when user leaves the all articles page and comes back, the user will see the start of the page
             wentThroughGetMethod=false;
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,6 +13,8 @@ import java.util.List;
 
 /**
  * Created by rher490 on 30/01/2018.
+ * This java class deals with retrieves articles that the logged in user has created so far.
+ * Only shows 10 pages at the time.
  */
 public class PersonalArticles extends HttpServlet {
     private int pageNumber = 1;
@@ -35,12 +37,10 @@ public class PersonalArticles extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Personal Articles: do post");
-        //get username details
         HttpSession session = req.getSession(false);
-
+        //get username details
         String user = String.valueOf(session.getAttribute("personLoggedIn"));
-        String op = req.getParameter("operation");
-        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
+        try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("Personal Articles Signup done");
             int totalArticlesSoFar = dao.getTotalArticles(user);
             int totalPages = totalArticlesSoFar / 10 + 1;
@@ -51,6 +51,7 @@ public class PersonalArticles extends HttpServlet {
             }
 
             int checkNumber = this.pageNumber;
+            //ensures that when user leaves the all articles page and comes back, the user will see the start of the page
             if (!wentThroughGetMethod) {
                 checkNumber = 1;
             }
