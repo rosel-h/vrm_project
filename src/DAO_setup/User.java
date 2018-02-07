@@ -11,11 +11,12 @@ import java.io.IOException;
 
 /**
  * Created by rher490 on 24/01/2018.
+ * Lists the user information as an object
  */
 
 public class User {
     private String username;
-    private String password; //edit later
+    private String password;
     private String fname;
     private String lname;
     private String dateOfBirth;
@@ -27,6 +28,7 @@ public class User {
     private String security_q;
     private String security_a;
 
+    /*Constructors*/
     public User(){
 
     }
@@ -77,90 +79,92 @@ public class User {
         this.security_a = security_a;
     }
 
+    /*get username*/
     public String getUsername() {
         return username;
     }
-
+    /*set username*/
     public void setUsername(String username) {
         this.username = username;
     }
-
+    /*get password*/
     public String getPassword() {
         return password;
     }
-
+    /*set password*/
     public void setPassword(String password) {
         this.password = password;
     }
-
+    /*get first name*/
     public String getFname() {
         return fname;
     }
-
+    /*set first name*/
     public void setFname(String fname) {
         this.fname = fname;
     }
-
+    /*get last name*/
     public String getLname() {
         return lname;
     }
-
+    /*set first name */
     public void setLname(String lname) {
         this.lname = lname;
     }
-
+    /*get date of birth*/
     public String getDateOfBirth() {
         return dateOfBirth;
     }
-
+    /*set date of birth*/
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
+    /*get country */
     public String getCountry() {
         return country;
     }
-
+    /*set country*/
     public void setCountry(String country) {
         this.country = country;
     }
-
+    /*get avatar icon*/
     public String getAvatar_icon() {
         return avatar_icon;
     }
-
+    /*set avatar icon*/
     public void setAvatar_icon(String avatar_icon) {
         this.avatar_icon = avatar_icon;
     }
-
+    /*get status whether the user is an active user, inactive user or the account was created by user*/
     public String getStatus() {
         return status;
     }
-
+    /*set status*/
     public void setStatus(String status) {
         this.status = status;
     }
-
+    /*get email*/
     public String getEmail() {
         return email;
     }
-
+    /*set email*/
     public void setEmail(String email) {
         this.email = email;
     }
-
+    /*get description*/
     public String getDescription() { return description;}
-
+    /*set description*/
     public void setDescription(String description) {this.description = description;}
-
+    /*get security question*/
     public String getSecurity_q() { return security_q;}
-
+    /*set security question*/
     public void setSecurity_q(String security_q) { this.security_q = security_q;}
-
+    /*get security answer*/
     public String getSecurity_a() { return security_a;}
-
+    /*set security answer*/
     public void setSecurity_a(String security_a) { this.security_a = security_a;}
 
+    /*read jsonfile*/
     public static JSONObject readJSONFile(String fileName){
         JSONObject o = new JSONObject();
         JSONParser parser = new JSONParser();

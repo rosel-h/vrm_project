@@ -262,8 +262,8 @@
                             </td>
                             <td>by <c:choose>
                                 <c:when test="${articleList.userIsInactive()}">
-                                    <i style="color: lightsteelblue" data-toggle="tooltip"
-                                       title="inactive user">(${articleList.getUsername()})</i>
+                                    <i style="text-decoration: line-through;" data-toggle="tooltip"
+                                       title="inactive user">${articleList.getUsername()}</i>
                                 </c:when>
                                 <c:otherwise>
                                     <i>${articleList.getUsername()}</i>

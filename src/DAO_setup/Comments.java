@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by rher490 on 24/01/2018.
- * This will show both comments on articles
+ * This will show comments on articles
  */
 public class Comments {
     public int commentID;
@@ -32,37 +32,37 @@ public class Comments {
         this.comments = new ArrayList<>();
     }
 
-    //does nothing
+    //does nothing, used for dataFromResultSet as signature
     public Comments(){}
-
+    /*get commentid*/
     public int getCommentID() {
         return commentID;
     }
-
+    /*set commentid*/
     public void setCommentID(int commentID) {
         this.commentID = commentID;
     }
-
+    /*get date published*/
     public String getDatePublished() {
         return datePublished;
     }
-
+    /*set date published*/
     public void setDatePublished(String datePublished) {
         this.datePublished = datePublished;
     }
-
+    /*get username of the comment*/
     public String getCommentAuthor() {
         return commentAuthor;
     }
-
+    /*set username of author*/
     public void setCommentAuthor(String commentAuthor) {
         this.commentAuthor = commentAuthor;
     }
-
+    /*return content*/
     public String getContent() {
         return content;
     }
-
+    /*set content*/
     public void setContent(String content) {
         this.content = content;
     }
@@ -79,8 +79,6 @@ public class Comments {
     /*add comment to the list*/
     public boolean addChild (Comments comment){
         comments.add(comment);
-//        System.out.println("Comments class: "+comment.getCommentID()+" has been added as a child of "+this.getCommentID());
-//        System.out.println(this.hasChildren());
         return false;
     }
 
@@ -91,7 +89,7 @@ public class Comments {
         }
         return false;
     }
-
+    /*returns the comments that whose parent comment is this*/
     public List<Comments> getChildren(){
         return comments;
     }
