@@ -46,13 +46,11 @@ public class EditArticle extends HttpServlet {
             return;
         }
 
-        System.out.println("in Edit ArticleServlet");
         ServletContext s = getServletContext();
         String filepath = s.getRealPath("WEB-INF/mysql.properties");
 
         String op = req.getParameter("operation");
         String id = req.getParameter("articleID");
-        System.out.println("in Edit ArticleServlet: op " + op + "(id +" + id + ")");
         int articleID = Integer.parseInt(id);
 
         boolean articleHasBeenEdited;
@@ -74,13 +72,11 @@ public class EditArticle extends HttpServlet {
             newContent = Jsoup.clean(newContent, Whitelist.relaxed());
             String newDate = req.getParameter("futureDate");
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-            System.out.println("EditArticle Servlet: author " + author + "newTitle: " + newTitle);
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
                 if (newDate.length() < 5) {
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
                     System.out.println("EditArticle Servlet: Article added to database without date");
-
                 } else {
                     //if user has opted to change the publish date
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

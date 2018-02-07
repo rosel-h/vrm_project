@@ -193,7 +193,6 @@
         </div>
     </div>
 </div>
-
 <%--this is code for fade in fade out effect of featured articles--%>
 <div class="container">
     <div class="row">
@@ -235,9 +234,7 @@
                     </div>
                 </li>
             </ul>
-
             <div class="clear"></div>
-
             <div class="imgnum" style="max-width: 100%; float: right">
                 <span class="onselect">1</span>
                 <span>2</span>
@@ -248,8 +245,6 @@
         </div>
     </div>
 </div>
-
 <%@include file="footer.jsp" %>
-
 </body>
 </html>
