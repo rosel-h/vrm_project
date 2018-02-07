@@ -34,9 +34,13 @@ public class ForgetPassword extends HttpServlet {
                 System.out.println("ForgetPassword enter line 149: date of birth is wrong");
                 req.setAttribute("dobError", "date of birth is wrong");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals(security_q) || !userDAO.getUserByUsername(username).getSecurity_a().equals(security_a) ){
+            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals("") || !userDAO.getUserByUsername(username).getSecurity_a().equals("") ){
                 System.out.println("ForgetPassword enter line 149: security question or answer is wrong");
                 req.setAttribute("securityError", "security question or answer is wrong");
+                req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
+            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals(security_q) || !userDAO.getUserByUsername(username).getSecurity_a().equals(security_a) ){
+                System.out.println("ForgetPassword enter line 149: security question or answer is empty");
+                req.setAttribute("securityError", "you didn't set security question or answer. Please contact administrator.");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
             }else {
                 System.out.println("ForgetPassword enter line 36: username and dob verification success");
