@@ -11,6 +11,8 @@ import java.util.Properties;
 /**
  * Created by rher490 on 24/01/2018.
  */
+
+//standard MYSQL data base object
 public class MYSQLDatabase implements Database {
     Connection conn;
 

@@ -12,6 +12,7 @@ import java.io.IOException;
 /**
  * Created by rher490 on 24/01/2018.
  */
+
 public class User {
     private String username;
     private String password; //edit later

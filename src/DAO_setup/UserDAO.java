@@ -13,14 +13,20 @@ import org.mindrot.jbcrypt.BCrypt;
  * Date : 2018/1/31
  * Time : 11:09
  **/
+
+
+// repsents user connection to database
 public class UserDAO implements AutoCloseable {
     private final Connection conn;
     private final Database db;
 
+    //creates userDAo
     public UserDAO(Database db) throws IOException, SQLException {
         this.db = db;
         this.conn = db.getConnection();
     }
+
+    //check if the username and password combination returns a valid user (used for standard Login)
 
     public User getUserStandard(String username, String pass) {
         User user = null;
@@ -46,6 +52,7 @@ public class UserDAO implements AutoCloseable {
         return user;
     }
 
+    //Used for facebook login, compares the users email to database
     public User getUserFacebook(String email) {
         User user = new User();
 //        reactivateFBUser(email);
@@ -67,13 +74,16 @@ public class UserDAO implements AutoCloseable {
         return user;
     }
 
+    //returns a user object from the dataset created
+
     private User dataFromResultSet(ResultSet rs, User u) throws SQLException {
         return new User(rs.getString("username"), rs.getString("psw_hash"), rs.getString("fname"), rs.getString("lname"), rs.getString("dob"), rs.getString("country"), rs.getString("description"), rs.getString("avatar_icon"), rs.getString("status"), rs.getString("email_address"), rs.getString("security_q"), rs.getString("security_a"));
     }
 
+    //adds a new facebook user if email is not recognised
     public void addUserFB(String fName, String lName, String email) {
         String username = fName + "_" + lName;
-        String password = BCrypt.hashpw(String.valueOf(100000000 + (int) (Math.random() * 1000000000)), BCrypt.gensalt(15));
+        String password = BCrypt.hashpw(String.valueOf(100000000 + (int) (Math.random() * 1000000000)), BCrypt.gensalt(15)); //not used but creating one anyway
         String fname = fName;
         String lname = lName;
         String dob = "1900-11-11";
@@ -87,36 +97,7 @@ public class UserDAO implements AutoCloseable {
         addUser(username, password, fname, lname, dob, country, description, avatar, status,  email, security_q, security_a);
     }
 
-    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email, String security_q, String security_a) {
-        Boolean success = false;
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            stmt.setString(3, fname);
-            stmt.setString(4, lname);
-            stmt.setString(5, dob);
-            stmt.setString(6, country);
-            stmt.setString(7, description);
-            stmt.setString(8, avatar);
-            stmt.setString(9, status);
-            stmt.setString(10, email);
-            stmt.setString(11, security_q);
-            stmt.setString(12, security_a);
-
-            stmt.executeUpdate();
-
-            System.out.println("Creation Successful");
-            success = true;
-
-
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return success;
-    }
-
+    //check if the username exists
     public User getUserByUsername(String username) {
         User user = new User();
 
@@ -139,6 +120,37 @@ public class UserDAO implements AutoCloseable {
         return user;
     }
 
+    //general add user method
+    public boolean addUser(String username, String password, String fname, String lname, String dob, String country, String description, String avatar, String status, String email, String security_q, String security_a) {
+        Boolean success = false;
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO vrm_users VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, fname);
+            stmt.setString(4, lname);
+            stmt.setString(5, dob);
+            stmt.setString(6, country);
+            stmt.setString(7, description);
+            stmt.setString(8, avatar);
+            stmt.setString(9, status);
+            stmt.setString(10, email);
+            stmt.setString(11, security_q);
+            stmt.setString(12, security_a);
+
+            // execute statement
+            stmt.executeUpdate();
+
+            System.out.println("Creation Successful");
+            success = true;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return success;
+    }
+
+    // used to delete user from database by changing their status to inactive
     public boolean deleteUser(String username) {
         boolean deleteSuccess = false;
 
@@ -156,6 +168,7 @@ public class UserDAO implements AutoCloseable {
         return deleteSuccess;
     }
 
+    //updating user information
     public boolean updateUser(User user) {
         boolean updateSuccess = false;
 
@@ -179,7 +192,6 @@ public class UserDAO implements AutoCloseable {
             ps.executeUpdate();
             updateSuccess = true;
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -187,6 +199,8 @@ public class UserDAO implements AutoCloseable {
         return updateSuccess;
     }
 
+
+    //change password
     public boolean updatePassword(User user) {
         boolean updateSuccess = false;
 
@@ -196,20 +210,18 @@ public class UserDAO implements AutoCloseable {
             ps.setString(1, user.getPassword());
             ps.setString(2, user.getUsername());
 
-
             ps.executeUpdate();
 
             updateSuccess = true;
-
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return updateSuccess;
-
     }
 
+    // auto closable of connection
     @Override
     public void close() throws Exception {
         System.out.println("logging out of UserDao connection");
