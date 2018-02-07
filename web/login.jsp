@@ -23,10 +23,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-
     <title>Log In to VRM</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -92,8 +92,7 @@
                 <div class="page-heading">
                     <div class="panel-title"><h3>Sign In</h3></div>
                     <div style="float:right; font-size: 80%; position: relative; top:-10px">
-                        <%--<a style="color: white;" href="javascript:alert('Dont forget your password! Bad Luck! Contact us.');">Forgot password?</a>--%>
-                            <a style="color: white;" href="passwordreset">Forgot password?</a>
+                        <a style="color: white;" href="passwordreset">Forgot password?</a>
                     </div>
                     <div style="padding-top:30px" class="panel-body">
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>

@@ -139,8 +139,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="security_a" style="float: left;">Security Answer</label>
-                                    <input type="text" id="security_a" class="form-control" name="security_a" value="" required>
-                                </div>
+                                    <input type="text" id="security_a" class="form-control" name="security_a" value="" required></div>
                             </div>
 
                             <div class="form-group">

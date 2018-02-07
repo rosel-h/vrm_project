@@ -15,7 +15,6 @@
 %>
 
 
-
 <!DOCTYPE html><html>
 <head>
     <title>Sign up successfully | VRM Blog</title>
@@ -24,7 +23,8 @@
 <head>
     <title>Sign Up</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -100,7 +100,10 @@
                         </script>
 
                         <c:if test="${directErrorMessage.equals('true')}">
-                            <div class="control-label">Or click <ins><a href="Signin" style="color: yellow; font-weight: bold">here</a></ins> to login!</div>
+                            <div class="control-label">Or click
+                                <ins><a href="Signin" style="color: yellow; font-weight: bold">here</a></ins>
+                                to login!
+                            </div>
                         </c:if>
                     </div>
                 </div>
@@ -109,14 +112,7 @@
     </div>
 
 
-
-
-
 </header>
-
-
-
-
 
 
 </body>
