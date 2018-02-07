@@ -182,7 +182,7 @@
 
                     <p>${commentList.getContent()}</p>
                         <%--delete comment if user is logged in--%>
-                    <c:if test="${(articleToLoad.getUsername()==sessionScope) ||( sessionScope == commentList.getCommentAuthor())}">
+                    <c:if test="${(articleToLoad.getUsername()==sessionScope.personLoggedIn) ||( sessionScope.personLoggedIn == commentList.getCommentAuthor())}">
                         <form method="post" action="OneArticle">
                             <%--<button type="submit" class="btn btn-xs btn-danger">delete comment</button>--%>
 
