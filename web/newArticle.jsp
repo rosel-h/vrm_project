@@ -131,7 +131,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 15%; padding: 1% 0 0 0;">
-                    <h2>Tell us your journey. </h2>
+                    <h2 >Tell us your journey. </h2>
                     <span class="meta" style="font-size: 100%">Once you have travelled, the voyage never ends, but is played out over and over again in the quietest chambers. The mind can never break off from the journey.</span>
                 </div>
             </div>

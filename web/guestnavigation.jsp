@@ -12,10 +12,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
     <title>VRM Blog</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -29,7 +29,6 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Custom scripts for this template -->
     <script src="vendor/js/clean-blog.min.js"></script>
-
 </head>
 
 <body style="background-color: #e6e6e6">
@@ -64,13 +63,14 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading" style="margin: 20% 0 5%; padding: 5%">
-                    <span class="subheading" >By the travellers, for the travellers. Make every heartbeat count.</span>
+                    <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div style="margin: 5% 0 1% 0" class="form-group">
                         <div class="col-sm-12 col-md-12 controls">
                             <div style="margin: 1%" class="form-group">
                                 <button style="margin: 1%; padding-left: 5%; padding-right: 5%; opacity: 0.8; color: lightgrey"
                                         class="btn btn-default btn-responsive"
-                                        type="button"><a style="color:black; padding: 0 1% 0 1% " href="Signin">Login</a>
+                                        type="button"><a style="color:black; padding: 0 1% 0 1% "
+                                                         href="Signin">Login</a>
                                 </button>
                                 <button style="margin: 1%; opacity: 0.8; color: lightgrey"
                                         class="btn btn-default btn-responsive"
