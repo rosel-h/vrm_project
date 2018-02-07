@@ -336,15 +336,6 @@
                                     </div>
                                 </div>
 
-                                <%--                                <div class="form-group">
-
-                                                                    <div class="col-xs-12">
-                                                                        <label for="dob" style="float: left">Date of Birth</label>
-                                                                        <input type="date" id="dob" class="form-control" name="dob"
-                                                                               placeholder="date of birth">
-                                                                    </div>
-                                                                </div>--%>
-
                                 <div class="form-group">
 
                                     <div class="col-xs-12">
@@ -436,11 +427,11 @@
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>
 
                                     <%--//this is for local host--%>
-                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"
-                                         style="margin-left: 2%; padding-bottom: 5%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"--%>
+                                         <%--style="margin-left: 2%; padding-bottom: 5%"></div>--%>
                                 </div>
 
                             </div>
