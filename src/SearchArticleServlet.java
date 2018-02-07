@@ -51,12 +51,18 @@ public class SearchArticleServlet extends HttpServlet {
 
                 List<Article> articles = new ArrayList<>();
 
+                // get search type and keywords from search bar
                 String searchType = req.getParameter("searchType");
                 String keywordStr = req.getParameter("keywords");
+
+                // if user doesn't enter keywords, return empty result
                 if (keywordStr.equals("")) {
                     req.setAttribute("articleList", articles);
-                    req.getRequestDispatcher("searchresult.jsp").forward(req, resp);
+
+                    req.getRequestDispatcher("searchresult").forward(req, resp);
                 }
+
+                // split keyword string into string array, just in case user wants to search more than one keywords
                 String[] keywords = keywordStr.split(" ");
 
                 if (searchType.equals("title")) {
@@ -71,7 +77,7 @@ public class SearchArticleServlet extends HttpServlet {
                 }
 
                 req.setAttribute("articleList", articles);
-                req.getRequestDispatcher("searchresult.jsp").forward(req, resp);
+                req.getRequestDispatcher("searchresult").forward(req, resp);
                 System.out.println("SearchArticleServlet request has been dispatched");
 
             } catch (Exception e) {
@@ -79,6 +85,71 @@ public class SearchArticleServlet extends HttpServlet {
             }
 
         }
+
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
+//        ServletContext servletContext = getServletContext();
+//        String sessionFilePath = servletContext.getRealPath("WEB-INF/Sessions");
+//        String sessionID = session.getId();
+//        String fileName = sessionFilePath + "\\" + sessionID + ".json";
+//        JSONObject userJson;
+//
+//        File sessionFile = new File(fileName);
+//        String user = null;
+//        try (BlogDAO dao = new BlogDAO(/*mysqlDatabase*/ new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
+//            System.out.println("SearchArticleServlet enter line 50: ");
+//
+//            if (sessionFile.exists()) {
+//                System.out.println("SearchArticleServlet enter line 53: session exists");
+//                userJson = User.readJSONFile(fileName);
+//                System.out.println(JSONObject.toJSONString(userJson));
+//                user = String.valueOf(userJson.get("username"));
+//            } else {
+//                System.out.println("SearchArticleServlet enter line 58: session does'nt exist");
+//            }
+//
+//            String icon = dao.getIcon(user);
+//            System.out.println(icon + " "+ user);
+//            if (user != null) {
+//                req.setAttribute("personLoggedIn", user);
+//                String iconPath = getServletContext().getRealPath("avatars");
+//                req.setAttribute("personAvatarIcon", icon);
+//            }
+//
+//            List<Article> articles = new ArrayList<>();
+//
+//            String searchType = req.getParameter("searchType");
+//            String keywordStr = req.getParameter("keywords");
+//            if (keywordStr.equals("")) {
+//                req.setAttribute("articleList", articles);
+//
+//                req.getRequestDispatcher("searchresult.jsp").forward(req, resp);
+//            }
+//            String[] keywords = keywordStr.split(" ");
+//
+//            if (searchType.equals("title")) {
+//                System.out.println("SearchArticleServlet enter line 78: search by title");
+//                articles = dao.getArticleByTitle(keywords);
+//            }else if (searchType.equals("username")) {
+//                System.out.println("SearchArticleServlet enter line 82: search by username");
+//                articles = dao.getArticleByUsername(keywords);
+//            }else if (searchType.equals("date")) {
+//                System.out.println("SearchArticleServlet enter line 86: search by date");
+//                articles = dao.getArticleByDate(keywords);
+//            }
+//
+//            req.setAttribute("articleList", articles);
+//
+//            req.getRequestDispatcher("searchresult.jsp").forward(req, resp);
+//            System.out.println("SearchArticleServlet request has been dispatched");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 

@@ -256,7 +256,7 @@
                                     <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                                     <input type="hidden" id="csrfToken" name="csrfToken"
                                            value="${sessionScope.get("csrfSessionToken")}">
-                                    <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
+                                    <button type="submit" style="font-weight: bold; background: transparent; cursor: pointer" class="btn">Read More...</button>
                                 </form>
                             </td>
                             <td>by <i>${articleList.getUsername()}</i></td>

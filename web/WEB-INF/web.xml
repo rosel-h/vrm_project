@@ -14,6 +14,8 @@
         <url-pattern>/Articles</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
         <servlet-name>SignUp</servlet-name>
         <servlet-class>SignUpServlet</servlet-class>
@@ -23,6 +25,8 @@
         <servlet-name>SignUp</servlet-name>
         <url-pattern>/SignUp</url-pattern>
     </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>LogIn</servlet-name>
@@ -34,6 +38,8 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
         <servlet-name>Main</servlet-name>
         <servlet-class>MainServlet</servlet-class>
@@ -43,6 +49,8 @@
         <servlet-name>Main</servlet-name>
         <url-pattern>/Main</url-pattern>
     </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>FBAuth</servlet-name>
@@ -55,6 +63,7 @@
     </servlet-mapping>
 
 
+
     <servlet>
         <servlet-name>edit_Article</servlet-name>
         <servlet-class>EditArticle</servlet-class>
@@ -64,6 +73,8 @@
         <servlet-name>edit_Article</servlet-name>
         <url-pattern>/editArticles</url-pattern>
     </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>EditProfileServlet</servlet-name>
@@ -75,6 +86,8 @@
         <url-pattern>/editprofile</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
         <servlet-name>DeleteServlet</servlet-name>
         <servlet-class>DeleteServlet</servlet-class>
@@ -84,6 +97,8 @@
         <servlet-name>DeleteServlet</servlet-name>
         <url-pattern>/deleteuser</url-pattern>
     </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>CheckUsernameServlet</servlet-name>
@@ -95,6 +110,8 @@
         <url-pattern>/checkusername</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
         <servlet-name>CheckPasswordServlet</servlet-name>
         <servlet-class>CheckPasswordServlet</servlet-class>
@@ -105,6 +122,8 @@
         <url-pattern>/checkpassword</url-pattern>
     </servlet-mapping>
 
+
+
     <servlet>
         <servlet-name>SearchArticleServlet</servlet-name>
         <servlet-class>SearchArticleServlet</servlet-class>
@@ -114,6 +133,8 @@
         <servlet-name>SearchArticleServlet</servlet-name>
         <url-pattern>/searcharticle</url-pattern>
     </servlet-mapping>
+
+
 
     <error-page>
         <error-code>404</error-code>
@@ -130,6 +151,8 @@
         <location>/error500.jsp</location>
     </error-page>
 
+
+
     <servlet>
         <servlet-name>MyArticles</servlet-name>
         <servlet-class>PersonalArticles</servlet-class>
@@ -139,6 +162,8 @@
         <servlet-name>MyArticles</servlet-name>
         <url-pattern>/myArticles</url-pattern>
     </servlet-mapping>
+
+
 
     <servlet>
         <servlet-name>AboutUs</servlet-name>
@@ -270,4 +295,16 @@
         <servlet-name>Reset</servlet-name>
         <jsp-file>/resetpassword.jsp</jsp-file>
     </servlet>
+
+    <servlet>
+        <servlet-name>SearchResult</servlet-name>
+        <jsp-file>/searchresult.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchResult</servlet-name>
+        <url-pattern>/searchresult</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

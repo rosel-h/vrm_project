@@ -101,7 +101,7 @@
     <form id="signupform" class="form-horizontal" role="form" method="post" action="editprofile"
           enctype="multipart/form-data">
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-lg-6">
                 <div class="form-group">
                     <input type="hidden" id="csrfToken" name="csrfToken"
                            value="${sessionScope.get("csrfSessionToken")}">
@@ -184,7 +184,7 @@
 
 
             </div>
-            <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-lg-6">
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>

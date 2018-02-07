@@ -32,15 +32,6 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.5.24" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="lib" level="project" />
     <orderEntry type="library" exported="" name="javax.json-1.0" level="project" />
-    <orderEntry type="library" name="owasp-java-html-sanitizer-20160413.1-javadoc" level="project" />
-    <orderEntry type="library" name="owasp-java-html-sanitizer-20171016.1" level="project" />
-    <orderEntry type="library" name="lib (2)" level="project" />
-    <orderEntry type="library" name="lib (3)" level="project" />
-    <orderEntry type="library" name="com.google.collections" level="project" />
-    <orderEntry type="library" name="guava-19.0" level="project" />
-    <orderEntry type="library" name="lib (4)" level="project" />
-    <orderEntry type="library" name="jsoup-1.11.2" level="project" />
-    <orderEntry type="library" name="lib (5)" level="project" />
-    <orderEntry type="library" name="lib (6)" level="project" />
+    <orderEntry type="library" exported="" name="jsoup-1.11.2" level="project" />
   </component>
 </module>
