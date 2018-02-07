@@ -72,7 +72,7 @@ public class EditProfileServlet extends HttpServlet {
 
                     //if enter servlet from edit form(which means save new profile)
                     //load new profile info from form
-                    loadNewProfile(req, resp, username, userDAO);
+                    loadNewProfile(req, username, userDAO);
 
                     //set attributes of user object
                     user.setFname(fname);
@@ -152,7 +152,7 @@ public class EditProfileServlet extends HttpServlet {
         return map;
     }
 
-    private void loadNewProfile(HttpServletRequest req, HttpServletResponse resp, String username, UserDAO userDAO) throws Exception {
+    private void loadNewProfile(HttpServletRequest req, String username, UserDAO userDAO) throws Exception {
 
         User user = userDAO.getUserByUsername(username);
         System.out.println("EditProfileServlet enter line 53: multipartcontent");
@@ -226,12 +226,8 @@ public class EditProfileServlet extends HttpServlet {
 
                 } else {
 
-                    String fieldName = fileItem.getFieldName();
                     String fileName = fileItem.getName();
                     System.out.println("EditProfileServlet loadNewProfile enter line 135: fileName = " + fileName);
-                    String contentType = fileItem.getContentType();
-                    boolean isInMemory = fileItem.isInMemory();
-                    long sizeInBytes = fileItem.getSize();
 
                     //uploading image field is empty
                     if (fileName == null | fileName.equals("")) {
@@ -267,7 +263,7 @@ public class EditProfileServlet extends HttpServlet {
                 System.out.println("EditProfileServlet loadNewProfile enter line 195: " + file.getAbsolutePath());
                 doUpload.write(file);
 
-                BufferedImage img = null;
+                BufferedImage img;
                 try {
                     System.out.println("EditProfileServlet loadNewProfile enter line 200");
                     img = ImageIO.read(file);

@@ -25,7 +25,8 @@
     <title>Revising Article: ${articleToEdit.getTitle()}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -76,7 +77,7 @@
         }
 
         $(document).ready(function () {
-            loadRandomImage()
+            loadRandomImage();
             $('#summernote').summernote({
                 toolbar: [
                     // [groupName, [list of button]]
@@ -96,7 +97,7 @@
                     link: [],
                     air: []
                 },
-                prettifyHtml: true,
+                prettifyHtml: true
             });
             $('#summernote').summernote('insertImage', url, filename);
         });
@@ -152,15 +153,15 @@
 
             <div class="">
                 <h3 class="post-title">Edit Article
-                    <form class="form-inline" action="OneArticle" method="POST"
-                          style="display: inline-block; float: right;">
-                        <input type="hidden" id="csrfToken1" name="csrfToken"
-                               value="${sessionScope.get("csrfSessionToken")}">
+                    <form class="form-inline" action="OneArticle" method="POST" style="display: inline-block; float: right;">
+                        <input type="hidden" id="csrfToken1" name="csrfToken" value="${sessionScope.get("csrfSessionToken")}">
                         <input type="hidden" name="operation" value="delete">
                         <input type="hidden" name="articleID" value="${articleToEdit.getArticleID()}">
                         <%--<button style="float: right" type="submit" class="btn btn-danger pull-right">Delete</button>--%>
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#article${articleToEdit.getArticleID()}">Delete</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#article${articleToEdit.getArticleID()}">Delete
+                        </button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="article${articleToEdit.getArticleID()}" role="dialog">
@@ -172,7 +173,9 @@
                                     </div>
                                     <div class="modal-body">
                                         <button type="submit" class="btn btn-danger float-left">Delete</button>
-                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -184,8 +187,7 @@
                 <form action="editArticles" method="POST">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" id="title" name="title" class="form-control" maxlength="50"
-                               value="${articleToEdit.getTitle()}"
+                        <input type="text" id="title" name="title" class="form-control" maxlength="50" value="${articleToEdit.getTitle()}"
                                required>
                     </div>
                     <div class="form-group">

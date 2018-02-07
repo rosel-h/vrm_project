@@ -70,7 +70,7 @@
                         }
                     }
                 });
-            }
+            };
 
             document.getElementById("password").onblur = function () {
                 var password = document.getElementById("password").value;
@@ -129,7 +129,7 @@
 
                     }
                 });
-            }
+            };
 
             document.getElementById("cPassword").onblur = function () {
                 var password = document.getElementById("password").value;
@@ -173,7 +173,7 @@
                         }
                     }
                 });
-            }
+            };
         }
     </script>
 
@@ -272,7 +272,7 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${usernameError}</span>
+                                        <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${sessionScope.usernameError}</span>
 
                                         <input type="text" id="username" class="form-control" name="username"
                                                placeholder="Enter Username 4~20 characters" required>
@@ -295,7 +295,7 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${passwordError}</div>
+                                        <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${sessionScope.passwordError}</div>
                                         <input type="password" id="cPassword" class="form-control" name="cPassword"
                                                placeholder="Confirm Password" required>
 
@@ -307,7 +307,7 @@
                                 <div class="form-group">
 
                                     <div class="col-xs-12">
-                                        <label for="dob" style="float: left">Date of Birth</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="dobCheck">${dobError}</span>
+                                        <label for="dob" style="float: left">Date of Birth</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="dobCheck">${sessionScope.dobError}</span>
                                         <input type="date" id="dob" class="form-control" name="dob"
                                                placeholder="date of birth" required>
                                     </div>
@@ -437,9 +437,9 @@
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
-                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>--%>
                                     <%--//this is for local host--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%"></div>
                                     <span>&nbsp;&nbsp;</span>
                                     <%--<input type="submit" value="Submit" class="btn btn-login">--%>
                                     <button style="color:white; margin-right: 5%; padding: 1%; opacity: 0.8; height: 70%; float: right" id="btn-login"

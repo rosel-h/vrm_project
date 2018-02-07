@@ -13,6 +13,8 @@
           <element id="library" level="project" name="lib (3)" />
           <element id="library" level="project" name="com.google.collections" />
           <element id="library" level="project" name="lib (4)" />
+          <element id="library" level="project" name="javax.json-1.0" />
+          <element id="library" level="project" name="jsoup-1.11.2" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="VRM_Project/web/Web" />

@@ -101,7 +101,7 @@
         %>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div id="top" class="container">
-                <a class="navbar-brand">Welcome ${personLoggedIn}</a>
+                <a class="navbar-brand">Welcome ${sessionScope.personLoggedIn}</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                         aria-label="Toggle navigation">Menu
@@ -138,7 +138,7 @@
                     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 10%; padding: 10%">
                             <div style="padding-top: 5%" class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
+                                <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                                      class="img-circle img-fluid">
                             </div>
 
@@ -225,14 +225,14 @@
         </thead>
 
         <tbody>
-        <c:if test="${personLoggedIn == null}">
+        <c:if test="${sessionScope.personLoggedIn == null}">
             <tr>
                 <td colspan="4">Please log in first!</td>
             </tr>
         </c:if>
 
-        <c:if test="${articleList.size() == 0}">
-            <c:if test="${personLoggedIn != null}">
+        <c:if test="${sessionScope.articleList.size() == 0}">
+            <c:if test="${sessionScope.personLoggedIn != null}">
                 <tr>
                     <td colspan="4">No result found!</td>
                 </tr>
@@ -241,9 +241,9 @@
         </c:if>
 
 
-        <c:if test="${personLoggedIn != null}">
-            <c:if test="${articleList.size() > 0}">
-                <c:forEach var="articleList" items="${articleList}">
+        <c:if test="${sessionScope.personLoggedIn != null}">
+            <c:if test="${sessionScope.articleList.size() > 0}">
+                <c:forEach var="articleList" items="${sessionScope.articleList}">
                     <%
                         java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
                         request.setAttribute("sqlDateToday", sqlDateToday);
@@ -256,7 +256,7 @@
                                     <input type="hidden" name="operation" value="fullArticleClickedFromExplore">
                                     <input type="hidden" id="csrfToken" name="csrfToken"
                                            value="${sessionScope.get("csrfSessionToken")}">
-                                    <button type="submit" style="font-weight: lighter; background: transparent" class="btn">Read More...</button>
+                                    <button type="submit" style="font-weight: bold; background: transparent; cursor: pointer" class="btn">Read More...</button>
                                 </form>
                             </td>
                             <td>by <i>${articleList.getUsername()}</i></td>

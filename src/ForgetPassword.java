@@ -26,31 +26,32 @@ public class ForgetPassword extends HttpServlet {
         try (UserDAO userDAO = new UserDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
             System.out.println("ForgetPassword Connection Successful");
 
+            // username error
             if (userDAO.getUserByUsername(username) == null) {
                 System.out.println("ForgetPassword enter line 149: username doesn't exist");
                 req.setAttribute("Error", "There is something wrong with the information provided");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-
+            // facebook user cannot user reset password functinality
             } else if (userDAO.getUserByUsername(username).getStatus().equals("facebook")) {
                 System.out.println("ForgetPassword enter line 149: username doesn't exist");
                 req.setAttribute("Error", "This is a Facebook account");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-
+            // date of birth error
             } else if (!userDAO.getUserByUsername(username).getDateOfBirth().equals(dob)) {
                 System.out.println("ForgetPassword enter line 149: date of birth is wrong");
                 req.setAttribute("Error", "There is something wrong with the information provided");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-
-            }else if (!userDAO.getUserByUsername(username).getSecurity_q().equals("") || !userDAO.getUserByUsername(username).getSecurity_a().equals("") ){
+            // user didn't set security question or answer
+            }else if (userDAO.getUserByUsername(username).getSecurity_q().equals("") || userDAO.getUserByUsername(username).getSecurity_a().equals("") ){
                 System.out.println("ForgetPassword enter line 149: security question or answer is wrong");
                 req.setAttribute("Error", "You didn't set security question or answer. Please contact administrator.");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-
+            // security question or answer is wrong
             } else if (!userDAO.getUserByUsername(username).getSecurity_q().equals(security_q) || !userDAO.getUserByUsername(username).getSecurity_a().equals(security_a)) {
                 System.out.println("ForgetPassword enter line 149: security question or answer is wrong");
                 req.setAttribute("Error", "There is something wrong with the information provided");
                 req.getRequestDispatcher("forgetPassword.jsp").forward(req, resp);
-
+            // pass verification
             } else {
                 System.out.println("ForgetPassword enter line 36: username and dob verification success");
                 req.setAttribute("username", username);

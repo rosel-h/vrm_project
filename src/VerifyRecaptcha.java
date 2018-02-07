@@ -1,8 +1,3 @@
-/**
- * Created by Mengjie
- * Date : 2018/1/31
- * Time : 16:07
- **/
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,6 +9,12 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.net.ssl.HttpsURLConnection;
+/**
+ * Created by Mengjie
+ * Date : 2018/1/31
+ * Time : 16:07
+ **/
+
 
 public class VerifyRecaptcha {
 
@@ -27,7 +28,8 @@ public class VerifyRecaptcha {
 
     private final static String USER_AGENT = "Mozilla/5.0";
 
-    public static boolean verify(String gRecaptchaResponse) throws IOException {
+    static boolean verify(String gRecaptchaResponse) throws IOException {
+
         if (gRecaptchaResponse == null || "".equals(gRecaptchaResponse)) {
             return false;
         }
@@ -62,6 +64,7 @@ public class VerifyRecaptcha {
             while ((inputLine = bufferedReader.readLine()) != null) {
                 response.append(inputLine);
             }
+
             bufferedReader.close();
 
             // print result

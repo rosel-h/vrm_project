@@ -10,7 +10,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
+
 <!DOCTYPE html><html>
 <head>
     <title>Explore Community</title>
@@ -18,7 +18,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -116,7 +117,7 @@
                     <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                         <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                             <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                                <img src="avatars/${user.getAvatar_icon()}" alt="avatar"
+                                <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar"
                                      style="border-radius: 50%;padding-top: 10%"
                                      class="img-circle img-fluid">
                             </div>

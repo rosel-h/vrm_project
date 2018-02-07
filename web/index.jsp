@@ -17,8 +17,8 @@
 
     <title>VRM Blog</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
-
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
 
 
     <!-- Custom fonts for this template -->
@@ -108,7 +108,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </header>
 

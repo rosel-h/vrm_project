@@ -125,7 +125,7 @@
             <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                        <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
+                        <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
                              class="img-circle img-fluid">
                     </div>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
@@ -152,7 +152,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
+            <h2 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
             <div style="float: right">
                 <c:if test="${sessionScope.personLoggedIn ==null}">
                     <div>Logged in as Guest</div>
@@ -177,7 +177,6 @@
                 <tbody>
 
                 <%
-                    System.out.println("myArticles jsp: inside table body");
                     java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
                     request.setAttribute("sqlDateToday", sqlDateToday);
                 %>

@@ -1,45 +1,25 @@
 import DAO_setup.MYSQLDatabase;
 import DAO_setup.UserDAO;
-import com.mysql.fabric.xmlrpc.base.Array;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONException;
-import org.json.simple.JSONObject;
-import org.json.JSONTokener;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by mshe666 on 23/01/2018.
  */
 public class SignUpServlet extends HttpServlet {
-    // this is for local host
-//    private static final String SECRET_KEY = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
 
-    // this is for sporadic
-//    private static final String SECRET_KEY = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
-
-    boolean hasUppercase = false;
-    boolean hasLowercase = false;
-    boolean hasInteger = false;
-    boolean hasFour = false;
+    private boolean hasUppercase = false;
+    private boolean hasLowercase = false;
+    private boolean hasInteger = false;
+    private boolean hasFour = false;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -60,7 +40,7 @@ public class SignUpServlet extends HttpServlet {
     }
 
 
-    public void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
+    private void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException, ServletException, JSONException {
 
         String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
         System.out.println("g-recaptcha-response=" + gRecaptchaResponse);
@@ -71,7 +51,7 @@ public class SignUpServlet extends HttpServlet {
 
         if (!verify) {
             req.setAttribute("recaptchaError", "Hey! You are a ROBOT!");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -96,7 +76,7 @@ public class SignUpServlet extends HttpServlet {
                 String country = (paraMaps.get("country")[0].equals("")) ? "" : paraMaps.get("country")[0];
                 String description = (paraMaps.get("description")[0].equals("")) ? "" : paraMaps.get("description")[0];
                 String avatar = (paraMaps.get("avatar") == null) ? "avatar_01.png" : paraMaps.get("avatar")[0];
-                String email = "";
+
                 String security_q = (paraMaps.get("security_q")[0].equals("")) ? "" : paraMaps.get("security_q")[0];
                 String security_a= (paraMaps.get("security_a")[0].equals("")) ? "" : paraMaps.get("security_a")[0];
 
@@ -137,7 +117,7 @@ public class SignUpServlet extends HttpServlet {
         if (dob.equals("")) {
             System.out.println("SignUpServlet enter line 116: date of birth empty");
             req.setAttribute("dobError", "date of birth cannot be empty");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         }
     }
 
@@ -147,7 +127,7 @@ public class SignUpServlet extends HttpServlet {
             req.getRequestDispatcher("signup.jsp").forward(req, resp);
         } else if (!hasUppercase || !hasLowercase || !hasInteger || !hasFour) {
             req.setAttribute("passwordError", "Your password should contain at least 1 UPPERCASE character, 1 lowercase character, 1 digit number, and minimum length is 4!");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         }
     }
 
@@ -155,11 +135,11 @@ public class SignUpServlet extends HttpServlet {
         if (userDAO.getUserByUsername(username) != null) {
             System.out.println("SignUpServlet enter line 149: username exists");
             req.setAttribute("usernameError", "username already exists");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         }else if (username.length() < 4) {
             System.out.println("SignUpServlet enter line 201: username too short");
             req.setAttribute("usernameError", "username at least contains 4 characters!");
-            req.getRequestDispatcher("signup.jsp").forward(req, resp);
+            req.getRequestDispatcher("Signuppage").forward(req, resp);
         }
     }
 
