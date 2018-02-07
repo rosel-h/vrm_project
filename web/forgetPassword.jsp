@@ -90,7 +90,7 @@
                 <div class="page-heading" style="margin: 2%; padding: 10%">
 
                     <div class="panel-title"><h3>Password Reset - for Non-Facebook Users</h3></div>
-                    <div style="color: #ff0000; font-size: 70%">${sessionScope.Error}</div>
+                    <div style="color: #ff0000; font-size: 70%">${Error}</div>
 
                     <div style="padding-top:30px" class="panel-body">
 

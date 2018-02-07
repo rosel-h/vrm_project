@@ -445,7 +445,6 @@
                                             type="submit" value="Submit">Sign up
                                     </button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
