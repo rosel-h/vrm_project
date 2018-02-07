@@ -152,7 +152,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12">
-            <h1 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
+            <h2 class="post-title">All Articles by ${sessionScope.personLoggedIn}</h2>
             <div style="float: right">
                 <c:if test="${sessionScope.personLoggedIn ==null}">
                     <div>Logged in as Guest</div>
@@ -177,7 +177,6 @@
                 <tbody>
 
                 <%
-                    System.out.println("myArticles jsp: inside table body");
                     java.sql.Date sqlDateToday = java.sql.Date.valueOf(LocalDate.now());
                     request.setAttribute("sqlDateToday", sqlDateToday);
                 %>
