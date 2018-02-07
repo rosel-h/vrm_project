@@ -176,8 +176,8 @@
                         <h5 class="" style="display: inline-block">&nbsp;
                             <c:choose>
                                 <c:when test="${commentList.userIsInactive()}">
-                                    <span style="color: lightsteelblue" data-toggle="tooltip"
-                                          title="inactive user">(${commentList.getCommentAuthor()})</span>
+                                    <span style="text-decoration: line-through;" data-toggle="tooltip"
+                                          title="inactive user">${commentList.getCommentAuthor()}</span>
                                 </c:when>
                                 <c:otherwise>
                                     ${commentList.getCommentAuthor()}
@@ -270,8 +270,8 @@
                                     <h5 class="" style="display: inline-block">&nbsp;
                                         <c:choose>
                                             <c:when test="${children.userIsInactive()}">
-                                                <span style="color: lightsteelblue" data-toggle="tooltip"
-                                                      title="inactive user">(${children.getCommentAuthor()})</span>
+                                                <span style="text-decoration: line-through;" data-toggle="tooltip"
+                                                      title="inactive user">${children.getCommentAuthor()}</span>
                                             </c:when>
                                             <c:otherwise>
                                                 ${children.getCommentAuthor()}
