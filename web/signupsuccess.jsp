@@ -16,6 +16,7 @@
     <c:redirect url="Index"/>
 </c:if>
 
+
 <!DOCTYPE html><html>
 <head>
     <title>Sign up successfully | VRM Blog</title>
