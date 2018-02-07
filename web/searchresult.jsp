@@ -141,7 +141,7 @@
                                 <img src="avatars/${user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%"
                                      class="img-circle img-fluid">
                             </div>
-                            <br>
+
                             <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                             <div class="btn-group btn-group-justified col-xs-10" role="group"
                                  style="padding: 1%">
@@ -206,13 +206,13 @@
             </form>
         </div>
     </div>
-    <br>
+
     <div style="float: right">
         <c:if test="${sessionScope.personLoggedIn ==null}">
             <div>Logged in as Guest</div>
         </c:if>
     </div>
-    <br>
+
 
     <table class="table table-hover sorttable" id="articletable">
         <thead>

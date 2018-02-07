@@ -1,6 +1,8 @@
 import DAO_setup.Article;
 import DAO_setup.BlogDAO;
 import DAO_setup.MYSQLDatabase;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 /**
  * Created by rher490 on 25/01/2018.
+ * The java class deals with anything related to editing articles
+ * It retrieves all the data about the article for the user to edit and processes the information that has been edited
  */
 public class EditArticle extends HttpServlet {
 
@@ -65,14 +69,13 @@ public class EditArticle extends HttpServlet {
             System.out.println("EditArticle Servlet: add to dao");
             String author = req.getParameter("author");
             String newTitle = req.getParameter("title");
+            newTitle = Jsoup.clean(newTitle, Whitelist.relaxed());
             String newContent = req.getParameter("content");
+            newContent = Jsoup.clean(newContent, Whitelist.relaxed());
             String newDate = req.getParameter("futureDate");
             java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-
             System.out.println("EditArticle Servlet: author " + author + "newTitle: " + newTitle);
-
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(filepath))) {
-
                 if (newDate.length() < 5) {
                     System.out.println("EditArticle Servlet: newContent " + newContent);
                     articleHasBeenEdited = dao.editArticle(articleID, newTitle, newContent);
@@ -88,7 +91,6 @@ public class EditArticle extends HttpServlet {
                 }
                 if (articleHasBeenEdited) {
                     System.out.println("EditArticle Servlet: Article added to database");
-
                     //print log to file
                     Map<String, String> map = new HashMap<>();
                     map.put("articleID", String.valueOf(articleID));
@@ -96,7 +98,6 @@ public class EditArticle extends HttpServlet {
                     map.put("newContent", newContent);
                     map.put("submittedDate", String.valueOf(sqlDate));
                     map.put("operation", op);
-
                     String ipAddress = req.getRemoteAddr();
                     map.put("ip", ipAddress);
 

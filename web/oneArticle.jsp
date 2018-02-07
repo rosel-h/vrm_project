@@ -155,7 +155,7 @@
 
 
     </div>
-    <br>
+
 
     <div class="container">
         <p style="font-weight: bold">Comments</p>
@@ -324,7 +324,7 @@
                     </c:if>
 
                 </div>
-                <br>
+
             </c:if>
         </c:forEach>
         <c:if test="${sessionScope.personLoggedIn !=null}">
@@ -348,7 +348,7 @@
 
 </article>
 
-<br>
+
 <%@include file="footer.jsp" %>
 </body>
 </html>

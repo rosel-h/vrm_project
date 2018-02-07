@@ -1,3 +1,4 @@
+
 import DAO_setup.*;
 import org.jooq.tools.json.JSONObject;
 
@@ -23,6 +24,11 @@ import java.util.Map;
 
 /**
  * Created by rher490 on 2/02/2018.
+ * The servlet deals with retrieving each individual article.
+ * It also handles manipulating data related to articles....
+ * - adding and deleting articles,
+ * - adding and deleting comments
+ * note: editing articles is handled in the EditArticle.java file
  */
 public class IndividualArticleServlet extends HttpServlet {
     @Override
@@ -54,6 +60,7 @@ public class IndividualArticleServlet extends HttpServlet {
         System.out.println("IndividualArticleServlet - article  " + checkIfTheresArticle + " operation " + op);
         if (checkIfTheresArticle == null && op == null) {
             System.out.println("IAS: this is being redirected to allarticles");
+            //redirects user
             req.getRequestDispatcher("Articles").forward(req, resp);
         } else {
             try (BlogDAO dao = new BlogDAO(new MYSQLDatabase(getServletContext().getRealPath("WEB-INF/mysql.properties")))) {
@@ -90,6 +97,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     java.sql.Date sqlDate;
 
                     if (submittedDate.length() < 10) {
+                        //in case user did not add any date
                         sqlDate = java.sql.Date.valueOf(LocalDate.now());
                     } else {
                         LocalDate submittedDateReformatted = LocalDate.parse(submittedDate, formatter);
@@ -159,6 +167,7 @@ public class IndividualArticleServlet extends HttpServlet {
                             return;
                         }
 
+                        //retrieve data from jsp
                         String userWhoCommented = req.getParameter("userWhoCommented");
                         String comment = Jsoup.clean(req.getParameter("newComment"), Whitelist.relaxed());
                         int articleID = Integer.parseInt(req.getParameter("articleID"));
@@ -174,34 +183,6 @@ public class IndividualArticleServlet extends HttpServlet {
                         String ipAddress = req.getRemoteAddr();
                         map.put("ip", ipAddress);
                         String logType = "CommentOnArticle";
-                        LogWriter logWriter = new LogWriter(logType);
-                        logWriter.init(getServletContext().getRealPath("log"));
-                        logWriter.write(logType, map);
-                        //end of logging code
-
-                    } else if ("editarticle".equals(op)) {
-                        if (!passTokenCheck(csrfToken, csrfSessionToken)) {
-                            resp.sendError(666);
-                            return;
-                        }
-                        //clean content submission
-                        content = Jsoup.clean(content, Whitelist.relaxed());
-
-                        String title = req.getParameter("title");
-                        java.sql.Date sqlDate = java.sql.Date.valueOf(LocalDate.now());
-                        dao.addArticle(title, content, user, sqlDate);
-                        System.out.println("IndividualArticleServlet: new article made");
-
-                        //print log to file
-                        Map<String, String> map = new HashMap<>();
-                        map.put("title", title);
-                        map.put("content", content);
-                        map.put("operation", op);
-
-                        String ipAddress = req.getRemoteAddr();
-                        map.put("ip", ipAddress);
-
-                        String logType = "EditArticleIndividual";
                         LogWriter logWriter = new LogWriter(logType);
                         logWriter.init(getServletContext().getRealPath("log"));
                         logWriter.write(logType, map);
@@ -271,7 +252,7 @@ public class IndividualArticleServlet extends HttpServlet {
                     List<CommentOnArticles> commentsWithChildren = CommentOnArticles.addChildrenToParentComments(list);
                     System.out.println("IndividualArticleServlet - commentListCompressed: " + commentsWithChildren.size());
                     req.setAttribute("articleToLoad", articleToLoad);
-                    req.setAttribute("commentList", commentsWithChildren/*firstDegreeComments*/);
+                    req.setAttribute("commentList", commentsWithChildren);
                     req.getRequestDispatcher("oneArticle.jsp").forward(req, resp);
                 }
             } catch (SQLException e) {

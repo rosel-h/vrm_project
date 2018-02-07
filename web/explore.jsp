@@ -181,18 +181,6 @@
                 </form>
             </div>
         </div>
-        <div style="float: right">
-            <%--<c:if test="${sessionScope.personLoggedIn !=null}">--%>
-            <%--<div>Logged in as ${sessionScope.personLoggedIn} <a href="editprofile"> <img src="avatars/${user.getAvatar_icon()}"--%>
-            <%--style="height: 30px"--%>
-            <%--alt="avatar"/></a>--%>
-            <%--</div>--%>
-            <%--</c:if>--%>
-            <c:if test="${sessionScope.personLoggedIn ==null}">
-                <div>Logged in as Guest</div>
-            </c:if>
-        </div>
-        <br>
 
         <table class="table table-hover sorttable" id="articletable">
             <thead>
