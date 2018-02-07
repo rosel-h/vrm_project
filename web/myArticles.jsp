@@ -1,4 +1,5 @@
-<%@ page import="java.time.LocalDate" %><%--
+<%@ page import="java.time.LocalDate" %>
+<%--
   Created by IntelliJ IDEA.
   User: rher490
   Date: 30/01/2018
@@ -26,7 +27,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
@@ -75,6 +77,7 @@
         var imageCollection = [
             "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
+
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
             $('#backgroundImage').css('background-image', 'url(img/' + imageCollection[numImage] + ')');
@@ -125,27 +128,31 @@
             <div class="col-lg-8 col-md-10 col-sm-12 mx-auto" id="headingID">
                 <div class="page-heading" style="margin: 10% 0 5%; padding: 1% 0 0 0;">
                     <div class=" col-lg-4 col-4 col-md-4 col-sm-4 offset-4">
-                        <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar" style="border-radius: 50%;padding-top: 10%"
+                        <img src="avatars/${sessionScope.user.getAvatar_icon()}" alt="avatar"
+                             style="border-radius: 50%;padding-top: 10%"
                              class="img-circle img-fluid">
                     </div>
                     <span class="subheading">By the travellers, for the travellers. Make every heartbeat count.</span>
                     <div style="margin-top:1%" class="form-group">
                         <div class="col-sm-12 col-md-12 controls">
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-default btn-responsive"
                                     type="button"><a style="color:black; " href="myArticles"> My Articles </a>
                             </button>
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-default btn-responsive"
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-default btn-responsive"
                                     type="button"><a style="color:black; " href="Articles"> Community </a>
                             </button>
-                            <button style="margin: 1%; opacity: 0.8; color: lightgrey" class="btn btn-danger btn-responsive"
+                            <button style="margin: 1%; opacity: 0.8; color: lightgrey"
+                                    class="btn btn-danger btn-responsive"
                                     type="button"><a style="color:white; " href="NewArticle"> New Article</a>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     </div>
 </header>
 
@@ -190,7 +197,8 @@
                                 <input type="hidden" name="operation" value="fullArticleClickedFromMyArticle">
                                 <input type="hidden" id="csrfToken" name="csrfToken"
                                        value="${sessionScope.get("csrfSessionToken")}">
-                                <button type="submit" style="font-weight: lighter; background-color: transparent; font-weight: bold; cursor: pointer"
+                                <button type="submit"
+                                        style="font-weight: lighter; background-color: transparent; font-weight: bold; cursor: pointer"
                                         class="btn">Read More...
                                 </button>
                             </form>
@@ -207,12 +215,21 @@
             </table>
             <div class="btn-group mx-auto">
                 <c:if test="${currentPage>=2}">
-                    <a href="myArticles?_p=${currentPage-1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">PREV</button></a>
+                    <a href="myArticles?_p=${currentPage-1}">
+                        <button type="button" style="font-weight: bold; background: transparent"
+                                class="btn btn-primary">PREV
+                        </button>
+                    </a>
                 </c:if>
-                <button type="button" style="font-weight: bold;" class="btn btn-primary" disabled>${currentPage}</button>
+                <button type="button" style="font-weight: bold;" class="btn btn-primary"
+                        disabled>${currentPage}</button>
 
                 <c:if test="${currentPage<=lastPage-1}">
-                    <a href="myArticles?_p=${currentPage+1}"><button type="button" style="font-weight: bold; background: transparent" class="btn btn-primary">NEXT</button></a>
+                    <a href="myArticles?_p=${currentPage+1}">
+                        <button type="button" style="font-weight: bold; background: transparent"
+                                class="btn btn-primary">NEXT
+                        </button>
+                    </a>
                 </c:if>
             </div>
         </div>

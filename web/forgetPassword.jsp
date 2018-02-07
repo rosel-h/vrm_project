@@ -90,7 +90,7 @@
                 <div class="page-heading" style="margin: 2%; padding: 10%">
 
                     <div class="panel-title"><h3>Password Reset - for Non-Facebook Users</h3></div>
-                    <div style="color: #ff0000; font-size: 70%">${sessionScope.Error}</div>
+                    <div style="color: #ff0000; font-size: 70%">${Error}</div>
 
                     <div style="padding-top:30px" class="panel-body">
 
@@ -139,8 +139,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="security_a" style="float: left;">Security Answer</label>
-                                    <input type="text" id="security_a" class="form-control" name="security_a" value="" required>
-                                </div>
+                                    <input type="text" id="security_a" class="form-control" name="security_a" value="" required></div>
                             </div>
 
                             <div class="form-group">

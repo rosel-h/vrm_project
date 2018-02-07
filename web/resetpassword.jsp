@@ -26,7 +26,8 @@
     <title>Reset Password | VRM Blog</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -217,7 +218,9 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="password" style="float: left;">New Password</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordFormatCheck"></span>
+                                    <label for="password" style="float: left;">New Password</label><span
+                                        style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                        id="passwordFormatCheck"></span>
                                     <%--<label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>--%>
                                     <input type="password" id="password" class="form-control" name="password"
                                            placeholder="Enter Password 4~20 characters" required>
@@ -229,7 +232,9 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="cPassword" style="float: left;">Confirm New Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${passwordError}</div>
+                                    <label for="cPassword" style="float: left;">Confirm New Password</label>
+                                    <div style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                         id="passwordCheck">${passwordError}</div>
                                     <input type="password" id="cPassword" class="form-control" name="cPassword"
                                            placeholder="Confirm Password" required>
 

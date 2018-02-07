@@ -20,11 +20,11 @@ public class VerifyRecaptcha {
 
     public static final String url = "https://www.google.com/recaptcha/api/siteverify";
 
-    //this is for local host
-    public static final String secret = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
+//    //this is for local host
+//    public static final String secret = "6Lcm70MUAAAAAACdrHaIDupGxaTx42JOwTZubiVn";
 
     //this is for sporadic
-//    public static final String secret = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
+    public static final String secret = "6LfS8UMUAAAAAKGHuY1p1voSxu1vPvWSeu4KcvKN";
 
     private final static String USER_AGENT = "Mozilla/5.0";
 

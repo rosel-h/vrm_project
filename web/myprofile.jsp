@@ -107,14 +107,16 @@
                            value="${sessionScope.get("csrfSessionToken")}">
                     <label for="fname" class="control-label">First Name</label>
                     <div class="col-md-9">
-                        <input type="text" id="fname" class="form-control" name="fname" value="${sessionScope.user.getFname()}">
+                        <input type="text" id="fname" class="form-control" name="fname"
+                               value="${sessionScope.user.getFname()}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="lname" class="control-label">Last Name</label>
                     <div class="col-md-9">
-                        <input type="text" id="lname" class="form-control" name="lname" value="${sessionScope.user.getLname()}">
+                        <input type="text" id="lname" class="form-control" name="lname"
+                               value="${sessionScope.user.getLname()}">
                     </div>
                 </div>
 
@@ -130,18 +132,22 @@
                     <label for="country" class="control-label">Country</label>
                     <div class="col-md-9">
                         <select name="country" id="country" class="form-control">
-                            <option value="nz" <c:if test="${sessionScope.user.getCountry() eq 'nz'}">selected</c:if>>New
+                            <option value="nz" <c:if test="${sessionScope.user.getCountry() eq 'nz'}">selected</c:if>>
+                                New
                                 Zealand
                             </option>
                             <option value="aus" <c:if test="${sessionScope.user.getCountry() eq 'au'}">selected</c:if>>
                                 Australia
                             </option>
-                            <option value="in" <c:if test="${sessionScope.user.getCountry() eq 'in'}">selected</c:if>>India
+                            <option value="in" <c:if test="${sessionScope.user.getCountry() eq 'in'}">selected</c:if>>
+                                India
                             </option>
-                            <option value="us" <c:if test="${sessionScope.user.getCountry() eq 'us'}">selected</c:if>>United
+                            <option value="us" <c:if test="${sessionScope.user.getCountry() eq 'us'}">selected</c:if>>
+                                United
                                 States
                             </option>
-                            <option value="other" <c:if test="${sessionScope.user.getCountry() eq 'other'}">selected</c:if>>
+                            <option value="other"
+                                    <c:if test="${sessionScope.user.getCountry() eq 'other'}">selected</c:if>>
                                 Other
                             </option>
                         </select>
@@ -160,14 +166,16 @@
                                     <c:if test="${sessionScope.user.getSecurity_q() eq 'dad_fname'}">selected</c:if>>
                                 What's your Dad's first name?
                             </option>
-                            <option value="pet_name" <c:if test="${sessionScope.user.getSecurity_q() eq 'pet_name'}">selected</c:if>>
+                            <option value="pet_name"
+                                    <c:if test="${sessionScope.user.getSecurity_q() eq 'pet_name'}">selected</c:if>>
                                 What's your first pet's name?
                             </option>
                             <option value="bestf_fname"
                                     <c:if test="${sessionScope.user.getSecurity_q() eq 'bestf_fname'}">selected</c:if>>
                                 What's your best friend's first name?
                             </option>
-                            <option value="hometown" <c:if test="${sessionScope.user.getSecurity_q() eq 'hometown'}">selected</c:if>>
+                            <option value="hometown"
+                                    <c:if test="${sessionScope.user.getSecurity_q() eq 'hometown'}">selected</c:if>>
                                 Where's your home town?
                             </option>
                         </select>
@@ -182,15 +190,13 @@
                     </div>
                 </div>
 
-
             </div>
             <div class="col-xs-12 col-lg-6">
                 <div class="form-group">
                     <label for="description" class="ccontrol-label">Description</label>
                     <div>
                         <textarea id="description" class="form-control" name="description" rows="4"
-                                  columns="40">${sessionScope.user.getDescription()}
-                        </textarea>
+                                  columns="40">${sessionScope.user.getDescription()}</textarea>
                     </div>
                 </div>
 
@@ -255,25 +261,22 @@
                         $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
                     });
                 </script>
-
                 <div class="form-group">
                     <!-- Button -->
                     <div class="">
                         <button id="btn-signup" type="submit" class="btn btn-info">
                             Save
                         </button>
-
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
-
                         <a href="welcome.jsp">
                             <button id="btn-cancel" type="button" class="btn btn-default"> 
                                 Cancel
                             </button>
                         </a>
-
                         <span style="margin-left:20px; margin-right: 20px;">or</span>
-
-                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteProfile">Delete</button>
+                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal"
+                                data-target="#deleteProfile">Delete
+                        </button>
                         <!-- Modal -->
                         <div class="modal fade" id="deleteProfile" role="dialog">
                             <div class="modal-dialog modal-sm">
@@ -283,26 +286,28 @@
                                         <h6 class="modal-title">Are you sure you want to delete your profile?</h6>
                                     </div>
                                     <div class="modal-body">
-                                        Your articles and comments will still be accessible on the website, but you will never access them again.
+                                        Your articles and comments will still be accessible on the website, but you will
+                                        never access them again.
                                         Ever.
                                     </div>
                                     <div class="modal-body">
-                                        <button id="btn-delete" onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'" type="button" class="btn btn-danger">  
+                                        <button id="btn-delete"
+                                                onclick="window.location.href='deleteuser?csrfToken=${sessionScope.get('csrfSessionToken')}'"
+                                                type="button" class="btn btn-danger">  
                                             Delete
                                         </button>
-                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-default float-right" data-dismiss="modal">
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </form>
-
 </div>
 
 

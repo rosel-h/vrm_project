@@ -24,11 +24,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-
     <title>VRM Blog Blog</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"><link rel="icon" type="image/png" href="img/vrmlogo.png" />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/vrmlogo.png"/>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -179,19 +179,9 @@
 
     <script type="text/javascript">
         var imageCollection = [
-            "background01.jpg",
-            "background02.jpg",
-            "background03.jpg",
-            "background04.jpg",
-            "background05.jpg",
-            "background06.jpg",
-            "background07.jpg",
-            "background08.jpg",
-            "background09.jpg",
-            "background10.jpg",
-            "background11.jpg",
-            "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
+            "background01.jpg", "background02.jpg", "background03.jpg", "background04.jpg", "background05.jpg", "background06.jpg", "background07.jpg", "background08.jpg", "background09.jpg", "background10.jpg", "background11.jpg", "background13.jpg", "background14.jpg", "background15.jpg", "background16.jpg", "background17.jpg", "background18.jpg", "background19.jpg", "background20.jpg", "background21.jpg", "background22.jpg", "background23.jpg", "background24.jpg"
         ];
+
 
         function loadRandomImage() {
             var numImage = Math.floor(Math.random() * (imageCollection.length));
@@ -272,7 +262,9 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <label for="username" style="float: left;">Username</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="usernameCheck">${sessionScope.usernameError}</span>
+                                        <label for="username" style="float: left;">Username</label><span
+                                            style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                            id="usernameCheck">${sessionScope.usernameError}</span>
 
                                         <input type="text" id="username" class="form-control" name="username"
                                                placeholder="Enter Username 4~20 characters" required>
@@ -283,7 +275,9 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <label for="password" style="float: left;"> Password</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordFormatCheck"></span>
+                                        <label for="password" style="float: left;"> Password</label><span
+                                            style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                            id="passwordFormatCheck"></span>
                                         <%--<label for="password" style="float: left;"><span style="font-size: 60%; color: wheat">(at least 1 UPPERCASE, 1 lowercase, 1 digit number, minimum length is 4)</span></label>--%>
                                         <input type="password" id="password" class="form-control" name="password"
                                                placeholder="Enter Password 4~20 characters" required>
@@ -295,7 +289,9 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12">
-                                        <label for="cPassword" style="float: left;"> Confirm Password</label><div style="color:red; font-size: 70%; margin-left: 3%; float: right" id="passwordCheck">${sessionScope.passwordError}</div>
+                                        <label for="cPassword" style="float: left;"> Confirm Password</label>
+                                        <div style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                             id="passwordCheck">${sessionScope.passwordError}</div>
                                         <input type="password" id="cPassword" class="form-control" name="cPassword"
                                                placeholder="Confirm Password" required>
 
@@ -307,7 +303,9 @@
                                 <div class="form-group">
 
                                     <div class="col-xs-12">
-                                        <label for="dob" style="float: left">Date of Birth</label><span style="color:red; font-size: 70%; margin-left: 3%; float: right" id="dobCheck">${sessionScope.dobError}</span>
+                                        <label for="dob" style="float: left">Date of Birth</label><span
+                                            style="color:red; font-size: 70%; margin-left: 3%; float: right"
+                                            id="dobCheck">${sessionScope.dobError}</span>
                                         <input type="date" id="dob" class="form-control" name="dob"
                                                placeholder="date of birth" required>
                                     </div>
@@ -338,15 +336,6 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="form-group">
-
-                                    <div class="col-xs-12">
-                                        <label for="dob" style="float: left">Date of Birth</label>
-                                        <input type="date" id="dob" class="form-control" name="dob"
-                                               placeholder="date of birth">
-                                    </div>
-                                </div>--%>
-
                                 <div class="form-group">
 
                                     <div class="col-xs-12">
@@ -366,19 +355,19 @@
                                     <div class="col-xs-12">
                                         <label for="security_q" style="float: left;">Security Question</label>
                                         <select name="security_q" id="security_q" class="form-control">
-                                            <option value="secret_key" selected >
+                                            <option value="secret_key" selected>
                                                 Secret Key (Alphanumeric)
                                             </option>
-                                            <option value="dad_fname" selected >
+                                            <option value="dad_fname" selected>
                                                 What's your Dad's first name?
                                             </option>
-                                            <option value="pet_name" selected >
+                                            <option value="pet_name" selected>
                                                 What's your first pet's name?
                                             </option>
-                                            <option value="bestf_fname" selected >
+                                            <option value="bestf_fname" selected>
                                                 What's your best friend's first name?
                                             </option>
-                                            <option value="hometown" selected >
+                                            <option value="hometown" selected>
                                                 Where's your home town?
                                             </option>
                                         </select>
@@ -389,7 +378,8 @@
 
                                     <div class="col-xs-12">
                                         <label for="security_a" style="float: left;">Security Answer</label>
-                                        <input type="text" id="security_a" class="form-control" name="security_a" value="">
+                                        <input type="text" id="security_a" class="form-control" name="security_a"
+                                               value="">
                                     </div>
                                 </div>
 
@@ -437,10 +427,11 @@
 
                                 <div class=" row col-xs-12" style="display: block">
                                     <%--//this is for sporadic--%>
-                                    <%--<div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>--%>
+                                    <div class="g-recaptcha" data-sitekey="6LfS8UMUAAAAABglu_mCDKVCvWqoAznoR6DtrhRk" style="margin: 2%; padding: 2%"></div>
 
                                     <%--//this is for local host--%>
-                                    <div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp" style="margin-left: 2%; padding-bottom: 5%"></div>
+                                    <%--<div class="g-recaptcha" data-sitekey="6Lcm70MUAAAAADnXkTzd9N9aeRsrYH3EAkfe0lWp"--%>
+                                         <%--style="margin-left: 2%; padding-bottom: 5%"></div>--%>
                                 </div>
 
                             </div>
@@ -448,18 +439,18 @@
                             <div class="form-group">
 
                                 <div class=" row col-xs-12" style="display: block">
-                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8; height: 70%;" id="btn-signup"
+                                    <button style="color:white; margin: 1%; padding: 1%; opacity: 0.8; height: 70%;"
+                                            id="btn-signup"
                                             class="btn btn-success"
                                             type="submit" value="Submit">Sign up
                                     </button>
                                 </div>
-
                             </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </header>
 
