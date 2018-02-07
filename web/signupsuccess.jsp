@@ -14,9 +14,6 @@
     response.setDateHeader("Expires", 0); //prevents caching at the proxy server
 %>
 
-<c:if test="${sessionScope.personLoggedIn == null}">
-    <c:redirect url="Index"/>
-</c:if>
 
 
 <!DOCTYPE html><html>
@@ -78,7 +75,7 @@
 
                     <div style="padding-top:30px" class="panel-body">
 
-                        <div class="control-label">${sessionScope.directMessage} in <span id="countdown">6</span> seconds</div>
+                        <div class="control-label">${directMessage} in <span id="countdown">6</span> seconds</div>
                         <script type="text/javascript">
 
                             // Total seconds to wait
@@ -88,7 +85,7 @@
                                 seconds = seconds - 1;
                                 if (seconds < 0) {
                                     // Chnage your redirection link here
-                                    window.location = "login.jsp";
+                                    window.location = "Signin";
                                 } else {
                                     // Update remaining seconds
                                     document.getElementById("countdown").innerHTML = seconds;
@@ -102,8 +99,8 @@
 
                         </script>
 
-                        <c:if test="${sessionScope.directErrorMessage.equals('true')}">
-                            <div class="control-label">Or click <ins><a href="login.jsp" style="color: yellow; font-weight: bold">here</a></ins> to login!</div>
+                        <c:if test="${directErrorMessage.equals('true')}">
+                            <div class="control-label">Or click <ins><a href="Signin" style="color: yellow; font-weight: bold">here</a></ins> to login!</div>
                         </c:if>
                     </div>
                 </div>
