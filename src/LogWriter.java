@@ -1,8 +1,5 @@
 import com.google.gson.Gson;
-import org.apache.commons.fileupload.FileItem;
-import org.jooq.tools.json.JSONObject;
 
-import javax.servlet.http.HttpServlet;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +20,7 @@ public class LogWriter{
     private File logFile;
 
 
-    public LogWriter(String logType) throws IOException {
+    LogWriter(String logType) throws IOException {
         Date nowTime=new Date();
         SimpleDateFormat logtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.logType = logType;
@@ -54,7 +51,6 @@ public class LogWriter{
 
     public void write(String logType, Map map) throws IOException {
         map.put("datetime",this.datetime);
-
 
         Gson gsonObj = new Gson();
         // converts object to json string

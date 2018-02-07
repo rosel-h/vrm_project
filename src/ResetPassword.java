@@ -52,7 +52,7 @@ public class ResetPassword extends HttpServlet {
 
             //if update success, redirect to welcome.jsp
             if (updateSuccess) {
-                System.out.println("ResetPassword enter line 55: updateSuccess=" + updateSuccess);
+                System.out.println("ResetPassword enter line 55: updateSuccess=" + true);
                 req.setAttribute("successMessage", "Reset password successfully");
                 req.setAttribute("user", user);
                 req.getRequestDispatcher("Signin").forward(req, resp);

@@ -45,7 +45,6 @@ public class SearchArticleServlet extends HttpServlet {
                 System.out.println(icon + " " + username);
                 if (username != null) {
                     req.setAttribute("personLoggedIn", username);
-                    String iconPath = getServletContext().getRealPath("avatars");
                     req.setAttribute("personAvatarIcon", icon);
                 }
 
